@@ -1,9 +1,19 @@
-import React from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-function App() {
+function App(): any {
+  const [result, setResult] = useState('');
+  useEffect((): any => {
+    axios.get('http://ec2-3-142-146-122.us-east-2.compute.amazonaws.com')
+    .then(res => {
+      console.log('--- res === ', res)
+      setResult(res.data);
+    })
+  }, [])
+  
   return (
     <div className="App">
-      hello fucking world
+      {result}
     </div>
   );
 }
