@@ -2,15 +2,15 @@
 // import { useState, useEffect } from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import './App.css';
 import Home from './pages/Home';
 import SignIn from './components/Modal/SignIn';
+import Marker from './components/Modal/Marker';
 import Mypage from './pages/Mypage';
-import Footer from './components/Footer';
 import Nav from './components/Nav';
 // import Donation from './pages/Donation';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
-
 
 function App(): any {
   // const [result, setResult] = useState('');
@@ -21,7 +21,7 @@ function App(): any {
   //     setResult(res.data);
   //   })
   // }, [])
-  
+
   // return (
   //   <div className="App">
   //     {result}
@@ -38,41 +38,32 @@ function App(): any {
             <Donation/>
           )}
         /> */}
-        <Route 
+        <Route
           path="/mypage"
           render={() => {
-            if(isLogin === false) {
-              return <Redirect to="/signin" />
+            if (isLogin === false) {
+              return <Redirect to="/signin" />;
             }
-            return <Mypage/>
+            return <Mypage />;
           }}
         />
-        <Route 
-          path="/signin"
-          render={() => (
-            <SignIn/>
-          )}
-        />
-        <Route 
-          path="/map"
-          render={() => (
-            <Map/>
-          )}
-        />
-        <Route 
+        <Route path="/signin" render={() => <SignIn />} />
+        <Route path="/map" render={() => <Map />} />
+        <Route
           exact
           path="/"
           render={() => (
             <Home
-              // isLogin={isLogin: boolean}
+            // isLogin={isLogin: boolean}
             />
           )}
         />
         <Route component={NotFound} />
       </Switch>
-      <Footer />
+      {/* <SignIn></SignIn> */}
+      {/* <Marker></Marker> */}
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

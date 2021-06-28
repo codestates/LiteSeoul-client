@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+/* font-family: 'Noto Sans KR', sans-serif; */
+
+html,
+body,
+div,
+span,
+label,
+section,
+aside,
+footer,
+header,
+nav,
+video,
+table,
+tr,
+td,
+th {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
+section,
+aside,
+footer,
+header,
+nav,
+main,
+span,
+label {
+  display: block;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  /*
+  -webkit-text-size-adjust: none;
+  / 크롬, 사파리 기준 /
+  -moz-text-size-adjust: none;
+  / 모질라 파이어폭스 기준 /
+  -ms-text-size-adjust: none;
+  / 익스플로러 기준 /
+  text-size-adjust: none;
+  /edge 기준 */
+  overflow-x: hidden;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* bg */
+
+#bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#LogoSvg {
+  width: 40%;
+  z-index: 2;
+}
+
+@media screen and (max-width: 600px) {
+  #bg {
+    display: none;
+  }
+}
