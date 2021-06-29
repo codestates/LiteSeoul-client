@@ -1,0 +1,114 @@
+
+
+/* 회원가입 */
+/* 주황컬러 : #ff735d */
+.SignUpTitle {
+  text-align: center;
+  font-size: 50px;
+  color: #189cc4;
+  font-weight: bolder;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 50px 50px 50px;
+  justify-content:center;
+  
+}
+
+.UserImg {
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.ImgFlex {
+  display: flex;
+  text-align: center;
+  justify-content:center;
+}
+
+.UserName {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.UserEmail {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.UserNickname {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #188cc3;
+}
+
+.UserMobile {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.password {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.password2 {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.SignUpButton {
+  display: block;
+  padding: 7px;
+  background-color: #189cc4;
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+
+  float: left;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.1s;
+}
+.SignUpButton:active{
+  margin-left: 1px;
+  margin-top: 1px;
+  box-shadow: none;
+}
+
+.SignUpCheckbox {
+  font-size: 15px;
+  margin: 10px 0;
+}
+
+.errorMessages {
+  font-size: 15px;
+  font-weight: bolder;
+  text-align: center;
+  color: #ff735d;
+}

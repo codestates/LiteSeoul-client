@@ -1,18 +1,18 @@
 // import axios from 'axios';
 // import { useState, useEffect } from 'react';
-import { useState } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Home from './pages/Home';
-import SignIn from './components/Modal/SignIn';
-import Mypage from './pages/Mypage';
-import Footer from './components/Footer';
-import Nav from './components/Nav';
+import { useState } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import Home from "./pages/Home";
+import SignIn from "./components/Modal/SignIn";
+import Mypage from "./pages/Mypage";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
 // import Donation from './pages/Donation';
-import NotFound from './pages/NotFound';
-import Map from './pages/Map';
+import NotFound from "./pages/NotFound";
+import Map from "./pages/Map";
+import SignUp from "./components/Modal/SignUp";
 
-
-function App(): any {
+const App: React.FC = () => {
   // const [result, setResult] = useState('');
   // useEffect((): any => {
   //   axios.get('http://ec2-3-142-146-122.us-east-2.compute.amazonaws.com')
@@ -21,12 +21,22 @@ function App(): any {
   //     setResult(res.data);
   //   })
   // }, [])
-  
+
   // return (
   //   <div className="App">
   //     {result}
   //   </div>
   // );
+  
+  // const onSubmit = (form: {
+  //   name: string;
+  //   email: string;
+  //   mobile: string;
+  //   password: string;
+  //   password2: string;
+  // }) => {
+  //   console.log(form);
+  // };
   const [isLogin, SetLogin] = useState<boolean>(false);
   return (
     <BrowserRouter>
@@ -38,33 +48,24 @@ function App(): any {
             <Donation/>
           )}
         /> */}
-        <Route 
+        <Route
           path="/mypage"
           render={() => {
-            if(isLogin === false) {
-              return <Redirect to="/signin" />
+            if (isLogin === false) {
+              return <Redirect to="/signin" />;
             }
-            return <Mypage/>
+            return <Mypage />;
           }}
         />
-        <Route 
-          path="/signin"
-          render={() => (
-            <SignIn/>
-          )}
-        />
-        <Route 
-          path="/map"
-          render={() => (
-            <Map/>
-          )}
-        />
-        <Route 
+        <Route path="/signin" render={() => <SignIn />} />
+        <Route path="/signup" render={() => <SignUp />} />
+        <Route path="/map" render={() => <Map />} />
+        <Route
           exact
           path="/"
           render={() => (
             <Home
-              // isLogin={isLogin: boolean}
+            // isLogin={isLogin: boolean}
             />
           )}
         />
@@ -72,7 +73,7 @@ function App(): any {
       </Switch>
       <Footer />
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default App;
