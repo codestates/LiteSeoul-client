@@ -10,7 +10,7 @@ function LogoSvg(props: any) {
       {...props}
     >
       <defs>
-        <style>{'.prefix__cls-1{fill:#1d8dc4}'}</style>
+        <style>{'.prefix__cls-1{fill:#189cc4}'}</style>
       </defs>
       <title>{'LiteSeoul_mainLogo'}</title>
       <path

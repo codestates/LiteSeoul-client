@@ -120,8 +120,194 @@ img {
   z-index: 2;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 801px) {
   #bg {
     display: none;
+  }
+}
+
+@keyframes line-anim2 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 메인 백그라운드 애니메이션 설정 */
+
+#bg path:nth-child(1) {
+  stroke-dasharray: 600px;
+  stroke-dashoffset: 600px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(2) {
+  stroke-dasharray: 2000px;
+  stroke-dashoffset: 2000px;
+  animation: line-anim2 6s linear forwards;
+}
+
+#bg path:nth-child(3) {
+  stroke-dasharray: 1600px;
+  stroke-dashoffset: 1600px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(4) {
+  stroke-dasharray: 400px;
+  stroke-dashoffset: 400px;
+  animation: line-anim2 3s linear forwards;
+}
+
+#bg path:nth-child(5) {
+  stroke-dasharray: 2602px;
+  stroke-dashoffset: 2602px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(6) {
+  stroke-dasharray: 1500px;
+  stroke-dashoffset: 1500px;
+  animation: line-anim2 8s linear forwards;
+}
+
+#bg path:nth-child(7) {
+  stroke-dasharray: 801px;
+  stroke-dashoffset: 801px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(8) {
+  stroke-dasharray: 267px;
+  stroke-dashoffset: 267px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(9) {
+  stroke-dasharray: 673px;
+  stroke-dashoffset: 673px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(10) {
+  stroke-dasharray: 224px;
+  stroke-dashoffset: 224px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(11) {
+  stroke-dasharray: 280px;
+  stroke-dashoffset: 280px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(12) {
+  stroke-dasharray: 280px;
+  stroke-dashoffset: 280px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(13) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(14) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(15) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim 4s linear forwards;
+}
+
+#bg path:nth-child(16) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(17) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(18) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(19) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s ease forwards;
+}
+
+#bg path:nth-child(20) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(21) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(22) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(23) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#recycle {
+  width: 80%;
+  opacity: 0.2;
+  animation: rotate 10s linear infinite;
+  transform-origin: center;
+  z-index: 1;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#wood {
+  width: 80%;
+}
+
+.woodback {
+  animation: color 10s linear infinite;
+}
+
+@keyframes color {
+  0% {
+    fill: #1894cc;
+    opacity: 0.3;
+  }
+  50% {
+    fill: #ffc709;
+    opacity: 0.7;
+  }
+  100% {
+    fill: #1894cc;
+    opacity: 0.3;
   }
 }

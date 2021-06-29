@@ -292,7 +292,7 @@ const CommentInput = styled.input.attrs({
   text-indent: 20px;
   &:focus {
     outline: none;
-    border: 2px solid red;
+    border: 2px solid #ff735d;
     background: transparent;
   }
 `;
@@ -309,6 +309,10 @@ const CommentBtn = styled.button`
   border-radius: 20px;
   font-weight: 400;
   font-size: 1rem;
+  transition: 0.4s all;
+  &:hover {
+    background-color: #ff735d;
+  }
 `;
 
 function Marker() {

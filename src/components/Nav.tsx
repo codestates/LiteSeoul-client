@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const NavAni = keyframes`
+  0% {
+    top: -90px;
+    opacity:0;
+  }
+  100%{
+    top: 0px;
+    opacity:1;
+  }
+`;
 
 const NavOut = styled.div`
   width: 100%;
@@ -9,7 +20,10 @@ const NavOut = styled.div`
   border-bottom: 1px solid #189cc4;
   position: fixed;
   z-index: 900;
-  /* background: #fff; */
+  background: #fff;
+  transition: 0.4s all;
+  animation: ${NavAni} 0.8s;
+
   @media screen and (max-width: 750px) {
     height: 70px;
   }

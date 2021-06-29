@@ -3,6 +3,7 @@ import Footer from '../components/Home/Footer';
 import Rending from '../components/Home/Rending';
 import Slogan1 from '../components/Home/Slogan1';
 import Slogan2 from '../components/Home/Slogan2';
+import Recommends from '../components/Home/Recommends';
 import styled from 'styled-components';
 
 const HomeOut = styled.div`
@@ -29,8 +30,10 @@ const TopBtn = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  bottom: 5%;
-  right: 5%;
+  font-weight: 700;
+  font-size: 1.2rem;
+  bottom: 3%;
+  right: 3%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: 0.4s all;
   &:hover {
@@ -44,6 +47,7 @@ function Home() {
     <HomeOut>
       <TopBtn>TOP</TopBtn>
       <Rending></Rending>
+      <Recommends></Recommends>
       <Slogan1></Slogan1>
       <Slogan2></Slogan2>
       <Footer></Footer>
