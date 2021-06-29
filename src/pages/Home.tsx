@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import Ranking from "../components/Ranking";
 
-function Home(){
-    return(
-        <div>
-            Home
-        </div>
-    )
+function Home() {
+  return (
+    <div>
+        Home main
+      <Ranking />
+    </div>
+  );
 }
 
 export default Home;

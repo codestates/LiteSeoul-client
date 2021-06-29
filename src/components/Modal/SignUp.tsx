@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import styled from "styled-components";
 import "../../App.css";
@@ -112,6 +113,12 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);
 
+  const [image, setImage] = useState<File>();
+
+  // const handleImage = (img: string) => {
+  //   setImage(img);
+  // }
+
   // console.log(IFormInput.data)
   // 리턴 내부에서 모달창 생성 및 유효성검사와 인풋창 한번에 관리
   return (
@@ -137,7 +144,7 @@ const SignUp = () => {
             : errors.UserMobile
             ? "휴대폰 번호를 입력해주세요 :) 대쉬('-')는 안쓰셔도 돼요!"
             : errors.Password
-            ? "비밀번호를 입력해주세요 :)"
+            ? "비밀번호는 영어와 숫자를 조합해주세요 :)"
             : errors.Checkbox
             ? "이용약관에 동의해주세요 :)"
             : "깨끗한 서울을 위해 LiteSeoul에 동참해주세요!"}
