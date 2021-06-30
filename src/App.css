@@ -152,10 +152,11 @@
 }
 
 
-/* 유저랭킹 */
+/* 랭킹 하위 컴포넌트(유저/샵랭크) */
 .AllRankers {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 50px;
 }
 
 .EachRanker {
@@ -175,9 +176,10 @@
 }
 
 .EachNumber {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  /* height: 30px; */
   /* border: 3px solid purple; */
+
   border-radius: 9999px;
   text-align: center;
   margin: -10px 20px 20px -10px;
@@ -190,6 +192,10 @@
   /* left: 40px; */
 }
 
+.RankPicsDiv {
+  text-align: center;
+}
+
 .EachPic {
   /* border: 5px solid green; */
   /* background-color: wheat; */
@@ -197,6 +203,8 @@
   /* padding: 10% 0; */
   /* width: 90%; */
   height: 200px;
+  width: 200px;
+
 }
 
 .EachName {
