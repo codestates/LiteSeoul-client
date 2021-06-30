@@ -7,56 +7,27 @@ import "../../App.css";
 // styled-components로 모달창 css 관리
 const PlayModal = styled.div`
   width: 100%;
-  height: 100vh;
-  /* min-width: 1800px; */
+  height: 250%;
+  margin-top: 30%;
+  min-width: 500px;
   background-color: #bcb6b6;
-  position: absolute;
   z-index: 990;
   overflow: auto;
   opacity: 1;
-  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 1.5rem;
 `;
 
 const PlayModalInside = styled.div`
   width: 60%;
-  /* min-width: 500px; */
   height: 500px;
-  /* border: 7px solid red; */
   margin: auto;
   padding: 50px 50px 100px 50px;
   position: relative;
-  /* color: white; */
   background-color: white;
   border-radius: 10px;
-`;
-
-const ModalCloseBtn = styled.div`
-  width: 40px;
-  height: 40px;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  color: #ccc;
-  font-size: 2rem;
-  font-weight: 1000;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  background-color: #188cc3;
-  z-index: 999;
-  &:hover {
-    border: none;
-    /* background: #white; */
-    opacity: 1;
-    overflow: auto;
-  }
 `;
 
 const FileUpload = styled.div`
@@ -101,7 +72,7 @@ type IFormInput = {
 };
 
 // 사인업 함수 본문
-const SignUp = () => {
+const SignUp = (props: any) => {
   // react-hook-from 메소드 useForm
   const {
     register,
@@ -113,23 +84,21 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);
 
+  // 이미지를 업로드 후 실시간 렌더링 가능하지 않을까?
   const [image, setImage] = useState<File>();
 
-  // const handleImage = (img: string) => {
-  //   setImage(img);
-  // }
-
-  // console.log(IFormInput.data)
   // 리턴 내부에서 모달창 생성 및 유효성검사와 인풋창 한번에 관리
   return (
     <PlayModal>
-      <ModalCloseBtn
-        onClick={() => {
-          window.history.back();
-        }}
+      <div
+        className="ModalCloseBtn"
+        onClick={() =>
+          // window.history.back()
+          props.handleModalClose
+        }
       >
         X
-      </ModalCloseBtn>
+      </div>
       <PlayModalInside>
         <div className="SignUpTitle">LiteSeoul</div>
         <div className="errorMessages">

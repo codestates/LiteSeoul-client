@@ -1,4 +1,92 @@
+/* 임시 Nav! 지워도 상관 없음. */
+.Nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 2px solid #189cc4;
+}
+.Nav > ul {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.Nav > ul > li {
+  width: 150px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff73;
+  font-size: 16px;
+}
 
+/* SignIn > SignUp 임시 모달창 */
+.SignUpOpenBtn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 10px;
+  border: 1px solid #189cc4;
+  cursor: pointer;
+  width: 100px;
+  height: 5px;
+  background-color: #189cc4;
+  color: white;
+  text-align: center;
+  border-radius: 1rem;
+}
+
+.modal-background {
+  /* width: 50%; */
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 10, 0.86);
+}
+
+.modal-card {
+  margin: 0 auto;
+  display: block;
+  /* margin-top: 100ㅔㅌ; */
+  width: 300px;
+  height: 300px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.ModalCloseBtn {
+  margin-left: 90%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  /* position: absolute; */
+  top: 40px;
+  right: 40px;
+  color: #ccc;
+  font-size: 2rem;
+  font-weight: 1000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  background-color: #188cc4;
+  z-index: 999;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.1s;
+}
+.ModalCloseBtn:active {
+  /* margin-left: 1%;
+  margin-top: 1%; */
+  box-shadow: none;
+}
 
 /* 회원가입 */
 /* 주황컬러 : #ff735d */
@@ -13,8 +101,7 @@
   display: flex;
   flex-direction: column;
   margin: 30px 50px 50px 50px;
-  justify-content:center;
-  
+  justify-content: center;
 }
 
 .UserImg {
@@ -25,7 +112,7 @@
 .ImgFlex {
   display: flex;
   text-align: center;
-  justify-content:center;
+  justify-content: center;
 }
 
 .UserName {
@@ -52,7 +139,7 @@
   border-top: 0px;
   border-right: 0px;
   border-left: 0px;
-  border-bottom: 2px solid #188cc3;
+  border-bottom: 2px solid #188cc4;
 }
 
 .UserMobile {
@@ -95,7 +182,7 @@
   box-shadow: 2px 2px 2px black;
   transition-duration: 0.1s;
 }
-.SignUpButton:active{
+.SignUpButton:active {
   margin-left: 1px;
   margin-top: 1px;
   box-shadow: none;
@@ -112,8 +199,6 @@
   text-align: center;
   color: #ff735d;
 }
-
-
 
 /* 랭킹컴포넌트 */
 .AllRankingFlex {
@@ -136,7 +221,7 @@
   font-size: 20px;
   font-weight: bolder;
   padding: 0 0 0 30px;
-  color:#189cc4;
+  color: #189cc4;
   border: 2px solid #189cc4;
   box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
 
@@ -150,7 +235,6 @@
   background-color: #189cc4;
   color: white;
 }
-
 
 /* 랭킹 하위 컴포넌트(유저/샵랭크) */
 .AllRankers {
@@ -169,7 +253,7 @@
   cursor: pointer;
   transition-duration: 0.3s;
 }
-.EachRanker:active{
+.EachRanker:active {
   margin-left: 0.5px;
   margin-top: 0.5px;
   box-shadow: none;
@@ -204,7 +288,6 @@
   /* width: 90%; */
   height: 200px;
   width: 200px;
-
 }
 
 .EachName {
@@ -238,3 +321,251 @@
   margin-top: 0px;
   font-size: 13px;
 }
+
+
+
+/* Mypage*/
+.MypageFlex {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 230px 2fr;
+  grid-auto-rows: auto;
+}
+
+/* Mypage > MypageNav */
+.MypageNavOut {
+  border-right: 2px solid #189cc4;
+  padding: 50px 20px 200px 20px;
+  /* margin: 20px; */
+}
+
+.MypageContents {
+  text-align: center;
+  align-items: center;
+}
+
+/* Mypage > Nav */
+.MypageNavUl {
+  list-style: none;
+  padding-left: 0;
+  padding-top: 20px;
+}
+
+.MypageNavTitleWhole {
+  padding: 0 20px 30px 40px;
+  border-bottom: 1px solid #188cc4;
+}
+
+.MypageNavTitleHello {
+  font-size: 25px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.MypageNavUsername {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.MypageNavBtns {
+  border: 2px solid #188cc4;
+  border-radius: 2rem;
+  margin: 30px 20px 20px 20px;
+  cursor: pointer;
+  color: #188cc4;
+  font-weight: bolder;
+  /* background-color: #188cc4; */
+  text-align: center;
+  padding: 5px 5px 5px 0;
+  box-shadow: 2px 2px 2px black;
+}
+.MypageNavBtns:active {
+  box-shadow: none;
+}
+
+
+/* Mypage > JustInfo */
+.JustInfoFlex {
+  /* display: flex; */
+  /* border: 1px solid #189cc4; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+}
+
+.MyInfo {
+  /* margin: 80px 80px 80px 50px;
+  align-items: center;
+  text-align: center; */
+}
+.MyInfoTitle {
+  text-align: center;
+  font-size: 40px;
+  margin: 20px;
+  font-weight: bolder;
+}
+
+.MyInfoUl {
+  list-style: none;
+  padding-left: 0;
+}
+
+.MyInfoPicsImg {
+  margin: 20px;
+  border-radius: 9999px;
+  width: 200px;
+  height: 200px;
+}
+
+.MyInfoName {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.MyInfoEmail {
+  text-align: center;
+  color: gray;
+  margin: 10px;
+}
+
+.MyInfoEdit {
+  text-align: center;
+  background-color: #ff735d;
+  margin: 20px 40%;
+  border-radius: 80px;
+  color: white;
+  font-size: 15px;
+  font-weight: bolder;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.1s;
+  text-decoration-line: none;
+}
+.MyInfoEdit:active {
+  box-shadow: none;
+}
+/* 링크밑줄 없애기 */
+a {
+  text-decoration: none;
+}
+
+.MyLevel {
+  margin: 80px 80px 80px 50px;
+  align-items: center;
+  text-align: center;
+}
+
+.MyLevelUl {
+  list-style: none;
+}
+
+.MyLevelPicsImg {
+  border-radius: 9999px;
+  width: 200px;
+  height: 200px;
+}
+
+.MyLevelNums {
+  text-align: center;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: #189cc4;
+}
+
+.MylevelMents {
+  width: 100%;
+  height: 100%;
+}
+
+.MentsExp {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.MentExpNick {
+  font-weight: bolder;
+}
+
+.MentExpNums {
+  font-weight: bolder;
+  color: #189cc4;
+}
+
+/* Mypage > BillsLog */
+.BillsLogsTitle {
+  text-align: left;
+  font-size: 40px;
+  margin: 20px 20px 20px 70px;
+  font-weight: bolder;
+}
+
+.BillsLogsWhole {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.BillsOne {
+  border: 2px solid orange;
+  background-color: ccc;
+  border-radius: 10px;
+  width: 200px;
+  height: 300px;
+  margin: 20px;
+}
+
+.BillsXBtn {
+  margin-left: 90%;
+  width: 20px;
+  height: 20px;
+  /* border: 2px solid #ccc; */
+  border-radius: 50%;
+  top: 40px;
+  right: 40px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 1000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  background-color: #188cc4;
+  z-index: 999;
+  box-shadow: 2px 2px 2px black;
+}
+.BillsXBtn:active {
+  box-shadow: none;
+}
+
+/* mypage > 회원탈퇴 */
+.memberOutMents {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 10%;
+  font-size: 30px;
+}
+
+.memberOutBtn {
+  margin: 20px;
+  font-size: 15px;
+  border: 1px solid #ff735d;
+  background-color: #ff735d;
+  color: white;
+  border-radius: 2rem;
+  width: 100px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+}
+.memberOutBtn:active {
+  box-shadow: none;
+}
+
+
