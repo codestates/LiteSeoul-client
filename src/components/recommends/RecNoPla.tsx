@@ -11,7 +11,10 @@ const Out = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
   @media screen and (max-width: 1401px) {
     height: 65%;
   }
@@ -197,7 +200,7 @@ function ReNoPla() {
         </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          서울 성동구 왕십리로 115 헤어그라운드
+          <span>성동구 왕십리로 115 헤어그라운드</span>
         </StoreAdd>
       </Store>
     </Out>

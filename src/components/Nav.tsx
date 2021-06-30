@@ -20,9 +20,9 @@ const NavOut = styled.div`
   border-bottom: 1px solid #189cc4;
   position: fixed;
   z-index: 900;
-  background: #fff;
+  background: #ffffffb3;
   transition: 0.4s all;
-  animation: ${NavAni} 0.8s;
+  animation: ${NavAni} 1.2s;
 
   @media screen and (max-width: 750px) {
     height: 70px;

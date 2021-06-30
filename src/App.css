@@ -279,6 +279,9 @@ img {
   transform-origin: center;
   z-index: 1;
 }
+#recycle:hover {
+  animation-play-state: paused;
+}
 
 @keyframes rotate {
   0% {
