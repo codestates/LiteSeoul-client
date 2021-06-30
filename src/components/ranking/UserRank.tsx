@@ -1,5 +1,4 @@
 import React from "react";
-import dummyDatas from "../documents/dummyDatas";
 import pepe from "../image/pepeBamboo.png";
 import dummyUsers from "../documents/dummyUsers";
 

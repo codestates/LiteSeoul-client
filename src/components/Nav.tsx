@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 function Nav() {
   return (
     <div className="Nav">
-        Nav start
       <ul>
         <li>
           <NavLink exact to="/" className="textLink">
@@ -27,7 +26,6 @@ function Nav() {
           </NavLink>
         </li>
       </ul>
-      Nav out
     </div>
   );
 }

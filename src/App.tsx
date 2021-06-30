@@ -11,6 +11,11 @@ import Nav from "./components/Nav";
 import NotFound from "./pages/NotFound";
 import Map from "./pages/Map";
 import SignUp from "./components/Modal/SignUp";
+import JustInfo from "./components/profile/JustInfo";
+import BillsLog from "./components/profile/BillsLog";
+import LikePlace from "./components/profile/LikePlace";
+import InfoEdit from "./components/profile/InfoEdit";
+import MemberOut from "./components/profile/MemberOut";
 
 const App: React.FC = () => {
   // const [result, setResult] = useState('');
@@ -27,16 +32,7 @@ const App: React.FC = () => {
   //     {result}
   //   </div>
   // );
-  
-  // const onSubmit = (form: {
-  //   name: string;
-  //   email: string;
-  //   mobile: string;
-  //   password: string;
-  //   password2: string;
-  // }) => {
-  //   console.log(form);
-  // };
+
   const [isLogin, SetLogin] = useState<boolean>(true);
   return (
     <BrowserRouter>
@@ -49,6 +45,7 @@ const App: React.FC = () => {
           )}
         /> */}
         <Route
+          exact
           path="/mypage"
           render={() => {
             if (isLogin === false) {
@@ -57,8 +54,12 @@ const App: React.FC = () => {
             return <Mypage />;
           }}
         />
+        <Route path="/mypage/justinfo" render={() => <JustInfo />} />
+        <Route exact path="/mypage/billslog" render={() => <BillsLog />} />
+        <Route exact path="/mypage/likeplace" render={() => <LikePlace />} />
+        <Route exact path="/mypage/memberout" render={() => <MemberOut />} />
+        {/* <Route exact path="/mypage/infoedit" render={() => <InfoEdit />} /> */}
         <Route path="/signin" render={() => <SignIn />} />
-        <Route path="/signup" render={() => <SignUp />} />
         <Route path="/map" render={() => <Map />} />
         <Route
           exact
