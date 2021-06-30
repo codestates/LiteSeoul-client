@@ -130,12 +130,36 @@
   margin-right: 20px;
 }
 
-.AllUserRankers {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.selectBox {
+  width: 130px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: bolder;
+  padding: 0 0 0 30px;
+  color:#189cc4;
+  border: 2px solid #189cc4;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.selectBox::after {
+  content: "";
+  background-color: #189cc4;
+  color: white;
 }
 
-.EachUserRanker {
+
+/* 랭킹 하위 컴포넌트(유저/샵랭크) */
+.AllRankers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 50px;
+}
+
+.EachRanker {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -145,16 +169,17 @@
   cursor: pointer;
   transition-duration: 0.3s;
 }
-.EachUserRanker:active{
+.EachRanker:active{
   margin-left: 0.5px;
   margin-top: 0.5px;
   box-shadow: none;
 }
 
-.EachUserNumber {
-  width: 40px;
-  height: 40px;
+.EachNumber {
+  width: 36px;
+  /* height: 30px; */
   /* border: 3px solid purple; */
+
   border-radius: 9999px;
   text-align: center;
   margin: -10px 20px 20px -10px;
@@ -167,16 +192,22 @@
   /* left: 40px; */
 }
 
-.EachUserPic {
+.RankPicsDiv {
+  text-align: center;
+}
+
+.EachPic {
   /* border: 5px solid green; */
   /* background-color: wheat; */
   margin: 10px;
   /* padding: 10% 0; */
   /* width: 90%; */
   height: 200px;
+  width: 200px;
+
 }
 
-.EachUserName {
+.EachName {
   /* border: 3px solid tomato; */
   margin: 10px;
   margin-top: 0px;
@@ -184,13 +215,13 @@
   font-weight: bolder;
 }
 
-.EachUserMessage {
+.EachMessage {
   /* border: 3px solid royalblue; */
   margin: 10px;
   margin-top: 0px;
 }
 
-.EachUserLikes {
+.EachLikes {
   /* border: 3px solid brown; */
   margin: 10px;
   margin-top: 0px;
@@ -201,7 +232,7 @@
   border-bottom: 2px solid #189cc4;
 }
 
-.EachUserGround {
+.EachGround {
   /* border: 3px solid yellowgreen; */
   margin: 10px;
   margin-top: 0px;

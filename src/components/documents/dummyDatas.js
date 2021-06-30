@@ -7,14 +7,14 @@ const dummyDatas = [
     likes: 39,
     ground: "서울특별시 영등포구 당산동",
   },
-  // {
-  //   id: 2,
-  //   img: "../image/pepeBamboo.png",
-  //   name: "페페",
-  //   message: "fucking codestates",
-  //   likes: 39,
-  //   ground: "당산",
-  // },
+  {
+    id: 2,
+    img: "../image/choonShick.png",
+    name: "춘식이",
+    message: "처음 춘식이 영업하던 영근이형이 반석이와 정태를 춘식이 빠돌이로 물들여 버렸다... 혼자 남은 바실리는 오로지 페페를 수호할 뿐..",
+    likes: 39,
+    ground: "서울특별시 영등포구 보라매공원",
+  },
   // {
   //   id: 3,
   //   img: "../image/pepeBamboo.png",
