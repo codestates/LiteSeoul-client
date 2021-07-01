@@ -41,7 +41,8 @@
 }
 
 .modal-background {
-  /* width: 50%; */
+  /* width: 2000px; */
+  height: 120%;
   position: absolute;
   right: 0;
   top: 0;
@@ -242,6 +243,16 @@
   grid-template-columns: 1fr 1fr 1fr;
   margin: 0 50px;
 }
+@media screen and (max-width: 1020px) {
+  .AllRankers {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 650px) {
+  .AllRankers {
+    grid-template-columns: 1fr;
+  }
+}
 
 .EachRanker {
   list-style: none;
@@ -322,8 +333,6 @@
   font-size: 13px;
 }
 
-
-
 /* Mypage*/
 .MypageFlex {
   /* display: flex; */
@@ -332,19 +341,18 @@
   grid-auto-rows: auto;
 }
 
-/* Mypage > MypageNav */
-.MypageNavOut {
-  border-right: 2px solid #189cc4;
-  padding: 50px 20px 200px 20px;
-  /* margin: 20px; */
-}
-
 .MypageContents {
   text-align: center;
   align-items: center;
 }
 
-/* Mypage > Nav */
+/* Mypage > MypageNav */
+.MypageNavOut {
+  border-right: 2px solid #189cc4;
+  padding: 50px 20px 400px 20px;
+  /* margin: 20px; */
+}
+
 .MypageNavUl {
   list-style: none;
   padding-left: 0;
@@ -383,26 +391,25 @@
   box-shadow: none;
 }
 
-
 /* Mypage > JustInfo */
 .JustInfoFlex {
-  /* display: flex; */
-  /* border: 1px solid #189cc4; */
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: auto;
 }
+@media screen and (max-width: 800px) {
+  .JustInfoFlex {
+    grid-template-columns: 1fr ;
+  }
+}
 
 .MyInfo {
-  /* margin: 80px 80px 80px 50px;
-  align-items: center;
-  text-align: center; */
+  margin-top: 50px;
 }
 .MyInfoTitle {
-  text-align: center;
+  text-align: left;
   font-size: 40px;
-  margin: 20px;
+  margin: 20px 20px 20px 30px;
   font-weight: bolder;
 }
 
@@ -495,10 +502,16 @@ a {
 }
 
 /* Mypage > BillsLog */
+.MyBillsGrid {
+  display: grid;
+  grid-template-columns: 230px 2fr 1fr;
+  grid-auto-rows: auto;
+}
+
 .BillsLogsTitle {
   text-align: left;
   font-size: 40px;
-  margin: 20px 20px 20px 70px;
+  margin: 20px 20px 20px 30px;
   font-weight: bolder;
 }
 
@@ -508,6 +521,21 @@ a {
   flex-direction: column;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+@media screen and (max-width: 1300px) {
+  .BillsLogsWhole {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .BillsLogsWhole {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 800px) {
+  .BillsLogsWhole {
+    grid-template-columns: 1fr;
+  }
 }
 
 .BillsOne {
@@ -519,7 +547,13 @@ a {
   margin: 20px;
 }
 
+.BillsImg {
+  width: 100%;
+  height: 100%;
+}
+
 .BillsXBtn {
+  /* position: z99; */
   margin-left: 90%;
   width: 20px;
   height: 20px;
@@ -543,13 +577,76 @@ a {
   box-shadow: none;
 }
 
+.BillsLogAddBtn {
+  /* border: 1px solid royalblue; */
+  background-color: #188cc4;
+  border-radius: 9999px;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-top: 700px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+}
+.BillsLogAddBtn:active {
+  box-shadow: none;
+}
+
+/* .UploadBillsImg{
+  border: 4px solid #bcb6b6;
+  height: 150%;
+  width: 100%;
+  cursor: pointer;
+} */
+
+.UploadBillsImg {
+  height: 100px;
+  width: 100px;
+  /* border-radius: 100px; */
+  position: relative;
+  border: 4px solid #ffffff;
+  overflow: hidden;
+  /* background-image: linear-gradient(to bottom, #2590eb 50%, #ffffff 50%); */
+  background-size: 100% 200%;
+  transition: all 1s;
+  color: #ffffff;
+  font-size: 100px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.UploadBillsBackground {
+  height: 100%;
+  width: 100%;
+  /* background-color: #bcb6b6; */
+  text-align: center;
+  align-items: center;
+  border: 3px dashed #188cc4;
+  border-radius: 20px;
+}
+.UploadBillBackMents {
+  border: 3px dashed #ff735d;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 150px 50px;
+  color: #188cc4;
+  font-weight: bolder;
+}
+
 /* mypage > 회원탈퇴 */
 .memberOutMents {
   text-align: center;
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 10%;
+  margin-top: 30%;
   font-size: 30px;
 }
 
@@ -568,4 +665,59 @@ a {
   box-shadow: none;
 }
 
+/* Mypage > LikePlace */
+.WholeLikePlaces {
+  /* align-items: center; */
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+}
 
+.LikePlaceTitle {
+  font-size: 40px;
+  margin: 20px;
+  padding-left: 10px;
+  font-weight: bolder;
+}
+
+.LikePlaceUl {
+  list-style: none;
+}
+
+.OneLikePlace {
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #188cc4;
+  border-radius: 50px;
+  width: 800px;
+  height: 50px;
+  margin: 50px 50px 0 50px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+}
+.OneLikePlace:active {
+  box-shadow: none;
+}
+
+.LikePlaceNum {
+  border-radius: 9999px;
+  background-color: #188cc4;
+  color: white;
+  font-size: 25px;
+  width: 30px;
+  padding: 10px;
+}
+
+.LikePlaceName {
+  font-weight: bolder;
+  text-align: left;
+}
+
+.LikePlaceWhere {
+  font-size: 13px;
+  padding-bottom: 5px;
+  font-weight: bolder;
+  text-align: left;
+}
