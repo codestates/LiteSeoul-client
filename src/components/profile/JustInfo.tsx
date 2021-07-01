@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import dummyMyInfo from "../documents/dummyMyInfo";
-import pepeJoker from "../image/pepeJoker.jpeg";
 import ramguiThunder from "../image/ramguiThunder.jpeg";
 import mememe from "../image/mememe.png";
 import styled from "styled-components";
-import InfoEdit from "./InfoEdit";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import InfoEdit from "../Modal/InfoEdit";
 
 const MyLevelBarOut = styled.div`
   width: 100%;
@@ -22,8 +20,33 @@ const MyLevelExpControll = styled.div`
 `;
 
 function JustInfo() {
+
+  // 더미데이터 구조분해할당
   const { id, name, email, nickname, phone, level, expnow, expall } =
     dummyMyInfo;
+
+  // 개인정보 관리 인터페이스와 객체
+  interface userInfoForm {
+    id: number;
+    name: string;
+    email: string;
+    nickname: string;
+    phone: string;
+    level: number;
+    expnow: number;
+    expall: number;
+  }
+  const MyInfo: userInfoForm = {
+    id: id,
+    name: name,
+    email: email,
+    nickname: nickname,
+    phone: phone,
+    level: level,
+    expnow: expnow,
+    expall: expall
+  }
+  // console.log(MyInfo) // 정상렌더링 확인
 
   //얘는 exp bar 때문에 함수 안에 있어야 함
   const MyLevelBarIn = styled.div`
@@ -33,8 +56,9 @@ function JustInfo() {
     background-color: #189cc4;
     border-radius: 50px;
   `;
+  
+  // 인포에딧 모달창 관리
   const [show, setShow] = useState(false);
-
   const handleModalClose = (e: any) => {
     const currentClass = e.target.className;
     if (
@@ -45,7 +69,6 @@ function JustInfo() {
     }
     return;
   };
-
   const handleModalOpen = () => {
     setShow(true);
   };
@@ -53,7 +76,6 @@ function JustInfo() {
   return (
     <div className="JustInfoFlex">
       <div className="MyInfo">
-        <div className="MyInfoTitle">MY PROFILE</div>
         <ul className="MyInfoUl">
           <li>
             <div className="MyInfoPics">
@@ -71,7 +93,7 @@ function JustInfo() {
               <div hidden={!show}>
                 <div className="modal-background" onClick={handleModalClose}>
                   <div className="modal-card">
-                    <InfoEdit handleModalClose={handleModalClose} />
+                    <InfoEdit handleModalClose={handleModalClose} MyInfo={MyInfo}/>
                   </div>
                 </div>
               </div>

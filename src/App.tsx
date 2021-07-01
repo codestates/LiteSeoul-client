@@ -14,7 +14,7 @@ import SignUp from "./components/Modal/SignUp";
 import JustInfo from "./components/profile/JustInfo";
 import BillsLog from "./components/profile/BillsLog";
 import LikePlace from "./components/profile/LikePlace";
-import InfoEdit from "./components/profile/InfoEdit";
+import InfoEdit from "./components/Modal/InfoEdit";
 import MemberOut from "./components/profile/MemberOut";
 
 const App: React.FC = () => {

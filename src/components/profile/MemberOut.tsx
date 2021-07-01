@@ -8,7 +8,7 @@ function MemberOut() {
         <MypageNav />
       </div>
       <div className="memberOutMents">
-        정말 Zero Waste 생활을 그만하시겠어요?ㅜㅜ
+        정말 Zero Waste를 관두시겠어요?
         <div className="memberOutBtn">탈퇴하기</div>
       </div>
     </div>
