@@ -54,7 +54,7 @@ const App: React.FC = () => {
             return <Mypage />;
           }}
         />
-        <Route path="/mypage/justinfo" render={() => <JustInfo />} />
+        {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
         <Route exact path="/mypage/billslog" render={() => <BillsLog />} />
         <Route exact path="/mypage/likeplace" render={() => <LikePlace />} />
         <Route exact path="/mypage/memberout" render={() => <MemberOut />} />

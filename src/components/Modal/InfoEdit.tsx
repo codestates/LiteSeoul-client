@@ -35,7 +35,6 @@ const FileUpload = styled.div`
   position: relative;
   border: 4px solid #ffffff;
   overflow: hidden;
-  /* background-image: linear-gradient(to bottom, #2590eb 50%, #ffffff 50%); */
   background-image: url(${mememe});
   background-size: 100%;
   background-position: center;

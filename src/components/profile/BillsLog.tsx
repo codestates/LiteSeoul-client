@@ -34,36 +34,41 @@ function BillsLog() {
       <div>
         <MypageNav />
       </div>
-      <div>
-        <div className="BillsLogsTitle">나의 인증목록</div>
-        <ul className="BillsLogsWhole">
-          {dummyBills.map((dummyBill) => (
-            <li className="BillsOne" key={dummyBill.id}>
-              <div className="BillsBack">
-                <div className="BillsXBtn" onClick={xbtnHandler}>
-                  X
+      <div className="BillsMainBody">
+        <div className="BillsMainBodyLogs">
+          <div className="BillsLogsTitle">나의 인증목록</div>
+          <ul className="BillsLogsWhole">
+            {dummyBills.map((dummyBill) => (
+              <li className="BillsOne" key={dummyBill.id}>
+                <div className="BillsBack">
+                  <div className="BillsXBtn" onClick={xbtnHandler}>
+                    X
+                  </div>
+                  <img className="BillsImg" src={danggeun} alt="영수증"></img>
+                  {dummyBill.text}
                 </div>
-                <img className="BillsImg" src={danggeun} alt="영수증"></img>
-                {dummyBill.text}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div hidden={!show}>
-        <div className="modal-background" onClick={handleModalClose}>
-          <div className="modal-card">
-            <AddBills handleModalClose={handleModalClose} />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="BillsMainBtn" hidden={!show}>
+          <div className="modal-background" onClick={handleModalClose}>
+            <div className="modal-card">
+              <AddBills handleModalClose={handleModalClose} />
+            </div>
           </div>
         </div>
-      </div>
-      {show ? (
-        <></>
-      ) : (
-        <div className="BillsLogAddBtn" onClick={handleModalOpen}>
-          +
+        {show ? (
+          <></>
+        ) : (
+          <div className="BillsLogAddBtn" onClick={handleModalOpen}>
+            +
+          </div>
+        )}
+        <div className="MypageADMents">
+          여러분의 제로 웨이스트 숍으로 꾸며보세요!
         </div>
-      )}
+      </div>
     </div>
   );
 }
