@@ -9,7 +9,6 @@ function Mypage() {
         <MypageNav />
       </div>
       <div className="MypageContents">
-        <div className="MyInfoTitle">MY PROFILE</div>
         <JustInfo />
       </div>
     </div>
