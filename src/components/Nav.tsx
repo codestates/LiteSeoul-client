@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 
 const NavAni = keyframes`
   0% {
-    top: -90px;
+    top: -70px;
     opacity:0;
   }
   100%{
@@ -16,7 +16,7 @@ const NavAni = keyframes`
 const NavOut = styled.div`
   width: 100%;
   min-width: 500px;
-  height: 90px;
+  height: 70px;
   border-bottom: 1px solid #189cc4;
   position: fixed;
   z-index: 900;
@@ -25,7 +25,7 @@ const NavOut = styled.div`
   animation: ${NavAni} 1.2s;
 
   @media screen and (max-width: 750px) {
-    height: 70px;
+    height: 60px;
   }
 `;
 const NavTopColor = styled.div`
@@ -35,21 +35,21 @@ const NavTopColor = styled.div`
 
 const NavMainOut = styled.div`
   width: 90%;
-  height: 80px;
+  height: 60px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   @media screen and (max-width: 750px) {
-    height: 60px;
+    height: 50px;
     justify-content: center;
   }
 `;
 const Logo = styled.div`
   width: 10%;
-  height: 80px;
+  height: 60px;
   text-align: center;
-  line-height: 80px;
+  line-height: 60px;
   /* border: 1px solid red; */
   /* background: red; */
   color: #189cc4;
@@ -64,7 +64,7 @@ const NavUl = styled.ul`
   display: flex;
   & li {
     width: 120px;
-    height: 80px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,7 @@ const NavUl = styled.ul`
     display: flex;
     & li {
       width: 60px;
-      height: 60px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -142,9 +142,8 @@ const NavUl = styled.ul`
   }
 `;
 
-function Nav() {
+function Nav(props: any) {
   //임시 스테이트
-  const [isLogin, setLogin] = useState(false);
 
   return (
     <NavOut>
@@ -162,12 +161,17 @@ function Nav() {
               Map
             </NavLink>
           </li>
-          <li>
-            <NavLink exact to="/mypage">
-              MyPage
-            </NavLink>
-          </li>
-          {isLogin ? (
+          {props.isLogin ? (
+            <li>
+              <NavLink exact to="/mypage">
+                MyPage
+              </NavLink>
+            </li>
+          ) : (
+            <></>
+          )}
+
+          {props.isLogin ? (
             <li
               style={{
                 color: '#ff735D',
@@ -176,7 +180,7 @@ function Nav() {
               Logout
             </li>
           ) : (
-            <li>Login</li>
+            <li onClick={props.handleLoginModal}>Login</li>
           )}
         </NavUl>
       </NavMainOut>

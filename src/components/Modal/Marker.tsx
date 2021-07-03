@@ -315,7 +315,12 @@ const CommentBtn = styled.button`
   }
 `;
 
-function Marker() {
+type MarkerProps = {
+  handleModal: () => void;
+  isModal: boolean;
+};
+
+function Marker({ isModal, handleModal }: MarkerProps) {
   const [isCheck, setCheck] = useState(false);
 
   const handleCheck = () => {
@@ -325,7 +330,7 @@ function Marker() {
   return (
     <MarkerOut>
       <MarkerInMain>
-        <CloseBtn></CloseBtn>
+        <CloseBtn onClick={handleModal}></CloseBtn>
         <MarkerCenter>
           <MarkerInfo>
             <MakerStoreInfo>

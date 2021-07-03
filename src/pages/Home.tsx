@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/Home/Footer';
 import Rending from '../components/Home/Rending';
 import Slogan1 from '../components/Home/Slogan1';
 import Slogan2 from '../components/Home/Slogan2';
+import Slogan3 from '../components/Home/Slogan3';
 import Recommends from '../components/Home/Recommends';
 import styled from 'styled-components';
 
@@ -19,8 +20,8 @@ const HomeOut = styled.div`
   }
 `;
 const TopBtn = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-color: #189cc4;
   position: fixed;
@@ -31,11 +32,12 @@ const TopBtn = styled.div`
   justify-content: center;
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
   bottom: 3%;
   right: 3%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: 0.4s all;
+  opacity: 1;
   &:hover {
     background-color: #ff735d;
     letter-spacing: 0.2rem;
@@ -43,11 +45,16 @@ const TopBtn = styled.div`
 `;
 
 function Home() {
+  const handleTop = () => {
+    console.log('버튼 확인');
+  };
+
   return (
-    <HomeOut>
-      <TopBtn>TOP</TopBtn>
+    <HomeOut id="home">
+      <TopBtn onClick={handleTop}>TOP</TopBtn>
       <Rending></Rending>
       <Recommends></Recommends>
+      {/* <Slogan3></Slogan3> */}
       <Slogan1></Slogan1>
       <Slogan2></Slogan2>
       <Footer></Footer>

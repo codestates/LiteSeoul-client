@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Wood from '../SVG/Wood';
 
-const Slogan2Out = styled.div`
+const Slogan3Out = styled.div`
   width: 100%;
   height: 100vh;
   min-height: 900px;
@@ -12,7 +11,7 @@ const Slogan2Out = styled.div`
 const SloganMain = styled.div`
   width: 90%;
   height: 100%;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -29,6 +28,11 @@ const SloganImg = styled.div`
   align-items: center;
   justify-content: center;
   /* border: 1px solid red; */
+  position: relative;
+  & img {
+    width: 100%;
+    position: absolute;
+  }
   @media screen and (max-width: 801px) {
     width: 60%;
     height: 50%;
@@ -89,13 +93,11 @@ const SloganTextContent = styled.div`
     font-size: 1.2rem;
   }
 `;
-function Slogan2() {
+function Slogan3() {
   return (
-    <Slogan2Out>
+    <Slogan3Out>
       <SloganMain>
         <SloganText>
-          <img src="img/blueback-03.png" alt="bg"></img>
-
           <SloganTextTitle>Zero Waste Life</SloganTextTitle>
           <SloganTextContent>
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -106,11 +108,17 @@ function Slogan2() {
         </SloganText>
 
         <SloganImg>
-          <Wood></Wood>
+          <img src="img/earth.png" alt="earth" className="earth"></img>
+          <img src="img/cloud.png" alt="cloud" className="cloud"></img>
+          <img src="img/earthout.png" alt="earthout" className="earthoud"></img>
+          <img src="img/pan1.png" alt="pan1" className="pan1"></img>
+          <img src="img/pan2.png" alt="pan2" className="pan2"></img>
+          <img src="img/pan3.png" alt="pan3" className="pan3"></img>
+          <img src="img/tree.png" alt="tree" className="tree"></img>
         </SloganImg>
       </SloganMain>
-    </Slogan2Out>
+    </Slogan3Out>
   );
 }
 
-export default Slogan2;
+export default Slogan3;

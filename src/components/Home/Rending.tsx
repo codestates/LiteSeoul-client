@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Background from '../SVG/BackGround';
 import LogoSvg from '../SVG/LogoSvg';
@@ -86,6 +87,9 @@ const RendingBtn = styled.button`
   font-weight: 500;
   font-size: 1.3rem;
   transition: 0.4s all;
+  & a {
+    color: #fff;
+  }
   &:hover {
     background-color: #ff735d;
     letter-spacing: 0.2rem;
@@ -101,7 +105,7 @@ const RendingBtn = styled.button`
 `;
 function Rending() {
   return (
-    <RendingOut>
+    <RendingOut id="rending">
       <Background></Background>
       <LogoSvg></LogoSvg>
       <RendingSubTitle>Zero Waste Life</RendingSubTitle>
@@ -110,7 +114,9 @@ function Rending() {
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.mmy text of the printing and typesetting
         </div>
-        <RendingBtn>Explore</RendingBtn>
+        <RendingBtn>
+          <Link to="/map">Explore</Link>
+        </RendingBtn>
       </RendingContent>
     </RendingOut>
   );

@@ -103,6 +103,12 @@ img {
   border: 0;
 }
 
+/* react-router-dom  : link 관련 css 변경 */
+.textLink {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /* bg */
 
 #bg {
@@ -314,3 +320,24 @@ img {
     opacity: 0.3;
   }
 }
+
+@media screen and (max-width: 961px) {
+  .nav {
+    display: none;
+  }
+}
+
+/* 지도 반응형 클래스 */
+
+.hidden {
+  left: 350px;
+}
+.hidden > img {
+  transform: rotate(180deg);
+}
+
+.active {
+  opacity: 1;
+}
+
+/* slogan3 */

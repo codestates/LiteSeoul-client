@@ -106,6 +106,16 @@ const SloganText = styled.div`
   align-items: flex-end;
   justify-content: center;
   padding: 3%;
+  position: relative;
+  & img {
+    width: 40%;
+    object-fit: cover;
+    opacity: 0.2;
+    position: absolute;
+    z-index: 10;
+    transform: rotate(15deg);
+  }
+
   @media screen and (max-width: 800px) {
     width: 100%;
     height: auto;
@@ -120,6 +130,7 @@ const SloganTextTitle = styled.div`
   text-align: right;
   font-size: 3.5rem;
   font-weight: 700;
+  z-index: 20;
   @media screen and (max-width: 1200px) {
     height: auto;
     font-size: 3rem;
@@ -133,6 +144,8 @@ const SloganTextContent = styled.div`
   font-size: 1.2rem;
   text-align: right;
   color: #6e6e73;
+  z-index: 20;
+
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
   }
@@ -150,6 +163,7 @@ function Slogan1() {
           <SloganSubTitle>Zero Waste Life</SloganSubTitle>
         </SloganImg>
         <SloganText>
+          <img src="img/blueback-01.png" alt="bg"></img>
           <SloganTextTitle>Zero Waste Life</SloganTextTitle>
           <SloganTextContent>
             Lorem Ipsum is simply dummy text of the printing and typesetting

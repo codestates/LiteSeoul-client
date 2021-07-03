@@ -40,12 +40,16 @@ const CurrentLocation = styled.div`
   }
 `;
 
-function Map() {
+type MapProps = {
+  handleModal: () => void;
+  isModal: boolean;
+};
+
+function Map({ handleModal, isModal }: MapProps) {
   return (
     <MapOut>
-      <MapNav></MapNav>
-      <KakaoMap></KakaoMap>
-      <CurrentLocation></CurrentLocation>
+      <MapNav handleModal={handleModal} isModal={isModal}></MapNav>
+      <KakaoMap handleModal={handleModal} isModal={isModal}></KakaoMap>
     </MapOut>
   );
 }

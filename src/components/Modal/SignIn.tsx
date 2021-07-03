@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const SingInOut = styled.div`
@@ -23,7 +23,6 @@ const SignMain = styled.div`
     width: 400px;
     height: 600px;
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     /* border: 1px solid red; */
   }
 `;
@@ -60,6 +59,7 @@ const SignCenter = styled.div`
     bottom: 0;
     border-radius: 20px;
     display: flex;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   }
 `;
 const SignInImg = styled.div`
@@ -152,7 +152,10 @@ const SignInInput = styled.ul`
     }
   }
   & li:nth-child(4) {
-    background-color: #fee500;
+    background-image: url('img/kakao_login.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #000000;
     cursor: pointer;
     &:hover {
@@ -227,37 +230,81 @@ const InputPassword = styled.input.attrs({
   }
 `;
 
-function SignIn() {
+// type SigninProps = {
+//   handleModal: () => void;
+//   isModal: boolean;
+// };
+
+function SignIn(props: any) {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMessage, setErrMessage] = useState('');
+
+  const handleId = (e: any) => {
+    setId(e.target.value);
+  };
+
+  const handlePassword = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const LoginBtn = () => {
+    if (id !== '' && password !== '') {
+      console.log(id, password);
+      console.log('로그인완료');
+      setErrMessage('');
+    } else {
+      setErrMessage('아이디와 패스워드를 확인하세요');
+    }
+  };
+
   return (
     <SingInOut>
-      <SignMain>
-        <CloseBtn></CloseBtn>
-        <SignCenter>
-          <SignInImg>
-            <Img></Img>
-            <Text>지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.</Text>
-            <Logo>LiteSeoul</Logo>
-          </SignInImg>
-          <SignInInput>
-            <li>
-              <p>LiteSeoul</p>
-              <p>User Login</p>
-            </li>
-            <li>
-              <InputId autoFocus />
-            </li>
-            <li>
-              <InputPassword />
-            </li>
-            <li>Login with Kakao</li>
-            <li>Google Login</li>
-            <li>로그인</li>
-            <li>
-              <p>Create Account</p>
-            </li>
-          </SignInInput>
-        </SignCenter>
-      </SignMain>
+      {/* {errMessage === '' ? <></> : <ErrorMessage>{errMessage}</ErrorMessage>} */}
+      <form onSubmit={(e) => e.preventDefault()}>
+        <SignMain>
+          <CloseBtn onClick={props.handleLoginModal}></CloseBtn>
+          <SignCenter>
+            <SignInImg>
+              <Img></Img>
+              <Text>
+                지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.
+              </Text>
+              <Logo>LiteSeoul</Logo>
+            </SignInImg>
+            <SignInInput>
+              <li>
+                {errMessage === '' ? (
+                  <p>LiteSeoul</p>
+                ) : (
+                  <p
+                    style={{
+                      color: 'red',
+                      fontSize: '1.2rem',
+                    }}
+                  >
+                    {errMessage}
+                  </p>
+                )}
+
+                <p>User Login</p>
+              </li>
+              <li>
+                <InputId autoFocus value={id} onChange={handleId} />
+              </li>
+              <li>
+                <InputPassword value={password} onChange={handlePassword} />
+              </li>
+              <li></li>
+              <li>Google Login</li>
+              <li onClick={LoginBtn}>로그인</li>
+              <li>
+                <p>Create Account</p>
+              </li>
+            </SignInInput>
+          </SignCenter>
+        </SignMain>
+      </form>
     </SingInOut>
   );
 }

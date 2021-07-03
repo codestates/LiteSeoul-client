@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import CategoryCafe from './CategoryCafe';
 
 const MapNav1 = styled.div`
   width: 20%;
   min-width: 350px;
   height: 100%;
-  min-height: 900px;
+  min-height: 800px;
   background-color: #ccc;
   /* border: 1px solid blue; */
   position: fixed;
   box-shadow: rgba(17, 17, 26, 0.4) 0px 0px 16px;
   overflow: auto;
   z-index: 999;
+  transition: 0.4s all;
 `;
 
 const NavTop = styled.div`
@@ -80,6 +83,7 @@ const Category = styled.div`
   background-color: #ff735d;
   border-radius: 20px;
   margin: 0 auto;
+  margin-top: 30px;
 `;
 
 const CategoryOut = styled.div`
@@ -225,190 +229,160 @@ const CategoryList2 = styled.div`
   & div:nth-child(3) {
     width: 15px;
     height: 50px;
-    background-color: #189cc4;
     position: absolute;
     right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
-// const NavHidden = styled.div`
-//   width: 15px;
-//   height: 80px;
-//   background-color: #189cc4;
-//   position: absolute;
-//   top: 50%;
-//   right: -15px;
-//   transform: translateY(-50%);
-//   border-radius: 0 5px 5px 0;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: #fff;
-//   cursor: pointer;
-//   transition: 0.4s all;
-//   &:hover {
-//     width: 25px;
-//     right: -25px;
-//   }
-// `;
-function MapNav() {
+const NavHidden = styled.div`
+  width: 20px;
+  height: 200px;
+  background-color: #189cc4;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 5px 5px 0;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1000;
+  display: none;
+  & img {
+    width: 15px;
+    height: 15px;
+  }
+  @media screen and (max-width: 961px) {
+    display: flex;
+  }
+`;
+
+type MapProps = {
+  handleModal: () => void;
+  isModal: boolean;
+};
+function MapNav(props: any) {
+  // console.log(props);
   const [isList, SetList] = useState(false);
 
   const handelList = () => {
     SetList(!isList);
   };
 
+  const handleHome = () => {
+    // console.log(props.history);
+    props.history.goBack();
+  };
+
+  const handleNav = () => {
+    document.getElementById('nav')?.classList.toggle('nav');
+    document.getElementById('hidden')?.classList.toggle('hidden');
+  };
+
   return (
-    <MapNav1 id="nav">
-      {/* <NavHidden onClick={hidden}>*</NavHidden> */}
-      <NavTop>
-        <img src="icon/arrow_left_white.svg" alt="home"></img>
-        <img src="/icon/location_main.svg" alt="location"></img>LiteSeoul
-      </NavTop>
+    <>
+      <NavHidden onClick={handleNav} id="hidden">
+        <img src="icon/arrow_left_white.svg" alt="arrow"></img>
+      </NavHidden>
+      <MapNav1 id="nav" className="nav">
+        <NavTop>
+          <img
+            src="icon/arrow_left_white.svg"
+            alt="home"
+            onClick={handleHome}
+          ></img>
+          <img src="/icon/location_main.svg" alt="location"></img>LiteSeoul
+        </NavTop>
 
-      {isList ? (
-        <NavMain2>
-          <CategoryOut>
-            <img
-              src="icon/arrow_left_white.svg"
-              alt="category"
-              onClick={handelList}
-            ></img>
-            <Category2>List</Category2>
-          </CategoryOut>
-          <List2>
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
+        {isList ? (
+          <NavMain2>
+            <CategoryOut>
+              <img
+                src="icon/arrow_left_color.svg"
+                alt="category"
+                onClick={handelList}
+              ></img>
+              <Category2>List</Category2>
+            </CategoryOut>
+            <List2>
+              <CategoryList2 onClick={props.handleModal}>
+                <div>The Peaker</div>
+                <div>
+                  <img src="icon/location_main.svg" alt="maker"></img>
+                  <span>성동구 왕십리로 115 헤어그라운드</span>
+                </div>
+                <div>
+                  <img src="icon/arrow_left_color.svg" alt="maker"></img>
+                </div>
+              </CategoryList2>
+            </List2>
+          </NavMain2>
+        ) : (
+          <NavMain>
+            <Category>Category</Category>
+            <List>
+              {/* <CategoryList onClick={handelList}>
+                <div>
+                  <img src="icon/certification_mypage.svg" alt="category"></img>
+                </div>
+                <div>
+                  <span>Cafe</span>
+                  <span>zero waste cafe</span>
+                </div>
+                <div></div>
+              </CategoryList>
 
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
+              <CategoryList onClick={handelList}>
+                <div>
+                  <img src="icon/certification_mypage.svg" alt="category"></img>
+                </div>
+                <div>
+                  <span>Restaurant</span>
+                  <span>zero waste cafe</span>
+                </div>
+                <div></div>
+              </CategoryList>
 
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
+              <CategoryList onClick={handelList}>
+                <div>
+                  <img src="icon/certification_mypage.svg" alt="category"></img>
+                </div>
+                <div>
+                  <span>Store</span>
+                  <span>zero waste cafe</span>
+                </div>
+                <div></div>
+              </CategoryList>
 
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
+              <CategoryList onClick={handelList}>
+                <div>
+                  <img src="icon/certification_mypage.svg" alt="category"></img>
+                </div>
+                <div>
+                  <span>Etc</span>
+                  <span>zero waste cafe</span>
+                </div>
+                <div></div>
+              </CategoryList> */}
+              <CategoryCafe
+                {...props}
+                handelList={handelList}
+                isList={isList}
+              ></CategoryCafe>
+            </List>
+          </NavMain>
+        )}
+        {/* 아래는 category */}
 
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
+        {/* 아래는 리스트항목 */}
 
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
-
-            <CategoryList2>
-              <div>The Peaker</div>
-              <div>
-                <img src="icon/location_main.svg" alt="maker"></img>
-                <span>성동구 왕십리로 115 헤어그라운드</span>
-              </div>
-              <div></div>
-            </CategoryList2>
-          </List2>
-        </NavMain2>
-      ) : (
-        <NavMain>
-          <Category>Category</Category>
-          <List>
-            <CategoryList onClick={handelList}>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="category"></img>
-              </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
-              </div>
-              <div></div>
-            </CategoryList>
-
-            <CategoryList>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="category"></img>
-              </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
-              </div>
-              <div></div>
-            </CategoryList>
-
-            <CategoryList>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="category"></img>
-              </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
-              </div>
-              <div></div>
-            </CategoryList>
-
-            <CategoryList>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="category"></img>
-              </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
-              </div>
-              <div></div>
-            </CategoryList>
-
-            <CategoryList>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="category"></img>
-              </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
-              </div>
-              <div></div>
-            </CategoryList>
-          </List>
-        </NavMain>
-      )}
-      {/* 아래는 category */}
-
-      {/* 아래는 리스트항목 */}
-
-      <NavAdd></NavAdd>
-    </MapNav1>
+        <NavAdd></NavAdd>
+      </MapNav1>
+    </>
   );
 }
 
-export default MapNav;
+export default withRouter(MapNav);
