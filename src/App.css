@@ -1,0 +1,1082 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+/* font-family: 'Noto Sans KR', sans-serif; */
+
+html,
+body,
+div,
+span,
+label,
+section,
+aside,
+footer,
+header,
+nav,
+video,
+table,
+tr,
+td,
+th {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
+section,
+aside,
+footer,
+header,
+nav,
+main,
+span,
+label {
+  display: block;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  /*
+  -webkit-text-size-adjust: none;
+  / 크롬, 사파리 기준 /
+  -moz-text-size-adjust: none;
+  / 모질라 파이어폭스 기준 /
+  -ms-text-size-adjust: none;
+  / 익스플로러 기준 /
+  text-size-adjust: none;
+  /edge 기준 */
+  overflow-x: hidden;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* react-router-dom  : link 관련 css 변경 */
+.textLink {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* bg */
+
+#bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#LogoSvg {
+  width: 40%;
+  z-index: 2;
+}
+
+@media screen and (max-width: 801px) {
+  #bg {
+    display: none;
+  }
+}
+
+@keyframes line-anim2 {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 메인 백그라운드 애니메이션 설정 */
+
+#bg path:nth-child(1) {
+  stroke-dasharray: 600px;
+  stroke-dashoffset: 600px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(2) {
+  stroke-dasharray: 2000px;
+  stroke-dashoffset: 2000px;
+  animation: line-anim2 6s linear forwards;
+}
+
+#bg path:nth-child(3) {
+  stroke-dasharray: 1600px;
+  stroke-dashoffset: 1600px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(4) {
+  stroke-dasharray: 400px;
+  stroke-dashoffset: 400px;
+  animation: line-anim2 3s linear forwards;
+}
+
+#bg path:nth-child(5) {
+  stroke-dasharray: 2602px;
+  stroke-dashoffset: 2602px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(6) {
+  stroke-dasharray: 1500px;
+  stroke-dashoffset: 1500px;
+  animation: line-anim2 8s linear forwards;
+}
+
+#bg path:nth-child(7) {
+  stroke-dasharray: 801px;
+  stroke-dashoffset: 801px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(8) {
+  stroke-dasharray: 267px;
+  stroke-dashoffset: 267px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(9) {
+  stroke-dasharray: 673px;
+  stroke-dashoffset: 673px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(10) {
+  stroke-dasharray: 224px;
+  stroke-dashoffset: 224px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(11) {
+  stroke-dasharray: 280px;
+  stroke-dashoffset: 280px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(12) {
+  stroke-dasharray: 280px;
+  stroke-dashoffset: 280px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(13) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(14) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(15) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim 4s linear forwards;
+}
+
+#bg path:nth-child(16) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 5s linear forwards;
+}
+
+#bg path:nth-child(17) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(18) {
+  stroke-dasharray: 569px;
+  stroke-dashoffset: 569px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(19) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s ease forwards;
+}
+
+#bg path:nth-child(20) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(21) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(22) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#bg path:nth-child(23) {
+  stroke-dasharray: 221px;
+  stroke-dashoffset: 221px;
+  animation: line-anim2 4s linear forwards;
+}
+
+#recycle {
+  width: 80%;
+  opacity: 0.2;
+  animation: rotate 10s linear infinite;
+  transform-origin: center;
+  z-index: 1;
+}
+#recycle:hover {
+  animation-play-state: paused;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#wood {
+  width: 80%;
+}
+
+.woodback {
+  animation: color 10s linear infinite;
+}
+
+@keyframes color {
+  0% {
+    fill: #1894cc;
+    opacity: 0.3;
+  }
+  50% {
+    fill: #ffc709;
+    opacity: 0.7;
+  }
+  100% {
+    fill: #1894cc;
+    opacity: 0.3;
+  }
+}
+
+@media screen and (max-width: 961px) {
+  .nav {
+    display: none;
+  }
+}
+
+/* 지도 반응형 클래스 */
+
+.hidden {
+  left: 350px;
+}
+.hidden > img {
+  transform: rotate(180deg);
+}
+
+.active {
+  opacity: 1;
+}
+
+/* slogan3 */
+
+/* SignIn > SignUp 임시 모달창 */
+.SignUpOpenBtn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 10px;
+  border: 1px solid #189cc4;
+  cursor: pointer;
+  width: 100px;
+  height: 5px;
+  background-color: #189cc4;
+  color: white;
+  text-align: center;
+  border-radius: 1rem;
+}
+
+.modal-background {
+  /* width: 2000px; */
+  height: 120%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(10, 10, 10, 0.86);
+}
+
+.modal-card {
+  margin: 0 auto;
+  display: block;
+  /* margin-top: 100ㅔㅌ; */
+  width: 300px;
+  height: 300px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.ModalCloseBtn {
+  margin-left: 90%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  /* position: absolute; */
+  top: 40px;
+  right: 40px;
+  color: white;
+  font-size: 2rem;
+  font-weight: 1000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  background-color: #188cc4;
+  z-index: 999;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.1s;
+}
+.ModalCloseBtn:active {
+  /* margin-left: 1%;
+  margin-top: 1%; */
+  box-shadow: none;
+}
+
+/* 회원가입 */
+/* 주황컬러 : #ff735d */
+.SignUpTitle {
+  text-align: center;
+  font-size: 50px;
+  color: #189cc4;
+  font-weight: bolder;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 50px 50px 50px;
+  justify-content: center;
+}
+
+.UserImg {
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.ImgFlex {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.UserName {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.UserEmail {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.UserNickname {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #188cc4;
+}
+
+.UserMobile {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.password {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.password2 {
+  margin: 10px 0px;
+  padding: 10px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.SignUpButton {
+  display: block;
+  padding: 7px;
+  background-color: #189cc4;
+  border: none;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+
+  float: left;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.1s;
+}
+.SignUpButton:active {
+  margin-left: 1px;
+  margin-top: 1px;
+  box-shadow: none;
+}
+
+.SignUpCheckbox {
+  font-size: 15px;
+  margin: 10px 0;
+}
+
+.errorMessages {
+  font-size: 15px;
+  font-weight: bolder;
+  text-align: center;
+  color: #ff735d;
+}
+
+/* 랭킹컴포넌트 */
+.AllRankingFlex {
+  margin-left: 30%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.RankingTitle {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+  margin-right: 20px;
+}
+
+.selectBox {
+  width: 130px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: bolder;
+  padding: 0 0 0 30px;
+  color: #189cc4;
+  border: 2px solid #189cc4;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.selectBox::after {
+  content: '';
+  background-color: #189cc4;
+  color: white;
+}
+
+/* 랭킹 하위 컴포넌트(유저/샵랭크) */
+.AllRankers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 50px;
+}
+@media screen and (max-width: 1020px) {
+  .AllRankers {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 650px) {
+  .AllRankers {
+    grid-template-columns: 1fr;
+  }
+}
+
+.EachRanker {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  /* border: 3px solid red; */
+  margin: 20px;
+  box-shadow: 3px 3px 3px black;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.EachRanker:active {
+  margin-left: 0.5px;
+  margin-top: 0.5px;
+  box-shadow: none;
+}
+
+.EachNumber {
+  width: 36px;
+  /* height: 30px; */
+  /* border: 3px solid purple; */
+
+  border-radius: 9999px;
+  text-align: center;
+  margin: -10px 20px 20px -10px;
+  background-color: #ff735d;
+  color: white;
+  font-size: 30px;
+  align-items: center;
+  position: absolute;
+  /* top: 10px; */
+  /* left: 40px; */
+}
+
+.RankPicsDiv {
+  text-align: center;
+}
+
+.EachPic {
+  /* border: 5px solid green; */
+  /* background-color: wheat; */
+  margin: 10px;
+  /* padding: 10% 0; */
+  /* width: 90%; */
+  height: 200px;
+  width: 200px;
+}
+
+.EachName {
+  /* border: 3px solid tomato; */
+  margin: 10px;
+  margin-top: 0px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.EachMessage {
+  /* border: 3px solid royalblue; */
+  margin: 10px;
+  margin-top: 0px;
+}
+
+.EachLikes {
+  /* border: 3px solid brown; */
+  margin: 10px;
+  margin-top: 0px;
+  font-weight: bolder;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 2px solid #189cc4;
+}
+
+.EachGround {
+  /* border: 3px solid yellowgreen; */
+  margin: 10px;
+  margin-top: 0px;
+  font-size: 13px;
+}
+
+/* Mypage*/
+.MypageFlex {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 230px 2fr;
+  grid-auto-rows: auto;
+}
+
+.MypageContents {
+  text-align: center;
+  align-items: center;
+}
+
+/* Mypage > MypageNav */
+.MypageNavOut {
+  border-right: 2px solid #189cc4;
+  padding: 50px 20px 400px 20px;
+  /* margin: 20px; */
+}
+
+.MypageNavUl {
+  list-style: none;
+  padding-left: 0;
+  padding-top: 20px;
+}
+
+.MypageNavTitleWhole {
+  padding: 0 20px 30px 40px;
+  border-bottom: 1px solid #188cc4;
+}
+
+.MypageNavTitleHello {
+  font-size: 25px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.MypageNavUsername {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.MypageNavBtns {
+  border: 2px solid #188cc4;
+  border-radius: 2rem;
+  margin: 30px 20px 20px 20px;
+  cursor: pointer;
+  color: #188cc4;
+  font-weight: bolder;
+  /* background-color: #188cc4; */
+  text-align: center;
+  padding: 5px 5px 5px 0;
+  box-shadow: 2px 2px 2px black;
+}
+.MypageNavBtns:active {
+  box-shadow: none;
+}
+
+/* Mypage > ADMents */
+.MypageADgrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: auto;
+}
+@media screen and (max-width: 1400px) {
+  .MypageADgrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.MypageADMents {
+  border: 3px solid #188cc4;
+  /* margin: 20px; */
+  background-color: #188cc4;
+  color: white;
+  padding: 50px;
+  text-align: center;
+  align-items: center;
+}
+
+/* Mypage > JustInfo */
+/* .MypageInfoandTitleGrid {
+
+} */
+.JustInfoFlex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+}
+@media screen and (max-width: 1000px) {
+  .JustInfoFlex {
+    grid-template-columns: 1fr;
+  }
+}
+
+.MyInfo {
+  margin-top: 50px;
+}
+.MyInfoTitle {
+  text-align: left;
+  font-size: 40px;
+  margin: 20px 20px 20px 30px;
+  font-weight: bolder;
+}
+
+.MyInfoUl {
+  list-style: none;
+  padding-left: 0;
+}
+
+.MyInfoPicsImg {
+  margin: 20px;
+  border-radius: 9999px;
+  width: 200px;
+  height: 200px;
+}
+
+.MyInfoName {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.MyInfoEmail {
+  text-align: center;
+  color: gray;
+  margin: 10px;
+}
+
+.MyInfoEdit {
+  text-align: center;
+  background-color: #ff735d;
+  margin: 20px 40%;
+  border-radius: 80px;
+  color: white;
+  font-size: 15px;
+  font-weight: bolder;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+  transition-duration: 0.1s;
+  text-decoration-line: none;
+}
+.MyInfoEdit:active {
+  box-shadow: none;
+}
+/* 링크밑줄 없애기 */
+a {
+  text-decoration: none;
+}
+
+.MyLevel {
+  margin: 80px 80px 80px 50px;
+  align-items: center;
+  text-align: center;
+}
+
+.MyLevelUl {
+  list-style: none;
+}
+
+.MyLevelPicsImg {
+  border-radius: 9999px;
+  width: 200px;
+  height: 200px;
+}
+
+.MyLevelNums {
+  text-align: center;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: #189cc4;
+}
+
+.MylevelMents {
+  width: 100%;
+  height: 100%;
+}
+
+.MentsExp {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.MentExpNick {
+  font-weight: bolder;
+}
+
+.MentExpNums {
+  font-weight: bolder;
+  color: #189cc4;
+}
+
+/* Mypage > BillsLog */
+.MyBillsGrid {
+  display: grid;
+  grid-template-columns: 230px 2fr;
+}
+
+.BillsMainBody {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 1fr;
+  grid-auto-rows: auto;
+}
+
+.BillsLogsTitle {
+  text-align: left;
+  font-size: 40px;
+  margin: 20px 20px 20px 30px;
+  font-weight: bolder;
+}
+
+.BillsLogsWhole {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+@media screen and (max-width: 1450px) {
+  .BillsLogsWhole {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .BillsLogsWhole {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .BillsLogsWhole {
+    grid-template-columns: 1fr;
+  }
+}
+
+.BillsOne {
+  border: 2px solid orange;
+  background-color: ccc;
+  border-radius: 10px;
+  width: 200px;
+  height: 300px;
+  margin: 20px;
+}
+
+.BillsImg {
+  width: 100%;
+  height: 100%;
+}
+
+.BillsXBtn {
+  /* position: z99; */
+  margin-left: 90%;
+  width: 20px;
+  height: 20px;
+  /* border: 2px solid #ccc; */
+  border-radius: 50%;
+  top: 40px;
+  right: 40px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 1000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  background-color: #188cc4;
+  z-index: 999;
+  box-shadow: 2px 2px 2px black;
+}
+.BillsXBtn:active {
+  box-shadow: none;
+}
+
+.BillsLogAddBtn {
+  /* border: 1px solid royalblue; */
+  background-color: #188cc4;
+  border-radius: 9999px;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-top: 800px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+}
+.BillsLogAddBtn:active {
+  box-shadow: none;
+}
+
+/* .UploadBillsImg{
+  border: 4px solid #bcb6b6;
+  height: 150%;
+  width: 100%;
+  cursor: pointer;
+} */
+
+.UploadBillsImg {
+  height: 100px;
+  width: 100px;
+  /* border-radius: 100px; */
+  position: relative;
+  border: 4px solid #ffffff;
+  overflow: hidden;
+  /* background-image: linear-gradient(to bottom, #2590eb 50%, #ffffff 50%); */
+  background-size: 100% 200%;
+  transition: all 1s;
+  color: #ffffff;
+  font-size: 100px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.UploadBillsBackground {
+  height: 100%;
+  width: 100%;
+  /* background-color: #bcb6b6; */
+  text-align: center;
+  align-items: center;
+  border: 3px dashed #188cc4;
+  border-radius: 20px;
+}
+.UploadBillBackMents {
+  border: 3px dashed #ff735d;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 150px 50px;
+  color: #188cc4;
+  font-weight: bolder;
+}
+
+/* Mypage > LikePlace */
+.WholeLikePlaces {
+  /* align-items: center; */
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+}
+
+.LikePlaceTitle {
+  font-size: 40px;
+  margin: 20px;
+  padding-left: 10px;
+  font-weight: bolder;
+}
+
+.LikePlaceUl {
+  list-style: none;
+}
+
+.OneLikePlace {
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #188cc4;
+  border-radius: 50px;
+  width: 80%;
+  height: 50px;
+  margin: 50px 50px 0 150px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+}
+.OneLikePlace:active {
+  box-shadow: none;
+}
+
+.LikePlaceNum {
+  border-radius: 9999px;
+  background-color: #188cc4;
+  color: white;
+  font-size: 25px;
+  width: 30px;
+  padding: 10px;
+}
+
+.LikePlaceName {
+  font-weight: bolder;
+  text-align: left;
+}
+
+.LikePlaceWhere {
+  font-size: 13px;
+  padding-bottom: 5px;
+  font-weight: bolder;
+  text-align: left;
+}
+
+/* mypage > 회원탈퇴 */
+.memberOutMents {
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30%;
+  font-size: 30px;
+}
+
+.memberOutBtn {
+  margin: 20px;
+  font-size: 15px;
+  border: 1px solid #ff735d;
+  background-color: #ff735d;
+  color: white;
+  border-radius: 2rem;
+  width: 100px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px black;
+}
+.memberOutBtn:active {
+  box-shadow: none;
+}
+
+.memberOutGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-auto-rows: auto;
+}
+@media screen and (max-width: 1250px) {
+  .memberOutGrid {
+    grid-template-columns: 1fr;
+  }
+}
