@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { cafeData } from './cafeData';
-import CateRenderLists from './CateRenderLists';
 
 const CategoryList = styled.div`
   width: 80%;
@@ -47,117 +46,9 @@ const CategoryList = styled.div`
   }
 `;
 
-const NavMain2 = styled.div`
-  width: 100%;
-  height: 70%;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: space-evenly;
-`;
-
-const Category2 = styled.div`
-  width: 50%;
-  height: 40px;
-  color: #fff;
-  display: flex;
-  font-size: 1.2rem;
-  font-weight: 700;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffd700;
-  border-radius: 20px;
-  margin: 0 auto;
-`;
-
-const CategoryList2 = styled.div`
-  cursor: pointer;
-  margin: 0 auto;
-  width: 80%;
-  height: 80px;
-  border-radius: 20px;
-  background-color: #eee;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 20px;
-  & div:nth-child(1) {
-    width: 80%;
-    height: auto;
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    /* background-color: red; */
-  }
-  & div:nth-child(2) {
-    /* background-color: red; */
-    width: 80%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    & img {
-      width: 20px;
-      height: 20px;
-      margin-right: 3px;
-    }
-    & span {
-      font-size: 0.7rem;
-      color: #6e6e73;
-    }
-  }
-  & div:nth-child(3) {
-    width: 15px;
-    height: 50px;
-    position: absolute;
-    right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const List2 = styled.div`
-  width: 100%;
-  height: 80%;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 20%;
-    background-color: #189cc4;
-    border-radius: 4px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
-  }
-`;
-
-const CategoryOut = styled.div`
-  width: 100%;
-  height: 40px;
-  /* background-color: red; */
-  display: flex;
-  align-items: center;
-  & img {
-    width: 15px;
-    height: 15px;
-    object-fit: cover;
-    transform: rotate(180deg);
-    position: absolute;
-    left: 45px;
-    cursor: pointer;
-  }
-`;
-
-function CategoryCafe(props: any) {
+function CategoryLife(props: any) {
   const [isMap, setMap] = useState(cafeData);
-  const [cafeDatas, setCafeDats] = useState([]);
-  props.handleListDatas(cafeDatas);
+  const [lifeDatas, setLifeDatas] = useState([]);
 
   // 카페 카테고리를 눌럿을떄
   const handelCafe = (e: any) => {
@@ -233,27 +124,28 @@ function CategoryCafe(props: any) {
     }
 
     // console.log(e.target.value);
-    axios.get("http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/cafe")
+    axios.get("http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/life")
     .then(res => {
       console.log(res.data)
-      return setCafeDats(res.data)
+      setLifeDatas(res.data)
+      return props.handleListDatas(lifeDatas)
     })
   };
 
 
 
-  return (     
+  return (
     <CategoryList onClick={handelCafe}>
       <div>
         <img src="icon/certification_mypage.svg" alt="category"></img>
       </div>
       <div>
-        <span>Cafe</span>
-        <span>zero waste cafe</span>
+        <span>Life</span>
+        <span>for our life necessity</span>
       </div>
       <div></div>
     </CategoryList>
-  )
+  );
 }
 
-export default CategoryCafe;
+export default CategoryLife;

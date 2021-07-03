@@ -17,8 +17,8 @@ const PlayModal = styled.div`
   border-radius: 1.5rem;
 `;
 const PlayModalInside = styled.div`
-  width: 60%;
-  height: 400px;
+  width: 80%;
+  height: 90%;
   margin: auto;
   padding: 50px 50px 50px 50px;
   position: relative;

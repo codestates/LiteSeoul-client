@@ -20,7 +20,7 @@ const PlayModalInside = styled.div`
   height: 30px;
   margin: auto;
   margin-top: 80px;
-  padding: 20px;
+  /* padding: 10px; */
   position: relative;
   background-color: #ff735d;
   color: white;

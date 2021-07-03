@@ -950,7 +950,7 @@ a {
 } */
 
 .UploadBillsImg {
-  height: 100px;
+  height: 200%;
   width: 100px;
   /* border-radius: 100px; */
   position: relative;
@@ -983,7 +983,7 @@ a {
   border: 3px dashed #ff735d;
   border-radius: 20px;
   padding: 20px;
-  margin: 150px 50px;
+  margin: 60% 50px;
   color: #188cc4;
   font-weight: bolder;
 }
@@ -1025,11 +1025,13 @@ a {
 }
 
 .LikePlaceNum {
-  border-radius: 9999px;
+  border-radius: 50px;
   background-color: #188cc4;
   color: white;
   font-size: 25px;
-  width: 30px;
+  width: 4vh;
+  height: 30px;
+  /* height: 50%; */
   padding: 10px;
 }
 

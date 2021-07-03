@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
-import CategoryCafe from './CategoryCafe';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+import CategoryCafe from "./CategoryCafe";
+import CategoryLife from "./CategoryLife";
+import CategoryOrgan from "./CategoryOrgan";
+import axios from "axios";
+import CateRenderLists from "./CateRenderLists";
 
 const MapNav1 = styled.div`
   width: 20%;
@@ -267,6 +271,13 @@ type MapProps = {
 function MapNav(props: any) {
   // console.log(props);
   const [isList, SetList] = useState(false);
+  const [listDatas, setListDatas] = useState([]);
+
+  // 각 카테고리데이터 받아서 상태 저장
+  const handleListDatas = (data: any) => {
+    setListDatas(data)
+    // console.log(listDatas)
+  }
 
   const handelList = () => {
     SetList(!isList);
@@ -278,8 +289,8 @@ function MapNav(props: any) {
   };
 
   const handleNav = () => {
-    document.getElementById('nav')?.classList.toggle('nav');
-    document.getElementById('hidden')?.classList.toggle('hidden');
+    document.getElementById("nav")?.classList.toggle("nav");
+    document.getElementById("hidden")?.classList.toggle("hidden");
   };
 
   return (
@@ -309,14 +320,7 @@ function MapNav(props: any) {
             </CategoryOut>
             <List2>
               <CategoryList2 onClick={props.handleModal}>
-                <div>The Peaker</div>
-                <div>
-                  <img src="icon/location_main.svg" alt="maker"></img>
-                  <span>성동구 왕십리로 115 헤어그라운드</span>
-                </div>
-                <div>
-                  <img src="icon/arrow_left_color.svg" alt="maker"></img>
-                </div>
+                <CateRenderLists listDatas={listDatas}/>
               </CategoryList2>
             </List2>
           </NavMain2>
@@ -324,60 +328,27 @@ function MapNav(props: any) {
           <NavMain>
             <Category>Category</Category>
             <List>
-              {/* <CategoryList onClick={handelList}>
-                <div>
-                  <img src="icon/certification_mypage.svg" alt="category"></img>
-                </div>
-                <div>
-                  <span>Cafe</span>
-                  <span>zero waste cafe</span>
-                </div>
-                <div></div>
-              </CategoryList>
-
-              <CategoryList onClick={handelList}>
-                <div>
-                  <img src="icon/certification_mypage.svg" alt="category"></img>
-                </div>
-                <div>
-                  <span>Restaurant</span>
-                  <span>zero waste cafe</span>
-                </div>
-                <div></div>
-              </CategoryList>
-
-              <CategoryList onClick={handelList}>
-                <div>
-                  <img src="icon/certification_mypage.svg" alt="category"></img>
-                </div>
-                <div>
-                  <span>Store</span>
-                  <span>zero waste cafe</span>
-                </div>
-                <div></div>
-              </CategoryList>
-
-              <CategoryList onClick={handelList}>
-                <div>
-                  <img src="icon/certification_mypage.svg" alt="category"></img>
-                </div>
-                <div>
-                  <span>Etc</span>
-                  <span>zero waste cafe</span>
-                </div>
-                <div></div>
-              </CategoryList> */}
               <CategoryCafe
                 {...props}
                 handelList={handelList}
                 isList={isList}
+                handleListDatas={handleListDatas}
               ></CategoryCafe>
+              <CategoryLife
+                {...props}
+                handelList={handelList}
+                isList={isList}
+                handleListDatas={handleListDatas}
+              ></CategoryLife>
+              <CategoryOrgan
+                {...props}
+                handelList={handelList}
+                isList={isList}
+                handleListDatas={handleListDatas}
+              ></CategoryOrgan>
             </List>
           </NavMain>
         )}
-        {/* 아래는 category */}
-
-        {/* 아래는 리스트항목 */}
 
         <NavAdd></NavAdd>
       </MapNav1>
