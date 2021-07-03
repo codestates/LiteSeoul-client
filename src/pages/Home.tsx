@@ -15,7 +15,6 @@ const HomeOut = styled.div`
   width: 100%;
   height: 100vh;
   overflow: auto;
-  background: #eee;
   position: relative;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -48,6 +47,7 @@ const TopBtn = styled.div`
 `;
 
 function Home() {
+  const [isLogin, setLogin] = useState(false);
   const handleTop = () => {
     console.log('버튼 확인');
   };
@@ -55,13 +55,19 @@ function Home() {
   return (
     <HomeOut id="home">
       <TopBtn onClick={handleTop}>TOP</TopBtn>
-      <Rending></Rending>
-      <Recommends></Recommends>
-      {/* <Slogan3></Slogan3> */}
-      <Slogan1></Slogan1>
-      <Slogan2></Slogan2>
-      <Ranking></Ranking>
+      {isLogin ? <></> : <Rending></Rending>}
+      {isLogin ? <></> : <Recommends></Recommends>}
+      {isLogin ? (
+        <></>
+      ) : (
+        <>
+          <Slogan1></Slogan1>
+          <Slogan2></Slogan2>
+        </>
+      )}
 
+      {isLogin ? <Ranking></Ranking> : <></>}
+      {isLogin ? <Recommends></Recommends> : <></>}
       <Footer></Footer>
     </HomeOut>
   );
