@@ -6,12 +6,11 @@ import styled from "styled-components";
 function LikePlace() {
   const LikeADgrid = styled.div`
     display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-auto-rows: auto;
-@media screen and (max-width: 1500px) {
-
-    grid-template-columns: 1fr;
-}
+    grid-template-columns: 2fr 1fr;
+    grid-auto-rows: auto;
+    @media screen and (max-width: 1500px) {
+      grid-template-columns: 1fr;
+    }
   `;
 
   const consoleHandler = (e: any) => {
