@@ -123,13 +123,8 @@ function CategoryOrgan(props: any) {
       };
     }
 
-    // console.log(e.target.value);
-    axios.get("http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/organ")
-    .then(res => {
-      console.log(res.data)
-      setOrganDatas(res.data)
-      return props.handleListDatas(organDatas)
-    })
+    // 부모 컴포넌트인 MapNav에서 axios를 하기 위한 url 전송
+    props.handleListDatas('organ')
   };
 
 

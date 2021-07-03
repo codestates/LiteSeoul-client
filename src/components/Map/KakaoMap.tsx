@@ -126,13 +126,15 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal }) => {
         position: new window.kakao.maps.LatLng(isMap[i].lat, isMap[i].lng), // 마커의 위치
       });
 
-      var iwContent = `<div style=" width: 150px;
-    height: 50px;
-    background-color: #189cc4;
-    color:#fff;
-    text-align:center;
-    line-height:50px;
-    ">${isMap[i].content}`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+      var iwContent = `
+      <div style=" width: 150px;
+      height: 50px;
+      background-color: #189cc4;
+      color:#fff;
+      text-align:center;
+      line-height:50px;
+      ">${isMap[i].content}`; 
+      // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
       // 마커에 표시할 인포윈도우를 생성합니다
       var infowindow = new window.kakao.maps.InfoWindow({

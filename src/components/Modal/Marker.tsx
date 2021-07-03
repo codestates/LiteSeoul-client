@@ -318,9 +318,10 @@ const CommentBtn = styled.button`
 type MarkerProps = {
   handleModal: () => void;
   isModal: boolean;
+  modalData: any;
 };
 
-function Marker({ isModal, handleModal }: MarkerProps) {
+function Marker({ isModal, handleModal, modalData }: MarkerProps) {
   const [isCheck, setCheck] = useState(false);
 
   const handleCheck = () => {
@@ -328,6 +329,7 @@ function Marker({ isModal, handleModal }: MarkerProps) {
   };
 
   return (
+    // 프롭스로 가져온 모달데이터를 갖고 아래 하단부에 렌더링 하면 된다.
     <MarkerOut>
       <MarkerInMain>
         <CloseBtn onClick={handleModal}></CloseBtn>

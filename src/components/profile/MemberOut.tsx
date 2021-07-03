@@ -21,9 +21,9 @@ function MemberOut() {
 
   return (
     <div className="MypageFlex">
-      <div>
+      {/* <div>
         <MypageNav />
-      </div>
+      </div> */}
       <div className="memberOutGrid">
         <div className="memberOutMents">
           <div>정말 Zero Waste를 관두시겠어요?</div>

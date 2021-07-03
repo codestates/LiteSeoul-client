@@ -1,5 +1,5 @@
 import React from "react";
-import MypageNav from "./MypageNav";
+// import MypageNav from "./MypageNav";
 import dummyLikePlaces from "../documents/dummyLikePlaces";
 import styled from "styled-components";
 
@@ -19,13 +19,13 @@ function LikePlace() {
 
   return (
     <div className="MypageFlex">
-      <div>
+      {/* <div>
         <MypageNav />
-      </div>
+      </div> */}
       <LikeADgrid>
         <div className="WholeLikePlaces">
           <div className="LikePlaceTitle">자주 방문한 곳</div>
-          {dummyLikePlaces.map((dummyLikePlace) => (
+          {dummyLikePlaces.map((dummyLikePlace: any) => (
             <div
               className="OneLikePlace"
               key={dummyLikePlace.id}

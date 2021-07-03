@@ -11,17 +11,21 @@ import Mypage from './pages/Mypage';
 // import Donation from './pages/Donation';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
-import SignUp from './components/Modal/SignUp';
-import JustInfo from './components/profile/JustInfo';
 import BillsLog from './components/profile/BillsLog';
 import LikePlace from './components/profile/LikePlace';
-import InfoEdit from './components/Modal/InfoEdit';
 import MemberOut from './components/profile/MemberOut';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(true);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
+  const [modalData, setModalData] = useState([]);
+
+  const handleModalData = (data: any) => {
+    setModalData(data);
+    console.log(modalData)
+  }
+
   // console.log(isLoginModal);
   const handleModal = () => {
     setModal(!isModal);
@@ -69,9 +73,9 @@ function App(): any {
           }}
         />
         {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
-        <Route exact path="/mypage/billslog" render={() => <BillsLog />} />
+        {/* <Route exact path="/mypage/billslog" render={() => <BillsLog />} />
         <Route exact path="/mypage/likeplace" render={() => <LikePlace />} />
-        <Route exact path="/mypage/memberout" render={() => <MemberOut />} />
+        <Route exact path="/mypage/memberout" render={() => <MemberOut />} /> */}
         <Route
           path="/signin"
           render={() => (
@@ -84,7 +88,7 @@ function App(): any {
         />
         <Route
           path="/map"
-          render={() => <Map isModal={isModal} handleModal={handleModal} />}
+          render={() => <Map isModal={isModal} handleModal={handleModal} handleModalData={handleModalData} />}
         />
         <Route
           exact
@@ -107,7 +111,7 @@ function App(): any {
         ></SignIn>
       )}
       {isModal ? (
-        <Marker isModal={isModal} handleModal={handleModal}></Marker>
+        <Marker isModal={isModal} handleModal={handleModal} modalData={modalData}></Marker>
       ) : (
         <></>
       )}

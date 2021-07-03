@@ -267,16 +267,25 @@ const NavHidden = styled.div`
 type MapProps = {
   handleModal: () => void;
   isModal: boolean;
+  handleModalData: any;
 };
 function MapNav(props: any) {
   // console.log(props);
   const [isList, SetList] = useState(false);
   const [listDatas, setListDatas] = useState([]);
 
-  // 각 카테고리데이터 받아서 상태 저장
-  const handleListDatas = (data: any) => {
-    setListDatas(data)
-    // console.log(listDatas)
+  const handleListDatas = (url: string) => {
+     // 각 컴포넌트에서 props.handleListDatas(url)을 갖고 옴. 
+     // 실제 콘솔로그 데이터 도출 확인
+    console.log(url)
+
+    // shop, life, organ
+    // 여기서 각 데이터를 서버에서 axios한 다음, 해당 데이터를 상태에 저장하여 CateRenderLists 컴포넌트에 프롭스로 내려준다.
+    axios.get(`http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/${url}`)
+    .then(res => setListDatas(res.data))
+
+    // 실제 데이터가 상태에 저장되었는지 확인
+    console.log(listDatas)
   }
 
   const handelList = () => {
@@ -333,18 +342,21 @@ function MapNav(props: any) {
                 handelList={handelList}
                 isList={isList}
                 handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
               ></CategoryCafe>
               <CategoryLife
                 {...props}
                 handelList={handelList}
                 isList={isList}
                 handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
               ></CategoryLife>
               <CategoryOrgan
                 {...props}
                 handelList={handelList}
                 isList={isList}
                 handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
               ></CategoryOrgan>
             </List>
           </NavMain>

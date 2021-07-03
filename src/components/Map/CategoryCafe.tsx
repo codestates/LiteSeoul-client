@@ -157,7 +157,7 @@ const CategoryOut = styled.div`
 function CategoryCafe(props: any) {
   const [isMap, setMap] = useState(cafeData);
   const [cafeDatas, setCafeDats] = useState([]);
-  props.handleListDatas(cafeDatas);
+  
 
   // 카페 카테고리를 눌럿을떄
   const handelCafe = (e: any) => {
@@ -232,12 +232,8 @@ function CategoryCafe(props: any) {
       };
     }
 
-    // console.log(e.target.value);
-    axios.get("http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/cafe")
-    .then(res => {
-      console.log(res.data)
-      return setCafeDats(res.data)
-    })
+    // 부모 컴포넌트인 MapNav에서 axios를 하기 위한 url 전송
+    props.handleListDatas('cafe')
   };
 
 

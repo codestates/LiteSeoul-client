@@ -31,9 +31,9 @@ function BillsLog() {
 
   return (
     <div className="MyBillsGrid">
-      <div>
+      {/* <div>
         <MypageNav />
-      </div>
+      </div> */}
       <div className="BillsMainBody">
         <div className="BillsMainBodyLogs">
           <div className="BillsLogsTitle">나의 인증목록</div>
