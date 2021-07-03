@@ -1,3 +1,4 @@
+import { defaultMaxListeners } from 'events';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -240,6 +241,23 @@ function SignIn(props: any) {
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
 
+  const [show, setShow] = useState(false);
+
+  const handleModalClose = (e: any) => {
+    const currentClass = e.target.className;
+    if (
+      currentClass === 'ModalCloseBtn' ||
+      currentClass === 'modal-background'
+    ) {
+      setShow(false);
+    }
+    return;
+  };
+
+  const handleModalOpen = () => {
+    setShow(true);
+  };
+
   const handleId = (e: any) => {
     setId(e.target.value);
   };
@@ -303,6 +321,7 @@ function SignIn(props: any) {
               </li>
             </SignInInput>
           </SignCenter>
+          xw
         </SignMain>
       </form>
     </SingInOut>

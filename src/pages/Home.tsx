@@ -4,8 +4,11 @@ import Rending from '../components/Home/Rending';
 import Slogan1 from '../components/Home/Slogan1';
 import Slogan2 from '../components/Home/Slogan2';
 import Slogan3 from '../components/Home/Slogan3';
+import Ranking from '../components/Home/Ranking';
+
 import Recommends from '../components/Home/Recommends';
 import styled from 'styled-components';
+import { homedir } from 'os';
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
@@ -57,9 +60,10 @@ function Home() {
       {/* <Slogan3></Slogan3> */}
       <Slogan1></Slogan1>
       <Slogan2></Slogan2>
+      <Ranking></Ranking>
+
       <Footer></Footer>
     </HomeOut>
   );
 }
-
 export default Home;

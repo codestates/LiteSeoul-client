@@ -33,6 +33,8 @@
 
 김바실리, 김영근, 서반석, 안정태
 
+> "We are coding at hell Until it becomes heaven."
+
 <br>
 
 ### *© 2021 HellCoders*

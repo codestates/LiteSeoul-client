@@ -1,16 +1,22 @@
 // import axios from 'axios';
 // import { useState, useEffect } from 'react';
 import { useState } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
-import SignIn from './components/Modal/SignIn';
 import Marker from './components/Modal/Marker';
-import Mypage from './pages/Mypage';
 import Nav from './components/Nav';
+import SignIn from './components/Modal/SignIn';
+import Mypage from './pages/Mypage';
 // import Donation from './pages/Donation';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
+import SignUp from './components/Modal/SignUp';
+import JustInfo from './components/profile/JustInfo';
+import BillsLog from './components/profile/BillsLog';
+import LikePlace from './components/profile/LikePlace';
+import InfoEdit from './components/Modal/InfoEdit';
+import MemberOut from './components/profile/MemberOut';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
