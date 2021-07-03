@@ -1,6 +1,6 @@
 // import axios from 'axios';
 // import { useState, useEffect } from 'react';
-import { useState } from 'react';
+import { useState }from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
@@ -20,7 +20,7 @@ import MemberOut from './components/profile/MemberOut';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
-  const [isLogin, setLogin] = useState<boolean>(false);
+  const [isLogin, setLogin] = useState<boolean>(true);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
   // console.log(isLoginModal);
   const handleModal = () => {
@@ -59,11 +59,19 @@ function App(): any {
           )}
         /> */}
         <Route
+          exact
           path="/mypage"
           render={() => {
+            if (isLogin === false) {
+              return <Redirect to="/signin" />;
+            }
             return <Mypage />;
           }}
         />
+        {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
+        <Route exact path="/mypage/billslog" render={() => <BillsLog />} />
+        <Route exact path="/mypage/likeplace" render={() => <LikePlace />} />
+        <Route exact path="/mypage/memberout" render={() => <MemberOut />} />
         <Route
           path="/signin"
           render={() => (

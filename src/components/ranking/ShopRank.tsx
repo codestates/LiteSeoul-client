@@ -1,6 +1,7 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import choonShick from '../image/choonShick.png';
-import dummyShops from '../documents/dummyShops';
+// import choonShick from '../image/choonShick.png';
+// import dummyShops from '../documents/dummyShops';
 import styled from 'styled-components';
 
 const ShopRankOut = styled.div`
@@ -134,6 +135,16 @@ const Hr = styled.hr`
 `;
 
 function ShopRank() {
+  const [shopdata, setShopdata] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/rank")
+    .then(res => {
+      console.log(shopdata)
+      return setShopdata(res.data);
+    })
+  },[])
+
   // const [checkedItems, setCheckedItems] = useState(new Set());
   // const [bChecked, setChecked] = useState(false);
 
@@ -154,7 +165,7 @@ function ShopRank() {
   // };
   return (
     <>
-      {dummyShops.map((data: any) => {
+      {shopdata.map((data: any) => {
         return (
           <ShopRankOut key={data.id}>
             <RankNumber>{data.id}</RankNumber>

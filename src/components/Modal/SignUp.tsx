@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
@@ -81,11 +82,18 @@ const SignUp = (props: any) => {
   } = useForm<IFormInput>();
 
   // 제출과 에러 핸들링
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => (
+    console.log(data))
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);
 
   // 이미지를 업로드 후 실시간 렌더링 가능하지 않을까?
   const [image, setImage] = useState<File>();
+
+  // 회원가입버튼 작동여부 확인 함수
+  const createHandle = (e: any) => (
+    console.log('hello')
+  )
+
 
   // 리턴 내부에서 모달창 생성 및 유효성검사와 인풋창 한번에 관리
   return (
