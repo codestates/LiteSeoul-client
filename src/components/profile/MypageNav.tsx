@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRef } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import dummyMyInfo from '../documents/dummyMyInfo';
 import styled from 'styled-components';
 
@@ -119,7 +119,7 @@ const NavHidden = styled.div`
   height: 80px;
   background-color: #189cc4;
   position: absolute;
-  top: 10%;
+  top: 20%;
   transform: translateY(-50%);
   border-radius: 0 5px 5px 0;
   align-items: center;
@@ -132,7 +132,7 @@ const NavHidden = styled.div`
     width: 15px;
     height: 15px;
   }
-  @media screen and (max-width: 1101px) {
+  @media screen and (max-width: 1001px) {
     display: flex;
   }
 `;
@@ -161,17 +161,17 @@ function MypageNav() {
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/mypage/billslog">
+              <NavLink exact to="/mypage/MyPage2">
                 인증하기
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/mypage/likeplace">
+              <NavLink exact to="/mypage/MyPage3">
                 즐겨찾기
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/mypage/memberout">
+              <NavLink exact to="/mypage/MyPage4">
                 회원탈퇴
               </NavLink>
             </li>

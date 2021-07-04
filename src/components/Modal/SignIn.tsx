@@ -238,6 +238,7 @@ const InputPassword = styled.input.attrs({
 // };
 
 function SignIn(props: any) {
+  console.log(props);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
@@ -255,8 +256,10 @@ function SignIn(props: any) {
     return;
   };
 
-  const handleModalOpen = () => {
-    setShow(true);
+  const handleAccount = () => {
+    console.log('회원가입버튼');
+    props.handleSignUp();
+    props.handleLoginModal();
   };
 
   const handleId = (e: any) => {
@@ -280,63 +283,52 @@ function SignIn(props: any) {
   return (
     <SingInOut>
       {/* {errMessage === '' ? <></> : <ErrorMessage>{errMessage}</ErrorMessage>} */}
+      <form onSubmit={(e) => e.preventDefault()}>
+        <SignMain>
+          <CloseBtn onClick={props.handleLoginModal}></CloseBtn>
+          <SignCenter>
+            <SignInImg>
+              <Img></Img>
+              <Text>
+                지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.
+              </Text>
+              <Logo>LiteSeoul</Logo>
+            </SignInImg>
+            <SignInInput>
+              <li>
+                {errMessage === '' ? (
+                  <p>LiteSeoul</p>
+                ) : (
+                  <p
+                    style={{
+                      color: 'red',
+                      fontSize: '1.2rem',
+                    }}
+                  >
+                    {errMessage}
+                  </p>
+                )}
 
-      {show === false ? (
-        <form onSubmit={(e) => e.preventDefault()}>
-          <SignMain>
-            <CloseBtn onClick={props.handleLoginModal}></CloseBtn>
-            <SignCenter>
-              <SignInImg>
-                <Img></Img>
-                <Text>
-                  지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.
-                </Text>
-                <Logo>LiteSeoul</Logo>
-              </SignInImg>
-              <SignInInput>
-                <li>
-                  {errMessage === '' ? (
-                    <p>LiteSeoul</p>
-                  ) : (
-                    <p
-                      style={{
-                        color: 'red',
-                        fontSize: '1.2rem',
-                      }}
-                    >
-                      {errMessage}
-                    </p>
-                  )}
-
-                  <p>User Login</p>
-                </li>
-                <li>
-                  <InputId autoFocus value={id} onChange={handleId} />
-                </li>
-                <li>
-                  <InputPassword value={password} onChange={handlePassword} />
-                </li>
-                <li></li>
-                <li>Google Login</li>
-                <li onClick={LoginBtn}>로그인</li>
-                <li>
-                  <div onClick={handleModalOpen}>
-                    <p>Create Account</p>
-                  </div>
-                </li>
-              </SignInInput>
-            </SignCenter>
-          </SignMain>
-        </form>
-      ) : (
-        <div hidden={!show}>
-          <div className="modal-background" onClick={handleModalClose}>
-            <div className="modal-card">
-              <SignUp handleModalClose={handleModalClose} />
-            </div>
-          </div>
-        </div>
-      )}
+                <p>User Login</p>
+              </li>
+              <li>
+                <InputId autoFocus value={id} onChange={handleId} />
+              </li>
+              <li>
+                <InputPassword value={password} onChange={handlePassword} />
+              </li>
+              <li></li>
+              <li>Google Login</li>
+              <li onClick={LoginBtn}>로그인</li>
+              <li>
+                <div onClick={handleAccount}>
+                  <p>Create Account</p>
+                </div>
+              </li>
+            </SignInInput>
+          </SignCenter>
+        </SignMain>
+      </form>
     </SingInOut>
   );
 }

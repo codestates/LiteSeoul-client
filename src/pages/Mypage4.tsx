@@ -1,6 +1,6 @@
 import React from 'react';
 import MypageNav from '../components/profile/MypageNav';
-import JustInfo from '../components/profile/JustInfo';
+import MemberOut from '../components/profile/MemberOut';
 import styled from 'styled-components';
 
 const MyPageOut = styled.div`
@@ -14,25 +14,17 @@ const MyPageOut = styled.div`
   display: flex;
   position: relative;
   @media screen and (max-width: 1101px) {
-    height: 1300px;
+    height: 900px;
   }
 `;
 
-// const MypageContents = styled.div`
-//   width: 80%;
-//   height: 100%;
-//   /* background: #ccc; */
-//   position: absolute;
-//   right: 0;
-// `;
-
-function Mypage() {
+function Mypage4() {
   return (
     <MyPageOut>
       <MypageNav />
-      <JustInfo />
+      <MemberOut />
     </MyPageOut>
   );
 }
 
-export default Mypage;
+export default Mypage4;

@@ -1,38 +1,34 @@
 import React from 'react';
 import MypageNav from '../components/profile/MypageNav';
-import JustInfo from '../components/profile/JustInfo';
+import BillsLog from '../components/profile/BillsLog';
 import styled from 'styled-components';
 
 const MyPageOut = styled.div`
   width: 100%;
   height: 100vh;
   min-height: 900px;
-  overflow: hidden;
+  overflow: auto;
   /* border: 1px solid red; */
   /* background: yellow; */
   padding-top: 68px;
   display: flex;
   position: relative;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   @media screen and (max-width: 1101px) {
-    height: 1300px;
+    height: auto;
   }
 `;
 
-// const MypageContents = styled.div`
-//   width: 80%;
-//   height: 100%;
-//   /* background: #ccc; */
-//   position: absolute;
-//   right: 0;
-// `;
-
-function Mypage() {
+function Mypage2() {
   return (
     <MyPageOut>
       <MypageNav />
-      <JustInfo />
+      <BillsLog />
     </MyPageOut>
   );
 }
 
-export default Mypage;
+export default Mypage2;
