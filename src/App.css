@@ -336,6 +336,13 @@ img {
   transform: rotate(180deg);
 }
 
+.hidden1 {
+  left: 300px;
+}
+.hidden1 > img {
+  transform: rotate(180deg);
+}
+
 .active {
   opacity: 1;
 }

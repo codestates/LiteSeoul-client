@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
-import CategoryCafe from "./CategoryCafe";
-import CategoryLife from "./CategoryLife";
-import CategoryOrgan from "./CategoryOrgan";
-import axios from "axios";
-import CateRenderLists from "./CateRenderLists";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import CategoryCafe from './CategoryCafe';
+import CategoryLife from './CategoryLife';
+import CategoryOrgan from './CategoryOrgan';
+import axios from 'axios';
+import CateRenderLists from './CateRenderLists';
 
 const MapNav1 = styled.div`
   width: 20%;
@@ -238,6 +238,7 @@ const CategoryList2 = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    /* border: 1px solid blue; */
   }
 `;
 
@@ -275,9 +276,9 @@ function MapNav(props: any) {
 
   // 각 카테고리데이터 받아서 상태 저장
   const handleListDatas = (data: any) => {
-    setListDatas(data)
+    setListDatas(data);
     // console.log(listDatas)
-  }
+  };
 
   const handelList = () => {
     SetList(!isList);
@@ -289,8 +290,8 @@ function MapNav(props: any) {
   };
 
   const handleNav = () => {
-    document.getElementById("nav")?.classList.toggle("nav");
-    document.getElementById("hidden")?.classList.toggle("hidden");
+    document.getElementById('nav')?.classList.toggle('nav');
+    document.getElementById('hidden')?.classList.toggle('hidden');
   };
 
   return (
@@ -320,7 +321,7 @@ function MapNav(props: any) {
             </CategoryOut>
             <List2>
               <CategoryList2 onClick={props.handleModal}>
-                <CateRenderLists listDatas={listDatas}/>
+                <CateRenderLists listDatas={listDatas} />
               </CategoryList2>
             </List2>
           </NavMain2>

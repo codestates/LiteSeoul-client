@@ -1,7 +1,7 @@
-import { defaultMaxListeners } from "events";
-import React, { useState } from "react";
-import styled from "styled-components";
-import SignUp from "./SignUp";
+import { defaultMaxListeners } from 'events';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import SignUp from './SignUp';
 
 const SingInOut = styled.div`
   position: absolute;
@@ -37,12 +37,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url("/icon/close.svg");
+  background-image: url('/icon/close.svg');
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url("/icon/close2.svg");
+    background-image: url('/icon/close2.svg');
   }
 `;
 
@@ -83,7 +83,7 @@ const Img = styled.div`
   background-color: #fff;
   border-radius: 50%;
   margin-bottom: 20px;
-  background-image: url("/img/login_imge.svg");
+  background-image: url('/img/login_imge.svg');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -154,7 +154,7 @@ const SignInInput = styled.ul`
     }
   }
   & li:nth-child(4) {
-    background-image: url("img/kakao_login.png");
+    background-image: url('img/kakao_login.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -199,8 +199,8 @@ const SignInInput = styled.ul`
 `;
 
 const InputId = styled.input.attrs({
-  type: "text",
-  placeholder: "Email",
+  type: 'text',
+  placeholder: 'Email',
 })`
   width: 100%;
   height: 100%;
@@ -216,8 +216,8 @@ const InputId = styled.input.attrs({
 `;
 
 const InputPassword = styled.input.attrs({
-  type: "password",
-  placeholder: "Password",
+  type: 'password',
+  placeholder: 'Password',
 })`
   width: 100%;
   height: 100%;
@@ -238,17 +238,17 @@ const InputPassword = styled.input.attrs({
 // };
 
 function SignIn(props: any) {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [errMessage, setErrMessage] = useState("");
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMessage, setErrMessage] = useState('');
 
   const [show, setShow] = useState(false);
 
   const handleModalClose = (e: any) => {
     const currentClass = e.target.className;
     if (
-      currentClass === "ModalCloseBtn" ||
-      currentClass === "modal-background"
+      currentClass === 'ModalCloseBtn' ||
+      currentClass === 'modal-background'
     ) {
       setShow(false);
     }
@@ -268,12 +268,12 @@ function SignIn(props: any) {
   };
 
   const LoginBtn = () => {
-    if (id !== "" && password !== "") {
+    if (id !== '' && password !== '') {
       console.log(id, password);
-      console.log("로그인완료");
-      setErrMessage("");
+      console.log('로그인완료');
+      setErrMessage('');
     } else {
-      setErrMessage("아이디와 패스워드를 확인하세요");
+      setErrMessage('아이디와 패스워드를 확인하세요');
     }
   };
 
@@ -281,60 +281,62 @@ function SignIn(props: any) {
     <SingInOut>
       {/* {errMessage === '' ? <></> : <ErrorMessage>{errMessage}</ErrorMessage>} */}
 
-     { show === false ? (<form onSubmit={(e) => e.preventDefault()}>
-        <SignMain>
-          <CloseBtn onClick={props.handleLoginModal}></CloseBtn>
-          <SignCenter>
-            <SignInImg>
-              <Img></Img>
-              <Text>
-                지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.
-              </Text>
-              <Logo>LiteSeoul</Logo>
-            </SignInImg>
-            <SignInInput>
-              <li>
-                {errMessage === "" ? (
-                  <p>LiteSeoul</p>
-                ) : (
-                  <p
-                    style={{
-                      color: "red",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    {errMessage}
-                  </p>
-                )}
+      {show === false ? (
+        <form onSubmit={(e) => e.preventDefault()}>
+          <SignMain>
+            <CloseBtn onClick={props.handleLoginModal}></CloseBtn>
+            <SignCenter>
+              <SignInImg>
+                <Img></Img>
+                <Text>
+                  지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.
+                </Text>
+                <Logo>LiteSeoul</Logo>
+              </SignInImg>
+              <SignInInput>
+                <li>
+                  {errMessage === '' ? (
+                    <p>LiteSeoul</p>
+                  ) : (
+                    <p
+                      style={{
+                        color: 'red',
+                        fontSize: '1.2rem',
+                      }}
+                    >
+                      {errMessage}
+                    </p>
+                  )}
 
-                <p>User Login</p>
-              </li>
-              <li>
-                <InputId autoFocus value={id} onChange={handleId} />
-              </li>
-              <li>
-                <InputPassword value={password} onChange={handlePassword} />
-              </li>
-              <li></li>
-              <li>Google Login</li>
-              <li onClick={LoginBtn}>로그인</li>
-              <li>
-                <div onClick={handleModalOpen}>
-                  <p>Create Account</p>
-                </div>
-              </li>
-            </SignInInput>
-          </SignCenter>
-          xw
-        </SignMain>
-      </form>) : (
-      <div hidden={!show}>
-        <div className="modal-background" onClick={handleModalClose}>
-          <div className="modal-card">
-            <SignUp handleModalClose={handleModalClose} />
+                  <p>User Login</p>
+                </li>
+                <li>
+                  <InputId autoFocus value={id} onChange={handleId} />
+                </li>
+                <li>
+                  <InputPassword value={password} onChange={handlePassword} />
+                </li>
+                <li></li>
+                <li>Google Login</li>
+                <li onClick={LoginBtn}>로그인</li>
+                <li>
+                  <div onClick={handleModalOpen}>
+                    <p>Create Account</p>
+                  </div>
+                </li>
+              </SignInInput>
+            </SignCenter>
+          </SignMain>
+        </form>
+      ) : (
+        <div hidden={!show}>
+          <div className="modal-background" onClick={handleModalClose}>
+            <div className="modal-card">
+              <SignUp handleModalClose={handleModalClose} />
+            </div>
           </div>
         </div>
-      </div>)}
+      )}
     </SingInOut>
   );
 }

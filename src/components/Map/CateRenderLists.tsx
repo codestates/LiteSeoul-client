@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 
 function CateRenderLists(props: any) {
-
   // console.log(props)
   return (
-    <div>
+    <>
       <div>The Peaker</div>
       <div>
         <img src="icon/location_main.svg" alt="maker"></img>
@@ -13,7 +12,7 @@ function CateRenderLists(props: any) {
       <div>
         <img src="icon/arrow_left_color.svg" alt="maker"></img>
       </div>
-    </div>
+    </>
   );
 }
 
