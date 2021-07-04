@@ -1,10 +1,30 @@
-import React from "react";
-import MypageNav from "../components/profile/MypageNav";
-import JustInfo from "../components/profile/JustInfo";
-import BillsLog from "../components/profile/BillsLog";
-import { useState } from "react";
-import LikePlace from "../components/profile/LikePlace";
-import MemberOut from "../components/profile/MemberOut";
+import React, { useState } from 'react';
+import MypageNav from '../components/profile/MypageNav';
+import JustInfo from '../components/profile/JustInfo';
+import styled from 'styled-components';
+
+const MyPageOut = styled.div`
+  width: 100%;
+  height: 100vh;
+  min-height: 900px;
+  overflow: hidden;
+  /* border: 1px solid red; */
+  /* background: yellow; */
+  padding-top: 68px;
+  display: flex;
+  position: relative;
+  @media screen and (max-width: 1101px) {
+    height: 1300px;
+  }
+`;
+
+// const MypageContents = styled.div`
+//   width: 80%;
+//   height: 100%;
+//   /* background: #ccc; */
+//   position: absolute;
+//   right: 0;
+// `;
 
 function Mypage() {
 
@@ -16,27 +36,11 @@ function Mypage() {
     console.log(nowPage)
   }
 
-  const renderPage = (nowPage: string) => {
-    if(nowPage === "JustInfo" || nowPage === '') {
-      return <JustInfo />
-    } else if(nowPage === "BillsLog") {
-      return <BillsLog />
-    } else if(nowPage === "LikePlace") {
-      return <LikePlace />
-    } else if(nowPage === "MemberOut") {
-      return <MemberOut />
-    }
-  }
-
   return (
-    <div className="MypageFlex">
-      <div>
-        <MypageNav handlePage={handlePage} />
-      </div>
-      <div className="MypageContents">
-        {renderPage(nowPage)}
-      </div>
-    </div>
+    <MyPageOut>
+      <MypageNav />
+      <JustInfo />
+    </MyPageOut>
   );
 }
 

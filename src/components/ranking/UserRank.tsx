@@ -12,6 +12,21 @@ const ShopRankOut = styled.div`
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
     rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
     rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  @media screen and (max-width: 1501px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 901px) {
+    width: 250px;
+    height: 380px;
+  }
+  @media screen and (max-width: 831px) {
+    width: 220px;
+    height: 350px;
+  }
+  @media screen and (max-width: 761px) {
+    width: 200px;
+    height: 150px;
+  }
 `;
 const RankNumber = styled.div`
   position: absolute;
@@ -27,6 +42,11 @@ const RankNumber = styled.div`
   font-weight: 700;
   font-size: 2.5rem;
   color: #fff;
+  @media screen and (max-width: 1501px) {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
 `;
 
 const AllRankers = styled.div`
@@ -37,17 +57,29 @@ const AllRankers = styled.div`
   justify-content: space-evenly;
   align-items: center;
   /* background-color: pink; */
+  @media screen and (max-width: 901px) {
+    height: 380px;
+  }
+  @media screen and (max-width: 831px) {
+    height: 350px;
+  }
+  @media screen and (max-width: 761px) {
+    height: 150px;
+  }
 `;
 
 const ShopImg = styled.div`
   width: 80%;
   height: 45%;
-  border: 1px solid green;
+  /* border: 1px solid green; */
   margin-bottom: 5px;
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media screen and (max-width: 761px) {
+    display: none;
   }
 `;
 
@@ -59,6 +91,9 @@ const ShopTitle = styled.div`
   /* border: 1px solid red; */
   display: flex;
   align-items: center;
+  @media screen and (max-width: 901px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const ShopContent = styled.div`
@@ -67,6 +102,9 @@ const ShopContent = styled.div`
   /* border: 1px solid green; */
   font-size: 0.8rem;
   text-align: justify;
+  @media screen and (max-width: 901px) {
+    display: none;
+  }
 `;
 
 const ShopContent2 = styled.div`
@@ -78,6 +116,12 @@ const ShopContent2 = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  @media screen and (max-width: 901px) {
+    height: 15%;
+  }
+  @media screen and (max-width: 761px) {
+    height: 10%;
+  }
 `;
 
 const Like = styled.div`
@@ -96,6 +140,19 @@ const Like = styled.div`
     object-fit: cover;
     margin-right: 5px;
     /* border: 1px solid red; */
+  }
+  @media screen and (max-width: 761px) {
+    font-size: 1.2rem;
+    height: 30px;
+
+    & img {
+      margin-top: -3px;
+      width: 25px;
+      height: 25px;
+      object-fit: cover;
+      margin-right: 5px;
+      /* border: 1px solid red; */
+    }
   }
 `;
 const InputCk = styled.input`
@@ -127,6 +184,12 @@ const Add = styled.div`
     height: 20px;
     object-fit: cover;
     margin-right: 5px;
+  }
+  @media screen and (max-width: 831px) {
+    font-size: 0.6rem;
+  }
+  @media screen and (max-width: 761px) {
+    font-size: 0.5rem;
   }
 `;
 const Hr = styled.hr`

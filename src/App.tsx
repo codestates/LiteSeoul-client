@@ -1,6 +1,6 @@
 // import axios from 'axios';
 // import { useState, useEffect } from 'react';
-import { useState }from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
@@ -8,12 +8,16 @@ import Marker from './components/Modal/Marker';
 import Nav from './components/Nav';
 import SignIn from './components/Modal/SignIn';
 import Mypage from './pages/Mypage';
+import Mypage2 from './pages/Mypage2';
+import Mypage3 from './pages/Mypage3';
+import Mypage4 from './pages/Mypage4';
 // import Donation from './pages/Donation';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
-import BillsLog from './components/profile/BillsLog';
+// import BillsLog from './components/profile/BillsLog';
 import LikePlace from './components/profile/LikePlace';
-import MemberOut from './components/profile/MemberOut';
+// import MemberOut from './components/profile/MemberOut';
+import SignUp from './components/Modal/SignUp';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
@@ -26,16 +30,24 @@ function App(): any {
     console.log(modalData)
   }
 
+  const [isSingUp, setSignUp] = useState<boolean>(false);
   // console.log(isLoginModal);
+  console.log(isSingUp);
+
   const handleModal = () => {
     setModal(!isModal);
   };
+  
   const handleLoginModal = () => {
     setLoginModal(!isLoginModal);
   };
 
   const handleLogin = () => {
     setLogin(!isLogin);
+  };
+
+  const handleSignUp = () => {
+    setSignUp(!isSingUp);
   };
 
   // const [result, setResult] = useState('');
@@ -73,9 +85,9 @@ function App(): any {
           }}
         />
         {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
-        {/* <Route exact path="/mypage/billslog" render={() => <BillsLog />} />
-        <Route exact path="/mypage/likeplace" render={() => <LikePlace />} />
-        <Route exact path="/mypage/memberout" render={() => <MemberOut />} /> */}
+        <Route exact path="/mypage/MyPage2" render={() => <Mypage2 />} />
+        <Route exact path="/mypage/MyPage3" render={() => <Mypage3 />} />
+        <Route exact path="/mypage/MyPage4" render={() => <Mypage4 />} />
         <Route
           path="/signin"
           render={() => (
@@ -83,6 +95,7 @@ function App(): any {
               isLogin={isLogin}
               handleLogin={handleLogin}
               handleLoginModal={handleLoginModal}
+              handleSignUp={handleSignUp}
             />
           )}
         />
@@ -101,20 +114,23 @@ function App(): any {
         />
         <Route component={NotFound} />
       </Switch>
-      {isLoginModal === false ? (
-        <></>
-      ) : (
+      {isLoginModal ? (
         <SignIn
           // isLogin={isLogin}
           handleLogin={handleLogin}
           handleLoginModal={handleLoginModal}
+          handleSignUp={handleSignUp}
         ></SignIn>
+      ) : (
+        <></>
       )}
       {isModal ? (
         <Marker isModal={isModal} handleModal={handleModal} modalData={modalData}></Marker>
       ) : (
         <></>
       )}
+
+      {isSingUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
     </BrowserRouter>
   );
 }

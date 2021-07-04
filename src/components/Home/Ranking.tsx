@@ -34,13 +34,24 @@ const RankingTitle = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 1501px) {
+    font-size: 3rem;
+  }
+  @media screen and (max-width: 751px) {
+    font-size: 2.4rem;
+  }
+  @media screen and (max-width: 651px) {
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 601px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const RankingSelect = styled.select`
   width: 150px;
   height: 50px;
   margin-left: 20px;
-  line-height: 50px;
   text-indent: 20px;
   border: 2px solid #189cc4;
   color: #189cc4;
@@ -57,6 +68,20 @@ const RankingSelect = styled.select`
   & select::-ms-expand {
     display: none;
   }
+  @media screen and (max-width: 1501px) {
+    width: 120px;
+    height: 40px;
+    font-size: 1.2rem;
+    line-height: 40px;
+    background-size: 20px;
+  }
+  @media screen and (max-width: 601px) {
+    width: 100px;
+    height: 30px;
+    font-size: 1rem;
+    line-height: 30px;
+    background-size: 15px;
+  }
 `;
 
 const RankingList = styled.div`
@@ -69,6 +94,10 @@ const RankingList = styled.div`
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  @media screen and (max-width: 1501px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
 `;
 
 function Ranking() {

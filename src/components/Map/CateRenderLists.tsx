@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function CateRenderLists({ listDatas, handleModalData }: any) {
   // console.log(props)
