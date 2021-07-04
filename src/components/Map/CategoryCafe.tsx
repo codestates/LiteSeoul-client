@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { cafeData } from './cafeData';
-import CateRenderLists from './CateRenderLists';
 
 const CategoryList = styled.div`
   width: 80%;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const MarkerOut = styled.div`
   position: absolute;
@@ -36,12 +37,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -283,7 +284,7 @@ const MarkerCommnetInput = styled.div`
   justify-content: space-between;
 `;
 const CommentInput = styled.input.attrs({
-  type: 'text',
+  type: "text",
 })`
   width: 78%;
   height: 40px;
@@ -322,11 +323,23 @@ type MarkerProps = {
 };
 
 function Marker({ isModal, handleModal, modalData }: MarkerProps) {
+  // console.log(modalData)
   const [isCheck, setCheck] = useState(false);
 
   const handleCheck = () => {
     setCheck(!isCheck);
   };
+
+  const [comments, setComments] = useState([]);
+  // console.log(comments)
+
+  useEffect((): any => {
+    axios
+      .get(
+        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/${Number(modalData.id)}`
+      )
+      .then((res) => setComments(res.data.commentInfo));
+  }, []);
 
   return (
     // 프롭스로 가져온 모달데이터를 갖고 아래 하단부에 렌더링 하면 된다.
@@ -339,24 +352,18 @@ function Marker({ isModal, handleModal, modalData }: MarkerProps) {
               <div>
                 <img src="icon/certification_mypage.svg" alt="Category"></img>
               </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
+              <div key={modalData.id}>
+                <span>{modalData.name}</span>
+                <span>{modalData.category}</span>
               </div>
             </MakerStoreInfo>
             <MakerStoreText>
-              <div>
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate
-              </div>
+              <div>가게 소개문구 자리. 서버에 요청하여 받을 예정임.</div>
               <div>
                 <input
                   type="checkbox"
                   id="like"
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   onChange={handleCheck}
                 ></input>
                 <label htmlFor="like">
@@ -372,53 +379,13 @@ function Marker({ isModal, handleModal, modalData }: MarkerProps) {
           </MarkerInfo>
           <MarkerComment>COMMENT</MarkerComment>
           <MarkerCommemntUl>
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
+            {comments.map((comment: any) => (
+              <li key={comment.id}>
+                <div>{comment.name}</div>
+                <div>{comment.comment}</div>
+                <div>2021-06-28</div>
+              </li>
+            ))}
           </MarkerCommemntUl>
           <MarkerCommnetInput>
             <CommentInput></CommentInput>
