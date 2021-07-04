@@ -23,16 +23,17 @@ function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(true);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
+
+  // 타입생성 및 상태 객체값 지정 필요
   const [modalData, setModalData] = useState([]);
 
   const handleModalData = (data: any) => {
     setModalData(data);
-    console.log(modalData)
   }
 
-  const [isSingUp, setSignUp] = useState<boolean>(false);
+  const [isSignUp, setSignUp] = useState<boolean>(false);
   // console.log(isLoginModal);
-  console.log(isSingUp);
+  console.log(isSignUp);
 
   const handleModal = () => {
     setModal(!isModal);
@@ -47,7 +48,7 @@ function App(): any {
   };
 
   const handleSignUp = () => {
-    setSignUp(!isSingUp);
+    setSignUp(!isSignUp);
   };
 
   // const [result, setResult] = useState('');
@@ -130,7 +131,7 @@ function App(): any {
         <></>
       )}
 
-      {isSingUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
+      {isSignUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
     </BrowserRouter>
   );
 }

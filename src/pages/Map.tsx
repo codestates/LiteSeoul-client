@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MapNav from "../components/Map/MapNav";
 import KakaoMap from "../components/Map/KakaoMap";
+import { stringify } from "querystring";
 
 const MapOut = styled.div`
   width: 100%;
@@ -46,21 +47,17 @@ type MapProps = {
   handleModalData: any;
 };
 
-interface GroundDatas {
-  content: string;
-  lat: number;
-  lng: number;
-};
-
 function Map({ handleModal, isModal, handleModalData }: MapProps) {
-
   // 위도경도 데이터를 따로 모으는 상태와 함수가 필요함.
   // KakaoMap.tsx에서 isMap 상태가 위도경도에 관여함
-  const [ground, setGround] = useState([]);
+  // MapNav.tsx에 있는 listDatas랑 내용은 같으나 용도가 다르다.
+  const [groundDatas, setGroundDatas] = useState([]);
+  console.log(groundDatas);
 
-  const handleGround = (data: any) => (
-    setGround(data)
-  )
+  const handleGroundDatas = (data: any): void => setGroundDatas(data);
+
+
+  // const [markerRender, setMarkerRender] = useState()
 
 
   return (
@@ -69,8 +66,13 @@ function Map({ handleModal, isModal, handleModalData }: MapProps) {
         handleModal={handleModal}
         isModal={isModal}
         handleModalData={handleModalData}
+        handleGroundDatas={handleGroundDatas}
       ></MapNav>
-      <KakaoMap handleModal={handleModal} isModal={isModal}></KakaoMap>
+      <KakaoMap
+        handleModal={handleModal}
+        isModal={isModal}
+        groundDatas={groundDatas}
+      ></KakaoMap>
     </MapOut>
   );
 }
