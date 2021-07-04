@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MypageNav from '../components/profile/MypageNav';
 import JustInfo from '../components/profile/JustInfo';
 import styled from 'styled-components';
@@ -27,6 +27,15 @@ const MyPageOut = styled.div`
 // `;
 
 function Mypage() {
+
+  const [nowPage, setNowPage] = useState('');
+  console.log(nowPage)
+  
+  const handlePage = (data: any) => {
+    setNowPage(data)
+    console.log(nowPage)
+  }
+
   return (
     <MyPageOut>
       <MypageNav />

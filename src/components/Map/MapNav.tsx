@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
-import CategoryCafe from './CategoryCafe';
-import CategoryLife from './CategoryLife';
-import CategoryOrgan from './CategoryOrgan';
-import axios from 'axios';
-import CateRenderLists from './CateRenderLists';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+import CategoryCafe from "./CategoryCafe";
+import CategoryLife from "./CategoryLife";
+import CategoryOrgan from "./CategoryOrgan";
+import axios from "axios";
 
 const MapNav1 = styled.div`
   width: 20%;
@@ -265,19 +264,49 @@ const NavHidden = styled.div`
   }
 `;
 
-type MapProps = {
-  handleModal: () => void;
-  isModal: boolean;
-};
+// type MapProps = {
+//   handleModal: () => void;
+//   isModal: boolean;
+//   handleModalData: any;
+// };
+
+type shopData = {
+  id: number,
+  name: string,
+  address: string,
+  latitude: string,
+  longitude: string,
+  category: string,
+  recommend: string,
+  phone: string,
+  created_at: string,
+  updated_at: string
+}
+
 function MapNav(props: any) {
   // console.log(props);
   const [isList, SetList] = useState(false);
-  const [listDatas, setListDatas] = useState([]);
 
-  // 각 카테고리데이터 받아서 상태 저장
-  const handleListDatas = (data: any) => {
-    setListDatas(data);
-    // console.log(listDatas)
+  const [listDatas, setListDatas] = useState([]);
+  // 하단부 콘솔로그로 각 카테고리 클릭 시 데이터 도출확인
+  // console.log(listDatas)
+
+  const handleListDatas = (url: string) => {
+    // 각 컴포넌트에서 props.handleListDatas(url)을 갖고 옴.
+    // 실제 콘솔로그 데이터 도출 확인
+    console.log(url);
+
+    // shop, life, organ
+    // 여기서 각 데이터를 서버에서 axios한 다음, 해당 데이터를 상태에 저장하여 CateRenderLists 컴포넌트에 프롭스로 내려준다.
+    axios
+      .get(
+        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/${url}`
+      )
+      .then((res) => {
+        setListDatas(res.data)
+        props.handleGroundDatas(res.data)
+      })
+
   };
 
   const handelList = () => {
@@ -290,8 +319,8 @@ function MapNav(props: any) {
   };
 
   const handleNav = () => {
-    document.getElementById('nav')?.classList.toggle('nav');
-    document.getElementById('hidden')?.classList.toggle('hidden');
+    document.getElementById("nav")?.classList.toggle("nav");
+    document.getElementById("hidden")?.classList.toggle("hidden");
   };
 
   return (
@@ -299,6 +328,7 @@ function MapNav(props: any) {
       <NavHidden onClick={handleNav} id="hidden">
         <img src="icon/arrow_left_white.svg" alt="arrow"></img>
       </NavHidden>
+
       <MapNav1 id="nav" className="nav">
         <NavTop>
           <img
@@ -310,7 +340,7 @@ function MapNav(props: any) {
         </NavTop>
 
         {isList ? (
-          <NavMain2>
+          <NavMain2 id="NavMain2">
             <CategoryOut>
               <img
                 src="icon/arrow_left_color.svg"
@@ -320,9 +350,21 @@ function MapNav(props: any) {
               <Category2>List</Category2>
             </CategoryOut>
             <List2>
-              <CategoryList2 onClick={props.handleModal}>
-                <CateRenderLists listDatas={listDatas} />
-              </CategoryList2>
+              {/* 서버 데이터 렌더링 map.*/}
+              {listDatas.map((listData: shopData) => (
+                <CategoryList2 key={listData.id}  id="CategoryList2" onClick={props.handleModal}>
+                  <div onClick={() => (props.handleModalData(listData))}>
+                    <div>{listData.name}</div>
+                    <div>
+                      <img src="icon/location_main.svg" alt="maker"></img>
+                      <span>{listData.address}</span>
+                    </div>
+                    <div>
+                      <img src="icon/arrow_left_color.svg" alt="maker"></img>
+                    </div>
+                  </div>
+                </CategoryList2>
+              ))}
             </List2>
           </NavMain2>
         ) : (
@@ -334,18 +376,21 @@ function MapNav(props: any) {
                 handelList={handelList}
                 isList={isList}
                 handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
               ></CategoryCafe>
               <CategoryLife
                 {...props}
                 handelList={handelList}
                 isList={isList}
                 handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
               ></CategoryLife>
               <CategoryOrgan
                 {...props}
                 handelList={handelList}
                 isList={isList}
                 handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
               ></CategoryOrgan>
             </List>
           </NavMain>

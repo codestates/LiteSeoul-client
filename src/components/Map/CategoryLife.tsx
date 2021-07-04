@@ -122,14 +122,9 @@ function CategoryLife(props: any) {
         infowindow.close();
       };
     }
-
-    // console.log(e.target.value);
-    axios.get("http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/life")
-    .then(res => {
-      console.log(res.data)
-      setLifeDatas(res.data)
-      return props.handleListDatas(lifeDatas)
-    })
+    
+    // 부모 컴포넌트인 MapNav에서 axios를 하기 위한 url 전송
+    props.handleListDatas('life')
   };
 
 
