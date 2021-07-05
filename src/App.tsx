@@ -16,7 +16,7 @@ import SignUp from './components/Modal/SignUp';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
-  const [isLogin, setLogin] = useState<boolean>(false);
+  const [isLogin, setLogin] = useState<boolean>(true);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
 
   // 타입생성 및 상태 객체값 지정 필요

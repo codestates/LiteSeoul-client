@@ -1,9 +1,10 @@
-import axios from 'axios';
-import React from 'react';
-import { useState } from 'react';
-import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
-import styled from 'styled-components';
-import '../../App.css';
+import axios from "axios";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+import styled from "styled-components";
+import "../../App.css";
 
 // styled-components로 모달창 css 관리
 const SinUpOut = styled.div`
@@ -35,12 +36,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -98,19 +99,19 @@ const FileUpload = styled.label`
   position: relative;
   /* border: 1px solid red; */
   overflow: hidden;
-  background-image: url('icon/profile-01.svg');
+  background-image: url("icon/profile-01.svg");
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
 
-  & input[type='file'] {
+  & input[type="file"] {
     display: none;
   }
 `;
 
 const SignUpName = styled.input.attrs({
-  type: 'text',
-  placeholder: '* Name',
+  type: "text",
+  placeholder: "* Name",
 })`
   width: 100%;
   border: none;
@@ -124,8 +125,8 @@ const SignUpName = styled.input.attrs({
 `;
 
 const SignUpEmail = styled.input.attrs({
-  type: 'email',
-  placeholder: '* Email',
+  type: "email",
+  placeholder: "* Email",
 })`
   width: 100%;
   border: none;
@@ -139,8 +140,8 @@ const SignUpEmail = styled.input.attrs({
 `;
 
 const SignUpNickName = styled.input.attrs({
-  type: 'text',
-  placeholder: '* NicName',
+  type: "text",
+  placeholder: "* NickName",
 })`
   width: 100%;
   border: none;
@@ -154,8 +155,8 @@ const SignUpNickName = styled.input.attrs({
 `;
 
 const SignUpPhone = styled.input.attrs({
-  type: 'tel',
-  placeholder: '* Phone',
+  type: "tel",
+  placeholder: "* Phone",
 })`
   width: 100%;
   border: none;
@@ -169,8 +170,8 @@ const SignUpPhone = styled.input.attrs({
 `;
 
 const SignUpPassword = styled.input.attrs({
-  type: 'password',
-  placeholder: '* Password',
+  type: "password",
+  placeholder: "* Password",
 })`
   width: 100%;
   border: none;
@@ -210,7 +211,7 @@ const SignUpButton = styled.button`
 
 // 타입스크립트 관련 타입지정
 type IFormInput = {
-  UserImg?: File;
+  UserImg: any;
   UserName: string;
   UserEmail: string;
   UserNickname: string;
@@ -231,15 +232,58 @@ const SignUp = (props: any) => {
     handleSubmit,
   } = useForm<IFormInput>();
 
+  // 이미지를 업로드 후 실시간 렌더링 가능하지 않을까?
+  const [image, setImage] = useState({
+    lastModified: 0,
+    lastModifiedDate: new Date(),
+    name: "",
+    size: 0,
+    type: "",
+    webkitRelativePath: "",
+  });
+  // console.log(image);
+
+  const handelImage = (e: any) => {
+    // console.log(e);
+    // console.log(e.target);
+    console.log(e.target.files[0]);
+    // console.log(e.target.value);
+    setImage(e.target.files[0]);
+    console.log(image);
+  };
+
   // 제출과 에러 핸들링
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    // console.log(data.UserImg.FileList)
+    // console.log(data)
+    console.log(data.UserImg[0]);
+
+    const formData = new FormData();
+    formData.append("UserImg", data.UserImg[0]);
+    formData.append("name", data.UserName);
+    formData.append("email", data.UserEmail);
+    formData.append("nick", data.UserNickname);
+    formData.append("password", data.UserName);
+
+    axios
+      .post(
+        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signup",
+        formData
+      )
+      .then((res) => console.log(res));
+  };
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);
 
-  // 이미지를 업로드 후 실시간 렌더링 가능하지 않을까?
-  const [image, setImage] = useState<File>();
+  // useEffect(() => {
+  //   if (image !== "") {
+  //     errors.UserImg = "";
+  //   } else if (image === "") {
+  //     errors.UserImg = "프로필 사진을 지정해주세요 :)";
+  //   }
+  // }, [image]);
 
   // 회원가입버튼 작동여부 확인 함수
-  const createHandle = (e: any) => console.log('hello');
+  const createHandle = (e: any) => console.log("hello");
 
   const handleCLose = () => {
     props.handleSignUp();
@@ -254,37 +298,49 @@ const SignUp = (props: any) => {
           <SingUpTitle>LiteSeoul</SingUpTitle>
           <SingUpError>
             {errors.UserImg
-              ? '프로필 사진을 지정해주세요 :)'
-              : errors.UserName
-              ? '이름을 입력해주세요 :)'
-              : errors.UserEmail
-              ? '이메일을 입력해주세요 :)'
+              ? "프로필 사진을 지정해주세요 :)"
+              : // : errors.UserName
+              // ? '이름을 입력해주세요 :)'
+              errors.UserEmail
+              ? "이메일을 입력해주세요 :)"
               : errors.UserNickname
-              ? '닉네임은 4글자 이상 8글자 이하 영문이나 숫자로 입력해주세요 :)'
+              ? "닉네임은 4글자 이상 8글자 이하 영문이나 숫자로 입력해주세요 :)"
               : errors.UserMobile
               ? "휴대폰 번호를 입력해주세요 :) 대쉬('-')는 안쓰셔도 돼요!"
               : errors.Password
-              ? '비밀번호는 영어와 숫자를 조합해주세요 :)'
+              ? "비밀번호는 영어와 숫자를 조합해주세요 :)"
               : errors.Checkbox
-              ? '이용약관에 동의해주세요 :)'
-              : '깨끗한 서울을 위해 LiteSeoul에 동참해주세요!'}
+              ? "이용약관에 동의해주세요 :)"
+              : "깨끗한 서울을 위해 LiteSeoul에 동참해주세요!"}
           </SingUpError>
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
             onError={handleSubmit(onError)}
           >
+            {/* 이미지업로드 */}
             <FileUpload htmlFor="file">
               <input
                 id="file"
                 type="file"
                 accept=".jpg, .jpeg, .png"
-                {...register('UserImg', {
+                {...register("UserImg", {
                   required: true,
                 })}
               />
             </FileUpload>
 
-            {/* <div className="ErrorMessage"></div> */}
+            {/* 라이브러리안쓴 수정본 */}
+            {/* <FileUpload>
+              <input
+                onChange={handelImage}
+                id="file"
+                type="file"
+                name="picture"
+                accept=".jpg, .jpeg, .png"
+              ></input>
+            </FileUpload> */}
+
+            {/* 네임 없앰 */}
             <SignUpName
               {...register('UserName', {
                 required: true,
@@ -296,34 +352,34 @@ const SignUp = (props: any) => {
               })}
             ></SignUpName>
             <SignUpEmail
-              {...register('UserEmail', {
+              {...register("UserEmail", {
                 required: true,
                 pattern:
                   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
               })}
             ></SignUpEmail>
             <SignUpNickName
-              {...register('UserNickname', {
+              {...register("UserNickname", {
                 required: true,
                 pattern: /^[a-zA-Z0-9]{4,8}$/,
               })}
             ></SignUpNickName>
             <SignUpPhone
-              {...register('UserMobile', {
+              {...register("UserMobile", {
                 required: true,
                 pattern: /^\d{3}\d{3,4}\d{4}$/,
               })}
             ></SignUpPhone>
             <SignUpPassword
-              {...register('Password', {
+              {...register("Password", {
                 required: true,
                 minLength: {
                   value: 8,
-                  message: '8자 이상으로 영문+숫자+특수문자 조합하셔야 해요!',
+                  message: "8자 이상으로 영문+숫자로 조합하셔야 해요!",
                 },
                 maxLength: {
                   value: 15,
-                  message: '15자 이내로 입력하셔야 해요!',
+                  message: "15자 이내로 입력하셔야 해요!",
                 },
                 pattern: /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,15}$/,
               })}
@@ -335,7 +391,7 @@ const SignUp = (props: any) => {
                 // onChange={(e) => {
                 //   console.log(e.target.checked);
                 // }}
-                {...register('Checkbox', {
+                {...register("Checkbox", {
                   required: true,
                 })}
               />

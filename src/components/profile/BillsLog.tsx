@@ -3,6 +3,8 @@ import dummyBills from '../documents/dummyBills';
 import danggeun from '../image/danggeun.jpg';
 import AddBills from '../Modal/AddBills';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const BillsOut = styled.div`
   width: 80%;
@@ -139,14 +141,35 @@ const BillsUpload = styled.div`
 function BillsLog() {
   const xbtnHandler = (e: any) => {
     const returnvalue = window.confirm('정말 인증기록을 지우시겠어요?');
+
     if (returnvalue === true) {
-      alert('인증기록을 삭제하였습니다.');
+      axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/delete",{
+        access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4",
+        name: `${e.target.id}`
+      })
+      // .then(res => res.redirect(url, "/mypage2"))
+      .then(res =>{
+        alert('인증기록을 삭제하였습니다.');
+        window.location.reload()
+      })
+      // console.log(e.target.id)
+      
     } else {
       alert('삭제과정을 취소하였습니다.');
     }
   };
 
   const [show, setShow] = useState(false);
+  const [logs, setLogs] = useState([]);
+
+  useEffect(() => {
+    axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/list", {
+        access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4"
+    })
+    .then(res => {
+      setLogs(res.data)
+    })
+  }, [])
 
   //영수증 추가하는 창 열기
   const handleModalClose = () => {
@@ -162,11 +185,11 @@ function BillsLog() {
         <BillsTitle>나의 인증목록</BillsTitle>
         <BillsMain>
           <BillsUl>
-            {dummyBills.map((dummyBill) => (
-              <li key={dummyBill.id}>
-                <BillsDel onClick={xbtnHandler}></BillsDel>
-                <img className="BillsImg" src={danggeun} alt="영수증"></img>
-                <span>{dummyBill.text}</span>
+            {logs.map((log: any) => (
+              <li key={log.imgName}>
+                <BillsDel onClick={xbtnHandler} id={log.imgName}></BillsDel>
+                <img className="BillsImg" src={log.imgPath} alt="영수증"></img>
+                <span>{log.created_at}</span>
               </li>
             ))}
           </BillsUl>
