@@ -20,13 +20,27 @@ const MyPageOut = styled.div`
 
 function Mypage() {
 
-  const [nowPage, setNowPage] = useState('');
-  console.log(nowPage)
-  
-  const handlePage = (data: any) => {
-    setNowPage(data)
-    console.log(nowPage)
-  }
+    // 개인정보 관리 인터페이스와 객체(여기를 기점으로 MypageNav와 JustInfo에 동시 프롭스를 내려주면 된다.)
+    // interface userInfoForm {
+    //   id: number;
+    //   name: string;
+    //   email: string;
+    //   nickname: string;
+    //   phone: string;
+    //   level: number;
+    //   expnow: number;
+    //   expall: number;
+    // }
+    // const MyInfo: userInfoForm = {
+    //   id: id,
+    //   name: name,
+    //   email: email,
+    //   nickname: nickname,
+    //   phone: phone,
+    //   level: level,
+    //   expnow: expnow,
+    //   expall: expall,
+    // };
 
   return (
     <MyPageOut>

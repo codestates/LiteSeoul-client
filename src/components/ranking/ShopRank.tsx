@@ -198,16 +198,16 @@ const Hr = styled.hr`
 `;
 
 function ShopRank() {
-  const [shopdata, setShopdata] = useState([]);
+  const [shopRankdata, setShopRankdata] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/rank"
+        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/api/shop/rank"
       )
       .then((res) => {
-        console.log(shopdata);
-        return setShopdata(res.data);
+        console.log(shopRankdata);
+        return setShopRankdata(res.data);
       });
   }, []);
 

@@ -91,6 +91,7 @@ const SignUpForm = styled.form`
   }
 `;
 
+// 이 스타일드 컴포넌트 엘리먼트를 함수 안으로 끌고와서, 백그라운드 이미지 쪽을 if문으로 분기 나눈 다음 업로드 된 이미지를 렌더링 하면 될거 같음.
 const FileUpload = styled.label`
   display: block;
   height: 150px;
@@ -232,55 +233,25 @@ const SignUp = (props: any) => {
     handleSubmit,
   } = useForm<IFormInput>();
 
-  // 이미지를 업로드 후 실시간 렌더링 가능하지 않을까?
-  const [image, setImage] = useState({
-    lastModified: 0,
-    lastModifiedDate: new Date(),
-    name: "",
-    size: 0,
-    type: "",
-    webkitRelativePath: "",
-  });
-  // console.log(image);
-
-  const handelImage = (e: any) => {
-    // console.log(e);
-    // console.log(e.target);
-    console.log(e.target.files[0]);
-    // console.log(e.target.value);
-    setImage(e.target.files[0]);
-    console.log(image);
-  };
-
   // 제출과 에러 핸들링
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    // console.log(data.UserImg.FileList)
-    // console.log(data)
-    console.log(data.UserImg[0]);
-
     const formData = new FormData();
     formData.append("UserImg", data.UserImg[0]);
     formData.append("name", data.UserName);
     formData.append("email", data.UserEmail);
     formData.append("nick", data.UserNickname);
-    formData.append("password", data.UserName);
+    formData.append("password", data.Password);
 
     axios
       .post(
         "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signup",
         formData
       )
-      .then((res) => console.log(res));
+      .then((res) => {
+        window.location.replace("http://localhost:3000/");
+      });
   };
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);
-
-  // useEffect(() => {
-  //   if (image !== "") {
-  //     errors.UserImg = "";
-  //   } else if (image === "") {
-  //     errors.UserImg = "프로필 사진을 지정해주세요 :)";
-  //   }
-  // }, [image]);
 
   // 회원가입버튼 작동여부 확인 함수
   const createHandle = (e: any) => console.log("hello");
@@ -328,26 +299,13 @@ const SignUp = (props: any) => {
                 })}
               />
             </FileUpload>
-
-            {/* 라이브러리안쓴 수정본 */}
-            {/* <FileUpload>
-              <input
-                onChange={handelImage}
-                id="file"
-                type="file"
-                name="picture"
-                accept=".jpg, .jpeg, .png"
-              ></input>
-            </FileUpload> */}
-
-            {/* 네임 없앰 */}
             <SignUpName
-              {...register('UserName', {
+              {...register("UserName", {
                 required: true,
                 maxLength: 20,
                 pattern: {
                   value: /^[a-zA-Z0-9]{4,8}$/,
-                  message: '이름을 입력해주세요 :)',
+                  message: "이름을 입력해주세요 :)",
                 },
               })}
             ></SignUpName>

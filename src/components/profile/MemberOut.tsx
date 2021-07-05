@@ -78,11 +78,11 @@ function MemberOut() {
     <MemberDelOut>
       <MemberDelMain>
         <MemberDelText>정말 Zero Waste를 관두시겠어요?</MemberDelText>
-        {/* <div className="BillsMainBtn" hidden={!show}>
+        <div className="BillsMainBtn" hidden={!show}>
           <div className="modal-background" onClick={handleModalClose}>
             <RealOut handleModalClose={handleModalClose} />
           </div>
-        </div> */}
+        </div>
         <MemberCloseBtn onClick={handleModalOpen}>탈퇴하기</MemberCloseBtn>
       </MemberDelMain>
     </MemberDelOut>
