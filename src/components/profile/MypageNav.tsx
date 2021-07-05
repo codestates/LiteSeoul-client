@@ -161,17 +161,17 @@ function MypageNav() {
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/mypage/MyPage2">
+              <NavLink exact to="/mypage2">
                 인증하기
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/mypage/MyPage3">
+              <NavLink exact to="/mypage3">
                 즐겨찾기
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/mypage/MyPage4">
+              <NavLink exact to="/mypage4">
                 회원탈퇴
               </NavLink>
             </li>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import dummyMyInfo from '../documents/dummyMyInfo';
-import ramguiThunder from '../image/ramguiThunder.jpeg';
 import mememe from '../image/mememe.png';
 import styled from 'styled-components';
 import InfoEdit from '../Modal/InfoEdit';
@@ -174,6 +173,19 @@ const MyLevelText2 = styled.div`
     color: #6e6e73;
   }
 `;
+
+const MyPageEdit = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  background-color: #000000b3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 // 경계선 --------------------------
 const MyLevelBarOut = styled.div`
   width: 80%;
@@ -239,60 +251,54 @@ function JustInfo() {
   // 인포에딧 모달창 관리
   const [show, setShow] = useState(false);
   const handleModalClose = (e: any) => {
-    const currentClass = e.target.className;
-    if (
-      currentClass === 'ModalCloseBtn' ||
-      currentClass === 'modal-background'
-    ) {
-      setShow(false);
-    }
-    return;
+    setShow(false);
   };
   const handleModalOpen = () => {
     setShow(true);
   };
 
   return (
-    <JustInfoOut>
-      <MyInfoTitle>MY PROFILE</MyInfoTitle>
-      <MyInfoMain>
-        {/* 프로필 */}
-        <li>
-          <ProfileImg>
-            <img src={mememe} alt="profileImg"></img>
-          </ProfileImg>
-          <ProfileName>{nickname}</ProfileName>
-          <ProfileEmail>{email}</ProfileEmail>
-          <ProfileEdit onClick={handleModalClose}>Edit</ProfileEdit>
-        </li>
-        {/* 레벨 */}
-        <li>
-          <ProfileLevelImg>
-            <img
-              className="MyLevelPicsImg"
-              src="/img/mypage_moxman-01.svg"
-              alt="람쥐"
-            ></img>
-          </ProfileLevelImg>
-          <ProfileLevel>Level {level}</ProfileLevel>
-          <MyLevelBarOut>
-            <MyLevelBarIn>
-              <MyLevelExpControll>
-                {(expnow / expall) * 100}%
-              </MyLevelExpControll>
-            </MyLevelBarIn>
-          </MyLevelBarOut>
-          <MyLevelText1>
-            <span>{nickname}</span> 님은 다음 레벨까지 &nbsp;
-            <span>{expall - expnow}</span>점 남으셨습니다.
-          </MyLevelText1>
-          <MyLevelText2>
-            <div>오늘도 Zero Waste에</div>
-            <div>참여해주셔서 감사합니다.</div>
-          </MyLevelText2>
-        </li>
-      </MyInfoMain>
-      {/* <div className="JustInfoFlex">
+    <>
+      <JustInfoOut>
+        <MyInfoTitle>MY PROFILE</MyInfoTitle>
+        <MyInfoMain>
+          {/* 프로필 */}
+          <li>
+            <ProfileImg>
+              <img src={mememe} alt="profileImg"></img>
+            </ProfileImg>
+            <ProfileName>{nickname}</ProfileName>
+            <ProfileEmail>{email}</ProfileEmail>
+            <ProfileEdit onClick={handleModalOpen}>Edit</ProfileEdit>
+          </li>
+          {/* 레벨 */}
+          <li>
+            <ProfileLevelImg>
+              <img
+                className="MyLevelPicsImg"
+                src="/img/mypage_moxman-01.svg"
+                alt="람쥐"
+              ></img>
+            </ProfileLevelImg>
+            <ProfileLevel>Level {level}</ProfileLevel>
+            <MyLevelBarOut>
+              <MyLevelBarIn>
+                <MyLevelExpControll>
+                  {(expnow / expall) * 100}%
+                </MyLevelExpControll>
+              </MyLevelBarIn>
+            </MyLevelBarOut>
+            <MyLevelText1>
+              <span>{nickname}</span> 님은 다음 레벨까지 &nbsp;
+              <span>{expall - expnow}</span>점 남으셨습니다.
+            </MyLevelText1>
+            <MyLevelText2>
+              <div>오늘도 Zero Waste에</div>
+              <div>참여해주셔서 감사합니다.</div>
+            </MyLevelText2>
+          </li>
+        </MyInfoMain>
+        {/* <div className="JustInfoFlex">
         <div className="MyInfo">
           <ul className="MyInfoUl">
             <li>
@@ -366,8 +372,16 @@ function JustInfo() {
         </div>
       </div> */}
 
-      {/* <MypageADMents>여러분의 제로 웨이스트 숍으로 꾸며보세요!</MypageADMents> */}
-    </JustInfoOut>
+        {/* <MypageADMents>여러분의 제로 웨이스트 숍으로 꾸며보세요!</MypageADMents> */}
+      </JustInfoOut>
+      {show ? (
+        <MyPageEdit>
+          <InfoEdit handleModalClose={handleModalClose} MyInfo={MyInfo} />
+        </MyPageEdit>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 
