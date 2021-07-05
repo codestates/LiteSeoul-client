@@ -63,8 +63,11 @@ function CategoryLife(props: any) {
   const handelCafe = () => {
     props.handelList();
     props.handelCategoy('life');
+    props.handleMarker('life');
 
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    container!.innerHTML = '';
+
     let options = {
       //지도를 생성할 때 필요한 기본 옵션
       center: new window.kakao.maps.LatLng(37.535946, 127.006161), //지도의 중심좌표.
@@ -72,7 +75,7 @@ function CategoryLife(props: any) {
     };
     let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-    var imageSrc = 'icon/location_main.svg', // 마커이미지의 주소입니다
+    var imageSrc = 'icon/location_main2.svg', // 마커이미지의 주소입니다
       imageSize = new window.kakao.maps.Size(35, 35), // 마커이미지의 크기입니다
       imageOption = { offset: new window.kakao.maps.Point(15, 44) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
