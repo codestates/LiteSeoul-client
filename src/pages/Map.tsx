@@ -13,33 +13,6 @@ const MapOut = styled.div`
   overflow: hidden;
 `;
 
-const CurrentLocation = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #fff;
-  background-image: url('/icon/Current_location-01.svg');
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: fixed;
-  z-index: 991;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1.2rem;
-  bottom: 3%;
-  right: 3%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: 0.4s all;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
 type MapProps = {
   handleModal: () => void;
   isModal: boolean;

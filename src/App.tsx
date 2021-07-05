@@ -1,7 +1,6 @@
 // import axios from 'axios';
-// import { useState, useEffect } from 'react';
 import { useState } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Marker from './components/Modal/Marker';
@@ -15,15 +14,10 @@ import Mypage4 from './pages/Mypage4';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
 import SignUp from './components/Modal/SignUp';
-import JustInfo from './components/profile/JustInfo';
-import BillsLog from './components/profile/BillsLog';
-import LikePlace from './components/profile/LikePlace';
-import InfoEdit from './components/Modal/InfoEdit';
-import MemberOut from './components/profile/MemberOut';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
-  const [isLogin, setLogin] = useState<boolean>(true);
+  const [isLogin, setLogin] = useState<boolean>(false);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
   const [isSingUp, setSignUp] = useState<boolean>(false);
   // console.log(isLoginModal);
@@ -71,16 +65,13 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            if (isLogin === false) {
-              return <Redirect to="/signin" />;
-            }
             return <Mypage />;
           }}
         />
         {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
-        <Route exact path="/mypage/MyPage2" render={() => <Mypage2 />} />
-        <Route exact path="/mypage/MyPage3" render={() => <Mypage3 />} />
-        <Route exact path="/mypage/MyPage4" render={() => <Mypage4 />} />
+        <Route exact path="/mypage2" render={() => <Mypage2 />} />
+        <Route exact path="/mypage3" render={() => <Mypage3 />} />
+        <Route exact path="/mypage4" render={() => <Mypage4 />} />
         <Route
           path="/signin"
           render={() => (

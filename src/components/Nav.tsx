@@ -85,9 +85,15 @@ const Logo = styled.div`
   line-height: 60px;
   /* border: 1px solid red; */
   /* background: red; */
-  color: #189cc4;
-  font-weight: 700;
-  font-size: 1.3rem;
+  & a {
+    color: #189cc4;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transition: 0.4s all;
+    &:hover {
+      letter-spacing: 0.2rem;
+    }
+  }
   @media screen and (max-width: 750px) {
     display: none;
   }
@@ -267,7 +273,11 @@ function Nav(props: any) {
       <NavOut>
         <NavTopColor></NavTopColor>
         <NavMainOut>
-          <Logo>LiteSeoul</Logo>
+          <Logo>
+            <NavLink exact to="/">
+              LiteSeoul
+            </NavLink>
+          </Logo>
           <NavUl>
             <li>
               <NavLink exact to="/">
