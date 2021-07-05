@@ -662,7 +662,7 @@ img {
 .MypageFlex {
   /* display: flex; */
   display: grid;
-  grid-template-columns: 230px 2fr;
+  grid-template-columns: 230px 1fr;
   grid-auto-rows: auto;
 }
 

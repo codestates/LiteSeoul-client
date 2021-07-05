@@ -10,7 +10,6 @@ import Mypage from './pages/Mypage';
 import Mypage2 from './pages/Mypage2';
 import Mypage3 from './pages/Mypage3';
 import Mypage4 from './pages/Mypage4';
-// import Donation from './pages/Donation';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
 import SignUp from './components/Modal/SignUp';
@@ -19,12 +18,22 @@ function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
-  const [isSingUp, setSignUp] = useState<boolean>(false);
+
+  // 타입생성 및 상태 객체값 지정 필요
+  const [modalData, setModalData] = useState([]);
+
+  const handleModalData = (data: any) => {
+    setModalData(data);
+  }
+
+  const [isSignUp, setSignUp] = useState<boolean>(false);
   // console.log(isLoginModal);
-  console.log(isSingUp);
+  console.log(isSignUp);
+
   const handleModal = () => {
     setModal(!isModal);
   };
+  
   const handleLoginModal = () => {
     setLoginModal(!isLoginModal);
   };
@@ -34,7 +43,7 @@ function App(): any {
   };
 
   const handleSignUp = () => {
-    setSignUp(!isSingUp);
+    setSignUp(!isSignUp);
   };
 
   // const [result, setResult] = useState('');
@@ -85,7 +94,7 @@ function App(): any {
         />
         <Route
           path="/map"
-          render={() => <Map isModal={isModal} handleModal={handleModal} />}
+          render={() => <Map isModal={isModal} handleModal={handleModal} handleModalData={handleModalData} />}
         />
         <Route
           exact
@@ -109,12 +118,12 @@ function App(): any {
         <></>
       )}
       {isModal ? (
-        <Marker isModal={isModal} handleModal={handleModal}></Marker>
+        <Marker isModal={isModal} handleModal={handleModal} modalData={modalData}></Marker>
       ) : (
         <></>
       )}
 
-      {isSingUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
+      {isSignUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
     </BrowserRouter>
   );
 }
