@@ -24,7 +24,7 @@ function App(): any {
 
   const handleModalData = (data: any) => {
     setModalData(data);
-  }
+  };
 
   const [isSignUp, setSignUp] = useState<boolean>(false);
   // console.log(isLoginModal);
@@ -33,7 +33,7 @@ function App(): any {
   const handleModal = () => {
     setModal(!isModal);
   };
-  
+
   const handleLoginModal = () => {
     setLoginModal(!isLoginModal);
   };
@@ -94,7 +94,13 @@ function App(): any {
         />
         <Route
           path="/map"
-          render={() => <Map isModal={isModal} handleModal={handleModal} handleModalData={handleModalData} />}
+          render={() => (
+            <Map
+              isModal={isModal}
+              handleModal={handleModal}
+              handleModalData={handleModalData}
+            />
+          )}
         />
         <Route
           exact
@@ -118,7 +124,11 @@ function App(): any {
         <></>
       )}
       {isModal ? (
-        <Marker isModal={isModal} handleModal={handleModal} modalData={modalData}></Marker>
+        <Marker
+          isModal={isModal}
+          handleModal={handleModal}
+          modalData={modalData}
+        ></Marker>
       ) : (
         <></>
       )}

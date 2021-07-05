@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const MarkerOut = styled.div`
   position: absolute;
@@ -25,7 +25,7 @@ const MarkerInMain = styled.div`
   @media screen and (max-width: 850px) {
     width: 400px;
     position: relative;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 `;
 
@@ -37,12 +37,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url("/icon/close.svg");
+  background-image: url('/icon/close.svg');
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url("/icon/close2.svg");
+    background-image: url('/icon/close2.svg');
   }
 `;
 
@@ -284,7 +284,7 @@ const MarkerCommnetInput = styled.div`
   justify-content: space-between;
 `;
 const CommentInput = styled.input.attrs({
-  type: "text",
+  type: 'text',
 })`
   width: 78%;
   height: 40px;
@@ -336,7 +336,9 @@ function Marker({ isModal, handleModal, modalData }: MarkerProps) {
   useEffect((): any => {
     axios
       .get(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/${Number(modalData.id)}`
+        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/${Number(
+          modalData.id,
+        )}`,
       )
       .then((res) => setComments(res.data.commentInfo));
   }, []);
@@ -363,7 +365,7 @@ function Marker({ isModal, handleModal, modalData }: MarkerProps) {
                 <input
                   type="checkbox"
                   id="like"
-                  style={{ display: "none" }}
+                  style={{ display: 'none' }}
                   onChange={handleCheck}
                 ></input>
                 <label htmlFor="like">

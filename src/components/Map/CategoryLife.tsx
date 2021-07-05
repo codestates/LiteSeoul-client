@@ -5,7 +5,7 @@ import { cafeData } from './cafeData';
 
 const CategoryList = styled.div`
   width: 80%;
-  height: 80px;
+  height: 100px;
   border-radius: 20px;
   background-color: #eee;
   display: flex;
@@ -17,7 +17,7 @@ const CategoryList = styled.div`
     height: 60px;
     &img {
       width: 60px;
-      height: 50px;
+      height: 60px;
       object-fit: cover;
     }
   }
@@ -25,11 +25,11 @@ const CategoryList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     width: 150px;
-    height: 50px;
+    height: 60px;
     & span:nth-child(1) {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 700;
     }
     & span:nth-child(2) {
@@ -47,17 +47,28 @@ const CategoryList = styled.div`
 `;
 
 function CategoryLife(props: any) {
-  const [isMap, setMap] = useState(cafeData);
-  const [lifeDatas, setLifeDatas] = useState([]);
+  const data = JSON.parse(localStorage.getItem('total') || '{}');
+
+  useEffect(() => {
+    const axiosLife = data.filter((el: any) => {
+      return el['category'] === 'life';
+    });
+    console.log(axiosLife);
+    setMap(axiosLife);
+  }, []);
+
+  const [isMap, setMap] = useState(data);
 
   // 카페 카테고리를 눌럿을떄
-  const handelCafe = (e: any) => {
+  const handelCafe = () => {
     props.handelList();
+    props.handelCategoy('life');
+
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
     let options = {
       //지도를 생성할 때 필요한 기본 옵션
       center: new window.kakao.maps.LatLng(37.535946, 127.006161), //지도의 중심좌표.
-      level: 7, //지도의 레벨(확대, 축소 정도)
+      level: 8, //지도의 레벨(확대, 축소 정도)
     };
     let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
@@ -76,7 +87,10 @@ function CategoryLife(props: any) {
       var marker = new window.kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         image: markerImage,
-        position: new window.kakao.maps.LatLng(isMap[i].lat, isMap[i].lng), // 마커의 위치
+        position: new window.kakao.maps.LatLng(
+          isMap[i].latitude,
+          isMap[i].longitude,
+        ), // 마커의 위치
       });
 
       var iwContent = `<div style=" width: 150px;
@@ -85,7 +99,7 @@ function CategoryLife(props: any) {
         color:#fff;
         text-align:center;
         line-height:50px;
-        ">${isMap[i].content}`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        ">${isMap[i].name}`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
       // 마커에 표시할 인포윈도우를 생성합니다
       var infowindow = new window.kakao.maps.InfoWindow({
@@ -122,12 +136,7 @@ function CategoryLife(props: any) {
         infowindow.close();
       };
     }
-    
-    // 부모 컴포넌트인 MapNav에서 axios를 하기 위한 url 전송
-    props.handleListDatas('life')
   };
-
-
 
   return (
     <CategoryList onClick={handelCafe}>
@@ -138,7 +147,9 @@ function CategoryLife(props: any) {
         <span>Life</span>
         <span>for our life necessity</span>
       </div>
-      <div></div>
+      <div>
+        <img src="icon/arrow_left_color.svg" alt="arrow"></img>
+      </div>
     </CategoryList>
   );
 }

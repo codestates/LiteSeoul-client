@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import MapNav from "../components/Map/MapNav";
-import KakaoMap from "../components/Map/KakaoMap";
-import { stringify } from "querystring";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import MapNav from '../components/Map/MapNav';
+import KakaoMap from '../components/Map/KakaoMap';
+import axios from 'axios';
 
 const MapOut = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ const CurrentLocation = styled.div`
   height: 60px;
   border-radius: 50%;
   background-color: #fff;
-  background-image: url("/icon/Current_location-01.svg");
+  background-image: url('/icon/Current_location-01.svg');
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
@@ -48,17 +48,18 @@ type MapProps = {
 };
 
 function Map({ handleModal, isModal, handleModalData }: MapProps) {
-  // 위도경도 데이터를 따로 모으는 상태와 함수가 필요함.
-  // KakaoMap.tsx에서 isMap 상태가 위도경도에 관여함
-  // MapNav.tsx에 있는 listDatas랑 내용은 같으나 용도가 다르다.
-  const [groundDatas, setGroundDatas] = useState([]);
-  console.log(groundDatas);
+  console.log(isModal);
 
-  const handleGroundDatas = (data: any): void => setGroundDatas(data);
-
-
-  // const [markerRender, setMarkerRender] = useState()
-
+  useEffect(() => {
+    axios
+      .get(
+        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll`,
+      )
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('total', JSON.stringify(res.data));
+      });
+  }, []);
 
   return (
     <MapOut>
@@ -66,16 +67,14 @@ function Map({ handleModal, isModal, handleModalData }: MapProps) {
         handleModal={handleModal}
         isModal={isModal}
         handleModalData={handleModalData}
-        handleGroundDatas={handleGroundDatas}
       ></MapNav>
       <KakaoMap
         handleModal={handleModal}
         isModal={isModal}
-        groundDatas={groundDatas}
+        // handleModalData={handleModalData}
       ></KakaoMap>
     </MapOut>
   );
 }
 
 export default Map;
-
