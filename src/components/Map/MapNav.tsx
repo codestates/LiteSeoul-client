@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
-import CategoryCafe from "./CategoryCafe";
-import CategoryLife from "./CategoryLife";
-import CategoryOrgan from "./CategoryOrgan";
-import axios from "axios";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import CategoryCafe from './CategoryCafe';
+import CategoryLife from './CategoryLife';
+import CategoryOrgan from './CategoryOrgan';
+import axios from 'axios';
 
 const MapNav1 = styled.div`
   width: 20%;
@@ -66,6 +66,7 @@ const NavMain2 = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: space-evenly;
+  /* border: 1px solid red; */
 `;
 
 const NavAdd = styled.div`
@@ -135,6 +136,7 @@ const List2 = styled.div`
   width: 100%;
   height: 80%;
   overflow: auto;
+  /* border: 1px solid blue; */
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -199,24 +201,30 @@ const CategoryList2 = styled.div`
   border-radius: 20px;
   background-color: #eee;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
   position: relative;
   margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0px;
+  }
   & div:nth-child(1) {
     width: 80%;
-    height: auto;
+    height: 30px;
     font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    /* background-color: red; */
+    font-size: 1.2rem;
+    /* margin-bottom: 5px; */
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   & div:nth-child(2) {
     /* background-color: red; */
     width: 80%;
-    height: auto;
+    height: 30px;
     display: flex;
     align-items: center;
     & img {
@@ -227,6 +235,9 @@ const CategoryList2 = styled.div`
     & span {
       font-size: 0.7rem;
       color: #6e6e73;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
   & div:nth-child(3) {
@@ -234,6 +245,8 @@ const CategoryList2 = styled.div`
     height: 50px;
     position: absolute;
     right: 15px;
+    top: 50%;
+    margin-top: -25px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -271,42 +284,41 @@ const NavHidden = styled.div`
 // };
 
 type shopData = {
-  id: number,
-  name: string,
-  address: string,
-  latitude: string,
-  longitude: string,
-  category: string,
-  recommend: string,
-  phone: string,
-  created_at: string,
-  updated_at: string
-}
+  id: number;
+  name: string;
+  address: string;
+  latitude: string;
+  longitude: string;
+  category: string;
+  recommend: string;
+  phone: string;
+  created_at: string;
+  updated_at: string;
+};
 
 function MapNav(props: any) {
   // console.log(props);
+  const data = JSON.parse(localStorage.getItem('total') || '{}');
+
+  const axiosOrgan = data.filter((el: any) => {
+    return el['category'] === 'organ';
+  });
+
+  const axiosCafe = data.filter((el: any) => {
+    return el['category'] === 'cafe';
+  });
+
+  const axiosLife = data.filter((el: any) => {
+    return el['category'] === 'life';
+  });
+
   const [isList, SetList] = useState(false);
-
   const [listDatas, setListDatas] = useState([]);
-  // 하단부 콘솔로그로 각 카테고리 클릭 시 데이터 도출확인
-  // console.log(listDatas)
 
-  const handleListDatas = (url: string) => {
-    // 각 컴포넌트에서 props.handleListDatas(url)을 갖고 옴.
-    // 실제 콘솔로그 데이터 도출 확인
-    console.log(url);
+  const [isCategory, setCategory] = useState('');
 
-    // shop, life, organ
-    // 여기서 각 데이터를 서버에서 axios한 다음, 해당 데이터를 상태에 저장하여 CateRenderLists 컴포넌트에 프롭스로 내려준다.
-    axios
-      .get(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/category/${url}`
-      )
-      .then((res) => {
-        setListDatas(res.data)
-        props.handleGroundDatas(res.data)
-      })
-
+  const handelCategoy = (e: any) => {
+    setCategory(e);
   };
 
   const handelList = () => {
@@ -319,8 +331,8 @@ function MapNav(props: any) {
   };
 
   const handleNav = () => {
-    document.getElementById("nav")?.classList.toggle("nav");
-    document.getElementById("hidden")?.classList.toggle("hidden");
+    document.getElementById('nav')?.classList.toggle('nav');
+    document.getElementById('hidden')?.classList.toggle('hidden');
   };
 
   return (
@@ -349,23 +361,114 @@ function MapNav(props: any) {
               ></img>
               <Category2>List</Category2>
             </CategoryOut>
-            <List2>
-              {/* 서버 데이터 렌더링 map.*/}
-              {listDatas.map((listData: shopData) => (
-                <CategoryList2 key={listData.id}  id="CategoryList2" onClick={props.handleModal}>
-                  <div onClick={() => (props.handleModalData(listData))}>
-                    <div>{listData.name}</div>
-                    <div>
-                      <img src="icon/location_main.svg" alt="maker"></img>
-                      <span>{listData.address}</span>
+            {isCategory === 'cafe' ? (
+              <List2>
+                {axiosCafe.map((listData: shopData) => (
+                  <CategoryList2
+                    key={listData.id}
+                    id="CategoryList2"
+                    onClick={props.handleModal}
+                  >
+                    <div
+                      onClick={() => props.handleModalData(listData)}
+                      style={{
+                        width: '80%',
+                        height: 'auto',
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginTop: '5px',
+                        }}
+                      >
+                        {listData.name}
+                      </div>
+                      <div>
+                        <img src="icon/location_main.svg" alt="maker"></img>
+                        <span title={listData.address}>{listData.address}</span>
+                      </div>
+                      <div>
+                        <img src="icon/arrow_left_color.svg" alt="arrow"></img>
+                      </div>
                     </div>
-                    <div>
-                      <img src="icon/arrow_left_color.svg" alt="maker"></img>
+                  </CategoryList2>
+                ))}
+              </List2>
+            ) : (
+              <></>
+            )}
+            {isCategory === 'life' ? (
+              <List2>
+                {axiosLife.map((listData: shopData) => (
+                  <CategoryList2
+                    key={listData.id}
+                    id="CategoryList2"
+                    onClick={props.handleModal}
+                  >
+                    <div
+                      onClick={() => props.handleModalData(listData)}
+                      style={{
+                        width: '80%',
+                        height: 'auto',
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginTop: '5px',
+                        }}
+                      >
+                        {listData.name}
+                      </div>
+                      <div>
+                        <img src="icon/location_main.svg" alt="maker"></img>
+                        <span title={listData.address}>{listData.address}</span>
+                      </div>
+                      <div>
+                        <img src="icon/arrow_left_color.svg" alt="arrow"></img>
+                      </div>
                     </div>
-                  </div>
-                </CategoryList2>
-              ))}
-            </List2>
+                  </CategoryList2>
+                ))}
+              </List2>
+            ) : (
+              <></>
+            )}
+            {isCategory === 'organ' ? (
+              <List2>
+                {axiosOrgan.map((listData: shopData) => (
+                  <CategoryList2
+                    key={listData.id}
+                    id="CategoryList2"
+                    onClick={props.handleModal}
+                  >
+                    <div
+                      onClick={() => props.handleModalData(listData)}
+                      style={{
+                        width: '80%',
+                        height: 'auto',
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginTop: '5px',
+                        }}
+                      >
+                        {listData.name}
+                      </div>
+                      <div>
+                        <img src="icon/location_main.svg" alt="maker"></img>
+                        <span title={listData.address}>{listData.address}</span>
+                      </div>
+                      <div>
+                        <img src="icon/arrow_left_color.svg" alt="arrow"></img>
+                      </div>
+                    </div>
+                  </CategoryList2>
+                ))}
+              </List2>
+            ) : (
+              <></>
+            )}
           </NavMain2>
         ) : (
           <NavMain>
@@ -375,22 +478,25 @@ function MapNav(props: any) {
                 {...props}
                 handelList={handelList}
                 isList={isList}
-                handleListDatas={handleListDatas}
+                // handleListDatas={handleListDatas}
                 handleModalData={props.handleModalData}
+                handelCategoy={handelCategoy}
               ></CategoryCafe>
               <CategoryLife
                 {...props}
                 handelList={handelList}
                 isList={isList}
-                handleListDatas={handleListDatas}
+                // handleListDatas={handleListDatas}
                 handleModalData={props.handleModalData}
+                handelCategoy={handelCategoy}
               ></CategoryLife>
               <CategoryOrgan
                 {...props}
                 handelList={handelList}
                 isList={isList}
-                handleListDatas={handleListDatas}
+                // handleListDatas={handleListDatas}
                 handleModalData={props.handleModalData}
+                handelCategoy={handelCategoy}
               ></CategoryOrgan>
             </List>
           </NavMain>

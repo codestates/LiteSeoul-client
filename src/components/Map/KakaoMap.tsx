@@ -53,63 +53,37 @@ const Marker = styled.div`
   border: 1px solid #189cc4;
 `;
 
-
-
 type groundData = {
-  id: number,
-  name: string,
-  address: string,
-  latitude: string,
-  longitude: string,
-  category: string,
-  recommend: string,
-  phone: string,
-  created_at: string,
-  updated_at: string
-}
+  id: number;
+  name: string;
+  address: string;
+  latitude: string;
+  longitude: string;
+  category: string;
+  recommend: string;
+  phone: string;
+  created_at: string;
+  updated_at: string;
+};
 
 type KakaomapProps = {
   handleModal: () => void;
   isModal: boolean;
   // groundDatas: Array<groundData>;
-  groundDatas: any;
 };
 
-const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal, groundDatas}) => {
-  // const Kakaomap: React.FC<KakaomapProps> = (props: any) => {
-  //카테고리가 변할때마다 생성되어야 할둣? dev 설정시
-  // const [isMap, setMap] = useState(markerdata);
-  // const [isMap, setMap] = useState([{
-  //   id: 0,
-  //   name: "",
-  //   address: "",
-  //   latitude: "",
-  //   longitude: "",
-  //   category: "",
-  //   recommend: "",
-  //   phone: "",
-  //   created_at: "",
-  //   updated_at: ""
-  // }]);
-  const [isMap, setMap] = useState(groundDatas);
+const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal }) => {
+  const data = JSON.parse(localStorage.getItem('total') || '{}');
 
-  // 여기서 콘솔로그 값으로 데이터에 대한 트리거를 작동시켜야 실제 맵에 마커가 렌더링 된다. 렌더링 되는것 까지는 확인하였음.
-  // console.log(groundDatas)
-  // console.log(isMap)
+  const [isMap, setMap] = useState(data);
 
   useEffect(() => {
-    // console.log(groundDatas)
-    setMap(groundDatas)
-    // console.log(isMap)
     mapscript();
-    // console.log(isMap)
-    // 초기 값으로 isMap이 아니라 groundDatas를 해놓으면 한 박자 늦게 렌더링이 된다. 예를들어 cafe를 누르고 그 다음 뒤로가서 life를 누르면 렌더링되는 마커는 cafe의 마커이다.
-  }, [groundDatas]);
+  }, []);
 
-  // useEffect(() => {
-    
-  //   // console.log(isModal);
-  // }, []);
+  const handleMakerModal = () => {
+    handleModal();
+  };
 
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -148,7 +122,7 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal, groundDatas})
     let options = {
       //지도를 생성할 때 필요한 기본 옵션
       center: new window.kakao.maps.LatLng(37.535946, 127.006161), //지도의 중심좌표.
-      level: 7, //지도의 레벨(확대, 축소 정도)
+      level: 8, //지도의 레벨(확대, 축소 정도)
     };
     let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
@@ -169,7 +143,10 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal, groundDatas})
         map: map, // 마커를 표시할 지도
         image: markerImage,
         // position: new window.kakao.maps.LatLng(isMap[i].lat, isMap[i].lng), // 마커의 위치
-        position: new window.kakao.maps.LatLng(isMap[i].latitude, isMap[i].longitude), // 마커의 위치
+        position: new window.kakao.maps.LatLng(
+          isMap[i].latitude,
+          isMap[i].longitude,
+        ), // 마커의 위치
       });
 
       var iwContent = `
@@ -179,7 +156,7 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal, groundDatas})
       color:#fff;
       text-align:center;
       line-height:50px;
-      ">${isMap[i].name}`; 
+      ">${isMap[i].name}`;
       // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
       // 마커에 표시할 인포윈도우를 생성합니다
@@ -201,7 +178,7 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal, groundDatas})
         makeOutListener(infowindow),
       );
 
-      window.kakao.maps.event.addListener(marker, 'click', handleModal);
+      // window.kakao.maps.event.addListener(marker, 'click', handleMakerModal);
     }
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다

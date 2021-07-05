@@ -160,7 +160,7 @@ function LikePlace() {
             <LikePlaceListNum>{dummyLikePlace.id}</LikePlaceListNum>
             <LikePlaceStore>{dummyLikePlace.name}</LikePlaceStore>
             <LikePlaceAddr>
-              <img src="../image/location_main.svg" alt="d"></img>
+              <img src="icon/location_main.svg" alt="d"></img>
               {dummyLikePlace.where}
             </LikePlaceAddr>
           </LikePlaceList>
