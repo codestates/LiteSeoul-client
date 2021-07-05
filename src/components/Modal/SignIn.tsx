@@ -277,12 +277,8 @@ function SignIn(props: any) {
       // 서버 연결 관련
       axios
         .post(
-          // process.env.REACT_APP_SERVER_URL + 
-          // 'user/signin',]
           "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin",
           {
-            // "email": `${id}`,
-            // "password": `${password}`
             email: id,
             password: password
           }
@@ -291,11 +287,7 @@ function SignIn(props: any) {
           console.log(res)
           console.log(res.data.access_token)
           sessionStorage.setItem("access_token", res.data.access_token)
-          // 엑세스 토큰을 갖고 isLogin 여부 핸들링
-
-          // sessionStorage.setItem("id", res.data.id);
-          // props.handleResponseSuccess();
-          // props.history.push("/");
+          window.location.replace("http://localhost:3000/")
         })
         .catch(() => {
           setErrMessage("아이디와 패스워드를 확인해주세요");

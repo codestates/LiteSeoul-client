@@ -76,7 +76,6 @@ function AddBills({ handleModalClose }: any) {
     <AddBillsOut>
       <CloseBtn onClick={handleModalClose}></CloseBtn>
       <PlayModalInside>
-        <RenderImg></RenderImg>
         <input
           className="UploadBillsImg"
           type="file"
@@ -86,6 +85,7 @@ function AddBills({ handleModalClose }: any) {
         <BillsAddLine>
           {billsImg ? (
             <div>
+              <RenderImg></RenderImg>
               <img src={billsImg} alt="업로드"></img>
               <div className="UploadBillBackMents">인증을 업로드 할게요!</div>
             </div>

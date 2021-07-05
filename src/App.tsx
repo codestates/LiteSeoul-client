@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import { useState } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Marker from './components/Modal/Marker';
@@ -13,10 +13,11 @@ import Mypage4 from './pages/Mypage4';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
 import SignUp from './components/Modal/SignUp';
+import { useEffect } from 'react';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
-  const [isLogin, setLogin] = useState<boolean>(true);
+  const [isLogin, setLogin] = useState<boolean>(false);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
 
   // 타입생성 및 상태 객체값 지정 필요
@@ -46,6 +47,15 @@ function App(): any {
     setSignUp(!isSignUp);
   };
 
+  // 토큰을 갖고 로그인 유지해주는 이펙트 훅
+  useEffect(() => {
+    if (sessionStorage.getItem('access_token') !== null) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }, [])
+
   // const [result, setResult] = useState('');
   // useEffect((): any => {
   //   axios.get('http://ec2-3-142-146-122.us-east-2.compute.amazonaws.com')
@@ -74,7 +84,11 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            return <Mypage />;
+            if(!isLogin) {
+              return <Redirect to="/" />
+            } else {
+              return <Mypage />;
+            }
           }}
         />
         {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}

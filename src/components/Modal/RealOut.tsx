@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const PlayModal = styled.div`
@@ -33,23 +34,21 @@ const PlayModalInside = styled.div`
   cursor: pointer;
   box-shadow: 2px 2px 2px black;
   &:active {
-  box-shadow: none;
+    box-shadow: none;
   }
 `;
 
 function RealOut({ handleModalClose }: any) {
-
   const outHandler = (e: any) => {
     const returnvalue = window.confirm("정말 인증기록을 지우시겠어요?");
     if (returnvalue === true) {
       alert("회원탈퇴를 최종적으로 완료하셨습니다🥲");
-      window.location.href = "http://localhost:3000/"
+      window.location.href = "http://localhost:3000/";
     } else {
       alert("탈퇴과정을 취소하였습니다😆");
-      window.location.href = "http://localhost:3000/mypage/memberout"
+      window.location.href = "http://localhost:3000/mypage4/";
     }
   };
-
 
   return (
     <PlayModal>
