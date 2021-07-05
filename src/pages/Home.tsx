@@ -3,9 +3,7 @@ import Footer from '../components/Home/Footer';
 import Rending from '../components/Home/Rending';
 import Slogan1 from '../components/Home/Slogan1';
 import Slogan2 from '../components/Home/Slogan2';
-import Slogan3 from '../components/Home/Slogan3';
 import Ranking from '../components/Home/Ranking';
-
 import Recommends from '../components/Home/Recommends';
 import styled from 'styled-components';
 import { homedir } from 'os';

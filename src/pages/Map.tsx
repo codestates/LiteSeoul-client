@@ -78,3 +78,4 @@ function Map({ handleModal, isModal, handleModalData }: MapProps) {
 }
 
 export default Map;
+

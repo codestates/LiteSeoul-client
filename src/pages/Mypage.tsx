@@ -18,14 +18,6 @@ const MyPageOut = styled.div`
   }
 `;
 
-// const MypageContents = styled.div`
-//   width: 80%;
-//   height: 100%;
-//   /* background: #ccc; */
-//   position: absolute;
-//   right: 0;
-// `;
-
 function Mypage() {
 
   const [nowPage, setNowPage] = useState('');

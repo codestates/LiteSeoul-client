@@ -11,7 +11,7 @@ const AddBillsOut = styled.div`
   justify-content: center;
   overflow: hidden;
   position: relative;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
 `;

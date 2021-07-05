@@ -1,7 +1,5 @@
-import { defaultMaxListeners } from 'events';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import SignUp from './SignUp';
 
 const SingInOut = styled.div`
   position: absolute;
@@ -242,19 +240,6 @@ function SignIn(props: any) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
-
-  const [show, setShow] = useState(false);
-
-  const handleModalClose = (e: any) => {
-    const currentClass = e.target.className;
-    if (
-      currentClass === 'ModalCloseBtn' ||
-      currentClass === 'modal-background'
-    ) {
-      setShow(false);
-    }
-    return;
-  };
 
   const handleAccount = () => {
     console.log('회원가입버튼');
