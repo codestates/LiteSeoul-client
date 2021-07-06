@@ -238,6 +238,7 @@ const SignUp = (props: any) => {
     const formData = new FormData();
     formData.append("UserImg", data.UserImg[0]);
     formData.append("name", data.UserName);
+    formData.append('phone', data.UserMobile)
     formData.append("email", data.UserEmail);
     formData.append("nick", data.UserNickname);
     formData.append("password", data.Password);
