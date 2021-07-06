@@ -19,11 +19,11 @@ const MyPageOut = styled.div`
   }
 `;
 
-function Mypage3() {
+function Mypage3({myinfo}: any) {
   return (
     <MyPageOut id="Mypage">
-      <MypageNav />
-      <LikePlace />
+      <MypageNav myinfo={myinfo}/>
+      <LikePlace myinfo={myinfo}/>
     </MyPageOut>
   );
 }

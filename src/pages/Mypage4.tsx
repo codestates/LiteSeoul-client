@@ -18,10 +18,10 @@ const MyPageOut = styled.div`
   }
 `;
 
-function Mypage4() {
+function Mypage4({myinfo}: any) {
   return (
     <MyPageOut>
-      <MypageNav />
+      <MypageNav myinfo={myinfo}/>
       <MemberOut />
     </MyPageOut>
   );

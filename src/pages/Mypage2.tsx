@@ -22,10 +22,10 @@ const MyPageOut = styled.div`
   }
 `;
 
-function Mypage2() {
+function Mypage2({myinfo}: any) {
   return (
     <MyPageOut>
-      <MypageNav />
+      <MypageNav myinfo={myinfo}/>
       <BillsLog />
     </MyPageOut>
   );

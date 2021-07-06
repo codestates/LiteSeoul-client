@@ -1,8 +1,10 @@
-import React from 'react';
-import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import styled from 'styled-components';
-import dummyMyInfo from '../documents/dummyMyInfo';
-import mememe from '../image/mememe.png';
+import axios from "axios";
+import React from "react";
+import { useState } from "react";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import styled from "styled-components";
+import dummyMyInfo from "../documents/dummyMyInfo";
+import mememe from "../image/mememe.png";
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -32,12 +34,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -88,69 +90,6 @@ const SignUpForm = styled.form`
   }
 `;
 
-const FileUpload = styled.label`
-  display: block;
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  position: relative;
-  /* border: 1px solid red; */
-  overflow: hidden;
-  background-image: url('icon/profile-01.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-
-  & input[type='file'] {
-    display: none;
-  }
-`;
-
-const SignUpNickName = styled.input.attrs({
-  type: 'text',
-  placeholder: '* NicName',
-})`
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-bottom: 2px solid #189cc4;
-  outline: none;
-  text-indent: 10px;
-  &:focus {
-    border-bottom: 2px solid #ff735d;
-  }
-`;
-
-const SignUpPhone = styled.input.attrs({
-  type: 'tel',
-  placeholder: '* Phone',
-})`
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-bottom: 2px solid #189cc4;
-  outline: none;
-  text-indent: 10px;
-  &:focus {
-    border-bottom: 2px solid #ff735d;
-  }
-`;
-
-const SignUpPassword = styled.input.attrs({
-  type: 'password',
-  placeholder: '* Password',
-})`
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-bottom: 2px solid #189cc4;
-  outline: none;
-  text-indent: 10px;
-  &:focus {
-    border-bottom: 2px solid #ff735d;
-  }
-`;
-
 const SignUpButton = styled.button`
   width: 100%;
   height: 40px;
@@ -170,17 +109,89 @@ const SignUpButton = styled.button`
 
 // 타입스크립트 관련 타입지정
 type EditFormInput = {
-  UserImg?: File;
+  UserImg: any;
   UserName: string;
-  UserEmail: string;
   UserNickname: string;
   UserMobile: string;
   Password: string;
 };
 
-const InfoEdit = ({ MyInfo, handleModalClose }: any) => {
-  console.log(MyInfo);
-  const { id, name, email, nickname, phone, level, expnow, expall } = MyInfo;
+const InfoEdit = ({ myinfo, handleModalClose }: any) => {
+  console.log(myinfo);
+  const {
+    id,
+    name,
+    email,
+    nick,
+    phone,
+    level,
+    currentExp,
+    maxExp,
+    profileImgPath,
+  } = myinfo;
+
+  const FileUpload = styled.label`
+  display: block;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  position: relative;
+  /* border: 1px solid red; */
+  overflow: hidden;
+  background-image: url("icon/profile-01.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+
+  & input[type="file"] {
+    display: none;
+  }
+`;
+
+const SignUpNickName = styled.input.attrs({
+  type: "text",
+  placeholder: nick,
+})`
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+  &:focus {
+    border-bottom: 2px solid #ff735d;
+  }
+`;
+
+const SignUpPhone = styled.input.attrs({
+  type: "tel",
+  placeholder: phone,
+})`
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+  &:focus {
+    border-bottom: 2px solid #ff735d;
+  }
+`;
+
+const SignUpPassword = styled.input.attrs({
+  type: "password",
+  placeholder: "기존 비밀번호로 확인해주세요",
+})`
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+  &:focus {
+    border-bottom: 2px solid #ff735d;
+  }
+`;
 
   const {
     register,
@@ -188,7 +199,48 @@ const InfoEdit = ({ MyInfo, handleModalClose }: any) => {
     handleSubmit,
   } = useForm<EditFormInput>();
 
-  const onSubmit: SubmitHandler<EditFormInput> = (data) => console.log(data);
+  const [userImg, setUserImg] = useState(profileImgPath);
+  const [userNick, setUserNick] = useState(nick);
+  const [userPhone, setUserPhone] = useState(phone);
+
+  const onSubmit: SubmitHandler<EditFormInput> = (data) => {
+    // 실제 데이터 입력값 나오는지 확인
+    console.log(data);
+
+    // 데이터 스테이트 수정
+    setUserImg(data.UserImg[0]);
+    setUserNick(data.UserNickname);
+    setUserPhone(data.UserMobile);
+
+    // 폼데이터로 보내는 버전. 하단부 axios에는 그냥 보내는 버전.
+    const formData = new FormData();
+    const token = sessionStorage.getItem("access_token");
+    formData.append("UserImg", userImg);
+    if (token !== null) {
+      formData.append("access_token", token);
+    }
+
+    formData.append("nick", userNick);
+    formData.append("phone", userPhone);
+    formData.append("password", data.Password);
+
+    axios
+      .post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/profile", {
+        // 헤더값으로 프로필사진, 닉네임, 이름, 핸폰번호, 비번값(확인용) 보냄
+        // 스테이트 훅으로 변경사항 or 기존사항 그대로 보내기. 어차피 기존사항 보내든 변경사항 보내든 비밀번호 비교하여서 rds 넣기만 하면 된다.
+        UserImg: userImg,
+        nick: userNick,
+        phone: userPhone,
+        password: data.Password,
+      })
+      .then((res) => {
+        // 제대로 서버쪽에 전달되어서 201코드 받는지 확인
+        console.log(res);
+
+        // 이후 리다이렉트로 /mypage로 가게 함.
+        window.location.replace("http://localhost:3000/mypage/");
+      });
+  };
   const onError: SubmitErrorHandler<EditFormInput> = (data) =>
     console.log(data);
 
@@ -200,8 +252,8 @@ const InfoEdit = ({ MyInfo, handleModalClose }: any) => {
           <SingUpTitle>LiteSeoul</SingUpTitle>
           <SingUpError>
             {errors.Password
-              ? '확인을 위해 기존 비밀번호를 입력해주세요 :)'
-              : '개인정보 수정화면입니다.'}
+              ? "확인을 위해 기존 비밀번호를 입력해주세요 :)"
+              : "개인정보 수정화면입니다."}
           </SingUpError>
           <SignUpForm
             onSubmit={handleSubmit(onSubmit)}
@@ -209,10 +261,11 @@ const InfoEdit = ({ MyInfo, handleModalClose }: any) => {
           >
             <FileUpload htmlFor="file">
               <input
+                id="file"
                 className="UserImg"
                 type="file"
                 accept=".jpg, .jpeg, .png"
-                {...register('UserImg', {
+                {...register("UserImg", {
                   required: false,
                 })}
               />
@@ -221,27 +274,27 @@ const InfoEdit = ({ MyInfo, handleModalClose }: any) => {
             <div>{email}</div>
 
             <SignUpNickName
-              {...register('UserNickname', {
-                required: true,
+              {...register("UserNickname", {
+                required: false,
                 pattern: /^[a-zA-Z0-9]{4,8}$/,
               })}
             ></SignUpNickName>
             <SignUpPhone
-              {...register('UserMobile', {
-                required: true,
+              {...register("UserMobile", {
+                required: false,
                 pattern: /^\d{3}\d{3,4}\d{4}$/,
               })}
             ></SignUpPhone>
             <SignUpPassword
-              {...register('Password', {
+              {...register("Password", {
                 required: true,
                 minLength: {
                   value: 8,
-                  message: '8자 이상으로 영문+숫자+특수문자 조합하셔야 해요!',
+                  message: "8자 이상으로 영문+숫자+특수문자 조합하셔야 해요!",
                 },
                 maxLength: {
                   value: 15,
-                  message: '15자 이내로 입력하셔야 해요!',
+                  message: "15자 이내로 입력하셔야 해요!",
                 },
                 pattern: /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,15}$/,
               })}

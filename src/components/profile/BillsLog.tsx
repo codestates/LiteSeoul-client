@@ -139,6 +139,10 @@ const BillsUpload = styled.div`
 `;
 
 function BillsLog() {
+  const [show, setShow] = useState(false);
+  const [logs, setLogs] = useState([]);
+
+  // 영수증 인증기록 제거버튼
   const xbtnHandler = (e: any) => {
     const returnvalue = window.confirm("정말 인증기록을 지우시겠어요?");
 
@@ -164,9 +168,7 @@ function BillsLog() {
     }
   };
 
-  const [show, setShow] = useState(false);
-  const [logs, setLogs] = useState([]);
-
+  // 실시간 유저의 영수증 인증정보 렌더링
   useEffect(() => {
     axios
       .post(
