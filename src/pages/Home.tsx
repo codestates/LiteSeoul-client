@@ -45,7 +45,7 @@ const TopBtn = styled.div`
 `;
 
 function Home() {
-  const [isLogin, setLogin] = useState(true);
+  const [isLogin, setLogin] = useState(false);
   const handleTop = () => {
     console.log('버튼 확인');
   };

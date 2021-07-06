@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -25,6 +24,7 @@ const CategoryList = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    /* border: 1px solid red; */
     width: 150px;
     height: 60px;
     & span:nth-child(1) {
@@ -45,24 +45,123 @@ const CategoryList = styled.div`
   }
 `;
 
-function CategoryOrgan(props: any) {
-  const data = JSON.parse(localStorage.getItem('total') || '{}');
+const NavMain2 = styled.div`
+  width: 100%;
+  height: 70%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-evenly;
+`;
 
-  useEffect(() => {
-    const axiosOrgan = data.filter((el: any) => {
-      return el['category'] === 'organ';
-    });
-    console.log(axiosOrgan);
-    setMap(axiosOrgan);
-  }, []);
+const Category2 = styled.div`
+  width: 50%;
+  height: 40px;
+  color: #fff;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffd700;
+  border-radius: 20px;
+  margin: 0 auto;
+`;
+
+const CategoryList2 = styled.div`
+  cursor: pointer;
+  margin: 0 auto;
+  width: 80%;
+  height: 80px;
+  border-radius: 20px;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 20px;
+  & div:nth-child(1) {
+    width: 80%;
+    height: auto;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    /* background-color: red; */
+  }
+  & div:nth-child(2) {
+    /* background-color: red; */
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    & img {
+      width: 20px;
+      height: 20px;
+      margin-right: 3px;
+    }
+    & span {
+      font-size: 0.7rem;
+      color: #6e6e73;
+    }
+  }
+  & div:nth-child(3) {
+    width: 15px;
+    height: 50px;
+    position: absolute;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const List2 = styled.div`
+  width: 100%;
+  height: 80%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 20%;
+    background-color: #189cc4;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+  }
+`;
+
+const CategoryOut = styled.div`
+  width: 100%;
+  height: 40px;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  & img {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    transform: rotate(180deg);
+    position: absolute;
+    left: 45px;
+    cursor: pointer;
+  }
+`;
+
+function CategoryTotal(props: any) {
+  const data = JSON.parse(localStorage.getItem('total') || '{}');
 
   const [isMap, setMap] = useState(data);
 
   // 카페 카테고리를 눌럿을떄
-  const handelCafe = (e: any) => {
+  const handelTotal = () => {
     props.handelList();
-    props.handelCategoy('organ');
-    props.handleMarker('organ');
+    props.handelCategoy('all');
+    props.handleMarker('all');
 
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
     container!.innerHTML = '';
@@ -74,7 +173,7 @@ function CategoryOrgan(props: any) {
     };
     let map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-    var imageSrc = 'icon/location_main3.svg', // 마커이미지의 주소입니다
+    var imageSrc = 'icon/location_main.svg', // 마커이미지의 주소입니다
       imageSize = new window.kakao.maps.Size(35, 35), // 마커이미지의 크기입니다
       imageOption = { offset: new window.kakao.maps.Point(15, 44) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
@@ -132,24 +231,21 @@ function CategoryOrgan(props: any) {
       };
     }
 
-    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
     function makeOutListener(infowindow: any) {
       return function () {
         infowindow.close();
       };
     }
-
-    // 부모 컴포넌트인 MapNav에서 axios를 하기 위한 url 전송
   };
 
   return (
-    <CategoryList onClick={handelCafe}>
+    <CategoryList onClick={handelTotal}>
       <div>
         <img src="icon/certification_mypage.svg" alt="category"></img>
       </div>
       <div>
-        <span>Organic</span>
-        <span>nature organic market</span>
+        <span>All</span>
+        <span>zero waste life</span>
       </div>
       <div>
         <img src="icon/arrow_left_color.svg" alt="arrow"></img>
@@ -158,4 +254,4 @@ function CategoryOrgan(props: any) {
   );
 }
 
-export default CategoryOrgan;
+export default CategoryTotal;

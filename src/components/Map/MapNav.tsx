@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import CategoryTotal from './CategoryTotal';
 import CategoryCafe from './CategoryCafe';
 import CategoryLife from './CategoryLife';
 import CategoryOrgan from './CategoryOrgan';
@@ -207,6 +208,10 @@ const CategoryList2 = styled.div`
   cursor: pointer;
   position: relative;
   margin-bottom: 20px;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
   &:last-child {
     margin-bottom: 0px;
   }
@@ -276,12 +281,6 @@ const NavHidden = styled.div`
     display: flex;
   }
 `;
-
-// type MapProps = {
-//   handleModal: () => void;
-//   isModal: boolean;
-//   handleModalData: any;
-// };
 
 type shopData = {
   id: number;
@@ -361,6 +360,42 @@ function MapNav(props: any) {
               ></img>
               <Category2>List</Category2>
             </CategoryOut>
+            {isCategory === 'all' ? (
+              <List2>
+                {data.map((listData: shopData) => (
+                  <CategoryList2
+                    key={listData.id}
+                    id="CategoryList2"
+                    onClick={props.handleModal}
+                  >
+                    <div
+                      onClick={() => props.handleModalData(listData)}
+                      style={{
+                        width: '80%',
+                        height: 'auto',
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginTop: '10px',
+                        }}
+                      >
+                        {listData.name}
+                      </div>
+                      <div>
+                        <img src="icon/location_main.svg" alt="maker"></img>
+                        <span title={listData.address}>{listData.address}</span>
+                      </div>
+                      <div>
+                        <img src="icon/arrow_left_color.svg" alt="arrow"></img>
+                      </div>
+                    </div>
+                  </CategoryList2>
+                ))}
+              </List2>
+            ) : (
+              <></>
+            )}
             {isCategory === 'cafe' ? (
               <List2>
                 {axiosCafe.map((listData: shopData) => (
@@ -378,7 +413,7 @@ function MapNav(props: any) {
                     >
                       <div
                         style={{
-                          marginTop: '5px',
+                          marginTop: '10px',
                         }}
                       >
                         {listData.name}
@@ -414,7 +449,7 @@ function MapNav(props: any) {
                     >
                       <div
                         style={{
-                          marginTop: '5px',
+                          marginTop: '10px',
                         }}
                       >
                         {listData.name}
@@ -450,7 +485,7 @@ function MapNav(props: any) {
                     >
                       <div
                         style={{
-                          marginTop: '5px',
+                          marginTop: '10px',
                         }}
                       >
                         {listData.name}
@@ -474,6 +509,14 @@ function MapNav(props: any) {
           <NavMain>
             <Category>Category</Category>
             <List>
+              <CategoryTotal
+                {...props}
+                handelList={handelList}
+                isList={isList}
+                // handleListDatas={handleListDatas}
+                handleModalData={props.handleModalData}
+                handelCategoy={handelCategoy}
+              ></CategoryTotal>
               <CategoryCafe
                 {...props}
                 handelList={handelList}
