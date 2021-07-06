@@ -58,32 +58,44 @@ const MemberCloseBtn = styled.div`
 `;
 
 function MemberOut() {
-  const [show, setShow] = useState(false);
-  const handleModalClose = (e: any) => {
-    const currentClass = e.target.className;
-    if (
-      currentClass === 'ModalCloseBtn' ||
-      currentClass === 'modal-background'
-    ) {
-      setShow(false);
+  // const [show, setShow] = useState(false);
+  // const handleModalClose = (e: any) => {
+  //   const currentClass = e.target.className;
+  //   if (
+  //     currentClass === 'ModalCloseBtn' ||
+  //     currentClass === 'modal-background'
+  //   ) {
+  //     setShow(false);
+  //   }
+  //   return;
+  // };
+  // const handleModalOpen = () => {
+  //   setShow(true);
+  //   console.log('hello');
+  // };
+
+  const outHandler = () => {
+    const returnvalue = window.confirm("😣 정말 제로 웨이스트를 그만두시겠어요?");
+    if (returnvalue === true) {
+      alert("회원탈퇴를 최종적으로 완료하셨습니다🥲");
+      // 이 부분에 axios로 서버에다가 회원삭제 요청을 보내면 된다.
+      window.location.href = "http://localhost:3000/";
+    } else {
+      alert("탈퇴과정을 취소하였습니다😆");
+      window.location.href = "http://localhost:3000/mypage4/";
     }
-    return;
-  };
-  const handleModalOpen = () => {
-    setShow(true);
-    console.log('hello');
   };
 
   return (
     <MemberDelOut>
       <MemberDelMain>
         <MemberDelText>정말 Zero Waste를 관두시겠어요?</MemberDelText>
-        <div className="BillsMainBtn" hidden={!show}>
+        {/* <div className="BillsMainBtn" hidden={!show}>
           <div className="modal-background" onClick={handleModalClose}>
             <RealOut handleModalClose={handleModalClose} />
           </div>
-        </div>
-        <MemberCloseBtn onClick={handleModalOpen}>탈퇴하기</MemberCloseBtn>
+        </div> */}
+        <MemberCloseBtn onClick={outHandler}>탈퇴하기</MemberCloseBtn>
       </MemberDelMain>
     </MemberDelOut>
   );

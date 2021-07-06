@@ -201,33 +201,10 @@ const MyLevelExpControll = styled.div`
   padding-right: 5px;
 `;
 
-function JustInfo() {
+function JustInfo({myinfo}: any) {
   // 더미데이터 구조분해할당
   const { id, name, email, nickname, phone, level, expnow, expall } =
-    dummyMyInfo;
-
-  // 개인정보 관리 인터페이스와 객체
-  interface userInfoForm {
-    id: number;
-    name: string;
-    email: string;
-    nickname: string;
-    phone: string;
-    level: number;
-    expnow: number;
-    expall: number;
-  }
-  const MyInfo: userInfoForm = {
-    id: id,
-    name: name,
-    email: email,
-    nickname: nickname,
-    phone: phone,
-    level: level,
-    expnow: expnow,
-    expall: expall,
-  };
-  // console.log(MyInfo) // 정상렌더링 확인
+    myinfo;
 
   //얘는 exp bar 때문에 함수 안에 있어야 함
   const MyLevelBarIn = styled.div`
@@ -376,7 +353,7 @@ function JustInfo() {
       </JustInfoOut>
       {show ? (
         <MyPageEdit>
-          <InfoEdit handleModalClose={handleModalClose} MyInfo={MyInfo} />
+          <InfoEdit handleModalClose={handleModalClose} myinfo={myinfo} />
         </MyPageEdit>
       ) : (
         <></>

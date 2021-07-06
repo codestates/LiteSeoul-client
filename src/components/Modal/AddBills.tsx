@@ -60,11 +60,11 @@ const BillsAddLine = styled.div`
 `;
 
 function AddBills({ handleModalClose }: any) {
-  console.log(handleModalClose);
+  // console.log(handleModalClose);
   const [billsImg, setBillsImg] = useState('');
 
   const fileUpload = (e: any): void => {
-    console.log(e.target.value);
+    console.log(e);
     setBillsImg(e.target.value);
   };
 
@@ -75,17 +75,19 @@ function AddBills({ handleModalClose }: any) {
   return (
     <AddBillsOut>
       <CloseBtn onClick={handleModalClose}></CloseBtn>
+      <RenderImg></RenderImg>
       <PlayModalInside>
         <input
           className="UploadBillsImg"
           type="file"
           accept=".jpg, .jpeg, .png"
           onChange={fileUpload}
+          // onClick={fileUpload}
         />
         <BillsAddLine>
           {billsImg ? (
             <div>
-              <RenderImg></RenderImg>
+              
               <img src={billsImg} alt="업로드"></img>
               <div className="UploadBillBackMents">인증을 업로드 할게요!</div>
             </div>
