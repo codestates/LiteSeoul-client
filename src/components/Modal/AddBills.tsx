@@ -77,8 +77,8 @@ const SubmitBtn = styled.div`
 `;
 
 const BillsImgOut = styled.div`
-height: 100%;
-`
+  height: 100%;
+`;
 
 const BillsImg = styled.img`
   /* margin-top: 0%; */
@@ -94,11 +94,11 @@ function AddBills({ handleModalClose }: any) {
   };
 
   const [billsImg, setBillsImg] = useState<Bills>();
-  const [uploadImg, setUploadImg] = useState('');
-  console.log(billsImg)
-  console.log(uploadImg)
+  const [uploadImg, setUploadImg] = useState("");
+  console.log(billsImg);
+  console.log(uploadImg);
 
-  // 이미지 프리뷰 함수
+  // 영수증 업로드 시 이미지 프리뷰 함수
   const handleFileOnChange = (event: any) => {
     event.preventDefault();
     let reader = new FileReader();
@@ -108,33 +108,35 @@ function AddBills({ handleModalClose }: any) {
         file,
         previewURL: reader.result,
       });
-      setUploadImg(file)
+      setUploadImg(file);
     };
     reader.readAsDataURL(file);
   };
 
+  // 영수증 업로드 후 제출 버튼 함수
   const handleImgSubmit = () => {
-    if(billsImg === undefined) {
+    if (billsImg === undefined) {
       alert("이미지를 업로드 해주세요!");
     } else {
-
       const formData = new FormData();
-      const token = sessionStorage.getItem("access_token")
-      if(token !== null) {
-        formData.append("access_token", token)
+      const token = sessionStorage.getItem("access_token");
+      if (token !== null) {
+        formData.append("access_token", token);
       }
-      formData.append("receipt", uploadImg)
+      formData.append("receipt", uploadImg);
 
-      
-      axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/add", formData)
-      .then(res => console.log(res))
+      axios
+        .post(
+          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/add",
+          formData
+        )
+        .then((res) => console.log(res));
     }
-  }
+  };
 
   return (
     <AddBillsOut>
       <CloseBtn onClick={handleModalClose}></CloseBtn>
-      {/* <RenderImg></RenderImg> */}
       <PlayModalInside>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
@@ -142,7 +144,6 @@ function AddBills({ handleModalClose }: any) {
             type="file"
             accept=".jpg, .jpeg, .png"
             onChange={handleFileOnChange}
-            // onClick={fileUpload}
           />
         </form>
         <BillsAddLine>
@@ -153,7 +154,7 @@ function AddBills({ handleModalClose }: any) {
                 <div>인증을 바꾸시려면</div>
                 <div>업로드 된 인증을 클릭하세요!</div>
                 <SubmitBtn onClick={handleImgSubmit}>제출하기</SubmitBtn>
-                </div>
+              </div>
             </BillsImgOut>
           ) : (
             <div className="UploadBillBackMents">

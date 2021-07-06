@@ -88,6 +88,7 @@ function App(): any {
       "access_token": sessionStorage.getItem("access_token")
     })
     .then(res => {
+      // console.log(res)
       setMyinfo(res.data)
     })
   }, [])
@@ -121,7 +122,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage2 />;
+              return <Mypage2 myinfo={myinfo}/>;
             }
           }}
         />
@@ -132,7 +133,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage3 />;
+              return <Mypage3 myinfo={myinfo}/>;
             }
           }}
         />
@@ -143,7 +144,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage4 />;
+              return <Mypage4 myinfo={myinfo}/>;
             }
           }}
         />

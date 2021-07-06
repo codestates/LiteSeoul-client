@@ -138,7 +138,8 @@ const NavHidden = styled.div`
   }
 `;
 
-function MypageNav(props: any) {
+function MypageNav({myinfo}: any) {
+  const {nick} = myinfo
   const handleNav = () => {
     document.getElementById("nav1")?.classList.toggle("nav1");
     document.getElementById("hidden1")?.classList.toggle("hidden1");
@@ -152,8 +153,7 @@ function MypageNav(props: any) {
       <MyPageNavOut id="nav1">
         <MyPageNavTop>
           <MyPageNavTopInfo>
-            {/* <div>반갑습니다. {myinfo.nickname}님</div> */}
-            <div>반갑습니다. {dummyMyInfo.nickname}님</div>
+            <div>반갑습니다. {nick}님</div>
           </MyPageNavTopInfo>
         </MyPageNavTop>
         <MyPageNavMain>
