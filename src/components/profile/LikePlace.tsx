@@ -2,6 +2,9 @@ import React from 'react';
 import MypageNav from './MypageNav';
 import dummyLikePlaces from '../documents/dummyLikePlaces';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
 
 const LikePlaceOut = styled.div`
   width: 80%;
@@ -147,23 +150,41 @@ const LikePlaceAddr = styled.div`
 `;
 
 function LikePlace() {
+
+  const [likePlaces, setLikePlaces] = useState([]);
+  console.log(likePlaces)
+
   const consoleHandler = (e: any) => {
     console.log(e.target.innerText);
   };
+
+
+
+  // 더미데이터
+  const id = 1
+
+  useEffect(() => {
+    axios.get(`http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/manyVisits/${id}`)
+    .then(res => {
+      // console.log(res)
+      setLikePlaces(res.data)
+    })
+  }, [])
 
   return (
     <LikePlaceOut>
       <LikePlaceTitle>자주 방문한 곳</LikePlaceTitle>
       <LikePlaceMain>
-        {dummyLikePlaces.map((dummyLikePlace) => (
-          <LikePlaceList key={dummyLikePlace.id} onClick={consoleHandler}>
-            <LikePlaceListNum>{dummyLikePlace.id}</LikePlaceListNum>
-            <LikePlaceStore>{dummyLikePlace.name}</LikePlaceStore>
-            <LikePlaceAddr>
-              <img src="icon/location_main.svg" alt="d"></img>
-              {dummyLikePlace.where}
-            </LikePlaceAddr>
-          </LikePlaceList>
+        {likePlaces.map((likePlace: any) => (
+            <LikePlaceList key={likePlace.id} onClick={consoleHandler}>
+              <LikePlaceListNum>{likePlace.rank}</LikePlaceListNum>
+              <LikePlaceStore>{likePlace.shop.name}</LikePlaceStore>
+              <LikePlaceAddr>
+                <img src="icon/location_main.svg" alt="d"></img>
+                {likePlace.shop.address}
+              </LikePlaceAddr>
+            </LikePlaceList>
+
         ))}
       </LikePlaceMain>
     </LikePlaceOut>

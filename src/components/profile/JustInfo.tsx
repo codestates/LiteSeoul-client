@@ -203,14 +203,16 @@ const MyLevelExpControll = styled.div`
 
 function JustInfo({myinfo}: any) {
   // 더미데이터 구조분해할당
-  const { id, name, email, nickname, phone, level, expnow, expall } =
+  const { id, name, email, nick, phone, level, currentExp, maxExp, profileImgPath } =
     myinfo;
+
+    const percentage = Math.floor((currentExp / maxExp) * 100)
 
   //얘는 exp bar 때문에 함수 안에 있어야 함
   const MyLevelBarIn = styled.div`
     text-align: center;
     color: white;
-    width: ${(expnow / expall) * 100}%;
+    width: ${percentage}%;
     background-color: #189cc4;
     border-radius: 50px;
   `;
@@ -224,6 +226,8 @@ function JustInfo({myinfo}: any) {
     text-align: center;
     align-items: center;
   `;
+
+ 
 
   // 인포에딧 모달창 관리
   const [show, setShow] = useState(false);
@@ -242,9 +246,9 @@ function JustInfo({myinfo}: any) {
           {/* 프로필 */}
           <li>
             <ProfileImg>
-              <img src={mememe} alt="profileImg"></img>
+              <img src={profileImgPath} alt="profileImg"></img>
             </ProfileImg>
-            <ProfileName>{nickname}</ProfileName>
+            <ProfileName>{nick}</ProfileName>
             <ProfileEmail>{email}</ProfileEmail>
             <ProfileEdit onClick={handleModalOpen}>Edit</ProfileEdit>
           </li>
@@ -261,13 +265,13 @@ function JustInfo({myinfo}: any) {
             <MyLevelBarOut>
               <MyLevelBarIn>
                 <MyLevelExpControll>
-                  {(expnow / expall) * 100}%
+                  {percentage}%
                 </MyLevelExpControll>
               </MyLevelBarIn>
             </MyLevelBarOut>
             <MyLevelText1>
-              <span>{nickname}</span> 님은 다음 레벨까지 &nbsp;
-              <span>{expall - expnow}</span>점 남으셨습니다.
+              <span>{nick}</span> 님은 다음 레벨까지 &nbsp;
+              <span>{maxExp - currentExp}</span>점 남으셨습니다.
             </MyLevelText1>
             <MyLevelText2>
               <div>오늘도 Zero Waste에</div>

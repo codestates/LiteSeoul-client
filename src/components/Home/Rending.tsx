@@ -7,7 +7,8 @@ import LogoSvg from '../SVG/LogoSvg';
 const RendingOut = styled.div`
   width: 100%;
   height: 100vh;
-  min-height: 900px;
+  min-height: 990px;
+  min-width: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,11 +26,26 @@ const RendingSubTitle = styled.div`
   font-weight: 700;
   color: #000;
   margin-top: 20px;
-  @media screen and (max-width: 900px) {
-    font-size: 2rem;
+  z-index: 900;
+  @media screen and (max-width: 1471px) {
+    font-size: 1.9rem;
+    text-align: center;
   }
-  @media screen and (max-width: 600px) {
-    font-size: 1rem;
+  @media screen and (max-width: 901px) {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  @media screen and (max-width: 781px) {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  @media screen and (max-width: 641px) {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  @media screen and (max-width: 541px) {
+    font-size: 0.8rem;
+    text-align: center;
   }
 `;
 
@@ -40,10 +56,13 @@ const RendingContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  z-index: 990;
   & div {
-    width: 60%;
+    width: 65%;
     color: #6e6e73;
     font-size: 1rem;
+    line-height: 25px;
+    text-align: justify;
   }
   @media screen and (max-width: 1600px) {
     width: 40%;
@@ -59,6 +78,7 @@ const RendingContent = styled.div`
       font-size: 1rem;
       margin-bottom: 10px;
       font-size: 0.9rem;
+      text-align: center;
     }
   }
 
@@ -83,10 +103,11 @@ const RendingBtn = styled.button`
   border-radius: 20px;
   background: #189cc4;
   color: #fff;
-  z-index: 3;
+  z-index: 99;
   font-weight: 500;
   font-size: 1.3rem;
   transition: 0.4s all;
+  position: relative;
   & a {
     color: #fff;
   }
@@ -101,6 +122,7 @@ const RendingBtn = styled.button`
   }
   @media screen and (max-width: 900px) {
     width: 100%;
+    /* display: none; */
   }
 `;
 function Rending() {
@@ -108,14 +130,16 @@ function Rending() {
     <RendingOut id="rending">
       <Background></Background>
       <LogoSvg></LogoSvg>
-      <RendingSubTitle>Zero Waste Life</RendingSubTitle>
+      <RendingSubTitle>"당신의 서울, 서울을 깨끗하게"</RendingSubTitle>
       <RendingContent>
         <div>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.mmy text of the printing and typesetting
+          지금, 아픈 지구를 살리기 위해 당신의 손길이 필요합니다.
+          <br />
+          우리가 서 있고 천만시민이 살아가는 서울을 먼저 살리기 위해
+          만들었습니다.
         </div>
         <RendingBtn>
-          <Link to="/map">Explore</Link>
+          <Link to="/map">참여하기</Link>
         </RendingBtn>
       </RendingContent>
     </RendingOut>
