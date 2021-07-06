@@ -7,6 +7,7 @@ const Slogan1Out = styled.div`
   height: 100vh;
   min-height: 900px;
   background: #fff;
+  min-width: 500px;
 `;
 
 const SloganMain = styled.div`
@@ -131,9 +132,17 @@ const SloganTextTitle = styled.div`
   font-size: 3.5rem;
   font-weight: 700;
   z-index: 20;
-  @media screen and (max-width: 1200px) {
+  @media screen and (max-width: 1550px) {
     height: auto;
     font-size: 3rem;
+  }
+  @media screen and (max-width: 1320px) {
+    height: auto;
+    font-size: 2.4rem;
+  }
+  @media screen and (max-width: 700px) {
+    height: auto;
+    font-size: 1.8rem;
   }
 `;
 
@@ -145,12 +154,16 @@ const SloganTextContent = styled.div`
   text-align: right;
   color: #6e6e73;
   z-index: 20;
+  line-height: 30px;
 
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
   }
   @media screen and (max-width: 800px) {
     font-size: 1.2rem;
+  }
+  @media screen and (max-width: 761px) {
+    font-size: 0.9rem;
   }
 `;
 function Slogan1() {
@@ -164,12 +177,13 @@ function Slogan1() {
         </SloganImg>
         <SloganText>
           <img src="img/blueback-01.png" alt="bg"></img>
-          <SloganTextTitle>Zero Waste Life</SloganTextTitle>
+          <SloganTextTitle>'제로 웨이스트 샵'을 찾아드릴게요</SloganTextTitle>
           <SloganTextContent>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled
+            탄소중립시대인 '넷제로(Net-Zero)'를 위해 함께 동참해주세요.
+            <br />
+            당신 근처에서 환경을 위해 재생용기를 사용하고 <br />
+            1회용품과 화학용품을 없앤 '제로 웨이스트 샵(Zero Waste Shop)'을
+            만나보세요.
           </SloganTextContent>
         </SloganText>
       </SloganMain>
