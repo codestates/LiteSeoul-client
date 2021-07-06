@@ -6,7 +6,6 @@ import Slogan2 from '../components/Home/Slogan2';
 import Ranking from '../components/Home/Ranking';
 import Recommends from '../components/Home/Recommends';
 import styled from 'styled-components';
-import { homedir } from 'os';
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
