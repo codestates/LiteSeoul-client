@@ -26,6 +26,7 @@ import { useEffect } from "react";
     currentExp: number;
     maxExp: number;
     profileImgPath: string;
+    profileText: string;
   }
 
 function App(): any {
@@ -45,7 +46,8 @@ function App(): any {
     level: 0,
     currentExp: 0,
     maxExp: 0,
-    profileImgPath: ''
+    profileImgPath: '',
+    profileText: ''
   });
   // console.log(myinfo)
 
@@ -56,18 +58,17 @@ function App(): any {
         'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll',
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         localStorage.setItem('total', JSON.stringify(res.data));
       });
   }, []);
 
   //내위치 위도경도
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       var lat = position.coords.latitude, // 위도
         lon = position.coords.longitude; // 경도
-      console.log(lat, lon);
+      // console.log(lat, lon);
     });
   }, []);
 

@@ -45,13 +45,11 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home() {
+function Home({isLogin}: any) {
   //탑으로 올라가는 버튼 나타는 유무
   const [isBlock, setBlock] = useState(false);
   // 스크롤 위치 추적용 (랜딩페이지로 추적함)
   const [topbtn, setTopbtn] = useState(0);
-
-  const [isLogin, setLogin] = useState(false);
 
   //현재위치불러오기 추천시스템용으로다가 불러옴
   // useEffect(() => {

@@ -197,17 +197,33 @@ const Hr = styled.hr`
   width: 100%;
 `;
 
+// interface userInfoForm {
+//   id: number;
+//   name: string;
+//   email: string;
+//   nick: string;
+//   phone: string;
+//   level: number;
+//   currentExp: number;
+//   maxExp: number;
+//   profileImgPath: string;
+//   profileText: string;
+// }
+
 function UserRank() {
 
   const [userRankData, setUserRankData] = useState([]);
+  console.log(userRankData);
+
+  // const{profileImgPath, profileText, nick, email} = userRankData;
 
   useEffect(() => {
     axios
       .get(
-        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/api/user/rank"
+        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/rank"
       )
       .then((res) => {
-        console.log(userRankData);
+        // console.log(res)
         return setUserRankData(res.data);
       });
   }, []);
@@ -232,25 +248,25 @@ function UserRank() {
   // };
   return (
     <>
-      {dummyShops.map((data: any) => {
+      {userRankData.map((data: any, idx: number) => {
         return (
           <ShopRankOut key={data.id}>
-            <RankNumber>{data.id}</RankNumber>
+            <RankNumber>{idx+1}</RankNumber>
             <AllRankers>
               <ShopImg>
-                <img src="img/main_wood.svg" alt="user"></img>
+                <img src={data.profileImgPath} alt="user"></img>
               </ShopImg>
               <ShopTitle>{data.name}</ShopTitle>
-              <ShopContent>{data.message}</ShopContent>
+              <ShopContent>{data.profileText}</ShopContent>
               <ShopContent2>
                 <Like>
                   <img src="icon/like_fill.svg" alt="like"></img>
-                  <span>Likes {data.likes}</span>
+                  <span>Level {data.level}</span>
                 </Like>
                 <Hr></Hr>
                 <Add>
                   <img src="icon/location_main.svg" alt="location"></img>
-                  <span>{data.ground}</span>
+                  <span>Exp. {Math.floor((data.currentExp / data.maxExp)*100)}%</span>
                 </Add>
               </ShopContent2>
             </AllRankers>

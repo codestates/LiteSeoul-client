@@ -113,6 +113,7 @@ type EditFormInput = {
   UserName: string;
   UserNickname: string;
   UserMobile: string;
+  profileText: string;
   Password: string;
 };
 
@@ -133,6 +134,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     currentExp,
     maxExp,
     profileImgPath,
+    profileText,
   } = myinfo;
 
   const FileUpload = styled.label`
@@ -153,7 +155,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     }
   `;
 
-  const SignUpNickName = styled.input.attrs({
+  const EditNickName = styled.input.attrs({
     type: "text",
     placeholder: nick || "* NickName",
   })`
@@ -168,9 +170,24 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     }
   `;
 
-  const SignUpPhone = styled.input.attrs({
+  const EditPhone = styled.input.attrs({
     type: "tel",
     placeholder: phone || "* Mobile Phone",
+  })`
+    width: 100%;
+    border: none;
+    height: 50px;
+    border-bottom: 2px solid #189cc4;
+    outline: none;
+    text-indent: 10px;
+    &:focus {
+      border-bottom: 2px solid #ff735d;
+    }
+  `;
+
+  const EditText = styled.input.attrs({
+    type: "text",
+    placeholder: profileText || "* 상태메시지를 입력해주세요",
   })`
     width: 100%;
     border: none;
@@ -204,53 +221,80 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     handleSubmit,
   } = useForm<EditFormInput>();
 
-  const [userImg, setUserImg] = useState(profileImgPath);
+  const [userImg, setUserImg] = useState("");
   const [userNick, setUserNick] = useState(nick);
   const [userPhone, setUserPhone] = useState(phone);
   const [uploadImg, setUploadImg] = useState<ProfilePics>();
+  const [myText, setMytext] = useState(profileText);
 
   const onSubmit: SubmitHandler<EditFormInput> = (data) => {
     // 실제 데이터 입력값 나오는지 확인
     console.log(data);
 
-    // 데이터 스테이트 수정
-    setUserImg(data.UserImg[0]);
-    setUserNick(data.UserNickname);
-    setUserPhone(data.UserMobile);
-
-    // 폼데이터로 보내는 버전. 하단부 axios에는 그냥 보내는 버전.
     const formData = new FormData();
     const token = sessionStorage.getItem("access_token");
-    formData.append("UserImg", userImg);
-    if (token !== null) {
-      formData.append("access_token", token);
+
+    if (data.UserNickname) {
+      setUserNick(data.UserNickname);
+    }
+    if (data.UserMobile) {
+      setUserPhone(data.UserMobile);
+    }
+    if(data.profileText) {
+      setMytext(data.profileText);
     }
 
-    formData.append("nick", userNick);
-    formData.append("phone", userPhone);
-    formData.append("password", data.Password);
+    // 데이터 스테이트 수정
+    // 이미지 변화가 있으면~
+    if (data.UserImg[0]) {
+      setUserImg(data.UserImg[0]);
+      formData.append("UserImg", userImg);
+      if (token !== null) {
+        formData.append("access_token", token);
+      }
+      formData.append("nick", userNick);
+      formData.append("phone", userPhone);
+      formData.append('profileText', myText)
+      formData.append("password", data.Password);
 
-    axios
-      .post(
-        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/profile",
-        {
-          // 헤더값으로 프로필사진, 닉네임, 이름, 핸폰번호, 비번값(확인용) 보냄
-          // 스테이트 훅으로 변경사항 or 기존사항 그대로 보내기. 어차피 기존사항 보내든 변경사항 보내든 비밀번호 비교하여서 rds 넣기만 하면 된다.
-          UserImg: userImg,
-          nick: userNick,
-          phone: userPhone,
-          password: data.Password,
-        }
-      )
-      .then((res) => {
-        // 제대로 서버쪽에 전달되어서 201코드 받는지 확인
-        console.log(res);
+      axios
+        .post(
+          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/update",
+          formData
+        )
+        .then((res) => {
+          // 제대로 서버쪽에 전달되어서 201코드 받는지 확인
+          console.log(res);
 
-        // 만약 코드가 401 뜨면 얼럿창 떠서 취소시킴 => 마이페이지 리다이렉트
+          // 만약 코드가 401 뜨면 얼럿창 떠서 취소시킴 => 마이페이지 리다이렉트
 
-        // 이후 리다이렉트로 /mypage로 가게 함.
-        window.location.replace("http://localhost:3000/mypage/");
-      });
+          // 이후 리다이렉트로 /mypage로 가게 함.
+          window.location.replace("http://localhost:3000/mypage/");
+        })
+        .catch((err) => {
+          alert("비밀번호가 맞지않아요!");
+        });
+    } else {
+      //이미지 변화가 없으면~
+      axios
+        .post(
+          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/changeinfo",
+          {
+            access_token: token,
+            nick: userNick,
+            phone: userPhone,
+            profileText: myText,
+            password: data.Password,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          window.location.replace("http://localhost:3000/mypage/");
+        })
+        .catch((err) => {
+          alert("비밀번호가 맞지않아요!");
+        });
+    }
   };
   const onError: SubmitErrorHandler<EditFormInput> = (data) =>
     console.log(data);
@@ -274,7 +318,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
 
   const deleteUploadImg = () => {
     setUploadImg(undefined);
-    setUserImg(profileImgPath)
+    setUserImg(profileImgPath);
   };
 
   return (
@@ -314,18 +358,24 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
 
             <div>{email}</div>
 
-            <SignUpNickName
+            <EditNickName
               {...register("UserNickname", {
                 required: false,
                 pattern: /^[a-zA-Z0-9]{4,8}$/,
               })}
-            ></SignUpNickName>
-            <SignUpPhone
+            ></EditNickName>
+            <EditPhone
               {...register("UserMobile", {
                 required: false,
                 pattern: /^\d{3}\d{3,4}\d{4}$/,
               })}
-            ></SignUpPhone>
+            ></EditPhone>
+            <EditText
+              {...register("profileText", {
+                required: false,
+                pattern: /^.{0,255}$/,
+              })}
+            ></EditText>
             <SignUpPassword
               {...register("Password", {
                 required: true,
