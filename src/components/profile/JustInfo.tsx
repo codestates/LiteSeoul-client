@@ -212,7 +212,10 @@ function JustInfo({ myinfo }: any) {
     currentExp,
     maxExp,
     profileImgPath,
+    profileText
   } = myinfo;
+
+  console.log(profileImgPath)
 
   const percentage = Math.floor((currentExp / maxExp) * 100);
 

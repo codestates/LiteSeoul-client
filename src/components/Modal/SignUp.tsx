@@ -236,6 +236,7 @@ const SignUp = (props: any) => {
   // 제출과 에러 핸들링
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const formData = new FormData();
+    // formData.append("charset", "UTF-8")
     formData.append("UserImg", data.UserImg[0]);
     formData.append("name", data.UserName);
     formData.append("phone", data.UserMobile);
@@ -246,7 +247,12 @@ const SignUp = (props: any) => {
     axios
       .post(
         "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signup",
-        formData
+        formData,
+        {
+          headers: {
+            "Content-type": "charset=UTF-8",
+          },
+        }
       )
       .then((res) => {
         window.location.replace("http://localhost:3000/");
@@ -300,7 +306,7 @@ const SignUp = (props: any) => {
             {errors.UserImg
               ? "프로필 사진을 지정해주세요 :)"
               : errors.UserName
-              ? '이름을 입력해주세요 :)'
+              ? "이름을 입력해주세요 :)"
               : errors.UserEmail
               ? "이메일을 입력해주세요 :)"
               : errors.UserNickname
