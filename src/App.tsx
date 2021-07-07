@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Map from "./pages/Map";
 import SignUp from "./components/Modal/SignUp";
 import { useEffect } from "react";
+import queryStringify from 'qs-stringify';
 
   //유저정보 데이터 타입 관리
   interface userInfoForm {
@@ -49,7 +50,7 @@ function App(): any {
     profileImgPath: '',
     profileText: ''
   });
-  // console.log(myinfo)
+  console.log(myinfo)
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
@@ -92,20 +93,57 @@ function App(): any {
     setSignUp(!isSignUp);
   };
 
-  // 토큰을 받아와서 세션 스토리지에 저장하는 이펙트 훅
+  // 토큰을 받아와서 세션 스토리지에 저장 & myinfo 저장하는 이펙트 훅
   useEffect(() => {
-    axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get", {
-      "access_token": sessionStorage.getItem("access_token")
-    })
-    .then(res => {
-      // console.log(res)
-      setMyinfo(res.data)
-    })
-  }, [])
+    const url = new URL(window.location.href);
+    if(sessionStorage.getItem("access_token")){
+      axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get", {
+        "access_token": sessionStorage.getItem("access_token")
+      })
+      .then(res => {
+        // console.log(res)
+        setMyinfo(res.data)
+      })
+    }
+
+    if(url.searchParams.get('code')){
+      const code = url.searchParams.get('code');
+      console.log('kakao');
+
+      const data = queryStringify({
+        'grant_type': 'authorization_code',
+        'client_id': 'd33a84f54f22e12cd75db7c1981bd095',
+        'redirect_uri': 'http://localhost:3000',
+        'code': code
+      });
+
+      axios({
+        method: 'post',
+        url: 'https://kauth.kakao.com/oauth/token',
+        headers: { 
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data : data
+      })
+        .then((res) => {
+          // console.log(res)
+          setLogin(true);
+          axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",{ 
+              kakaoToken: res.data.access_token
+            }
+          )
+            .then((result) => {
+              // console.log(result)
+              sessionStorage.setItem('access_token', result.data);
+              window.location.reload();
+            })
+        })
+      }
+    }, [])
 
     // 토큰을 갖고 로그인 유지해주는 이펙트 훅
     useEffect(() => {
-      if (sessionStorage.getItem("access_token") !== null) {
+      if (sessionStorage.getItem("access_token") !== null || localStorage.getItem("id") !== null) {
         setLogin(true);
       } else {
         setLogin(false);
