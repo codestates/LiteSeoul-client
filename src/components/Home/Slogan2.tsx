@@ -104,7 +104,7 @@ const SloganTextContent = styled.div`
 `;
 function Slogan2() {
   return (
-    <Slogan2Out>
+    <Slogan2Out id="slogan2">
       <SloganMain>
         <SloganText>
           <img src="img/blueback-03.png" alt="bg"></img>

@@ -14,7 +14,7 @@ const SingInOut = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 1000;
 `;
 
 const SignMain = styled.div`
@@ -38,12 +38,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url("/icon/close.svg");
+  background-image: url('/icon/close.svg');
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url("/icon/close2.svg");
+    background-image: url('/icon/close2.svg');
   }
 `;
 
@@ -84,7 +84,7 @@ const Img = styled.div`
   background-color: #fff;
   border-radius: 50%;
   margin-bottom: 20px;
-  background-image: url("/img/login_imge.svg");
+  background-image: url('/img/login_imge.svg');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -155,7 +155,7 @@ const SignInInput = styled.ul`
     }
   }
   & li:nth-child(4) {
-    background-image: url("img/kakao_login.png");
+    background-image: url('img/kakao_login.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -200,8 +200,8 @@ const SignInInput = styled.ul`
 `;
 
 const InputId = styled.input.attrs({
-  type: "text",
-  placeholder: "Email",
+  type: 'text',
+  placeholder: 'Email',
 })`
   width: 100%;
   height: 100%;
@@ -217,8 +217,8 @@ const InputId = styled.input.attrs({
 `;
 
 const InputPassword = styled.input.attrs({
-  type: "password",
-  placeholder: "Password",
+  type: 'password',
+  placeholder: 'Password',
 })`
   width: 100%;
   height: 100%;
@@ -235,9 +235,9 @@ const InputPassword = styled.input.attrs({
 
 function SignIn(props: any) {
   // console.log(props);
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [errMessage, setErrMessage] = useState("");
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMessage, setErrMessage] = useState('');
 
   // const kakaoLogin = () => {
   //   axios
@@ -248,7 +248,7 @@ function SignIn(props: any) {
   // };
 
   const handleAccount = () => {
-    console.log("회원가입버튼");
+    console.log('회원가입버튼');
     props.handleSignUp();
     props.handleLoginModal();
   };
@@ -262,10 +262,10 @@ function SignIn(props: any) {
   };
 
   const LoginBtn = () => {
-    if (id === "") {
-      setErrMessage("아이디를 입력해주세요");
-    } else if (password === "") {
-      setErrMessage("비밀번호를 입력해주세요");
+    if (id === '') {
+      setErrMessage('아이디를 입력해주세요');
+    } else if (password === '') {
+      setErrMessage('비밀번호를 입력해주세요');
     } else {
       // console.log('로그인완료')
       // setErrMessage('');
@@ -275,7 +275,7 @@ function SignIn(props: any) {
       // 서버 연결 관련
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin",
+          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin',
           {
             email: id,
             password: password,
@@ -290,7 +290,7 @@ function SignIn(props: any) {
           window.location.replace("http://localhost:3000/");
         })
         .catch(() => {
-          setErrMessage("아이디와 패스워드를 확인해주세요");
+          setErrMessage('아이디와 패스워드를 확인해주세요');
         });
     }
 
@@ -319,13 +319,13 @@ function SignIn(props: any) {
             </SignInImg>
             <SignInInput>
               <li>
-                {errMessage === "" ? (
+                {errMessage === '' ? (
                   <p>LiteSeoul</p>
                 ) : (
                   <p
                     style={{
-                      color: "red",
-                      fontSize: "1.2rem",
+                      color: 'red',
+                      fontSize: '1.2rem',
                     }}
                   >
                     {errMessage}

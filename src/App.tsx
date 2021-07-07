@@ -49,6 +49,28 @@ function App(): any {
   });
   // console.log(myinfo)
 
+  //전체 지도 데이터 받아오기
+  useEffect(() => {
+    axios
+      .get(
+        'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll',
+      )
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('total', JSON.stringify(res.data));
+      });
+  }, []);
+
+  //내위치 위도경도
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var lat = position.coords.latitude, // 위도
+        lon = position.coords.longitude; // 경도
+      console.log(lat, lon);
+    });
+  }, []);
+
   const handleModalData = (data: any) => {
     setModalData(data);
   };
@@ -190,6 +212,10 @@ function App(): any {
           isModal={isModal}
           handleModal={handleModal}
           modalData={modalData}
+          handleLoginModal={handleLoginModal}
+          isLoginModal={isLoginModal}
+          isLogin={isLogin}
+          handleLogin={handleLogin}
         ></Marker>
       ) : (
         <></>

@@ -49,7 +49,7 @@ type MapProps = {
 };
 
 function Map({ handleModal, isModal, handleModalData }: MapProps) {
-  console.log(isModal);
+  // console.log(isModal);
   var data = JSON.parse(localStorage.getItem('total') || '{}');
   var axioscafe = data.filter((el: any) => {
     return el['category'] === 'cafe';
@@ -65,7 +65,7 @@ function Map({ handleModal, isModal, handleModalData }: MapProps) {
   const [isMarker, setMarker] = useState('all');
 
   const handleMarker = (e: string) => {
-    console.log(e);
+    // console.log(e);
     setMarker(e);
   };
 
@@ -181,17 +181,6 @@ function Map({ handleModal, isModal, handleModalData }: MapProps) {
       }
     }
   };
-
-  useEffect(() => {
-    axios
-      .get(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll`,
-      )
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('total', JSON.stringify(res.data));
-      });
-  }, []);
 
   return (
     <MapOut>

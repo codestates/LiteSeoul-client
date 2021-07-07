@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
-import Footer from "../components/Home/Footer";
-import Rending from "../components/Home/Rending";
-import Slogan1 from "../components/Home/Slogan1";
-import Slogan2 from "../components/Home/Slogan2";
-import Ranking from "../components/Home/Ranking";
-import Recommends from "../components/Home/Recommends";
-import styled from "styled-components";
-import { homedir } from "os";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Footer from '../components/Home/Footer';
+import Rending from '../components/Home/Rending';
+import Slogan1 from '../components/Home/Slogan1';
+import Slogan2 from '../components/Home/Slogan2';
+import Ranking from '../components/Home/Ranking';
+import Recommends from '../components/Home/Recommends';
+import styled from 'styled-components';
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
+  /* border: 1px solid red; */
   width: 100%;
   height: 100vh;
-  overflow: auto;
+  overflow: scroll;
   position: relative;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -44,14 +45,73 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home({ isLogin }: any) {
-  const handleTop = () => {
-    console.log("버튼 확인");
+function Home() {
+  //탑으로 올라가는 버튼 나타는 유무
+  const [isBlock, setBlock] = useState(false);
+  // 스크롤 위치 추적용 (랜딩페이지로 추적함)
+  const [topbtn, setTopbtn] = useState(0);
+
+  const [isLogin, setLogin] = useState(false);
+
+  //현재위치불러오기 추천시스템용으로다가 불러옴
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/recommend',
+  //       {
+  //         latitude: '',
+  //         longitude: '',
+  //         userId: 4,
+  //       },
+  //     )
+  //     .then((res: any) => {
+  //       console.log(res);
+  //     });
+  // }, []);
+
+  useEffect(() => {
+    if (topbtn > 300) {
+      setBlock(true);
+    } else {
+      setBlock(false);
+    }
+  }, [topbtn]);
+
+  useEffect(() => {
+    document.getElementById('home')?.addEventListener('scroll', test);
+    return () =>
+      document.getElementById('home')?.removeEventListener('scroll', test);
+  }, []);
+
+  const test = () => {
+    if (document.getElementById('home')) {
+      setTopbtn(
+        Math.abs(
+          Number(
+            document.getElementById('rending')?.getBoundingClientRect().top,
+          ),
+        ),
+      );
+    }
+  };
+
+  const handleScroll = () => {
+    document.getElementById('home')?.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
     <HomeOut id="home">
-      <TopBtn onClick={handleTop}>TOP</TopBtn>
+      {isBlock ? (
+        <TopBtn onClick={handleScroll} id="topbtn">
+          TOP
+        </TopBtn>
+      ) : (
+        <></>
+      )}
+
       {isLogin ? <></> : <Rending></Rending>}
       {isLogin ? <></> : <Recommends></Recommends>}
       {isLogin ? (
@@ -70,3 +130,4 @@ function Home({ isLogin }: any) {
   );
 }
 export default Home;
+

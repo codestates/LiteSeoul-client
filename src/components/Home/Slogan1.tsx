@@ -168,7 +168,7 @@ const SloganTextContent = styled.div`
 `;
 function Slogan1() {
   return (
-    <Slogan1Out>
+    <Slogan1Out id="slogan1">
       <SloganMain>
         <SloganImg>
           <Recycle></Recycle>

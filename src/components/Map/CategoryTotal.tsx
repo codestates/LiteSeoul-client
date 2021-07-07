@@ -45,113 +45,6 @@ const CategoryList = styled.div`
   }
 `;
 
-const NavMain2 = styled.div`
-  width: 100%;
-  height: 70%;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: space-evenly;
-`;
-
-const Category2 = styled.div`
-  width: 50%;
-  height: 40px;
-  color: #fff;
-  display: flex;
-  font-size: 1.2rem;
-  font-weight: 700;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffd700;
-  border-radius: 20px;
-  margin: 0 auto;
-`;
-
-const CategoryList2 = styled.div`
-  cursor: pointer;
-  margin: 0 auto;
-  width: 80%;
-  height: 80px;
-  border-radius: 20px;
-  background-color: #eee;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 20px;
-  & div:nth-child(1) {
-    width: 80%;
-    height: auto;
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    /* background-color: red; */
-  }
-  & div:nth-child(2) {
-    /* background-color: red; */
-    width: 80%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    & img {
-      width: 20px;
-      height: 20px;
-      margin-right: 3px;
-    }
-    & span {
-      font-size: 0.7rem;
-      color: #6e6e73;
-    }
-  }
-  & div:nth-child(3) {
-    width: 15px;
-    height: 50px;
-    position: absolute;
-    right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const List2 = styled.div`
-  width: 100%;
-  height: 80%;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    height: 20%;
-    background-color: #189cc4;
-    border-radius: 4px;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
-  }
-`;
-
-const CategoryOut = styled.div`
-  width: 100%;
-  height: 40px;
-  /* background-color: red; */
-  display: flex;
-  align-items: center;
-  & img {
-    width: 15px;
-    height: 15px;
-    object-fit: cover;
-    transform: rotate(180deg);
-    position: absolute;
-    left: 45px;
-    cursor: pointer;
-  }
-`;
-
 function CategoryTotal(props: any) {
   const data = JSON.parse(localStorage.getItem('total') || '{}');
 
@@ -194,7 +87,11 @@ function CategoryTotal(props: any) {
         ), // 마커의 위치
       });
 
-      var iwContent = `<div style=" width: 150px;
+      var iwContent = `<div id="${isMap[i].id}" value="${isMap[i].id}" 
+      onmouseenter="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#ffd700' "
+      onmouseout="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#eee' "
+
+      style=" width: 150px;
         height: 50px;
         background-color: #189cc4;
         color:#fff;
@@ -217,11 +114,9 @@ function CategoryTotal(props: any) {
       );
       window.kakao.maps.event.addListener(
         marker,
-        'mouseout',
+        'click',
         makeOutListener(infowindow),
       );
-
-      // window.kakao.maps.event.addListener(marker, 'click', props.handleModal);
     }
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
