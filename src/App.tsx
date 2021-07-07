@@ -1,5 +1,5 @@
-// import axios from 'axios';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
@@ -13,7 +13,6 @@ import Mypage4 from './pages/Mypage4';
 import NotFound from './pages/NotFound';
 import Map from './pages/Map';
 import SignUp from './components/Modal/SignUp';
-import { useEffect } from 'react';
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
@@ -23,13 +22,35 @@ function App(): any {
   // 타입생성 및 상태 객체값 지정 필요
   const [modalData, setModalData] = useState([]);
 
+  //전체 지도 데이터 받아오기
+  useEffect(() => {
+    axios
+      .get(
+        'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll',
+      )
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('total', JSON.stringify(res.data));
+      });
+  }, []);
+
+  //내위치 위도경도
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var lat = position.coords.latitude, // 위도
+        lon = position.coords.longitude; // 경도
+      console.log(lat, lon);
+    });
+  }, []);
+
   const handleModalData = (data: any) => {
     setModalData(data);
   };
 
   const [isSignUp, setSignUp] = useState<boolean>(false);
   // console.log(isLoginModal);
-  console.log(isSignUp);
+  // console.log(isSignUp);
 
   const handleModal = () => {
     setModal(!isModal);
@@ -54,22 +75,8 @@ function App(): any {
     } else {
       setLogin(false);
     }
-  }, [])
+  }, []);
 
-  // const [result, setResult] = useState('');
-  // useEffect((): any => {
-  //   axios.get('http://ec2-3-142-146-122.us-east-2.compute.amazonaws.com')
-  //   .then(res => {
-  //     console.log('--- res === ', res)
-  //     setResult(res.data);
-  //   })
-  // }, [])
-
-  // return (
-  //   <div className="App">
-  //     {result}
-  //   </div>
-  // );
   return (
     <BrowserRouter>
       <Nav isLogin={isLogin} handleLoginModal={handleLoginModal}></Nav>
@@ -84,8 +91,8 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            if(!isLogin) {
-              return <Redirect to="/" />
+            if (!isLogin) {
+              return <Redirect to="/" />;
             } else {
               return <Mypage />;
             }
@@ -142,6 +149,10 @@ function App(): any {
           isModal={isModal}
           handleModal={handleModal}
           modalData={modalData}
+          handleLoginModal={handleLoginModal}
+          isLoginModal={isLoginModal}
+          isLogin={isLogin}
+          handleLogin={handleLogin}
         ></Marker>
       ) : (
         <></>

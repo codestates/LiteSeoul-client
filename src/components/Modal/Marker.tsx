@@ -318,21 +318,69 @@ const CommentBtn = styled.button`
 
 type MarkerProps = {
   handleModal: () => void;
+  handleLoginModal: () => void;
+  handleLogin: () => void;
   isModal: boolean;
   modalData: any;
+  isLoginModal: boolean;
+  isLogin: boolean;
 };
 
-function Marker({ isModal, handleModal, modalData }: MarkerProps) {
-  // console.log(modalData)
+function Marker({
+  isModal,
+  handleModal,
+  modalData,
+  isLoginModal,
+  isLogin,
+  handleLoginModal,
+}: MarkerProps) {
+  console.log(modalData);
+
+  //댓글,좋아요, 유즈이펙트 관리용 돈터치
+  const [commentModi, setcommentModi] = useState('');
+  const [likeModi, setlikeModi] = useState('');
+
+  //댓글 상태
+  const [isComment, setComment] = useState('');
+
+  //댓글 체인지
+  const handleComment = (e: any) => {
+    setComment(e.target.value);
+  };
+
+  // 좋아요 버튼 false , true (체크박스유무)
+  //엑시오스로 상태받아서 하면될듯
   const [isCheck, setCheck] = useState(false);
 
-  const handleCheck = () => {
-    setCheck(!isCheck);
+  //좋아요 클릭시
+  const handleCheck = (e: any) => {
+    // if (isLogin === false) {
+    //   handleLoginModal();
+    // } else {
+    // console.log(e.target.checked);
+    // }
+    // 좋아요 클릭했을떄
+    axios
+      .post(
+        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/likeToggle`,
+        {
+          userId: 4,
+          shopId: modalData.id,
+        },
+      )
+      .then((res: any) => {
+        // console.log(res);
+        setCheck(!isCheck);
+        // console.log(isCheck);
+        setlikeModi('a');
+        setlikeModi('');
+      });
   };
 
   const [comments, setComments] = useState([]);
-  // console.log(comments)
+  // console.log(comments);
 
+  //댓글 가져오기
   useEffect((): any => {
     axios
       .get(
@@ -340,61 +388,124 @@ function Marker({ isModal, handleModal, modalData }: MarkerProps) {
           modalData.id,
         )}`,
       )
-      .then((res) => setComments(res.data.commentInfo));
-  }, []);
+      .then((res) => {
+        setComments(res.data.commentInfo);
+        console.log(res.data.commentInfo);
+      });
+  }, [commentModi]);
+
+  //좋아요 가져오기
+  useEffect((): any => {
+    axios
+      .get(
+        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/${Number(
+          modalData.id,
+        )}`,
+      )
+      .then((res) => {
+        for (let i = 0; i < res.data.likeInfo.length; i++) {
+          //유저 아이디 가져와야함.!! 임의로 4
+          if (res.data.likeInfo[i].userId === 4) {
+            setCheck(true);
+          } else {
+            setCheck(false);
+          }
+        }
+        // console.log(res.data.likeInfo.length);
+        setLike(res.data.likeInfo.length);
+      });
+    return false;
+  }, [likeModi]);
+
+  //좋아요 갯수 상태
+  const [Like, setLike] = useState(null);
+
+  // 댓글제출시
+  const CommnetSubmit = () => {
+    // console.log('submit');
+    // console.log(modalData.id);
+    // if (isLogin === false) {
+    //   handleLoginModal();
+    // }
+    if (isComment === '') {
+      alert('댓글을 입력하세요');
+    } else {
+      axios
+        .post(
+          `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/comment`,
+          {
+            userId: 4,
+            shopId: modalData.id,
+            comment: isComment,
+          },
+        )
+        .then((res: any) => {
+          console.log(res);
+          setComment('');
+          setcommentModi('a');
+          setcommentModi('');
+        });
+    }
+  };
 
   return (
     // 프롭스로 가져온 모달데이터를 갖고 아래 하단부에 렌더링 하면 된다.
     <MarkerOut>
-      <MarkerInMain>
-        <CloseBtn onClick={handleModal}></CloseBtn>
-        <MarkerCenter>
-          <MarkerInfo>
-            <MakerStoreInfo>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="Category"></img>
-              </div>
-              <div key={modalData.id}>
-                <span>{modalData.name}</span>
-                <span>{modalData.category}</span>
-              </div>
-            </MakerStoreInfo>
-            <MakerStoreText>
-              <div>가게 소개문구 자리. 서버에 요청하여 받을 예정임.</div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="like"
-                  style={{ display: 'none' }}
-                  onChange={handleCheck}
-                ></input>
-                <label htmlFor="like">
-                  {isCheck ? (
-                    <img src="icon/like_fill.svg" alt="Likes"></img>
-                  ) : (
-                    <img src="icon/like_stroke.svg" alt="Likes"></img>
-                  )}
-                </label>
-                <span>Likes 120</span>
-              </div>
-            </MakerStoreText>
-          </MarkerInfo>
-          <MarkerComment>COMMENT</MarkerComment>
-          <MarkerCommemntUl>
-            {comments.map((comment: any) => (
-              <li key={comment.id}>
-                <div>{comment.name}</div>
-                <div>{comment.comment}</div>
-                <div>2021-06-28</div>
-              </li>
-            ))}
-          </MarkerCommemntUl>
-          <MarkerCommnetInput>
-            <CommentInput></CommentInput>
-            <CommentBtn>등록</CommentBtn>
-          </MarkerCommnetInput>
-        </MarkerCenter>
-      </MarkerInMain>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <MarkerInMain>
+          <CloseBtn onClick={handleModal}></CloseBtn>
+          <MarkerCenter>
+            <MarkerInfo>
+              <MakerStoreInfo>
+                <div>
+                  <img src="icon/certification_mypage.svg" alt="Category"></img>
+                </div>
+                <div key={modalData.id}>
+                  <span>{modalData.name}</span>
+                  <span>{modalData.category}</span>
+                </div>
+              </MakerStoreInfo>
+              <MakerStoreText>
+                <div>가게 소개문구 자리. 서버에 요청하여 받을 예정임.</div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="like"
+                    style={{ display: 'none' }}
+                    checked={isCheck}
+                    onChange={(e) => handleCheck(e)}
+                  ></input>
+                  <label htmlFor="like">
+                    {isCheck ? (
+                      <img src="icon/like_fill.svg" alt="Likes"></img>
+                    ) : (
+                      <img src="icon/like_stroke.svg" alt="Likes"></img>
+                    )}
+                  </label>
+                  <span>Likes {Like}</span>
+                </div>
+              </MakerStoreText>
+            </MarkerInfo>
+            <MarkerComment>COMMENT</MarkerComment>
+            <MarkerCommemntUl>
+              {comments.map((comment: any) => (
+                <li key={comment.id}>
+                  <div>{comment.name}</div>
+                  <div>{comment.comment}</div>
+                  <div>{comment.created_at.substring(0, 10)}</div>
+                </li>
+              ))}
+            </MarkerCommemntUl>
+            <MarkerCommnetInput>
+              <CommentInput
+                value={isComment}
+                onChange={handleComment}
+              ></CommentInput>
+              <CommentBtn onClick={CommnetSubmit}>등록</CommentBtn>
+            </MarkerCommnetInput>
+          </MarkerCenter>
+        </MarkerInMain>
+      </form>
     </MarkerOut>
   );
 }

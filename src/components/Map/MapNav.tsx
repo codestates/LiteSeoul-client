@@ -5,7 +5,6 @@ import CategoryTotal from './CategoryTotal';
 import CategoryCafe from './CategoryCafe';
 import CategoryLife from './CategoryLife';
 import CategoryOrgan from './CategoryOrgan';
-import axios from 'axios';
 
 const MapNav1 = styled.div`
   width: 20%;
@@ -151,49 +150,6 @@ const List2 = styled.div`
   }
 `;
 
-const CategoryList = styled.div`
-  width: 80%;
-  height: 80px;
-  border-radius: 20px;
-  background-color: #eee;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
-  & div:nth-child(1) {
-    width: 60px;
-    height: 60px;
-    &img {
-      width: 60px;
-      height: 50px;
-      object-fit: cover;
-    }
-  }
-  & div:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 150px;
-    height: 50px;
-    & span:nth-child(1) {
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-    & span:nth-child(2) {
-      font-size: 1rem;
-      color: #6e6e73;
-    }
-  }
-  & div:nth-child(3) {
-    width: 15px;
-    height: 50px;
-    text-align: center;
-    line-height: 50px;
-    color: #189cc4;
-  }
-`;
-
 const CategoryList2 = styled.div`
   cursor: pointer;
   margin: 0 auto;
@@ -296,7 +252,6 @@ type shopData = {
 };
 
 function MapNav(props: any) {
-  // console.log(props);
   const data = JSON.parse(localStorage.getItem('total') || '{}');
 
   const axiosOrgan = data.filter((el: any) => {
@@ -312,8 +267,6 @@ function MapNav(props: any) {
   });
 
   const [isList, SetList] = useState(false);
-  const [listDatas, setListDatas] = useState([]);
-
   const [isCategory, setCategory] = useState('');
 
   const handelCategoy = (e: any) => {
@@ -365,7 +318,7 @@ function MapNav(props: any) {
                 {data.map((listData: shopData) => (
                   <CategoryList2
                     key={listData.id}
-                    id="CategoryList2"
+                    id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
                   >
                     <div
@@ -401,7 +354,7 @@ function MapNav(props: any) {
                 {axiosCafe.map((listData: shopData) => (
                   <CategoryList2
                     key={listData.id}
-                    id="CategoryList2"
+                    id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
                   >
                     <div
@@ -437,7 +390,7 @@ function MapNav(props: any) {
                 {axiosLife.map((listData: shopData) => (
                   <CategoryList2
                     key={listData.id}
-                    id="CategoryList2"
+                    id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
                   >
                     <div
@@ -473,7 +426,7 @@ function MapNav(props: any) {
                 {axiosOrgan.map((listData: shopData) => (
                   <CategoryList2
                     key={listData.id}
-                    id="CategoryList2"
+                    id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
                   >
                     <div

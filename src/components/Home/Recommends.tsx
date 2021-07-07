@@ -77,7 +77,7 @@ const RecommendsList = styled.div`
 
 function Recommends() {
   return (
-    <RecommendsOut>
+    <RecommendsOut id="recommend">
       <RecommendsMain>
         <RecommendsTitle>Today`s Recommend Store</RecommendsTitle>
         <RecommendsSubTitle>

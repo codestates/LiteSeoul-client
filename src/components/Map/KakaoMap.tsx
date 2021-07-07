@@ -7,33 +7,6 @@ declare global {
   }
 }
 
-const CurrentLocation = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #fff;
-  background-image: url('/icon/Current_location-01.svg');
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: fixed;
-  z-index: 991;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1.2rem;
-  bottom: 3%;
-  right: 3%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: 0.4s all;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
 const MapContents = styled.div`
   width: 80%;
   height: 100vh;
@@ -44,19 +17,6 @@ const MapContents = styled.div`
     width: 100%;
   }
 `;
-
-type groundData = {
-  id: number;
-  name: string;
-  address: string;
-  latitude: string;
-  longitude: string;
-  category: string;
-  recommend: string;
-  phone: string;
-  created_at: string;
-  updated_at: string;
-};
 
 type KakaomapProps = {
   handleModal: () => void;
@@ -72,10 +32,6 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal }) => {
   useEffect(() => {
     mapscript();
   }, []);
-
-  const handleMakerModal = () => {
-    handleModal();
-  };
 
   const mapscript = () => {
     let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -137,8 +93,6 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal }) => {
         'mouseout',
         makeOutListener(infowindow),
       );
-
-      // window.kakao.maps.event.addListener(marker, 'click', handleMakerModal);
     }
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다

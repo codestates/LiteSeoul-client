@@ -143,17 +143,21 @@ function BillsLog() {
     const returnvalue = window.confirm('정말 인증기록을 지우시겠어요?');
 
     if (returnvalue === true) {
-      axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/delete",{
-        access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4",
-        name: `${e.target.id}`
-      })
-      // .then(res => res.redirect(url, "/mypage2"))
-      .then(res =>{
-        alert('인증기록을 삭제하였습니다.');
-        window.location.reload()
-      })
+      axios
+        .post(
+          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/delete',
+          {
+            access_token:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4',
+            name: `${e.target.id}`,
+          },
+        )
+        // .then(res => res.redirect(url, "/mypage2"))
+        .then((res) => {
+          alert('인증기록을 삭제하였습니다.');
+          window.location.reload();
+        });
       // console.log(e.target.id)
-      
     } else {
       alert('삭제과정을 취소하였습니다.');
     }
@@ -163,13 +167,18 @@ function BillsLog() {
   const [logs, setLogs] = useState([]);
 
   useEffect(() => {
-    axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/list", {
-        access_token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4"
-    })
-    .then(res => {
-      setLogs(res.data)
-    })
-  }, [])
+    axios
+      .post(
+        'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/list',
+        {
+          access_token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4',
+        },
+      )
+      .then((res) => {
+        setLogs(res.data);
+      });
+  }, []);
 
   //영수증 추가하는 창 열기
   const handleModalClose = () => {
@@ -234,7 +243,7 @@ function BillsLog() {
       )} */}
       </BillsOut>
       {show ? (
-        <BillsUpload onClick={handleModalClose}>
+        <BillsUpload>
           <AddBills handleModalClose={handleModalClose} />
         </BillsUpload>
       ) : (

@@ -109,7 +109,7 @@ function Ranking() {
   };
 
   return (
-    <RankingOut>
+    <RankingOut id="ranking">
       <RangkingMain>
         <RankingTitle>
           Zero Waste TOP 9

@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { cafeData } from './cafeData';
 
 const CategoryList = styled.div`
   width: 80%;
@@ -53,7 +51,7 @@ function CategoryLife(props: any) {
     const axiosLife = data.filter((el: any) => {
       return el['category'] === 'life';
     });
-    console.log(axiosLife);
+    // console.log(axiosLife);
     setMap(axiosLife);
   }, []);
 
@@ -96,7 +94,10 @@ function CategoryLife(props: any) {
         ), // 마커의 위치
       });
 
-      var iwContent = `<div style=" width: 150px;
+      var iwContent = `<div id="${isMap[i].id}" value="${isMap[i].id}" 
+      onmouseenter="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#ffd700' "
+      onmouseout="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#eee' "
+      style=" width: 150px;
         height: 50px;
         background-color: #189cc4;
         color:#fff;
@@ -119,11 +120,9 @@ function CategoryLife(props: any) {
       );
       window.kakao.maps.event.addListener(
         marker,
-        'mouseout',
+        'click',
         makeOutListener(infowindow),
       );
-
-      window.kakao.maps.event.addListener(marker, 'click', props.handleModal);
     }
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다

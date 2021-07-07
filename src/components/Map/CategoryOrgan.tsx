@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -52,7 +51,7 @@ function CategoryOrgan(props: any) {
     const axiosOrgan = data.filter((el: any) => {
       return el['category'] === 'organ';
     });
-    console.log(axiosOrgan);
+    // console.log(axiosOrgan);
     setMap(axiosOrgan);
   }, []);
 
@@ -95,7 +94,10 @@ function CategoryOrgan(props: any) {
         ), // 마커의 위치
       });
 
-      var iwContent = `<div style=" width: 150px;
+      var iwContent = `<div id="${isMap[i].id}" value="${isMap[i].id}" 
+      onmouseenter="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#ffd700' "
+      onmouseout="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#eee' "
+      style=" width: 150px;
         height: 50px;
         background-color: #189cc4;
         color:#fff;
@@ -118,7 +120,7 @@ function CategoryOrgan(props: any) {
       );
       window.kakao.maps.event.addListener(
         marker,
-        'mouseout',
+        'click',
         makeOutListener(infowindow),
       );
 
