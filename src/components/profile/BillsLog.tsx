@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import dummyBills from '../documents/dummyBills';
-import danggeun from '../image/danggeun.jpg';
-import AddBills from '../Modal/AddBills';
-import styled from 'styled-components';
-import { useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import dummyBills from "../documents/dummyBills";
+import danggeun from "../image/danggeun.jpg";
+import AddBills from "../Modal/AddBills";
+import styled from "styled-components";
+import { useEffect } from "react";
+import axios from "axios";
 
 const BillsOut = styled.div`
   width: 80%;
@@ -97,12 +97,12 @@ const BillsDel = styled.div`
   top: 2%;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -115,20 +115,20 @@ const BillsAdd = styled.div`
   right: 2%;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   transform: rotate(45deg);
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
     transform: rotate(45deg);
   }
 `;
 
 const BillsUpload = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   position: absolute;
   inset: 0;
   z-index: 1000;
@@ -139,43 +139,46 @@ const BillsUpload = styled.div`
 `;
 
 function BillsLog() {
+  const [show, setShow] = useState(false);
+  const [logs, setLogs] = useState([]);
+
+  // 영수증 인증기록 제거버튼
   const xbtnHandler = (e: any) => {
-    const returnvalue = window.confirm('정말 인증기록을 지우시겠어요?');
+    const returnvalue = window.confirm("정말 인증기록을 지우시겠어요?");
 
     if (returnvalue === true) {
       axios
         .post(
-          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/delete',
+          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/delete",
           {
-            access_token:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4',
+            access_token: sessionStorage.getItem("access_token"),
             name: `${e.target.id}`,
-          },
+          }
         )
-        // .then(res => res.redirect(url, "/mypage2"))
+        // .then(res => )
         .then((res) => {
-          alert('인증기록을 삭제하였습니다.');
+          alert("인증기록을 삭제하였습니다.");
           window.location.reload();
+          // window.location.replace("http://localhost:3000/mypage2")
+          // res.redirect(url, "/mypage2")
         });
       // console.log(e.target.id)
     } else {
-      alert('삭제과정을 취소하였습니다.');
+      alert("삭제과정을 취소하였습니다.");
     }
   };
 
-  const [show, setShow] = useState(false);
-  const [logs, setLogs] = useState([]);
-
+  // 실시간 유저의 영수증 인증정보 렌더링
   useEffect(() => {
     axios
       .post(
-        'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/list',
+        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/list",
         {
-          access_token:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiLslYjsoJXtg5wiLCJlbWFpbCI6ImFqdDUzMDdAZ21haWwuY29tIiwibmljayI6ImpldHR5Iiwic2FsdCI6IiQyYiQxMCR3L0FiekZvREkzZW54TFJPZUdBLmx1Iiwic25zSWQiOiJsb2NhbCIsInByb2ZpbGVJbWdQYXRoIjoiIiwicHJvZmlsZVRleHQiOiIiLCJsZXZlbCI6MCwiY3VycmVudEV4cCI6MCwibWF4RXhwIjowLCJjcmVhdGVkX2F0IjoiMjAyMS0wNy0wMVQwMzowNDo1MS41NjJaIiwidXBkYXRlZF9hdCI6IjIwMjEtMDctMDFUMDM6MDQ6NTEuNTYyWiIsImlhdCI6MTYyNTQ3MzU1OSwiZXhwIjoxNjI1NTU5OTU5fQ.3dRgaxJP7ScN9MEtzIDG_khvL7hOWiIJAzSM3zVrSa4',
-        },
+          access_token: sessionStorage.getItem("access_token")
+        }
       )
       .then((res) => {
+        console.log(res)
         setLogs(res.data);
       });
   }, []);
@@ -194,13 +197,17 @@ function BillsLog() {
         <BillsTitle>나의 인증목록</BillsTitle>
         <BillsMain>
           <BillsUl>
-            {logs.map((log: any) => (
-              <li key={log.imgName}>
-                <BillsDel onClick={xbtnHandler} id={log.imgName}></BillsDel>
-                <img className="BillsImg" src={log.imgPath} alt="영수증"></img>
-                <span>{log.created_at}</span>
-              </li>
-            ))}
+            {logs.length !== 0 ? (
+              logs.map((log: any) => (
+                <li key={log.imgName}>
+                  <BillsDel onClick={xbtnHandler} id={log.imgName}></BillsDel>
+                  <img className="BillsImg" src={log.imgPath} alt="영수증"></img>
+                  <span>{log.created_at}</span>
+                </li>
+              ))
+            ): (
+              <div>제로 웨이스트 숍 이용 인증을 해주세요!</div>
+            )}
           </BillsUl>
           <BillsAdd onClick={handleModalOpen}></BillsAdd>
 

@@ -234,9 +234,11 @@ function Nav(props: any) {
   };
 
   const deleteSession = () => {
-    console.log('hello');
-    sessionStorage.removeItem('access_token');
-    window.location.replace('http://localhost:3000/');
+    console.log("hello");
+    sessionStorage.removeItem("access_token");
+    // 로그아웃 시 로컬스토리지 데이터 삭제
+    localStorage.removeItem("id");
+    window.location.replace("http://localhost:3000/");
   };
 
   return (

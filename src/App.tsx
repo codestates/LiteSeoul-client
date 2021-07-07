@@ -1,26 +1,53 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
-import Marker from './components/Modal/Marker';
-import Nav from './components/Nav';
-import SignIn from './components/Modal/SignIn';
-import Mypage from './pages/Mypage';
-import Mypage2 from './pages/Mypage2';
-import Mypage3 from './pages/Mypage3';
-import Mypage4 from './pages/Mypage4';
-import NotFound from './pages/NotFound';
-import Map from './pages/Map';
-import SignUp from './components/Modal/SignUp';
+import { useState } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import Marker from "./components/Modal/Marker";
+import Nav from "./components/Nav";
+import SignIn from "./components/Modal/SignIn";
+import Mypage from "./pages/Mypage";
+import Mypage2 from "./pages/Mypage2";
+import Mypage3 from "./pages/Mypage3";
+import Mypage4 from "./pages/Mypage4";
+import NotFound from "./pages/NotFound";
+import Map from "./pages/Map";
+import SignUp from "./components/Modal/SignUp";
+import { useEffect } from "react";
+
+  //유저정보 데이터 타입 관리
+  interface userInfoForm {
+    id: number;
+    name: string;
+    email: string;
+    nick: string;
+    phone: string;
+    level: number;
+    currentExp: number;
+    maxExp: number;
+    profileImgPath: string;
+  }
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
+  console.log('로그인 여부', isLogin)
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
-
-  // 타입생성 및 상태 객체값 지정 필요
   const [modalData, setModalData] = useState([]);
+  const [isSignUp, setSignUp] = useState<boolean>(false);
+  console.log('회원가입 모달창', isSignUp);
+  const [myinfo, setMyinfo] = useState<userInfoForm>({
+    id: 0,
+    name: "",
+    email: "",
+    nick: "",
+    phone: "",
+    level: 0,
+    currentExp: 0,
+    maxExp: 0,
+    profileImgPath: ''
+  });
+  // console.log(myinfo)
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
@@ -48,10 +75,6 @@ function App(): any {
     setModalData(data);
   };
 
-  const [isSignUp, setSignUp] = useState<boolean>(false);
-  // console.log(isLoginModal);
-  // console.log(isSignUp);
-
   const handleModal = () => {
     setModal(!isModal);
   };
@@ -68,14 +91,25 @@ function App(): any {
     setSignUp(!isSignUp);
   };
 
-  // 토큰을 갖고 로그인 유지해주는 이펙트 훅
+  // 토큰을 받아와서 세션 스토리지에 저장하는 이펙트 훅
   useEffect(() => {
-    if (sessionStorage.getItem('access_token') !== null) {
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  }, []);
+    axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get", {
+      "access_token": sessionStorage.getItem("access_token")
+    })
+    .then(res => {
+      // console.log(res)
+      setMyinfo(res.data)
+    })
+  }, [])
+
+    // 토큰을 갖고 로그인 유지해주는 이펙트 훅
+    useEffect(() => {
+      if (sessionStorage.getItem("access_token") !== null) {
+        setLogin(true);
+      } else {
+        setLogin(false);
+      }
+    }, []);
 
   return (
     <BrowserRouter>
@@ -94,14 +128,43 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage />;
+              return <Mypage myinfo={myinfo}/>;
             }
           }}
         />
-        {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
-        <Route exact path="/mypage2" render={() => <Mypage2 />} />
-        <Route exact path="/mypage3" render={() => <Mypage3 />} />
-        <Route exact path="/mypage4" render={() => <Mypage4 />} />
+        <Route
+          exact
+          path="/mypage2"
+          render={() => {
+            if (!isLogin) {
+              return <Redirect to="/" />;
+            } else {
+              return <Mypage2 myinfo={myinfo}/>;
+            }
+          }}
+        />
+        <Route
+          exact
+          path="/mypage3"
+          render={() => {
+            if (!isLogin) {
+              return <Redirect to="/" />;
+            } else {
+              return <Mypage3 myinfo={myinfo}/>;
+            }
+          }}
+        />
+        <Route
+          exact
+          path="/mypage4"
+          render={() => {
+            if (!isLogin) {
+              return <Redirect to="/" />;
+            } else {
+              return <Mypage4 myinfo={myinfo}/>;
+            }
+          }}
+        />
         <Route
           path="/signin"
           render={() => (
@@ -128,7 +191,7 @@ function App(): any {
           path="/"
           render={() => (
             <Home
-            // isLogin={isLogin: boolean}
+            isLogin={isLogin}
             />
           )}
         />

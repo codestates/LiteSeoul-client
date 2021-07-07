@@ -1,8 +1,9 @@
-import React from 'react';
-import { useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import dummyMyInfo from '../documents/dummyMyInfo';
-import styled from 'styled-components';
+import React from "react";
+import { useRef } from "react";
+import { NavLink, Link } from "react-router-dom";
+import dummyMyInfo from "../documents/dummyMyInfo";
+import styled from "styled-components";
+import Mypage from "../../pages/Mypage";
 
 const MyPageNavOut = styled.div`
   width: 20%;
@@ -137,11 +138,13 @@ const NavHidden = styled.div`
   }
 `;
 
-function MypageNav() {
+function MypageNav({myinfo}: any) {
+  const {nick} = myinfo
   const handleNav = () => {
-    document.getElementById('nav1')?.classList.toggle('nav1');
-    document.getElementById('hidden1')?.classList.toggle('hidden1');
+    document.getElementById("nav1")?.classList.toggle("nav1");
+    document.getElementById("hidden1")?.classList.toggle("hidden1");
   };
+
   return (
     <>
       <NavHidden id="hidden1" onClick={handleNav}>
@@ -150,7 +153,7 @@ function MypageNav() {
       <MyPageNavOut id="nav1">
         <MyPageNavTop>
           <MyPageNavTopInfo>
-            <div>반갑습니다. {dummyMyInfo.nickname}님</div>
+            <div>반갑습니다. {nick}님</div>
           </MyPageNavTopInfo>
         </MyPageNavTop>
         <MyPageNavMain>

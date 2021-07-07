@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import dotenv from 'dotenv';
+import axios from "axios";
+import React, { useState } from "react";
+import styled from "styled-components";
+import dotenv from "dotenv";
 dotenv.config();
 
 const SingInOut = styled.div`
@@ -233,24 +233,19 @@ const InputPassword = styled.input.attrs({
   }
 `;
 
-// type SigninProps = {
-//   handleModal: () => void;
-//   isModal: boolean;
-// };
-
 function SignIn(props: any) {
   // console.log(props);
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
 
-  const kakaoLogin = () => {
-    axios
-      .get(
-        'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login',
-      )
-      .then((res) => console.log(res));
-  };
+  // const kakaoLogin = () => {
+  //   axios
+  //     .get(
+  //       "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login"
+  //     )
+  //     .then(res => console.log(res))
+  // };
 
   const handleAccount = () => {
     console.log('회원가입버튼');
@@ -284,13 +279,15 @@ function SignIn(props: any) {
           {
             email: id,
             password: password,
-          },
+          }
         )
         .then((res) => {
           console.log(res);
           console.log(res.data.access_token);
-          sessionStorage.setItem('access_token', res.data.access_token);
-          window.location.replace('http://localhost:3000/');
+          sessionStorage.setItem("access_token", res.data.access_token);
+          // 반석&영근 요청으로 id값 로컬 스토리지에 저장
+          localStorage.setItem("id", res.data.id);
+          window.location.replace("http://localhost:3000/");
         })
         .catch(() => {
           setErrMessage('아이디와 패스워드를 확인해주세요');
@@ -343,7 +340,9 @@ function SignIn(props: any) {
               <li>
                 <InputPassword value={password} onChange={handlePassword} />
               </li>
-              <li onClick={kakaoLogin}></li>
+              <li>
+              {/* <a href="http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login">kakao</a> */}
+              </li>
               <li>Google Login</li>
               <li onClick={LoginBtn}>로그인</li>
               <li>
