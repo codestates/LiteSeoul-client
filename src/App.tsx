@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import { useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
@@ -14,23 +14,44 @@ import NotFound from "./pages/NotFound";
 import Map from "./pages/Map";
 import SignUp from "./components/Modal/SignUp";
 import { useEffect } from "react";
-import axios from "axios";
+
+  //유저정보 데이터 타입 관리
+  interface userInfoForm {
+    id: number;
+    name: string;
+    email: string;
+    nick: string;
+    phone: string;
+    level: number;
+    currentExp: number;
+    maxExp: number;
+    profileImgPath: string;
+  }
 
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
+  console.log('로그인 여부', isLogin)
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
-
-  // 타입생성 및 상태 객체값 지정 필요
   const [modalData, setModalData] = useState([]);
+  const [isSignUp, setSignUp] = useState<boolean>(false);
+  console.log('회원가입 모달창', isSignUp);
+  const [myinfo, setMyinfo] = useState<userInfoForm>({
+    id: 0,
+    name: "",
+    email: "",
+    nick: "",
+    phone: "",
+    level: 0,
+    currentExp: 0,
+    maxExp: 0,
+    profileImgPath: ''
+  });
+  // console.log(myinfo)
 
   const handleModalData = (data: any) => {
     setModalData(data);
   };
-
-  const [isSignUp, setSignUp] = useState<boolean>(false);
-  // console.log(isLoginModal);
-  console.log(isSignUp);
 
   const handleModal = () => {
     setModal(!isModal);
@@ -48,41 +69,7 @@ function App(): any {
     setSignUp(!isSignUp);
   };
 
-  // 토큰을 갖고 로그인 유지해주는 이펙트 훅
-  useEffect(() => {
-    if (sessionStorage.getItem("access_token") !== null) {
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  }, []);
-
-  //유저정보 데이터 타입 관리
-  interface userInfoForm {
-    id: number;
-    name: string;
-    email: string;
-    nick: string;
-    phone: string;
-    level: number;
-    currentExp: number;
-    maxExp: number;
-    profileImgPath: string;
-  }
-
-  const [myinfo, setMyinfo] = useState<userInfoForm>({
-    id: 0,
-    name: "",
-    email: "",
-    nick: "",
-    phone: "",
-    level: 0,
-    currentExp: 0,
-    maxExp: 0,
-    profileImgPath: ''
-  });
-  // console.log(myinfo)
-
+  // 토큰을 받아와서 세션 스토리지에 저장하는 이펙트 훅
   useEffect(() => {
     axios.post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get", {
       "access_token": sessionStorage.getItem("access_token")
@@ -92,6 +79,15 @@ function App(): any {
       setMyinfo(res.data)
     })
   }, [])
+
+    // 토큰을 갖고 로그인 유지해주는 이펙트 훅
+    useEffect(() => {
+      if (sessionStorage.getItem("access_token") !== null) {
+        setLogin(true);
+      } else {
+        setLogin(false);
+      }
+    }, []);
 
   return (
     <BrowserRouter>
@@ -114,7 +110,6 @@ function App(): any {
             }
           }}
         />
-        {/* <Route path="/mypage/justinfo" render={() => <JustInfo />} /> */}
         <Route
           exact
           path="/mypage2"
@@ -174,7 +169,7 @@ function App(): any {
           path="/"
           render={() => (
             <Home
-            // isLogin={isLogin: boolean}
+            isLogin={isLogin}
             />
           )}
         />

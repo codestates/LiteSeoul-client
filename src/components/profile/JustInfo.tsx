@@ -264,7 +264,7 @@ function JustInfo({ myinfo }: any) {
               <img
                 className="MyLevelPicsImg"
                 src="/img/mypage_moxman-01.svg"
-                alt="람쥐"
+                alt="levelPics"
               ></img>
             </ProfileLevelImg>
             <ProfileLevel>Level {level}</ProfileLevel>
