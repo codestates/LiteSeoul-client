@@ -261,6 +261,34 @@ const SignUp = (props: any) => {
     props.handleSignUp();
   };
 
+  // 회원가입시 프로필사진 프리뷰
+  type ProfilePics = {
+    file: string;
+    previewURL: any | string;
+  };
+
+  const [uploadImg, setUploadImg] = useState<ProfilePics>();
+
+  const handleFileOnChange = (event: any) => {
+    event.preventDefault();
+    let reader = new FileReader();
+
+    if (event.target.files[0] !== undefined) {
+      const file = event.target.files[0];
+      reader.onloadend = () => {
+        setUploadImg({
+          file,
+          previewURL: reader.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const deleteUploadImg = () => {
+    setUploadImg(undefined);
+  };
+
   // 리턴 내부에서 모달창 생성 및 유효성검사와 인풋창 한번에 관리
   return (
     <SinUpOut id="Signup">
@@ -271,9 +299,9 @@ const SignUp = (props: any) => {
           <SingUpError>
             {errors.UserImg
               ? "프로필 사진을 지정해주세요 :)"
-              : // : errors.UserName
-              // ? '이름을 입력해주세요 :)'
-              errors.UserEmail
+              : errors.UserName
+              ? '이름을 입력해주세요 :)'
+              : errors.UserEmail
               ? "이메일을 입력해주세요 :)"
               : errors.UserNickname
               ? "닉네임은 4글자 이상 8글자 이하 영문이나 숫자로 입력해주세요 :)"
@@ -290,15 +318,23 @@ const SignUp = (props: any) => {
             onError={handleSubmit(onError)}
           >
             {/* 이미지업로드 */}
-            <FileUpload htmlFor="file">
-              <input
-                id="file"
-                type="file"
-                accept=".jpg, .jpeg, .png"
-                {...register("UserImg", {
-                  required: true,
-                })}
-              />
+            <FileUpload htmlFor="file" onChange={handleFileOnChange}>
+              {uploadImg !== undefined ? (
+                <img
+                  src={uploadImg.previewURL}
+                  alt="프사"
+                  onClick={deleteUploadImg}
+                ></img>
+              ) : (
+                <input
+                  id="file"
+                  type="file"
+                  accept=".jpg, .jpeg, .png, .gif"
+                  {...register("UserImg", {
+                    required: true,
+                  })}
+                />
+              )}
             </FileUpload>
             <SignUpName
               {...register("UserName", {

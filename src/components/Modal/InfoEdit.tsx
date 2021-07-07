@@ -116,6 +116,11 @@ type EditFormInput = {
   Password: string;
 };
 
+type ProfilePics = {
+  file: string;
+  previewURL: any | string;
+};
+
 const InfoEdit = ({ myinfo, handleModalClose }: any) => {
   console.log(myinfo);
   const {
@@ -131,67 +136,67 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
   } = myinfo;
 
   const FileUpload = styled.label`
-  display: block;
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  position: relative;
-  /* border: 1px solid red; */
-  overflow: hidden;
-  background-image: url("icon/profile-01.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
+    display: block;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    position: relative;
+    /* border: 1px solid red; */
+    overflow: hidden;
+    background-image: url("icon/profile-01.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
 
-  & input[type="file"] {
-    display: none;
-  }
-`;
+    & input[type="file"] {
+      display: none;
+    }
+  `;
 
-const SignUpNickName = styled.input.attrs({
-  type: "text",
-  placeholder: nick,
-})`
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-bottom: 2px solid #189cc4;
-  outline: none;
-  text-indent: 10px;
-  &:focus {
-    border-bottom: 2px solid #ff735d;
-  }
-`;
+  const SignUpNickName = styled.input.attrs({
+    type: "text",
+    placeholder: nick || "* NickName",
+  })`
+    width: 100%;
+    border: none;
+    height: 50px;
+    border-bottom: 2px solid #189cc4;
+    outline: none;
+    text-indent: 10px;
+    &:focus {
+      border-bottom: 2px solid #ff735d;
+    }
+  `;
 
-const SignUpPhone = styled.input.attrs({
-  type: "tel",
-  placeholder: phone,
-})`
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-bottom: 2px solid #189cc4;
-  outline: none;
-  text-indent: 10px;
-  &:focus {
-    border-bottom: 2px solid #ff735d;
-  }
-`;
+  const SignUpPhone = styled.input.attrs({
+    type: "tel",
+    placeholder: phone || "* Mobile Phone",
+  })`
+    width: 100%;
+    border: none;
+    height: 50px;
+    border-bottom: 2px solid #189cc4;
+    outline: none;
+    text-indent: 10px;
+    &:focus {
+      border-bottom: 2px solid #ff735d;
+    }
+  `;
 
-const SignUpPassword = styled.input.attrs({
-  type: "password",
-  placeholder: "기존 비밀번호로 확인해주세요",
-})`
-  width: 100%;
-  border: none;
-  height: 50px;
-  border-bottom: 2px solid #189cc4;
-  outline: none;
-  text-indent: 10px;
-  &:focus {
-    border-bottom: 2px solid #ff735d;
-  }
-`;
+  const SignUpPassword = styled.input.attrs({
+    type: "password",
+    placeholder: "기존 비밀번호로 확인해주세요",
+  })`
+    width: 100%;
+    border: none;
+    height: 50px;
+    border-bottom: 2px solid #189cc4;
+    outline: none;
+    text-indent: 10px;
+    &:focus {
+      border-bottom: 2px solid #ff735d;
+    }
+  `;
 
   const {
     register,
@@ -202,6 +207,7 @@ const SignUpPassword = styled.input.attrs({
   const [userImg, setUserImg] = useState(profileImgPath);
   const [userNick, setUserNick] = useState(nick);
   const [userPhone, setUserPhone] = useState(phone);
+  const [uploadImg, setUploadImg] = useState<ProfilePics>();
 
   const onSubmit: SubmitHandler<EditFormInput> = (data) => {
     // 실제 데이터 입력값 나오는지 확인
@@ -225,17 +231,22 @@ const SignUpPassword = styled.input.attrs({
     formData.append("password", data.Password);
 
     axios
-      .post("http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/profile", {
-        // 헤더값으로 프로필사진, 닉네임, 이름, 핸폰번호, 비번값(확인용) 보냄
-        // 스테이트 훅으로 변경사항 or 기존사항 그대로 보내기. 어차피 기존사항 보내든 변경사항 보내든 비밀번호 비교하여서 rds 넣기만 하면 된다.
-        UserImg: userImg,
-        nick: userNick,
-        phone: userPhone,
-        password: data.Password,
-      })
+      .post(
+        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/profile",
+        {
+          // 헤더값으로 프로필사진, 닉네임, 이름, 핸폰번호, 비번값(확인용) 보냄
+          // 스테이트 훅으로 변경사항 or 기존사항 그대로 보내기. 어차피 기존사항 보내든 변경사항 보내든 비밀번호 비교하여서 rds 넣기만 하면 된다.
+          UserImg: userImg,
+          nick: userNick,
+          phone: userPhone,
+          password: data.Password,
+        }
+      )
       .then((res) => {
         // 제대로 서버쪽에 전달되어서 201코드 받는지 확인
         console.log(res);
+
+        // 만약 코드가 401 뜨면 얼럿창 떠서 취소시킴 => 마이페이지 리다이렉트
 
         // 이후 리다이렉트로 /mypage로 가게 함.
         window.location.replace("http://localhost:3000/mypage/");
@@ -243,6 +254,28 @@ const SignUpPassword = styled.input.attrs({
   };
   const onError: SubmitErrorHandler<EditFormInput> = (data) =>
     console.log(data);
+
+  // 회원가입시 프로필사진 프리뷰
+  const handleFileOnChange = (event: any) => {
+    event.preventDefault();
+    let reader = new FileReader();
+
+    if (event.target.files[0] !== undefined) {
+      const file = event.target.files[0];
+      reader.onloadend = () => {
+        setUploadImg({
+          file,
+          previewURL: reader.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const deleteUploadImg = () => {
+    setUploadImg(undefined);
+    setUserImg(profileImgPath)
+  };
 
   return (
     <SinUpOut>
@@ -259,16 +292,24 @@ const SignUpPassword = styled.input.attrs({
             onSubmit={handleSubmit(onSubmit)}
             onError={handleSubmit(onError)}
           >
-            <FileUpload htmlFor="file">
-              <input
-                id="file"
-                className="UserImg"
-                type="file"
-                accept=".jpg, .jpeg, .png"
-                {...register("UserImg", {
-                  required: false,
-                })}
-              />
+            <FileUpload htmlFor="file" onChange={handleFileOnChange}>
+              {uploadImg !== undefined ? (
+                <img
+                  src={uploadImg.previewURL}
+                  alt="프사"
+                  onClick={deleteUploadImg}
+                ></img>
+              ) : (
+                <input
+                  id="file"
+                  className="UserImg"
+                  type="file"
+                  accept=".jpg, .jpeg, .png, .gif"
+                  {...register("UserImg", {
+                    required: false,
+                  })}
+                />
+              )}
             </FileUpload>
 
             <div>{email}</div>

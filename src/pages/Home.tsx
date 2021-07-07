@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Footer from '../components/Home/Footer';
-import Rending from '../components/Home/Rending';
-import Slogan1 from '../components/Home/Slogan1';
-import Slogan2 from '../components/Home/Slogan2';
-import Ranking from '../components/Home/Ranking';
-import Recommends from '../components/Home/Recommends';
-import styled from 'styled-components';
-import { homedir } from 'os';
+import React, { useState, useEffect, useRef } from "react";
+import Footer from "../components/Home/Footer";
+import Rending from "../components/Home/Rending";
+import Slogan1 from "../components/Home/Slogan1";
+import Slogan2 from "../components/Home/Slogan2";
+import Ranking from "../components/Home/Ranking";
+import Recommends from "../components/Home/Recommends";
+import styled from "styled-components";
+import { homedir } from "os";
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
@@ -44,10 +44,9 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home() {
-  const [isLogin, setLogin] = useState(false);
+function Home({ isLogin }: any) {
   const handleTop = () => {
-    console.log('버튼 확인');
+    console.log("버튼 확인");
   };
 
   return (
