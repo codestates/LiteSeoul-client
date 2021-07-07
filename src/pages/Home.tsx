@@ -45,13 +45,11 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home() {
+function Home(props: any) {
   //탑으로 올라가는 버튼 나타는 유무
   const [isBlock, setBlock] = useState(false);
   // 스크롤 위치 추적용 (랜딩페이지로 추적함)
   const [topbtn, setTopbtn] = useState(0);
-
-  const [isLogin, setLogin] = useState(false);
 
   //현재위치불러오기 추천시스템용으로다가 불러옴
   // useEffect(() => {
@@ -78,6 +76,9 @@ function Home() {
   }, [topbtn]);
 
   useEffect(() => {
+    console.log(
+      document.getElementById('slogan1')?.getBoundingClientRect().top,
+    );
     document.getElementById('home')?.addEventListener('scroll', test);
     return () =>
       document.getElementById('home')?.removeEventListener('scroll', test);
@@ -92,6 +93,48 @@ function Home() {
           ),
         ),
       );
+    }
+
+    if (
+      Math.abs(
+        Number(
+          document.getElementById('recommend')?.getBoundingClientRect().top,
+        ),
+      ) < 300
+    ) {
+      document.getElementById('recommend1')?.classList.add('recommend1');
+    } else {
+      document.getElementById('recommend1')?.classList.remove('recommend1');
+    }
+
+    console.log(
+      document.getElementById('slogan1')?.getBoundingClientRect().top,
+    );
+
+    if (
+      document.getElementById('rending') &&
+      Math.abs(
+        Number(document.getElementById('slogan1')?.getBoundingClientRect().top),
+      ) < 300
+    ) {
+      document.getElementById('slogan1Img')?.classList.add('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.add('slogan1Text');
+    } else {
+      document.getElementById('slogan1Img')?.classList.remove('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.remove('slogan1Text');
+    }
+
+    if (
+      document.getElementById('rending') &&
+      Math.abs(
+        Number(document.getElementById('slogan2')?.getBoundingClientRect().top),
+      ) < 300
+    ) {
+      document.getElementById('slogan2Img')?.classList.add('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.add('slogan2Text');
+    } else {
+      document.getElementById('slogan2Img')?.classList.remove('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.remove('slogan2Text');
     }
   };
 
@@ -112,9 +155,9 @@ function Home() {
         <></>
       )}
 
-      {isLogin ? <></> : <Rending></Rending>}
-      {isLogin ? <></> : <Recommends></Recommends>}
-      {isLogin ? (
+      {props.isLogin ? <></> : <Rending></Rending>}
+      {props.isLogin ? <></> : <Recommends></Recommends>}
+      {props.isLogin ? (
         <></>
       ) : (
         <>
@@ -123,11 +166,10 @@ function Home() {
         </>
       )}
 
-      {isLogin ? <Ranking></Ranking> : <></>}
-      {isLogin ? <Recommends></Recommends> : <></>}
+      {props.isLogin ? <Ranking></Ranking> : <></>}
+      {props.isLogin ? <Recommends></Recommends> : <></>}
       <Footer></Footer>
     </HomeOut>
   );
 }
 export default Home;
-
