@@ -239,13 +239,13 @@ function SignIn(props: any) {
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
 
-  // const kakaoLogin = () => {
-  //   axios
-  //     .get(
-  //       "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login"
-  //     )
-  //     .then(res => console.log(res))
-  // };
+  const kakaoLogin = () => {
+    console.log('hello');
+    const _hostName = 'https://kauth.kakao.com';
+    const _restApiKey = 'd33a84f54f22e12cd75db7c1981bd095';
+    const _redirectUrl = 'http://localhost:3000'
+    window.location.assign(`${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`)
+  }
 
   const handleAccount = () => {
     console.log('회원가입버튼');
@@ -340,8 +340,7 @@ function SignIn(props: any) {
               <li>
                 <InputPassword value={password} onChange={handlePassword} />
               </li>
-              <li>
-              {/* <a href="http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login">kakao</a> */}
+              <li onClick={kakaoLogin}>
               </li>
               <li>Google Login</li>
               <li onClick={LoginBtn}>로그인</li>
