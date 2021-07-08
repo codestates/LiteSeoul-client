@@ -141,7 +141,6 @@ const List2 = styled.div`
     width: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    height: 20%;
     background-color: #189cc4;
     border-radius: 4px;
   }
@@ -165,8 +164,9 @@ const CategoryList2 = styled.div`
   position: relative;
   margin-bottom: 20px;
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+    background-color: #ffd700;
   }
   &:last-child {
     margin-bottom: 0px;
@@ -287,6 +287,17 @@ function MapNav(props: any) {
     document.getElementById('hidden')?.classList.toggle('hidden');
   };
 
+  const handlemaker = (e: any) => {
+    if (document.getElementById(e)) {
+      document.getElementById(e)!.style.backgroundColor = '#ffd700';
+    }
+  };
+  const handlemaker2 = (e: any) => {
+    if (document.getElementById(e)) {
+      document.getElementById(e)!.style.backgroundColor = '#189cc4';
+    }
+  };
+
   return (
     <>
       <NavHidden onClick={handleNav} id="hidden">
@@ -320,6 +331,8 @@ function MapNav(props: any) {
                     key={listData.id}
                     id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
+                    onMouseEnter={() => handlemaker(listData.id)}
+                    onMouseLeave={() => handlemaker2(listData.id)}
                   >
                     <div
                       onClick={() => props.handleModalData(listData)}
@@ -356,6 +369,8 @@ function MapNav(props: any) {
                     key={listData.id}
                     id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
+                    onMouseEnter={() => handlemaker(listData.id)}
+                    onMouseLeave={() => handlemaker2(listData.id)}
                   >
                     <div
                       onClick={() => props.handleModalData(listData)}
@@ -392,6 +407,8 @@ function MapNav(props: any) {
                     key={listData.id}
                     id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
+                    onMouseEnter={() => handlemaker(listData.id)}
+                    onMouseLeave={() => handlemaker2(listData.id)}
                   >
                     <div
                       onClick={() => props.handleModalData(listData)}
@@ -428,6 +445,8 @@ function MapNav(props: any) {
                     key={listData.id}
                     id={'CategoryList' + listData.id}
                     onClick={props.handleModal}
+                    onMouseEnter={() => handlemaker(listData.id)}
+                    onMouseLeave={() => handlemaker2(listData.id)}
                   >
                     <div
                       onClick={() => props.handleModalData(listData)}

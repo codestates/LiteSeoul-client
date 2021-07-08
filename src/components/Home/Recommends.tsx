@@ -22,6 +22,13 @@ const RecommendsMain = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  transition: 1.2s all;
+  transform: scale(0.7);
+  &.recommend1 {
+    opacity: 1;
+    transform: scale(1);
+  }
 `;
 
 const RecommendsTitle = styled.div`
@@ -78,7 +85,7 @@ const RecommendsList = styled.div`
 function Recommends() {
   return (
     <RecommendsOut id="recommend">
-      <RecommendsMain>
+      <RecommendsMain id="recommend1">
         <RecommendsTitle>Today`s Recommend Store</RecommendsTitle>
         <RecommendsSubTitle>
           오늘도 함께 Zero Waste를 실천해보는건 어떠세요?

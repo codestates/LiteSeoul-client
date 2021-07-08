@@ -334,7 +334,8 @@ function Marker({
   isLogin,
   handleLoginModal,
 }: MarkerProps) {
-  console.log(modalData);
+  // console.log(modalData);
+  // console.log(isLogin, '마커 로그인 확인용');
 
   //댓글,좋아요, 유즈이펙트 관리용 돈터치
   const [commentModi, setcommentModi] = useState('');
@@ -342,6 +343,9 @@ function Marker({
 
   //댓글 상태
   const [isComment, setComment] = useState('');
+
+  const userId = Number(localStorage.getItem('id'));
+  // console.log(typeof userId);
 
   //댓글 체인지
   const handleComment = (e: any) => {
@@ -354,27 +358,27 @@ function Marker({
 
   //좋아요 클릭시
   const handleCheck = (e: any) => {
-    // if (isLogin === false) {
-    //   handleLoginModal();
-    // } else {
-    // console.log(e.target.checked);
-    // }
+    if (isLogin === false) {
+      handleLoginModal();
+    } else {
+      // console.log(e.target.checked);
+      axios
+        .post(
+          `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/likeToggle`,
+          {
+            userId: userId,
+            shopId: modalData.id,
+          },
+        )
+        .then((res: any) => {
+          // console.log(res);
+          setCheck(!isCheck);
+          console.log(isCheck);
+          setlikeModi('a');
+          setlikeModi('');
+        });
+    }
     // 좋아요 클릭했을떄
-    axios
-      .post(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/likeToggle`,
-        {
-          userId: 4,
-          shopId: modalData.id,
-        },
-      )
-      .then((res: any) => {
-        // console.log(res);
-        setCheck(!isCheck);
-        // console.log(isCheck);
-        setlikeModi('a');
-        setlikeModi('');
-      });
   };
 
   const [comments, setComments] = useState([]);
@@ -390,7 +394,7 @@ function Marker({
       )
       .then((res) => {
         setComments(res.data.commentInfo);
-        console.log(res.data.commentInfo);
+        // console.log(res.data.commentInfo);
       });
   }, [commentModi]);
 
@@ -405,16 +409,16 @@ function Marker({
       .then((res) => {
         for (let i = 0; i < res.data.likeInfo.length; i++) {
           //유저 아이디 가져와야함.!! 임의로 4
-          if (res.data.likeInfo[i].userId === 4) {
+          if (res.data.likeInfo[i].userId === userId) {
             setCheck(true);
+            break;
           } else {
             setCheck(false);
           }
         }
-        // console.log(res.data.likeInfo.length);
+        // console.log(res.data.likeInfo);
         setLike(res.data.likeInfo.length);
       });
-    return false;
   }, [likeModi]);
 
   //좋아요 갯수 상태
@@ -424,17 +428,16 @@ function Marker({
   const CommnetSubmit = () => {
     // console.log('submit');
     // console.log(modalData.id);
-    // if (isLogin === false) {
-    //   handleLoginModal();
-    // }
-    if (isComment === '') {
+    if (isLogin === false) {
+      handleLoginModal();
+    } else if (isComment === '') {
       alert('댓글을 입력하세요');
     } else {
       axios
         .post(
           `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/comment`,
           {
-            userId: 4,
+            userId: userId,
             shopId: modalData.id,
             comment: isComment,
           },

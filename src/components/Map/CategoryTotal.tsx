@@ -87,50 +87,51 @@ function CategoryTotal(props: any) {
         ), // 마커의 위치
       });
 
-      var iwContent = `<div id="${isMap[i].id}" value="${isMap[i].id}" 
+      var iwContent = `<div id="${isMap[i].id}" value="${isMap[i].id}"  class='info'
       onmouseenter="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#ffd700' "
       onmouseout="document.getElementById('CategoryList${isMap[i].id}').style.backgroundColor = '#eee' "
-
       style=" width: 150px;
         height: 50px;
         background-color: #189cc4;
         color:#fff;
         text-align:center;
         line-height:50px;
-        ">${isMap[i].name}`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        ">${isMap[i].name}`;
 
       // 마커에 표시할 인포윈도우를 생성합니다
       var infowindow = new window.kakao.maps.InfoWindow({
         content: iwContent, // 인포윈도우에 표시할 내용
       });
 
+      infowindow.open(map, marker);
+
       // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
       // 이벤트 리스너로는 클로저를 만들어 등록합니다
       // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-      window.kakao.maps.event.addListener(
-        marker,
-        'mouseover',
-        makeOverListener(map, marker, infowindow),
-      );
-      window.kakao.maps.event.addListener(
-        marker,
-        'click',
-        makeOutListener(infowindow),
-      );
+      // window.kakao.maps.event.addListener(
+      //   marker,
+      //   'mouseover',
+      //   makeOverListener(map, marker, infowindow),
+      // );
+      // window.kakao.maps.event.addListener(
+      //   marker,
+      //   'click',
+      //   makeOutListener(infowindow),
+      // );
     }
 
     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-    function makeOverListener(map: any, marker: any, infowindow: any) {
-      return function () {
-        infowindow.open(map, marker);
-      };
-    }
+    // function makeOverListener(map: any, marker: any, infowindow: any) {
+    //   return function () {
+    //     infowindow.open(map, marker);
+    //   };
+    // }
 
-    function makeOutListener(infowindow: any) {
-      return function () {
-        infowindow.close();
-      };
-    }
+    // function makeOutListener(infowindow: any) {
+    //   return function () {
+    //     infowindow.close();
+    //   };
+    // }
   };
 
   return (

@@ -30,6 +30,13 @@ const SloganImg = styled.div`
   align-items: center;
   justify-content: center;
   /* border: 1px solid red; */
+  transition: 2s all;
+  transform: translateX(100%);
+  opacity: 0;
+  &.slogan2Img {
+    transform: translateX(0%);
+    opacity: 1;
+  }
   @media screen and (max-width: 801px) {
     width: 60%;
     height: 50%;
@@ -45,6 +52,11 @@ const SloganText = styled.div`
   align-items: flex-start;
   justify-content: center;
   padding: 3%;
+  opacity: 0;
+  transition: 2s all;
+  &.slogan2Text {
+    opacity: 1;
+  }
   & img {
     width: 30%;
     object-fit: cover;
@@ -106,7 +118,7 @@ function Slogan2() {
   return (
     <Slogan2Out id="slogan2">
       <SloganMain>
-        <SloganText>
+        <SloganText id="slogan2Text">
           <img src="img/blueback-03.png" alt="bg"></img>
 
           <SloganTextTitle>당신의 제로 웨이스트(Zero Waste)</SloganTextTitle>
@@ -117,7 +129,7 @@ function Slogan2() {
           </SloganTextContent>
         </SloganText>
 
-        <SloganImg>
+        <SloganImg id="slogan2Img">
           <Wood></Wood>
         </SloganImg>
       </SloganMain>

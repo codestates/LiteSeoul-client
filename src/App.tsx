@@ -33,17 +33,17 @@ import queryStringify from 'qs-stringify';
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
-  console.log('로그인 여부', isLogin)
+  console.log('로그인 여부', isLogin);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState([]);
   const [isSignUp, setSignUp] = useState<boolean>(false);
   console.log('회원가입 모달창', isSignUp);
   const [myinfo, setMyinfo] = useState<userInfoForm>({
     id: 0,
-    name: "",
-    email: "",
-    nick: "",
-    phone: "",
+    name: '',
+    email: '',
+    nick: '',
+    phone: '',
     level: 0,
     currentExp: 0,
     maxExp: 0,
@@ -167,7 +167,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage myinfo={myinfo}/>;
+              return <Mypage myinfo={myinfo} />;
             }
           }}
         />
@@ -178,7 +178,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage2 myinfo={myinfo}/>;
+              return <Mypage2 myinfo={myinfo} />;
             }
           }}
         />
@@ -189,7 +189,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage3 myinfo={myinfo}/>;
+              return <Mypage3 myinfo={myinfo} />;
             }
           }}
         />
@@ -200,7 +200,7 @@ function App(): any {
             if (!isLogin) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage4 myinfo={myinfo}/>;
+              return <Mypage4 myinfo={myinfo} />;
             }
           }}
         />
@@ -225,15 +225,7 @@ function App(): any {
             />
           )}
         />
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <Home
-            isLogin={isLogin}
-            />
-          )}
-        />
+        <Route exact path="/" render={() => <Home isLogin={isLogin} />} />
         <Route component={NotFound} />
       </Switch>
       {isLoginModal ? (

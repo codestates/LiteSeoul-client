@@ -1,7 +1,7 @@
-import axios from "axios";
-import React, { useState } from "react";
-import styled from "styled-components";
-import dotenv from "dotenv";
+import axios from 'axios';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const SingInOut = styled.div`
@@ -165,15 +165,15 @@ const SignInInput = styled.ul`
       letter-spacing: 0.2rem;
     }
   }
-  & li:nth-child(5) {
+  /* & li:nth-child(5) {
     color: #000000;
     border: 1px solid #86868b;
     cursor: pointer;
     &:hover {
       letter-spacing: 0.2rem;
     }
-  }
-  & li:nth-child(6) {
+  } */
+  & li:nth-child(5) {
     background: #189cc4;
     color: #fff;
     cursor: pointer;
@@ -181,7 +181,7 @@ const SignInInput = styled.ul`
       letter-spacing: 0.2rem;
     }
   }
-  & li:nth-child(7) {
+  & li:nth-child(6) {
     margin-top: 30px;
     width: 150px;
     height: auto;
@@ -275,16 +275,18 @@ function SignIn(props: any) {
       // 서버 연결 관련
       axios
         .post(
-          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin',
+          // 'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin',
+          'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/user/signin',
+
           {
             email: id,
             password: password,
-          }
+          },
         )
         .then((res) => {
           console.log(res);
           console.log(res.data.access_token);
-          sessionStorage.setItem("access_token", res.data.access_token);
+          sessionStorage.setItem('access_token', res.data.access_token);
           // 반석&영근 요청으로 id값 로컬 스토리지에 저장
           localStorage.setItem("id", res.data.payload.id);
           window.location.replace("http://localhost:3000/");
@@ -342,7 +344,7 @@ function SignIn(props: any) {
               </li>
               <li onClick={kakaoLogin}>
               </li>
-              <li>Google Login</li>
+              {/* <li>Google Login</li> */}
               <li onClick={LoginBtn}>로그인</li>
               <li>
                 <div onClick={handleAccount}>
