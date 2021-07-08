@@ -58,6 +58,16 @@ const MyPageNavTopInfo = styled.div`
     justify-content: center;
     /* background: yellow; */
   }
+  & div:nth-child(2) {
+    width: 100%;
+    height: 50%;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: yellow; */
+  }
   /* & div:nth-child(2) {
     height: 30%;
     font-size: 1.2rem;
@@ -152,22 +162,23 @@ function MypageNav({ myinfo, handleMypageNow }: any) {
       <MyPageNavOut id="nav1">
         <MyPageNavTop>
           <MyPageNavTopInfo>
-            <div>반갑습니다. {nick}님</div>
+            <div>반갑습니다,</div>
+            <div>{nick}님 :)</div>
           </MyPageNavTopInfo>
         </MyPageNavTop>
         <MyPageNavMain>
           <MyPageNavUl>
-            <li>
-              <div onClick={() => handleMypageNow("justinfo")}>Mypage</div>
+            <li onClick={() => handleMypageNow("justinfo")}>
+              <div>Mypage</div>
             </li>
-            <li>
-              <div onClick={() => handleMypageNow("billslog")}>인증하기</div>
+            <li onClick={() => handleMypageNow("billslog")}>
+              <div>인증하기</div>
             </li>
-            <li>
-              <div onClick={() => handleMypageNow("likeplace")}>즐겨찾기</div>
+            <li onClick={() => handleMypageNow("likeplace")}>
+              <div>즐겨찾기</div>
             </li>
-            <li>
-              <div onClick={() => handleMypageNow("memberout")}>회원탈퇴</div>
+            <li onClick={() => handleMypageNow("memberout")}>
+              <div>회원탈퇴</div>
             </li>
           </MyPageNavUl>
         </MyPageNavMain>
