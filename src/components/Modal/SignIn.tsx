@@ -240,7 +240,7 @@ function SignIn(props: any) {
   const [errMessage, setErrMessage] = useState('');
 
   const kakaoLogin = () => {
-    console.log('hello');
+    // console.log('hello');
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = 'd33a84f54f22e12cd75db7c1981bd095';
     const _redirectUrl = 'http://localhost:3000'

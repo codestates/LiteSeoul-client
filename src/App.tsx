@@ -181,14 +181,14 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            if (!isLogin) {
+            if (!sessionStorage.getItem("access_token")) {
               return <Redirect to="/" />;
             } else {
               return <Mypage myinfo={myinfo} />;
             }
           }}
         />
-        <Route
+        {/* <Route
           exact
           path="/mypage2"
           render={() => {
@@ -220,7 +220,7 @@ function App(): any {
               return <Mypage4 myinfo={myinfo} />;
             }
           }}
-        />
+        /> */}
         <Route
           path="/signin"
           render={() => (

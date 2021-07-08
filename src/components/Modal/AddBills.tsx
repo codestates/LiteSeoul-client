@@ -85,7 +85,7 @@ const BillsImg = styled.img`
   padding: 50px;
 `;
 
-function AddBills({ handleModalClose }: any) {
+function AddBills({ handleModalClose, handleMypageNow }: any) {
   // console.log(handleModalClose)/
 
   type Bills = {
@@ -132,7 +132,8 @@ function AddBills({ handleModalClose }: any) {
         )
         .then((res) => {
           console.log(res)
-          window.location.replace("http://localhost:3000/mypage/");
+          handleMypageNow("billslog")
+          window.location.reload();
         });
     }
   };
