@@ -32,6 +32,13 @@ const SloganImg = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  transition: 2s all;
+  transform: translateX(-100%);
+  opacity: 0;
+  &.slogan1Img {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 
   @media screen and (max-width: 800px) {
     width: 70%;
@@ -108,6 +115,8 @@ const SloganText = styled.div`
   justify-content: center;
   padding: 3%;
   position: relative;
+  opacity: 0;
+  transition: 2s all;
   & img {
     width: 40%;
     object-fit: cover;
@@ -116,7 +125,9 @@ const SloganText = styled.div`
     z-index: 10;
     transform: rotate(15deg);
   }
-
+  &.slogan1Text {
+    opacity: 1;
+  }
   @media screen and (max-width: 800px) {
     width: 100%;
     height: auto;
@@ -170,12 +181,12 @@ function Slogan1() {
   return (
     <Slogan1Out id="slogan1">
       <SloganMain>
-        <SloganImg>
+        <SloganImg id="slogan1Img">
           <Recycle></Recycle>
           <SloganTitle>LiteSeoul</SloganTitle>
           <SloganSubTitle>Zero Waste Life</SloganSubTitle>
         </SloganImg>
-        <SloganText>
+        <SloganText id="slogan1Text">
           <img src="img/blueback-01.png" alt="bg"></img>
           <SloganTextTitle>'제로 웨이스트 샵'을 찾아드릴게요</SloganTextTitle>
           <SloganTextContent>

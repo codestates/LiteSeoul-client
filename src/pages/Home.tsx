@@ -13,6 +13,7 @@ const HomeOut = styled.div`
   /* padding-top: 90px; */
   /* border: 1px solid red; */
   width: 100%;
+  min-width: 500px;
   height: 100vh;
   overflow: scroll;
   position: relative;
@@ -46,27 +47,26 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home({ isLogin, loading }: any) {
+function Home(props: any) {
   //탑으로 올라가는 버튼 나타는 유무
   const [isBlock, setBlock] = useState(false);
   // 스크롤 위치 추적용 (랜딩페이지로 추적함)
   const [topbtn, setTopbtn] = useState(0);
+  let nav = JSON.parse(localStorage.getItem('nav') || '{}');
 
-  //현재위치불러오기 추천시스템용으로다가 불러옴
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/recommend',
-  //       {
-  //         latitude: '',
-  //         longitude: '',
-  //         userId: 4,
-  //       },
-  //     )
-  //     .then((res: any) => {
-  //       console.log(res);
-  //     });
-  // }, []);
+  // 현재위치불러오기 추천시스템용으로다가 불러옴
+  useEffect(() => {
+    axios
+      .post('https://www.api.liteseoul.com/shop/recommend', {
+        latitude: nav.lat || 37.535946,
+        longitude: nav.lon || 127.006161,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+        localStorage.setItem('recommend', JSON.stringify(res.data));
+        console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
+      });
+  }, []);
 
   useEffect(() => {
     if (topbtn > 300) {
@@ -92,6 +92,48 @@ function Home({ isLogin, loading }: any) {
         )
       );
     }
+
+    if (
+      Math.abs(
+        Number(
+          document.getElementById('recommend')?.getBoundingClientRect().top,
+        ),
+      ) < 500
+    ) {
+      document.getElementById('recommend1')?.classList.add('recommend1');
+    } else {
+      document.getElementById('recommend1')?.classList.remove('recommend1');
+    }
+
+    // console.log(
+    //   document.getElementById('slogan1')?.getBoundingClientRect().top,
+    // );
+
+    if (
+      document.getElementById('rending') &&
+      Math.abs(
+        Number(document.getElementById('slogan1')?.getBoundingClientRect().top),
+      ) < 500
+    ) {
+      document.getElementById('slogan1Img')?.classList.add('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.add('slogan1Text');
+    } else {
+      document.getElementById('slogan1Img')?.classList.remove('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.remove('slogan1Text');
+    }
+
+    if (
+      document.getElementById('rending') &&
+      Math.abs(
+        Number(document.getElementById('slogan2')?.getBoundingClientRect().top),
+      ) < 500
+    ) {
+      document.getElementById('slogan2Img')?.classList.add('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.add('slogan2Text');
+    } else {
+      document.getElementById('slogan2Img')?.classList.remove('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.remove('slogan2Text');
+    }
   };
 
   const handleScroll = () => {
@@ -103,7 +145,7 @@ function Home({ isLogin, loading }: any) {
 
   return (
     <>
-      {loading === true ? (
+      {props.loading === true ? (
         <Loading></Loading>
       ) : (
         <HomeOut id="home">
@@ -115,9 +157,9 @@ function Home({ isLogin, loading }: any) {
             <></>
           )}
 
-          {isLogin ? <></> : <Rending></Rending>}
-          {isLogin ? <></> : <Recommends></Recommends>}
-          {isLogin ? (
+          {props.isLogin ? <></> : <Rending></Rending>}
+          {props.isLogin ? <></> : <Recommends></Recommends>}
+          {props.isLogin ? (
             <></>
           ) : (
             <>
@@ -126,8 +168,8 @@ function Home({ isLogin, loading }: any) {
             </>
           )}
 
-          {isLogin ? <Ranking></Ranking> : <></>}
-          {isLogin ? <Recommends></Recommends> : <></>}
+          {props.isLogin ? <Ranking></Ranking> : <></>}
+          {props.isLogin ? <Recommends></Recommends> : <></>}
           <Footer></Footer>
         </HomeOut>
       )}
