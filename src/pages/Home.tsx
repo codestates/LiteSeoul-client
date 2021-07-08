@@ -61,7 +61,7 @@ function Home(props: any) {
         longitude: nav.lon || 127.006161,
       })
       .then((res: any) => {
-        // console.log(res.data);
+        console.log(res.data);
         localStorage.setItem('recommend', JSON.stringify(res.data));
         console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
       });

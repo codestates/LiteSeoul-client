@@ -195,8 +195,6 @@ const Img = styled.div`
 
 function RecNear() {
   const data = JSON.parse(localStorage.getItem('recommend') || '{}');
-  // console.log(data.nearest);
-
   return (
     <Out>
       <ListTitle>Near</ListTitle>
@@ -204,11 +202,19 @@ function RecNear() {
         <img src="/img/zero.jpeg" alt="store"></img>
       </Img>
       <Store>
-        <StoreName>{data.nearest.name}</StoreName>
-        <StoreText>{data.nearest.phone}</StoreText>
+        <StoreName>
+          {localStorage.getItem('recommend') ? data.nearest.name : '가게이름'}
+        </StoreName>
+        <StoreText>
+          {localStorage.getItem('recommend') ? data.nearest.phone : '전화번호'}
+        </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          <span>{data.nearest.address}</span>
+          <span>
+            {localStorage.getItem('recommend')
+              ? data.nearest.address
+              : '가게주소'}
+          </span>
         </StoreAdd>
       </Store>
     </Out>

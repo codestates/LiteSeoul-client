@@ -212,11 +212,23 @@ function ReRecycle() {
         <img src="/img/zero.jpeg" alt="store"></img>
       </Img>
       <Store>
-        <StoreName>{data.resultRecycle.name}</StoreName>
-        <StoreText>{data.resultRecycle.phone}</StoreText>
+        <StoreName>
+          {localStorage.getItem('recommend')
+            ? data.resultRecycle.name
+            : '가게이름'}
+        </StoreName>
+        <StoreText>
+          {localStorage.getItem('recommend')
+            ? data.resultRecycle.phone
+            : '전화번호'}
+        </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          <span>{data.resultRecycle.address}</span>
+          <span>
+            {localStorage.getItem('recommend')
+              ? data.resultRecycle.address
+              : '가게주소'}
+          </span>
         </StoreAdd>
       </Store>
     </Out>
