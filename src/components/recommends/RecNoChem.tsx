@@ -213,11 +213,23 @@ function ReNoChem() {
         <img src="/img/zero.jpeg" alt="store"></img>
       </Img>
       <Store>
-        <StoreName>{data.resultAntiChemical.name}</StoreName>
-        <StoreText>{data.resultAntiChemical.phone}</StoreText>
+        <StoreName>
+          {localStorage.getItem('recommend')
+            ? data.resultAntiChemical.name
+            : '가게이름'}
+        </StoreName>
+        <StoreText>
+          {localStorage.getItem('recommend')
+            ? data.resultAntiChemical.phone
+            : '전화번호'}
+        </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          <span>{data.resultAntiChemical.address}</span>
+          <span>
+            {localStorage.getItem('recommend')
+              ? data.resultAntiChemical.address
+              : '가게주소'}
+          </span>
         </StoreAdd>
       </Store>
     </Out>

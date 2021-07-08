@@ -198,7 +198,6 @@ const Img = styled.div`
 
 function ReNoPla() {
   const data = JSON.parse(localStorage.getItem('recommend') || '{}');
-
   return (
     <Out>
       <ListTitle>No Plastic</ListTitle>
@@ -206,11 +205,23 @@ function ReNoPla() {
         <img src="/img/zero.jpeg" alt="store"></img>
       </Img>
       <Store>
-        <StoreName>{data.resultAntiPlastic.name}</StoreName>
-        <StoreText>{data.resultAntiPlastic.phone}</StoreText>
+        <StoreName>
+          {localStorage.getItem('recommend')
+            ? data.resultAntiPlastic.name
+            : '가게이름'}
+        </StoreName>
+        <StoreText>
+          {localStorage.getItem('recommend')
+            ? data.resultAntiPlastic.phone
+            : '전화번호'}
+        </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          <span>{data.resultAntiPlastic.address}</span>
+          <span>
+            {localStorage.getItem('recommend')
+              ? data.resultAntiPlastic.address
+              : '가게주소'}
+          </span>
         </StoreAdd>
       </Store>
     </Out>
