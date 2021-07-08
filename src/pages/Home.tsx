@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Footer from '../components/Home/Footer';
-import Rending from '../components/Home/Rending';
-import Slogan1 from '../components/Home/Slogan1';
-import Slogan2 from '../components/Home/Slogan2';
-import Ranking from '../components/Home/Ranking';
-import Recommends from '../components/Home/Recommends';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Footer from "../components/Home/Footer";
+import Rending from "../components/Home/Rending";
+import Slogan1 from "../components/Home/Slogan1";
+import Slogan2 from "../components/Home/Slogan2";
+import Ranking from "../components/Home/Ranking";
+import Recommends from "../components/Home/Recommends";
+import styled from "styled-components";
+import Loading from "./Loading";
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
@@ -45,7 +46,7 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home({isLogin}: any) {
+function Home({ isLogin, loading }: any) {
   //탑으로 올라가는 버튼 나타는 유무
   const [isBlock, setBlock] = useState(false);
   // 스크롤 위치 추적용 (랜딩페이지로 추적함)
@@ -76,56 +77,61 @@ function Home({isLogin}: any) {
   }, [topbtn]);
 
   useEffect(() => {
-    document.getElementById('home')?.addEventListener('scroll', test);
+    document.getElementById("home")?.addEventListener("scroll", test);
     return () =>
-      document.getElementById('home')?.removeEventListener('scroll', test);
+      document.getElementById("home")?.removeEventListener("scroll", test);
   }, []);
 
   const test = () => {
-    if (document.getElementById('home')) {
+    if (document.getElementById("home")) {
       setTopbtn(
         Math.abs(
           Number(
-            document.getElementById('rending')?.getBoundingClientRect().top,
-          ),
-        ),
+            document.getElementById("rending")?.getBoundingClientRect().top
+          )
+        )
       );
     }
   };
 
   const handleScroll = () => {
-    document.getElementById('home')?.scrollTo({
+    document.getElementById("home")?.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   return (
-    <HomeOut id="home">
-      {isBlock ? (
-        <TopBtn onClick={handleScroll} id="topbtn">
-          TOP
-        </TopBtn>
+    <>
+      {loading === true ? (
+        <Loading></Loading>
       ) : (
-        <></>
-      )}
+        <HomeOut id="home">
+          {isBlock ? (
+            <TopBtn onClick={handleScroll} id="topbtn">
+              TOP
+            </TopBtn>
+          ) : (
+            <></>
+          )}
 
-      {isLogin ? <></> : <Rending></Rending>}
-      {isLogin ? <></> : <Recommends></Recommends>}
-      {isLogin ? (
-        <></>
-      ) : (
-        <>
-          <Slogan1></Slogan1>
-          <Slogan2></Slogan2>
-        </>
-      )}
+          {isLogin ? <></> : <Rending></Rending>}
+          {isLogin ? <></> : <Recommends></Recommends>}
+          {isLogin ? (
+            <></>
+          ) : (
+            <>
+              <Slogan1></Slogan1>
+              <Slogan2></Slogan2>
+            </>
+          )}
 
-      {isLogin ? <Ranking></Ranking> : <></>}
-      {isLogin ? <Recommends></Recommends> : <></>}
-      <Footer></Footer>
-    </HomeOut>
+          {isLogin ? <Ranking></Ranking> : <></>}
+          {isLogin ? <Recommends></Recommends> : <></>}
+          <Footer></Footer>
+        </HomeOut>
+      )}
+    </>
   );
 }
 export default Home;
-
