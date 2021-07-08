@@ -209,8 +209,12 @@ const NavUl2 = styled.ul`
       align-items: center;
       justify-content: center;
       font-size: 2rem;
+      color: #fff;
+
       /* border-bottom: 1px solid #fff; */
       &:hover {
+        color: #189cc4;
+
         background-color: #fff;
         & a {
           color: #189cc4;

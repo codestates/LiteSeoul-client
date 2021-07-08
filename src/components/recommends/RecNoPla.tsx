@@ -10,11 +10,11 @@ const Out = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  &:hover {
+  /* cursor: pointer; */
+  /* &:hover {
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
       rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  }
+  } */
   @media screen and (max-width: 1401px) {
     height: 65%;
   }
@@ -73,7 +73,8 @@ const ListTitle = styled.div`
 
 const Store = styled.div`
   width: 200px;
-  height: 180px;
+  height: 220px;
+
   /* border: 1px solid red; */
   position: absolute;
   bottom: 8%;
@@ -104,7 +105,7 @@ const StoreName = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
   /* background-color: green; */
   @media screen and (max-width: 1501px) {
@@ -115,6 +116,10 @@ const StoreName = styled.div`
   }
   @media screen and (max-width: 1201px) {
     width: 140px;
+  }
+  @media screen and (max-width: 901px) {
+    width: 250px;
+    justify-content: center;
   }
 `;
 
@@ -152,6 +157,7 @@ const StoreAdd = styled.div`
     width: 30px;
     height: 30px;
     object-fit: cover;
+    margin-right: 5px;
   }
   @media screen and (max-width: 1401px) {
     width: 160px;
@@ -160,6 +166,10 @@ const StoreAdd = styled.div`
   @media screen and (max-width: 1201px) {
     width: 140px;
     font-size: 0.6rem;
+  }
+  @media screen and (max-width: 901px) {
+    width: 250px;
+    /* border: 1px solid red; */
   }
 `;
 
@@ -187,6 +197,8 @@ const Img = styled.div`
 `;
 
 function ReNoPla() {
+  const data = JSON.parse(localStorage.getItem('recommend') || '{}');
+
   return (
     <Out>
       <ListTitle>No Plastic</ListTitle>
@@ -194,13 +206,11 @@ function ReNoPla() {
         <img src="/img/zero.jpeg" alt="store"></img>
       </Img>
       <Store>
-        <StoreName>The Peaker</StoreName>
-        <StoreText>
-          지속가능한 소비문화를 정립시키고 회복시키기 위한 온/오프라인공간
-        </StoreText>
+        <StoreName>{data.resultAntiPlastic.name}</StoreName>
+        <StoreText>{data.resultAntiPlastic.phone}</StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          <span>성동구 왕십리로 115 헤어그라운드</span>
+          <span>{data.resultAntiPlastic.address}</span>
         </StoreAdd>
       </Store>
     </Out>

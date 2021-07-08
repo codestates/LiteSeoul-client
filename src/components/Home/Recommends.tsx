@@ -23,11 +23,11 @@ const RecommendsMain = styled.div`
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: 2s all;
-  transform: translateX(100%);
+  transition: 1.2s all;
+  transform: scale(0.7);
   &.recommend1 {
     opacity: 1;
-    transform: translateX(0%);
+    transform: scale(1);
   }
 `;
 

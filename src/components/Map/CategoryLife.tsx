@@ -11,11 +11,11 @@ const CategoryList = styled.div`
   align-items: center;
   cursor: pointer;
   & div:nth-child(1) {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     &img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       object-fit: cover;
     }
   }
@@ -117,7 +117,7 @@ function CategoryLife(props: any) {
   return (
     <CategoryList onClick={handelCafe}>
       <div>
-        <img src="icon/certification_mypage.svg" alt="category"></img>
+        <img src="icon/life.svg" alt="category"></img>
       </div>
       <div>
         <span>Life</span>

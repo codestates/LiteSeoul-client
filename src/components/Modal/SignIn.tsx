@@ -165,15 +165,15 @@ const SignInInput = styled.ul`
       letter-spacing: 0.2rem;
     }
   }
-  & li:nth-child(5) {
+  /* & li:nth-child(5) {
     color: #000000;
     border: 1px solid #86868b;
     cursor: pointer;
     &:hover {
       letter-spacing: 0.2rem;
     }
-  }
-  & li:nth-child(6) {
+  } */
+  & li:nth-child(5) {
     background: #189cc4;
     color: #fff;
     cursor: pointer;
@@ -181,7 +181,7 @@ const SignInInput = styled.ul`
       letter-spacing: 0.2rem;
     }
   }
-  & li:nth-child(7) {
+  & li:nth-child(6) {
     margin-top: 30px;
     width: 150px;
     height: auto;
@@ -345,7 +345,7 @@ function SignIn(props: any) {
               <li>
                 {/* <a href="http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login">kakao</a> */}
               </li>
-              <li>Google Login</li>
+              {/* <li>Google Login</li> */}
               <li onClick={LoginBtn}>로그인</li>
               <li>
                 <div onClick={handleAccount}>

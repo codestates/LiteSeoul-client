@@ -141,7 +141,6 @@ const List2 = styled.div`
     width: 6px;
   }
   &::-webkit-scrollbar-thumb {
-    height: 20%;
     background-color: #189cc4;
     border-radius: 4px;
   }
