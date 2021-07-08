@@ -177,7 +177,7 @@ function LikePlace({myinfo}: any) {
     <LikePlaceOut>
       <LikePlaceTitle>자주 방문한 곳</LikePlaceTitle>
       <LikePlaceMain>
-        {likePlaces.map((likePlace: any) => (
+        {likePlaces.length !== 0 ? likePlaces.map((likePlace: any) => (
           <LikePlaceList key={likePlace.id} onClick={consoleHandler}>
             <LikePlaceListNum>{likePlace.rank}</LikePlaceListNum>
             <LikePlaceStore>{likePlace.shop.name}</LikePlaceStore>
@@ -186,7 +186,7 @@ function LikePlace({myinfo}: any) {
               {likePlace.shop.address}
             </LikePlaceAddr>
           </LikePlaceList>
-        ))}
+        )) : <div>인증을 하시면서 방문기록을 등록해보세요!</div>}
       </LikePlaceMain>
     </LikePlaceOut>
   );

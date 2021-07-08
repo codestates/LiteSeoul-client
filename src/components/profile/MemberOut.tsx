@@ -78,7 +78,7 @@ function MemberOut() {
         });
     } else {
       alert("탈퇴과정을 취소하였습니다😆");
-      window.location.href = "http://localhost:3000/mypage4/";
+      // window.location.href = "http://localhost:3000/mypage/";
     }
   };
 

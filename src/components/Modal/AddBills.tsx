@@ -85,7 +85,7 @@ const BillsImg = styled.img`
   padding: 50px;
 `;
 
-function AddBills({ handleModalClose }: any) {
+function AddBills({ handleModalClose, handleMypageNow }: any) {
   // console.log(handleModalClose)/
 
   type Bills = {
@@ -130,7 +130,11 @@ function AddBills({ handleModalClose }: any) {
           "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/add",
           formData
         )
-        .then((res) => console.log(res));
+        .then((res) => {
+          console.log(res)
+          handleMypageNow("billslog")
+          window.location.reload();
+        });
     }
   };
 

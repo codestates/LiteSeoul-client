@@ -89,28 +89,27 @@ const MyPageNavUl = styled.ul`
     justify-content: center;
     align-items: center;
     /* background: yellow; */
-    & a {
-      width: 70%;
-      height: 50px;
-      border-radius: 25px;
-      border: 3px solid #189cc4;
-      color: #189cc4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 25px;
-      position: relative;
+    cursor: pointer;
+    width: 70%;
+    height: 50px;
+    border-radius: 25px;
+    border: 3px solid #189cc4;
+    color: #189cc4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    position: relative;
 
-      &.active {
-        border: none;
-        background: #ff735d;
-        color: #fff;
-      }
-      &:hover {
-        border: none;
-        background: #ff735d;
-        color: #fff;
-      }
+    &.active {
+      border: none;
+      background: #ff735d;
+      color: #fff;
+    }
+    &:hover {
+      border: none;
+      background: #ff735d;
+      color: #fff;
     }
   }
 `;
@@ -138,8 +137,8 @@ const NavHidden = styled.div`
   }
 `;
 
-function MypageNav({myinfo}: any) {
-  const {nick} = myinfo
+function MypageNav({ myinfo, handleMypageNow }: any) {
+  const { nick } = myinfo;
   const handleNav = () => {
     document.getElementById("nav1")?.classList.toggle("nav1");
     document.getElementById("hidden1")?.classList.toggle("hidden1");
@@ -159,24 +158,16 @@ function MypageNav({myinfo}: any) {
         <MyPageNavMain>
           <MyPageNavUl>
             <li>
-              <NavLink exact to="/mypage">
-                MyPage
-              </NavLink>
+              <div onClick={() => handleMypageNow("justinfo")}>Mypage</div>
             </li>
             <li>
-              <NavLink exact to="/mypage2">
-                인증하기
-              </NavLink>
+              <div onClick={() => handleMypageNow("billslog")}>인증하기</div>
             </li>
             <li>
-              <NavLink exact to="/mypage3">
-                즐겨찾기
-              </NavLink>
+              <div onClick={() => handleMypageNow("likeplace")}>즐겨찾기</div>
             </li>
             <li>
-              <NavLink exact to="/mypage4">
-                회원탈퇴
-              </NavLink>
+              <div onClick={() => handleMypageNow("memberout")}>회원탈퇴</div>
             </li>
           </MyPageNavUl>
         </MyPageNavMain>
