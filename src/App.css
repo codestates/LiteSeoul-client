@@ -1090,3 +1090,65 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* 개인유저 정보수정 */
+.EditForm {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 600px) {
+  .EditForm{
+    width: 80%;
+  } 
+}
+
+.EditNickName {
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditNickName:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+.EditPhone{
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditPhone:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+.EditText{
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditText:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+.EditPassword {
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditPassword:focus {
+  border-bottom: 2px solid #ff735d;
+}
