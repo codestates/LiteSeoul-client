@@ -138,7 +138,7 @@ const BillsUpload = styled.div`
   justify-content: center;
 `;
 
-function BillsLog() {
+function BillsLog({handleMypageNow}: any) {
   const [show, setShow] = useState(false);
   const [logs, setLogs] = useState([]);
 
@@ -159,10 +159,8 @@ function BillsLog() {
         .then((res) => {
           alert("인증기록을 삭제하였습니다.");
           window.location.reload();
-          // window.location.replace("http://localhost:3000/mypage2")
-          // res.redirect(url, "/mypage2")
+          window.location.replace("http://localhost:3000/mypage")
         });
-      // console.log(e.target.id)
     } else {
       alert("삭제과정을 취소하였습니다.");
     }
@@ -251,7 +249,7 @@ function BillsLog() {
       </BillsOut>
       {show ? (
         <BillsUpload>
-          <AddBills handleModalClose={handleModalClose} />
+          <AddBills handleMypageNow={handleMypageNow} handleModalClose={handleModalClose} />
         </BillsUpload>
       ) : (
         <></>
