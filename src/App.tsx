@@ -37,7 +37,8 @@ function App(): any {
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState([]);
   const [isSignUp, setSignUp] = useState<boolean>(false);
-  console.log("회원가입 모달창", isSignUp);
+  // console.log("회원가입 모달창", isSignUp);
+  const [loading, setLoading] = useState(false);
   const [myinfo, setMyinfo] = useState<userInfoForm>({
     id: 0,
     name: "",
@@ -93,11 +94,12 @@ function App(): any {
     setSignUp(!isSignUp);
   };
 
-  const [loading, setLoading] = useState(false);
+  
   // 토큰을 받아와서 세션 스토리지에 저장 & myinfo 저장하는 이펙트 훅
   useEffect(() => {
     const url = new URL(window.location.href);
     if (sessionStorage.getItem("access_token")) {
+      setLogin(true);
       axios
         .post(
           "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get",
@@ -130,9 +132,9 @@ function App(): any {
         },
         data: data,
       }).then((res) => {
-        console.log("============ setLogin을 true로 변경")
+        // console.log("============ setLogin을 true로 변경")
         setLogin(true);
-        console.log("============ setLoading을 true로 변경")
+        // console.log("============ setLoading을 true로 변경")
         setLoading(true)
         axios
           .post(
@@ -142,10 +144,10 @@ function App(): any {
             }
           )
           .then((result) => {
-            console.log("============== 토큰까지 넣는 것 완료")
+            // console.log("============== 토큰까지 넣는 것 완료")
             sessionStorage.setItem("access_token", result.data);
             window.location.reload();
-            console.log("============== setLoading을 false로 변경")
+            // console.log("============== setLoading을 false로 변경")
             setLoading(false)
           });
       });
@@ -163,11 +165,11 @@ function App(): any {
     } else {
       setLogin(false);
     }
-  }, []);
+  }, [isLogin]);
 
   return (
     <BrowserRouter>
-      <Nav isLogin={isLogin} handleLoginModal={handleLoginModal}></Nav>
+      <Nav isLogin={isLogin} handleLoginModal={handleLoginModal} loading={loading}></Nav>
       <Switch>
         {/* <Route 
           path="/donation"

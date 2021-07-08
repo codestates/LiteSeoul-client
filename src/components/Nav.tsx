@@ -1,6 +1,6 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
 
 const NavAni = keyframes`
   0% {
@@ -43,7 +43,7 @@ const NavBtn = styled.div`
   display: none;
   cursor: pointer;
   z-index: 998;
-  background-image: url('/icon/menu_white.svg');
+  background-image: url("/icon/menu_white.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -54,7 +54,7 @@ const NavBtn = styled.div`
     right: 5%;
     top: 5%;
     &.NavBtn {
-      background-image: url('/icon/close_white.svg');
+      background-image: url("/icon/close_white.svg");
     }
   }
 `;
@@ -225,12 +225,12 @@ const NavUl2 = styled.ul`
 
 function Nav(props: any) {
   const handleNav = () => {
-    document.getElementById('MainNavHidden')?.classList.toggle('MainNavHidden');
-    document.getElementById('NavId')?.classList.toggle('NavBtn');
+    document.getElementById("MainNavHidden")?.classList.toggle("MainNavHidden");
+    document.getElementById("NavId")?.classList.toggle("NavBtn");
   };
 
   const handelNav2 = () => {
-    document.getElementById('MainNavHidden')?.classList.remove('MainNavHidden');
+    document.getElementById("MainNavHidden")?.classList.remove("MainNavHidden");
   };
 
   const deleteSession = () => {
@@ -243,62 +243,25 @@ function Nav(props: any) {
 
   return (
     <>
-      <NavBtn onClick={handleNav} id="NavId"></NavBtn>
-      <NavUl2 id="MainNavHidden">
-        <li>
-          <NavLink exact to="/" onClick={handelNav2}>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink exact to="/map" onClick={handelNav2}>
-            Map
-          </NavLink>
-        </li>
-        {props.isLogin ? (
-          <li>
-            <NavLink exact to="/mypage" onClick={handelNav2}>
-              MyPage
-            </NavLink>
-          </li>
-        ) : (
-          <></>
-        )}
-
-        {props.isLogin ? (
-          <li
-            style={{
-              color: '#ff735D',
-            }}
-          >
-            Logout
-          </li>
-        ) : (
-          <li onClick={props.handleLoginModal}>Login</li>
-        )}
-      </NavUl2>
-      <NavOut>
-        <NavTopColor></NavTopColor>
-        <NavMainOut>
-          <Logo>
-            <NavLink exact to="/">
-              LiteSeoul
-            </NavLink>
-          </Logo>
-          <NavUl>
+      {props.loading === true ? (
+        <></>
+      ) : (
+        <>
+          <NavBtn onClick={handleNav} id="NavId"></NavBtn>
+          <NavUl2 id="MainNavHidden">
             <li>
-              <NavLink exact to="/">
+              <NavLink exact to="/" onClick={handelNav2}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink exact to="/map">
+              <NavLink exact to="/map" onClick={handelNav2}>
                 Map
               </NavLink>
             </li>
             {props.isLogin ? (
               <li>
-                <NavLink exact to="/mypage">
+                <NavLink exact to="/mypage" onClick={handelNav2}>
                   MyPage
                 </NavLink>
               </li>
@@ -308,9 +271,8 @@ function Nav(props: any) {
 
             {props.isLogin ? (
               <li
-                onClick={deleteSession}
                 style={{
-                  color: '#ff735D',
+                  color: "#ff735D",
                 }}
               >
                 Logout
@@ -318,9 +280,53 @@ function Nav(props: any) {
             ) : (
               <li onClick={props.handleLoginModal}>Login</li>
             )}
-          </NavUl>
-        </NavMainOut>
-      </NavOut>
+          </NavUl2>
+          <NavOut>
+            <NavTopColor></NavTopColor>
+            <NavMainOut>
+              <Logo>
+                <NavLink exact to="/">
+                  LiteSeoul
+                </NavLink>
+              </Logo>
+              <NavUl>
+                <li>
+                  <NavLink exact to="/">
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink exact to="/map">
+                    Map
+                  </NavLink>
+                </li>
+                {props.isLogin ? (
+                  <li>
+                    <NavLink exact to="/mypage">
+                      MyPage
+                    </NavLink>
+                  </li>
+                ) : (
+                  <></>
+                )}
+
+                {props.isLogin ? (
+                  <li
+                    onClick={deleteSession}
+                    style={{
+                      color: "#ff735D",
+                    }}
+                  >
+                    Logout
+                  </li>
+                ) : (
+                  <li onClick={props.handleLoginModal}>Login</li>
+                )}
+              </NavUl>
+            </NavMainOut>
+          </NavOut>
+        </>
+      )}
     </>
   );
 }

@@ -638,31 +638,8 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     if (!isPassword) {
       setErrMessage("비밀번호를 다시 확인해주세요");
     } else {
-      if (userImg === "" || userImg === undefined) {
-        formData.append("UserImg", userImg);
-        if (token !== null) {
-          formData.append("access_token", token);
-        }
-        formData.append("nick", userNick);
-        formData.append("phone", userPhone);
-        formData.append("profileText", myText);
-        formData.append("password", password);
-
-        // 이미지 변화가 있다면~
-        await axios
-          .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/update",
-            formData
-          )
-          .then((res) => {
-            console.log(res);
-            window.location.replace("http://localhost:3000/mypage/");
-          })
-          .catch((err) => {
-            alert("비밀번호가 맞지않아요!");
-          });
-        // 이미지 변화가 없다면~
-      } else {
+      if(userImg === "") {
+        console.log("이미지없이 변화 요청")
         await axios
           .post(
             "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/changeinfo",
@@ -676,12 +653,41 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
           )
           .then((res) => {
             console.log(res);
+            alert("정보수정이 되었습니다! 홈 페이지로 이동합니다 :)")
             window.location.replace("http://localhost:3000/mypage/");
           })
           .catch((err) => {
             alert("비밀번호가 맞지않아요!");
           });
       }
+      if (userImg !== "" || userImg !== undefined) {
+        console.log(userImg)
+        formData.append("UserImg", userImg);
+        if (token !== null) {
+          formData.append("access_token", token);
+        }
+        formData.append("nick", userNick);
+        formData.append("phone", userPhone);
+        formData.append("profileText", myText);
+        formData.append("password", password);
+
+        console.log("이미지포함 변화 요청")
+        // 이미지 변화가 있다면~
+        await axios
+          .post(
+            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/update",
+            formData
+          )
+          .then((res) => {
+            console.log(res);
+            alert("정보수정이 되었습니다! 홈 페이지로 이동합니다 :)")
+            window.location.replace("http://localhost:3000/mypage/");
+          })
+          .catch((err) => {
+            alert("비밀번호가 맞지않아요!");
+          });
+        // 이미지 변화가 없다면~
+      } 
     }
   };
 

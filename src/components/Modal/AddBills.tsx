@@ -130,7 +130,10 @@ function AddBills({ handleModalClose }: any) {
           "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/add",
           formData
         )
-        .then((res) => console.log(res));
+        .then((res) => {
+          console.log(res)
+          window.location.replace("http://localhost:3000/mypage/");
+        });
     }
   };
 
