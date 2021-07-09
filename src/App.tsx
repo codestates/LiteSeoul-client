@@ -13,6 +13,7 @@ import SignUp from './components/Modal/SignUp';
 import { useEffect } from 'react';
 import queryStringify from 'qs-stringify';
 import Loading from './pages/Loading';
+import Participation from './pages/Participation'
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
