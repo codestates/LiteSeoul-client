@@ -13,7 +13,7 @@ import SignUp from './components/Modal/SignUp';
 import { useEffect } from 'react';
 import queryStringify from 'qs-stringify';
 import Loading from './pages/Loading';
-import Participation from './pages/Participation'
+import Participation from './pages/Participation';
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -40,10 +40,10 @@ function App(): any {
   const [loading, setLoading] = useState(false);
   const [myinfo, setMyinfo] = useState<userInfoForm>({
     id: 0,
-    name: "",
-    email: "",
-    nick: "",
-    phone: "",
+    name: '',
+    email: '',
+    nick: '',
+    phone: '',
     level: 0,
     currentExp: 0,
     maxExp: 0,
@@ -64,53 +64,53 @@ function App(): any {
       });
 
     localStorage.setItem(
-      "recommend",
+      'recommend',
       JSON.stringify({
         nearest: {
-          address: "성동구 왕십리로 115 헤이그라운드 9층",
-          category: "life",
+          address: '성동구 왕십리로 115 헤이그라운드 9층',
+          category: 'life',
           distance: 3.608268553240311,
           id: 6,
-          latitude: "37.54804049927143",
-          longitude: "127.04413748468407",
-          name: "더피커",
-          phone: "070-4118-0710",
-          recommend: "antiPlastic",
+          latitude: '37.54804049927143',
+          longitude: '127.04413748468407',
+          name: '더피커',
+          phone: '070-4118-0710',
+          recommend: 'antiPlastic',
         },
         resultAntiChemical: {
-          address: "서대문구 홍제천로2길 100, 1층",
-          category: "cafe",
+          address: '서대문구 홍제천로2길 100, 1층',
+          category: 'cafe',
           id: 17,
-          latitude: "37.57177467293018",
-          longitude: "126.92323569632859",
-          name: "카페 샘",
-          phone: "010-3646-4135",
-          recommend: "antiChemical",
+          latitude: '37.57177467293018',
+          longitude: '126.92323569632859',
+          name: '카페 샘',
+          phone: '010-3646-4135',
+          recommend: 'antiChemical',
         },
         resultAntiPlastic: {
-          address: "금천구 독산로 312 1층",
-          category: "cafe",
+          address: '금천구 독산로 312 1층',
+          category: 'cafe',
           id: 3,
-          latitude: "37.47491311875498",
-          longitude: "126.90365938283361",
-          name: "데일리로스팅",
-          phone: "070-4205-1212",
-          recommend: "antiPlastic",
+          latitude: '37.47491311875498',
+          longitude: '126.90365938283361',
+          name: '데일리로스팅',
+          phone: '070-4205-1212',
+          recommend: 'antiPlastic',
         },
         resultRecycle: {
-          address: "서대문구 연희동 708번지 1층",
-          category: "cafe",
+          address: '서대문구 연희동 708번지 1층',
+          category: 'cafe',
           id: 12,
-          latitude: "37.575344352775566",
-          longitude: "126.92843671167105",
-          name: "보틀팩토리",
-          phone: "02-3144-0703",
-          recommend: "recycle",
+          latitude: '37.575344352775566',
+          longitude: '126.92843671167105',
+          name: '보틀팩토리',
+          phone: '02-3144-0703',
+          recommend: 'recycle',
         },
-      })
+      }),
     );
 
-    console.log(localStorage.getItem("recommend"));
+    console.log(localStorage.getItem('recommend'));
   }, []);
 
   //내위치 위도경도
@@ -123,7 +123,7 @@ function App(): any {
         lat: lat,
         lon: lon,
       };
-      localStorage.setItem("nav", JSON.stringify(latlon));
+      localStorage.setItem('nav', JSON.stringify(latlon));
     });
   }, []);
 
@@ -212,7 +212,7 @@ function App(): any {
       sessionStorage.getItem('access_token') !== null ||
       localStorage.getItem('id') !== null
     ) {
-      console.log("======== 로그인 유지! true!");
+      console.log('======== 로그인 유지! true!');
       setLogin(true);
     } else {
       setLogin(false);
@@ -304,4 +304,3 @@ function App(): any {
 }
 
 export default App;
-
