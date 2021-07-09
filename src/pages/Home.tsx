@@ -7,6 +7,7 @@ import Slogan2 from '../components/Home/Slogan2';
 import Ranking from '../components/Home/Ranking';
 import Recommends from '../components/Home/Recommends';
 import styled from 'styled-components';
+import Bike from '../components/Home/bikeAni';
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
@@ -165,6 +166,7 @@ function Home(props: any) {
 
       {props.isLogin ? <Ranking></Ranking> : <></>}
       {props.isLogin ? <Recommends></Recommends> : <></>}
+      <Bike></Bike>
       <Footer></Footer>
     </HomeOut>
   );
