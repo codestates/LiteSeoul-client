@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MapNav from '../components/Map/MapNav';
 import KakaoMap from '../components/Map/KakaoMap';
-// import KakaoMap2 from '../components/Map/KakaoMap2';
 import axios from 'axios';
+import queryStringify from 'qs-stringify';
 
 const MapOut = styled.div`
   width: 100%;
@@ -46,9 +46,80 @@ type MapProps = {
   handleModal: () => void;
   isModal: boolean;
   handleModalData: any;
+  setLogin: any;
+  setMyinfo: any;
+  setLoading: any;
 };
 
-function Map({ handleModal, isModal, handleModalData }: MapProps) {
+function Map({
+  handleModal,
+  isModal,
+  handleModalData,
+  setLogin,
+  setMyinfo,
+  setLoading,
+}: MapProps) {
+  useEffect(() => {
+    var url = new URL(window.location.href);
+    console.log(url);
+    if (sessionStorage.getItem('access_token')) {
+      setLogin(true);
+      axios
+        .post(
+          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get',
+          {
+            access_token: sessionStorage.getItem('access_token'),
+          },
+        )
+        .then((res) => {
+          // console.log(res)
+          setMyinfo(res.data);
+        });
+    }
+
+    if (url.searchParams.get('code')) {
+      const code = url.searchParams.get('code');
+
+      console.log('kakao');
+      const data2: any = {
+        grant_type: 'authorization_code',
+        client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+        redirect_uri: url,
+        code: code,
+      };
+
+      const data = queryStringify(data2);
+
+      axios({
+        method: 'post',
+        url: 'https://kauth.kakao.com/oauth/token',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        data: data,
+      }).then((res) => {
+        // console.log("============ setLogin을 true로 변경")
+        setLogin(true);
+        // console.log("============ setLoading을 true로 변경")
+        setLoading(true);
+        axios
+          .post(
+            'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login',
+            {
+              kakaoToken: res.data.access_token,
+            },
+          )
+          .then((result) => {
+            // console.log("============== 토큰까지 넣는 것 완료")
+            sessionStorage.setItem('access_token', result.data);
+            window.location.reload();
+            // console.log("============== setLoading을 false로 변경")
+            setLoading(false);
+          });
+      });
+    }
+  }, []);
+
   // console.log(isModal);
   var data = JSON.parse(localStorage.getItem('total') || '{}');
   var axioscafe = data.filter((el: any) => {

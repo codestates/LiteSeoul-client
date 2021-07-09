@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Footer from "../components/Home/Footer";
-import Rending from "../components/Home/Rending";
-import Slogan1 from "../components/Home/Slogan1";
-import Slogan2 from "../components/Home/Slogan2";
-import Ranking from "../components/Home/Ranking";
-import Recommends from "../components/Home/Recommends";
-import styled from "styled-components";
-import Loading from "./Loading";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Footer from '../components/Home/Footer';
+import Rending from '../components/Home/Rending';
+import Slogan1 from '../components/Home/Slogan1';
+import Slogan2 from '../components/Home/Slogan2';
+import Ranking from '../components/Home/Ranking';
+import Recommends from '../components/Home/Recommends';
+import styled from 'styled-components';
 
 const HomeOut = styled.div`
   /* padding-top: 90px; */
@@ -77,19 +76,19 @@ function Home(props: any) {
   }, [topbtn]);
 
   useEffect(() => {
-    document.getElementById("home")?.addEventListener("scroll", test);
+    document.getElementById('home')?.addEventListener('scroll', test);
     return () =>
-      document.getElementById("home")?.removeEventListener("scroll", test);
+      document.getElementById('home')?.removeEventListener('scroll', test);
   }, []);
 
   const test = () => {
-    if (document.getElementById("home")) {
+    if (document.getElementById('home')) {
       setTopbtn(
         Math.abs(
           Number(
-            document.getElementById("rending")?.getBoundingClientRect().top
-          )
-        )
+            document.getElementById('rending')?.getBoundingClientRect().top,
+          ),
+        ),
       );
     }
 
@@ -137,43 +136,37 @@ function Home(props: any) {
   };
 
   const handleScroll = () => {
-    document.getElementById("home")?.scrollTo({
+    document.getElementById('home')?.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   return (
-    <>
-      {props.loading === true ? (
-        <Loading></Loading>
+    <HomeOut id="home">
+      {isBlock ? (
+        <TopBtn onClick={handleScroll} id="topbtn">
+          TOP
+        </TopBtn>
       ) : (
-        <HomeOut id="home">
-          {isBlock ? (
-            <TopBtn onClick={handleScroll} id="topbtn">
-              TOP
-            </TopBtn>
-          ) : (
-            <></>
-          )}
-
-          {props.isLogin ? <></> : <Rending></Rending>}
-          {props.isLogin ? <></> : <Recommends></Recommends>}
-          {props.isLogin ? (
-            <></>
-          ) : (
-            <>
-              <Slogan1></Slogan1>
-              <Slogan2></Slogan2>
-            </>
-          )}
-
-          {props.isLogin ? <Ranking></Ranking> : <></>}
-          {props.isLogin ? <Recommends></Recommends> : <></>}
-          <Footer></Footer>
-        </HomeOut>
+        <></>
       )}
-    </>
+
+      {props.isLogin ? <></> : <Rending></Rending>}
+      {props.isLogin ? <></> : <Recommends></Recommends>}
+      {props.isLogin ? (
+        <></>
+      ) : (
+        <>
+          <Slogan1></Slogan1>
+          <Slogan2></Slogan2>
+        </>
+      )}
+
+      {props.isLogin ? <Ranking></Ranking> : <></>}
+      {props.isLogin ? <Recommends></Recommends> : <></>}
+      <Footer></Footer>
+    </HomeOut>
   );
 }
 export default Home;
