@@ -264,6 +264,11 @@ function Nav(props: any) {
                 Map
               </NavLink>
             </li>
+            <li>
+              <NavLink exact to="/participation" onClick={handelNav2}>
+                Participation
+              </NavLink>
+            </li>
             {props.isLogin ? (
               <li>
                 <NavLink exact to="/mypage" onClick={handelNav2}>
@@ -305,6 +310,11 @@ function Nav(props: any) {
                     Map
                   </NavLink>
                 </li>
+                <li>
+              <NavLink exact to="/participation">
+                Participation
+              </NavLink>
+            </li>
                 {props.isLogin ? (
                   <li>
                     <NavLink exact to="/mypage">

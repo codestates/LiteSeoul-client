@@ -396,7 +396,7 @@ const SignUp = (props: any) => {
                   required: true,
                 })}
               />
-              <label htmlFor="signupCk">이용약관에 동의합니다</label>
+              <label htmlFor="signupCk">{" LiteSeoul에서의 개인정보 활용에 동의합니다."}</label>
             </SignUpCheckBox>
             <SignUpButton type="submit">CREATE ACCOUNT</SignUpButton>
           </SignUpForm>
