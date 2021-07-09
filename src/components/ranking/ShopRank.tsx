@@ -203,10 +203,11 @@ function ShopRank() {
   useEffect(() => {
     axios
       .get(
-        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/api/shop/rank"
+        // "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/api/shop/rank"
+        "https://www.api.liteseoul.com/shop/rank"
       )
       .then((res) => {
-        console.log(shopRankdata);
+       console.log(res.data)
         return setShopRankdata(res.data);
       });
   }, []);
@@ -232,10 +233,10 @@ function ShopRank() {
   return (
     <>
       {/* 서버정보 받은 렌더링 코드 */}
-      {/* {shopdata.map((data: any) => { */}
+      {shopRankdata.map((data: any) => {
 
       {/* 더미데이터 렌더링 코드 */}
-      {dummyShops.map((data: any) => {
+      {/* {dummyShops.map((data: any) => { */}
         return (
           <ShopRankOut key={data.id}>
             <RankNumber>{data.id}</RankNumber>
@@ -244,16 +245,16 @@ function ShopRank() {
                 <img src="img/main_recycle.svg" alt="user"></img>
               </ShopImg>
               <ShopTitle>{data.name}</ShopTitle>
-              <ShopContent>{data.message}</ShopContent>
+              <ShopContent>{data.text}</ShopContent>
               <ShopContent2>
                 <Like>
                   <img src="icon/like_fill.svg" alt="like"></img>
-                  <span>Likes {data.likes}</span>
+                  <span>Likes {data.likeLength}</span>
                 </Like>
                 <Hr></Hr>
                 <Add>
                   <img src="icon/location_main.svg" alt="location"></img>
-                  <span>{data.ground}</span>
+                  <span>{data.address}</span>
                 </Add>
               </ShopContent2>
             </AllRankers>
