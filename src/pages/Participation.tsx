@@ -43,12 +43,19 @@ const InputDetail = styled.div`
     font-size: 0.8rem;
   }
 `;
+const InputErr = styled.div`
+margin-top: 20px;
+font-size: 1rem;
+color: #ff735d;
+`
 
 const InputForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  /* margin: 0 30%; */
+  /* width: 40rem; */
 `;
 const InputName = styled.input`
   margin: 20px;
@@ -167,6 +174,19 @@ const InputText = styled.textarea`
 const InputSelectTitle = styled.div`
   color: #189cc4;
   font-weight: 700;
+  font-size: 1rem;
+  @media screen and (max-width: 1501px) {
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: 751px) {
+    font-size: 0.6rem;
+  }
+  @media screen and (max-width: 651px) {
+    font-size: 0.4rem;
+  }
+  @media screen and (max-width: 601px) {
+    font-size: 0.2rem;
+  }
 `
 
 const InputSelectBox = styled.div`
@@ -174,6 +194,19 @@ const InputSelectBox = styled.div`
   /* margin: 10px 0; */
   color: #ff735d;
   font-weight: 700;
+  font-size: 1rem;
+  @media screen and (max-width: 1501px) {
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: 751px) {
+    font-size: 0.6rem;
+  }
+  @media screen and (max-width: 651px) {
+    font-size: 0.4rem;
+  }
+  @media screen and (max-width: 601px) {
+    font-size: 0.2rem;
+  }
 `;
 
 const SelectInner = styled.div`
@@ -182,7 +215,7 @@ const SelectInner = styled.div`
 `;
 
 const InputFinal = styled.div`
-  width: 100%;
+  /* width: 100%; */
   height: 40px;
   /* border: 1px solid red; */
   /* display: grid; */
@@ -220,7 +253,8 @@ function Participation() {
   const [storeEmail, setStoreEmail] = useState("");
   const [category, setCategory] = useState("");
   const [text, setText] = useState("");
-  const [infoOk, setInfoOk] = useState(false);
+  const [infoOk, setInfoOk] = useState("");
+  const [errMessage, setErrorMessage] = useState("# 내용을 채워주세요!");
 
   const handleName = (e: any) => {
     setStoreName(e.target.value);
@@ -245,24 +279,39 @@ function Participation() {
 
   const handleInfoOk = (e: any) => {
     console.log(e);
-    if (e.target.value === "on") {
-      setInfoOk(true);
-    } else {
-      setInfoOk(false);
-    }
+    // if (e.target.value === "on") {
+    //   setInfoOk(true);
+    // } else {
+    //   setInfoOk(false);
+    // }
+    setInfoOk(e.target.value)
   };
 
   const handleSubmit = () => {
-    axios
-      .post("url", {
-        name: storeName,
-        num: marketNum,
-        email: storeEmail,
-        category: category,
-        text: text,
-        infoOk: infoOk,
-      })
-      .then((res) => console.log(res));
+
+    // 버튼누르면 바로 반응이 안온다.
+    const formData = new FormData();
+    formData.append("name", storeName)
+    formData.append("num", marketNum)
+    formData.append("email", storeEmail)
+    formData.append("catagory", category)
+    formData.append("text", text)
+    formData.append("infoOk", infoOk)
+
+
+    // 아마도 정보 보낼때 이렇게 보내야 할듯.
+    // axios
+    //   .post("url", {
+    //     name: storeName,
+    //     num: marketNum,
+    //     email: storeEmail,
+    //     category: category,
+    //     text: text,
+    //     infoOk: infoOk,
+    //   })
+    //   .then((res) => console.log(res));
+    
+
   };
 
   return (
@@ -274,6 +323,7 @@ function Participation() {
       <InputDetail>
         <div>Zero Waste를 실천하시는 사업자시라면</div>
         <div>LiteSeoul과 함께 하시는게 어떠세요?</div>
+        <InputErr>{errMessage}</InputErr>
       </InputDetail>
       <InputForm onSubmit={(e) => e.preventDefault()}>
         <InputName
@@ -314,7 +364,7 @@ function Participation() {
         ></InputText>
         <InputFinal>
           <input type="checkbox" onChange={handleInfoOk} />
-          <label>LiteSeoul에서의 사업자 정보 활용에 동의합니다.</label>
+          <label>LiteSeoul에서의 사업자 및 개인정보 활용에 동의합니다.</label>
         </InputFinal>
         <SubmitBtn type="submit" onClick={handleSubmit}>
           제출하기
