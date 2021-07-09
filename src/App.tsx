@@ -1,18 +1,18 @@
-import axios from "axios";
-import { useState } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import Marker from "./components/Modal/Marker";
-import Nav from "./components/Nav";
-import SignIn from "./components/Modal/SignIn";
-import Mypage from "./pages/Mypage";
-import Participation from "./pages/Participation";
-import NotFound from "./pages/NotFound";
-import Map from "./pages/Map";
-import SignUp from "./components/Modal/SignUp";
-import { useEffect } from "react";
-import queryStringify from "qs-stringify";
+import axios from 'axios';
+import { useState } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import './App.css';
+import Home from './pages/Home';
+import Marker from './components/Modal/Marker';
+import Nav from './components/Nav';
+import SignIn from './components/Modal/SignIn';
+import Mypage from './pages/Mypage';
+import NotFound from './pages/NotFound';
+import Map from './pages/Map';
+import SignUp from './components/Modal/SignUp';
+import { useEffect } from 'react';
+import queryStringify from 'qs-stringify';
+import Loading from './pages/Loading';
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -31,7 +31,7 @@ interface userInfoForm {
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
-  console.log("============= 로그인 여부", isLogin);
+  console.log('============= 로그인 여부', isLogin);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState([]);
   const [isSignUp, setSignUp] = useState<boolean>(false);
@@ -46,8 +46,8 @@ function App(): any {
     level: 0,
     currentExp: 0,
     maxExp: 0,
-    profileImgPath: "",
-    profileText: "",
+    profileImgPath: '',
+    profileText: '',
   });
   console.log(myinfo);
 
@@ -55,11 +55,11 @@ function App(): any {
   useEffect(() => {
     axios
       .get(
-        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll"
+        'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll',
       )
       .then((res) => {
-        // console.log(res.data);
-        localStorage.setItem("total", JSON.stringify(res.data));
+        console.log(res.data);
+        localStorage.setItem('total', JSON.stringify(res.data));
       });
 
     localStorage.setItem(
@@ -149,14 +149,14 @@ function App(): any {
   // 토큰을 받아와서 세션 스토리지에 저장 & myinfo 저장하는 이펙트 훅
   useEffect(() => {
     const url = new URL(window.location.href);
-    if (sessionStorage.getItem("access_token")) {
+    if (sessionStorage.getItem('access_token')) {
       setLogin(true);
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get",
+          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get',
           {
-            access_token: sessionStorage.getItem("access_token"),
-          }
+            access_token: sessionStorage.getItem('access_token'),
+          },
         )
         .then((res) => {
           // console.log(res)
@@ -164,22 +164,22 @@ function App(): any {
         });
     }
 
-    if (url.searchParams.get("code")) {
-      const code = url.searchParams.get("code");
-      console.log("kakao");
+    if (url.searchParams.get('code')) {
+      const code = url.searchParams.get('code');
+      console.log('kakao');
 
       const data = queryStringify({
-        grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000",
+        grant_type: 'authorization_code',
+        client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+        redirect_uri: 'http://localhost:3000',
         code: code,
       });
 
       axios({
-        method: "post",
-        url: "https://kauth.kakao.com/oauth/token",
+        method: 'post',
+        url: 'https://kauth.kakao.com/oauth/token',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data,
       }).then((res) => {
@@ -189,14 +189,14 @@ function App(): any {
         setLoading(true);
         axios
           .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
+            'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login',
             {
               kakaoToken: res.data.access_token,
-            }
+            },
           )
           .then((result) => {
             // console.log("============== 토큰까지 넣는 것 완료")
-            sessionStorage.setItem("access_token", result.data);
+            sessionStorage.setItem('access_token', result.data);
             window.location.reload();
             // console.log("============== setLoading을 false로 변경")
             setLoading(false);
@@ -208,8 +208,8 @@ function App(): any {
   // 토큰을 갖고 로그인 유지해주는 이펙트 훅
   useEffect(() => {
     if (
-      sessionStorage.getItem("access_token") !== null ||
-      localStorage.getItem("id") !== null
+      sessionStorage.getItem('access_token') !== null ||
+      localStorage.getItem('id') !== null
     ) {
       console.log("======== 로그인 유지! true!");
       setLogin(true);
@@ -237,7 +237,7 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            if (!sessionStorage.getItem("access_token")) {
+            if (!sessionStorage.getItem('access_token')) {
               return <Redirect to="/" />;
             } else {
               return <Mypage myinfo={myinfo} />;
@@ -262,14 +262,13 @@ function App(): any {
               isModal={isModal}
               handleModal={handleModal}
               handleModalData={handleModalData}
+              setMyinfo={setMyinfo}
+              setLogin={setLogin}
+              setLoading={setLoading}
             />
           )}
         />
-        <Route
-          exact
-          path="/"
-          render={() => <Home isLogin={isLogin} loading={loading} />}
-        />
+        <Route exact path="/" render={() => <Home isLogin={isLogin} />} />
         <Route component={NotFound} />
       </Switch>
       {isLoginModal ? (
@@ -297,8 +296,11 @@ function App(): any {
       )}
 
       {isSignUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
+
+      {loading ? <Loading></Loading> : <></>}
     </BrowserRouter>
   );
 }
 
 export default App;
+

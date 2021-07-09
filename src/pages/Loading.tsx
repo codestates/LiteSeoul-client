@@ -1,30 +1,54 @@
-import React from "react";
-import styled from "styled-components";
-import LogoSvg from "../components/SVG/LogoSvg";
-import Background from "../components/SVG/BackGround";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const Loadinging = styled.div`
-  margin-top: 300px;
-  color: #ff735d;
-  font-size: 100px;
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  font-weight: bolder;
+  background-color: #fff;
+  z-index: 1000;
+  & img {
+    width: 190px;
+    height: 190px;
+    position: absolute;
+  }
 `;
 
-const LoadingImage = styled.img`
-  width: 60px;
+const textAni = keyframes`
+0%{
+  opacity:0;
+}
+50%{
+  opacity:1;
+}
+100%{
+  opacity:0;
+  
+}
+`;
+
+const LoadingText = styled.div`
+  width: 150px;
+  height: 40px;
+  color: #189cc4;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  animation: ${textAni} 4s infinite;
 `;
 
 function Loading() {
   return (
     <Loadinging>
-        <Background></Background>
-      <LogoSvg></LogoSvg>
-      <div>
-        Loading...
-        <LoadingImage src="img/loading.gif" alt="loading"></LoadingImage>
-      </div>
+      <LoadingText>Loading</LoadingText>
+      <img src="img/loading.gif" alt="loading"></img>
     </Loadinging>
   );
 }
