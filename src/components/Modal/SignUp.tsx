@@ -104,10 +104,14 @@ const FileUpload = styled.label`
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
-
   & input[type="file"] {
     display: none;
   }
+`;
+
+const PreviewImg = styled.img`
+  object-fit: cover;
+  height: 100%;
 `;
 
 const SignUpName = styled.input.attrs({
@@ -326,11 +330,11 @@ const SignUp = (props: any) => {
             {/* 이미지업로드 */}
             <FileUpload htmlFor="file" onChange={handleFileOnChange}>
               {uploadImg !== undefined ? (
-                <img
+                <PreviewImg
                   src={uploadImg.previewURL}
                   alt="프사"
                   onClick={deleteUploadImg}
-                ></img>
+                ></PreviewImg>
               ) : (
                 <input
                   id="file"

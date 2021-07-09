@@ -144,6 +144,12 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     }
   `;
 
+const PreviewImg = styled.img`
+object-fit: cover;
+height: 100%;
+`;
+
+
   const [userImg, setUserImg] = useState("");
   // console.log(userImg);
   const [userNick, setUserNick] = useState(nick);
@@ -278,11 +284,11 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
           <form className="EditForm" onSubmit={(e) => e.preventDefault()}>
             <FileUpload htmlFor="file" onChange={handlePreviewChange}>
               {uploadImg !== undefined ? (
-                <img
+                <PreviewImg
                   src={uploadImg.previewURL}
                   alt="프사"
                   onClick={deleteUploadImg}
-                ></img>
+                ></PreviewImg>
               ) : (
                 <input
                   id="file"
