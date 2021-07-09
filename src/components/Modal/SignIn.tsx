@@ -235,17 +235,22 @@ const InputPassword = styled.input.attrs({
 
 function SignIn(props: any) {
   // console.log(props);
+
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [errMessage, setErrMessage] = useState('');
 
   const kakaoLogin = () => {
     // console.log('hello');
+    const url = new URL(window.location.href);
+
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = 'd33a84f54f22e12cd75db7c1981bd095';
-    const _redirectUrl = 'http://localhost:3000'
-    window.location.assign(`${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`)
-  }
+    const _redirectUrl = url;
+    window.location.assign(
+      `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`,
+    );
+  };
 
   const handleAccount = () => {
     console.log('회원가입버튼');
@@ -288,8 +293,8 @@ function SignIn(props: any) {
           console.log(res.data.access_token);
           sessionStorage.setItem('access_token', res.data.access_token);
           // 반석&영근 요청으로 id값 로컬 스토리지에 저장
-          localStorage.setItem("id", res.data.payload.id);
-          window.location.replace("http://localhost:3000/");
+          localStorage.setItem('id', res.data.payload.id);
+          window.location.replace('http://localhost:3000/');
         })
         .catch(() => {
           setErrMessage('아이디와 패스워드를 확인해주세요');
@@ -342,8 +347,7 @@ function SignIn(props: any) {
               <li>
                 <InputPassword value={password} onChange={handlePassword} />
               </li>
-              <li onClick={kakaoLogin}>
-              </li>
+              <li onClick={kakaoLogin}></li>
               {/* <li>Google Login</li> */}
               <li onClick={LoginBtn}>로그인</li>
               <li>
