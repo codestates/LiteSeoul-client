@@ -119,7 +119,7 @@ function Slogan2() {
     <Slogan2Out id="slogan2">
       <SloganMain>
         <SloganText id="slogan2Text">
-          <img src="img/blueback-03.png" alt="bg"></img>
+          {/* <img src="img/blueback-03.png" alt="bg"></img> */}
 
           <SloganTextTitle>당신의 제로 웨이스트(Zero Waste)</SloganTextTitle>
           <SloganTextContent>

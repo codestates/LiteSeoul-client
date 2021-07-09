@@ -206,12 +206,12 @@ function Footer() {
         </FooterCategory>
         <FooterBusiness>
           <li>New Business</li>
-          <li>smart5265988@gmail.com</li>
+          <li>LiteSeoul@liteseoul.com</li>
         </FooterBusiness>
         <FooterContact>
           <li>Contact</li>
-          <li>smart5265988@gmail.com</li>
-          <li>smart5265988@gmail.com</li>
+          <li>LiteSeoul@liteseoul.com</li>
+          <li>LiteSeoul@liteseoul.com</li>
         </FooterContact>
         <FooterCopyWrite>© 2021 LiteSeoul, HellCoders</FooterCopyWrite>
       </FooterMain>

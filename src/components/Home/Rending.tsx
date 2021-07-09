@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Background from '../SVG/BackGround';
 import LogoSvg from '../SVG/LogoSvg';
+import Scroll from './Scroll';
 
 const RendingOut = styled.div`
   width: 100%;
@@ -128,6 +129,7 @@ const RendingBtn = styled.button`
 function Rending() {
   return (
     <RendingOut id="rending">
+      <Scroll></Scroll>
       <Background></Background>
       <LogoSvg></LogoSvg>
       <RendingSubTitle>"당신의 서울, 서울을 깨끗하게"</RendingSubTitle>

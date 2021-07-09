@@ -187,7 +187,7 @@ function Slogan1() {
           <SloganSubTitle>Zero Waste Life</SloganSubTitle>
         </SloganImg>
         <SloganText id="slogan1Text">
-          <img src="img/blueback-01.png" alt="bg"></img>
+          {/* <img src="img/blueback-01.png" alt="bg"></img> */}
           <SloganTextTitle>'제로 웨이스트 샵'을 찾아드릴게요</SloganTextTitle>
           <SloganTextContent>
             탄소중립시대인 '넷제로(Net-Zero)'를 위해 함께 동참해주세요.
