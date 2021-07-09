@@ -281,6 +281,8 @@ function SignIn(props: any) {
       axios
         .post(
           // 'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin',
+          
+          // 정태쿤 주소
           'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/user/signin',
 
           {
