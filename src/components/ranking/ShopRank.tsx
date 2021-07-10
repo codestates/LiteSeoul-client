@@ -233,13 +233,13 @@ function ShopRank() {
   return (
     <>
       {/* 서버정보 받은 렌더링 코드 */}
-      {shopRankdata.map((data: any) => {
+      {shopRankdata.map((data: any, idx) => {
 
       {/* 더미데이터 렌더링 코드 */}
       {/* {dummyShops.map((data: any) => { */}
         return (
           <ShopRankOut key={data.id}>
-            <RankNumber>{data.id}</RankNumber>
+            <RankNumber>{idx + 1}</RankNumber>
             <AllRankers>
               <ShopImg>
                 <img src="img/main_recycle.svg" alt="user"></img>
