@@ -1,5 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { NavLink, Link } from "react-router-dom";
 
 const FooterOut = styled.div`
   width: 100%;
@@ -56,7 +57,11 @@ const FooterSocial = styled.ul`
         cursor: pointer;
       }
     }
+    & div:hover {
+      color: #189cc4;
+    }
   }
+
   & li:nth-child(1) {
     font-size: 1.8rem;
     font-weight: 500;
@@ -96,10 +101,16 @@ const FooterSocial = styled.ul`
 `;
 
 const FooterCategory = styled.ul`
-  width: 10%;
+  width: 15%;
   height: 100%;
   /* border: 1px solid green; */
   padding: 3%;
+  & a {
+    color: white;
+  }
+  & a:hover {
+    color: #189cc4;
+  }
   @media screen and (max-width: 901px) {
     width: 60%;
   }
@@ -124,6 +135,12 @@ const FooterBusiness = styled.ul`
   @media screen and (max-width: 901px) {
     width: 60%;
   }
+  & a {
+    color: white;
+  }
+  & a:hover {
+    color: #ff735d;
+  }
   & li {
     opacity: 0.7;
     color: #fff;
@@ -140,7 +157,7 @@ const FooterBusiness = styled.ul`
 `;
 
 const FooterContact = styled.ul`
-  width: 20%;
+  width: 25%;
   height: 100%;
   /* border: 1px solid green; */
   padding: 3%;
@@ -200,18 +217,34 @@ function Footer() {
         </FooterSocial>
         <FooterCategory>
           <li>Explore</li>
-          <li>Home</li>
-          <li>Map</li>
-          <li>MyPage</li>
+          <li>
+            <NavLink exact to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact to="/map">
+              Map
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact to="/mypage">
+              MyPage
+            </NavLink>
+          </li>
         </FooterCategory>
         <FooterBusiness>
           <li>New Business</li>
-          <li>LiteSeoul@liteseoul.com</li>
+          <li>
+            <Link to="/participation">기업참여 | Participation</Link>
+          </li>
+          <li>
+            <Link to="/donation">운영후원 | Donation</Link>
+          </li>
         </FooterBusiness>
         <FooterContact>
           <li>Contact</li>
-          <li>LiteSeoul@liteseoul.com</li>
-          <li>LiteSeoul@liteseoul.com</li>
+          <li>공식메일 | LiteSeoul@gmail.com</li>
         </FooterContact>
         <FooterCopyWrite>© 2021 LiteSeoul, HellCoders</FooterCopyWrite>
       </FooterMain>
