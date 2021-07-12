@@ -54,14 +54,11 @@ function App(): any {
   });
   console.log(myinfo);
 
-  // OAuth 분기처리를 위한 상태
-  const [Oauth, SetOauth] = useState("");
-
   //전체 지도 데이터 받아오기
   useEffect(() => {
     axios
       .get(
-        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll"
+        "https://www.api.liteseoul.com/shop/getAll"
       )
       .then((res) => {
         console.log(res.data);
@@ -159,7 +156,8 @@ function App(): any {
     // ================ 구글
     if (url.searchParams.get('query')) {
       const token: any = url.searchParams.get('query');
-  
+      console.log(token);
+
       console.log("============ setLogin을 true로 변경")
       setLogin(true);
       console.log("============ setLoading을 true로 변경")
@@ -167,7 +165,7 @@ function App(): any {
 
       sessionStorage.setItem("access_token", token);
       // window.location.reload();
-      // console.log("============== setLoading을 false로 변경")
+      console.log("============== setLoading을 false로 변경")
       setLoading(false);
     }
     // ================ 구글
@@ -177,8 +175,7 @@ function App(): any {
       setLogin(true);
       axios
         .post(
-          // "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get",
-          "https://api.liteseoul.com/user/get",
+          "https://www.api.liteseoul.com/user/get",
           {
             access_token: sessionStorage.getItem("access_token"),
           }
@@ -196,8 +193,8 @@ function App(): any {
       const data = queryStringify({
         grant_type: "authorization_code",
         client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        // redirect_uri: "http://localhost:3000/",
-        redirect_uri: "https://liteseoul.com/",
+        redirect_uri: "http://localhost:3000/",
+        // redirect_uri: "https://liteseoul.com/",
         code: code,
       });
 
@@ -215,8 +212,7 @@ function App(): any {
         setLoading(true);
         axios
           .post(
-            // "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
-            "https://api.liteseoul.com/kakao/login",
+            "https://www.api.liteseoul.com/kakao/login",
             {
               kakaoToken: res.data.access_token,
             }
@@ -274,7 +270,6 @@ function App(): any {
               handleLogin={handleLogin}
               handleLoginModal={handleLoginModal}
               handleSignUp={handleSignUp}
-              SetOauth={SetOauth}
             />
           )}
         />
@@ -300,7 +295,6 @@ function App(): any {
           handleLogin={handleLogin}
           handleLoginModal={handleLoginModal}
           handleSignUp={handleSignUp}
-          SetOauth={SetOauth}
         ></SignIn>
       ) : (
         <></>

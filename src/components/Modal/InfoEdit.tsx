@@ -224,7 +224,7 @@ height: 100%;
         console.log("이미지없이 변화 요청")
         await axios
           .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/changeinfo",
+            "https://www.api.liteseoul.com/user/changeinfo",
             {
               access_token: token,
               nick: userNick,
@@ -257,7 +257,7 @@ height: 100%;
         // 이미지 변화가 있다면~
         await axios
           .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/update",
+            "https://www.api.liteseoul.com/user/update",
             formData
           )
           .then((res) => {

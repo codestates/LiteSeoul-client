@@ -203,7 +203,6 @@ function ShopRank() {
   useEffect(() => {
     axios
       .get(
-        // "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/api/shop/rank"
         "https://www.api.liteseoul.com/shop/rank"
       )
       .then((res) => {
@@ -212,37 +211,16 @@ function ShopRank() {
       });
   }, []);
 
-  // const [checkedItems, setCheckedItems] = useState(new Set());
-  // const [bChecked, setChecked] = useState(false);
-
-  // console.log(checkedItems, bChecked);
-  // const checkedItemHandler = (id: any, isChecked: any) => {
-  //   if (isChecked) {
-  //     checkedItems.add(id);
-  //     setCheckedItems(checkedItems);
-  //   } else if (!isChecked && checkedItems.has(id)) {
-  //     checkedItems.delete(id);
-  //     setCheckedItems(checkedItems);
-  //   }
-  // };
-
-  // const checkHandler = (e: any) => {
-  //   setChecked(!bChecked);
-  //   checkedItemHandler(e.target.id, e.target.checked);
-  // };
   return (
     <>
-      {/* 서버정보 받은 렌더링 코드 */}
       {shopRankdata.map((data: any, idx) => {
-
-      {/* 더미데이터 렌더링 코드 */}
-      {/* {dummyShops.map((data: any) => { */}
         return (
           <ShopRankOut key={data.id}>
             <RankNumber>{idx + 1}</RankNumber>
             <AllRankers>
               <ShopImg>
-                <img src="img/main_recycle.svg" alt="user"></img>
+                {/* <img src="img/main_recycle.svg" alt="user"></img> */}
+                <img src={data.imgPath} alt="user"></img>
               </ShopImg>
               <ShopTitle>{data.name}</ShopTitle>
               <ShopContent>{data.text}</ShopContent>

@@ -66,7 +66,7 @@ function Map({
       setLogin(true);
       axios
         .post(
-          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get',
+          "https://www.api.liteseoul.com/user/get",
           {
             access_token: sessionStorage.getItem('access_token'),
           },
@@ -104,7 +104,7 @@ function Map({
         setLoading(true);
         axios
           .post(
-            'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login',
+            "https://www.api.liteseoul.com/kakao/login",
             {
               kakaoToken: res.data.access_token,
             },

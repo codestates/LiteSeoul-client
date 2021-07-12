@@ -66,7 +66,7 @@ function MemberOut() {
       alert("회원탈퇴를 최종적으로 완료하셨습니다🥲");
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/delete",
+          "https://www.api.liteseoul.com/user/delete",
           {
             access_token: sessionStorage.getItem("access_token"),
           }
