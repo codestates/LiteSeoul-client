@@ -161,12 +161,12 @@ function Home(props: any) {
         <>
           <Slogan1></Slogan1>
           <Slogan2></Slogan2>
+          <Bike></Bike>
         </>
       )}
 
       {props.isLogin ? <Ranking></Ranking> : <></>}
       {props.isLogin ? <Recommends></Recommends> : <></>}
-      <Bike></Bike>
       <Footer></Footer>
     </HomeOut>
   );
