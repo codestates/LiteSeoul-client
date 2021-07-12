@@ -165,6 +165,7 @@ function Home(props: any) {
         </>
       )}
 
+      {/* 애니메이션 추가 */}
       {props.isLogin ? <Ranking></Ranking> : <></>}
       {props.isLogin ? <Recommends></Recommends> : <></>}
       <Footer></Footer>
