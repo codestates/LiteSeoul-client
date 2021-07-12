@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import dotenv from 'dotenv';
+import qs from 'querystringify';
+
 dotenv.config();
 
 const SingInOut = styled.div`
@@ -247,28 +249,66 @@ function SignIn(props: any) {
     const _hostName = 'https://kauth.kakao.com';
     const _restApiKey = 'd33a84f54f22e12cd75db7c1981bd095';
     const _redirectUrl = url;
+
+    console.log('=== redirectUrl ===', _redirectUrl)
+
     window.location.assign(
       `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`,
     );
   };
 
   const googleLogin = () => {
-    const host_name = "https://accounts.google.com/o/oauth2/v2/auth"
-    // const redirect_uri = "https://liteseoul.com"
-    const redirect_uri = new URL(window.location.href);
+
+    console.log(props)
+
+    // props.SetOauth("google");
+
+    // const client_id = '609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com';
+    // const AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
+
+    // const data = qs.stringify({
+    //   client_id: client_id,
+    //   redirect_uri: window.location.href,
+    //   response_type: "token",
+    //   scope: "https://www.googleapis.com/auth/contacts.readonly"
+    // });
+
+    // const loginUrl = AUTHORIZE_URI + "?" + data;
+
+    // const google_token = qs.parse(window.location.hash.substr(1));
+
+    // console.log(google_token);
+
+    // if (!google_token) {
+    //   // window.location.assign(loginUrl);
+    //   window.location.assign(
+    //   `${AUTHORIZE_URI}/oauthchooseaccount?response_type=code&redirect_uri=${window.location.href}google%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`,
+    // )
+    //   return null;
+    // }
+
+    // const host_name = "https://accounts.google.com/o/oauth2/v2/auth"
+    // // const redirect_uri = "https://liteseoul.com"
+    // const redirect_uri = new URL(window.location.href);
+    // const client_id = '609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com';
+    
+    // // axios.get(`${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`)
+    // // .then(res =>console.log(res))
+
+    // window.location.assign(
+    //   `${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}google%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`,
+    // )
+
+    // const url = new URL(window.location.href);
+    const host_name = "https://accounts.google.com"
+    // const redirect_uri = 'http://localhost:80';
+    const redirect_uri = 'https://api.liteseoul.com';
+    console.log('=== redirect uri === ', redirect_uri)
     const client_id = '609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com';
     
-    // axios.get(`${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`)
-    // .then(res =>console.log(res))
-
     window.location.assign(
-      `${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}google%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`,
+      `${host_name}/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`,
     )
-
-    // sessionStorage.setItem('access_token', res.data.access_token);
-    // // 반석&영근 요청으로 id값 로컬 스토리지에 저장
-    // localStorage.setItem('id', res.data.payload.id);
-    // window.location.replace('http://localhost:3000/');
   };
 
   const handleAccount = () => {
