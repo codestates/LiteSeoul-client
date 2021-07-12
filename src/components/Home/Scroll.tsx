@@ -33,7 +33,7 @@ const ScrollOut = styled.div`
   right: 5%;
   animation: ${ScrollOp} 2s forwards;
   opacity: 0;
-  animation-delay: 2s;
+  animation-delay: 1s;
   &::before {
     content: '';
     width: 8px;
@@ -48,10 +48,31 @@ const ScrollOut = styled.div`
     animation-iteration-count: infinite;
     animation-name: ${ScrollAni};
   }
+  & span {
+    display: block;
+    position: absolute;
+    font-size: 1rem;
+    color: #189cc4;
+    top: 100px;
+    width: 60px;
+    /* border: 1px solid red; */
+    text-align: center;
+    left: -50%;
+    font-weight: 700;
+  }
+  @media screen and (max-width: 800px) {
+    top: 70%;
+    right: 50%;
+    margin-right: -15px;
+  }
 `;
 
 function Scroll() {
-  return <ScrollOut></ScrollOut>;
+  return (
+    <ScrollOut>
+      <span>Down</span>
+    </ScrollOut>
+  );
 }
 
 export default Scroll;
