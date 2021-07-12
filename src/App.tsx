@@ -15,6 +15,7 @@ import queryStringify from "qs-stringify";
 import Loading from "./pages/Loading";
 import Participation from "./pages/Participation";
 import Donation from "./pages/Donation";
+import qs from 'querystringify';
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -52,6 +53,9 @@ function App(): any {
     profileText: "",
   });
   console.log(myinfo);
+
+  // OAuth 분기처리를 위한 상태
+  const [Oauth, SetOauth] = useState("");
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
@@ -151,11 +155,30 @@ function App(): any {
   // 토큰을 받아와서 세션 스토리지에 저장 & myinfo 저장하는 이펙트 훅
   useEffect(() => {
     const url = new URL(window.location.href);
+
+    // ================ 구글
+    if (url.searchParams.get('query')) {
+      const token: any = url.searchParams.get('query');
+  
+      console.log("============ setLogin을 true로 변경")
+      setLogin(true);
+      console.log("============ setLoading을 true로 변경")
+      setLoading(true);
+
+      sessionStorage.setItem("access_token", token);
+      // window.location.reload();
+      // console.log("============== setLoading을 false로 변경")
+      setLoading(false);
+    }
+    // ================ 구글
+
+    // ================ 카카오
     if (sessionStorage.getItem("access_token")) {
       setLogin(true);
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get",
+          // "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get",
+          "https://api.liteseoul.com/user/get",
           {
             access_token: sessionStorage.getItem("access_token"),
           }
@@ -166,15 +189,16 @@ function App(): any {
         });
     }
 
-    if (url.searchParams.get("kakao")) {
-      const kakao = url.searchParams.get("kakao");
+      const code = url.searchParams.get("code");
       console.log("kakao");
+      console.log(code);
 
       const data = queryStringify({
         grant_type: "authorization_code",
         client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000",
-        code: kakao,
+        // redirect_uri: "http://localhost:3000/",
+        redirect_uri: "https://liteseoul.com/",
+        code: code,
       });
 
       axios({
@@ -185,13 +209,14 @@ function App(): any {
         },
         data: data,
       }).then((res) => {
-        // console.log("============ setLogin을 true로 변경")
+        console.log("============ setLogin을 true로 변경")
         setLogin(true);
-        // console.log("============ setLoading을 true로 변경")
+        console.log("============ setLoading을 true로 변경")
         setLoading(true);
         axios
           .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
+            // "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
+            "https://api.liteseoul.com/kakao/login",
             {
               kakaoToken: res.data.access_token,
             }
@@ -204,44 +229,7 @@ function App(): any {
             setLoading(false);
           });
       });
-    } else if (url.searchParams.get("google")) {
-      const google = url.searchParams.get("google");
-
-      const data = queryStringify({
-        grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000",
-        code: google,
-      });
-
-      axios({
-        method: "post",
-        url: "https://kauth.kakao.com/oauth/token",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: data,
-      }).then((res) => {
-        // console.log("============ setLogin을 true로 변경")
-        setLogin(true);
-        // console.log("============ setLoading을 true로 변경")
-        setLoading(true);
-        axios
-          .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
-            {
-              kakaoToken: res.data.access_token,
-            }
-          )
-          .then((result) => {
-            // console.log("============== 토큰까지 넣는 것 완료")
-            sessionStorage.setItem("access_token", result.data);
-            window.location.reload();
-            // console.log("============== setLoading을 false로 변경")
-            setLoading(false);
-          });
-      });
-    }
+  
   }, []);
 
   // 토큰을 갖고 로그인 유지해주는 이펙트 훅
@@ -286,6 +274,7 @@ function App(): any {
               handleLogin={handleLogin}
               handleLoginModal={handleLoginModal}
               handleSignUp={handleSignUp}
+              SetOauth={SetOauth}
             />
           )}
         />
@@ -311,6 +300,7 @@ function App(): any {
           handleLogin={handleLogin}
           handleLoginModal={handleLoginModal}
           handleSignUp={handleSignUp}
+          SetOauth={SetOauth}
         ></SignIn>
       ) : (
         <></>
