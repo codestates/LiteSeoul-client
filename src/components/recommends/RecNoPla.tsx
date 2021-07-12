@@ -202,7 +202,7 @@ function ReNoPla() {
     <Out>
       <ListTitle>No Plastic</ListTitle>
       <Img>
-        <img src="/img/zero.jpeg" alt="store"></img>
+        <img src={data.resultAntiPlastic.imgPath} alt="store"></img>
       </Img>
       <Store>
         <StoreName>
