@@ -127,7 +127,7 @@ function AddBills({ handleModalClose, handleMypageNow }: any) {
 
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/add",
+          "https://www.api.liteseoul.com/receipt/add",
           formData
         )
         .then((res) => {

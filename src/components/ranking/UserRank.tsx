@@ -220,7 +220,7 @@ function UserRank() {
   useEffect(() => {
     axios
       .get(
-        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/rank"
+        "https://www.api.liteseoul.com/user/rank"
       )
       .then((res) => {
         // console.log(res)
@@ -228,24 +228,6 @@ function UserRank() {
       });
   }, []);
 
-  // const [checkedItems, setCheckedItems] = useState(new Set());
-  // const [bChecked, setChecked] = useState(false);
-
-  // console.log(checkedItems, bChecked);
-  // const checkedItemHandler = (id: any, isChecked: any) => {
-  //   if (isChecked) {
-  //     checkedItems.add(id);
-  //     setCheckedItems(checkedItems);
-  //   } else if (!isChecked && checkedItems.has(id)) {
-  //     checkedItems.delete(id);
-  //     setCheckedItems(checkedItems);
-  //   }
-  // };
-
-  // const checkHandler = (e: any) => {
-  //   setChecked(!bChecked);
-  //   checkedItemHandler(e.target.id, e.target.checked);
-  // };
   return (
     <>
       {userRankData.map((data: any, idx: number) => {

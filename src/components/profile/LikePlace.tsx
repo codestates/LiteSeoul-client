@@ -165,7 +165,7 @@ function LikePlace({myinfo}: any) {
   useEffect(() => {
     axios
       .get(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/manyVisits/${id}`
+        `https://www.api.liteseoul.com/shop/manyVisits/${id}`
       )
       .then((res) => {
         // console.log(res)

@@ -149,7 +149,7 @@ function BillsLog({handleMypageNow}: any) {
     if (returnvalue === true) {
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/delete",
+          "https://www.api.liteseoul.com/receipt/delete",
           {
             access_token: sessionStorage.getItem("access_token"),
             name: `${e.target.id}`,
@@ -170,7 +170,7 @@ function BillsLog({handleMypageNow}: any) {
   useEffect(() => {
     axios
       .post(
-        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/receipt/list",
+        "https://www.api.liteseoul.com/receipt/list",
         {
           access_token: sessionStorage.getItem("access_token")
         }
@@ -208,44 +208,7 @@ function BillsLog({handleMypageNow}: any) {
             )}
           </BillsUl>
           <BillsAdd onClick={handleModalOpen}></BillsAdd>
-
-          {/* {show ? (
-          <></>
-        ) : (
-          <div className="BillsLogAddBtn" onClick={handleModalOpen}>
-            +
-          </div>
-        )} */}
         </BillsMain>
-
-        {/* <ul className="BillsLogsWhole">
-        {dummyBills.map((dummyBill) => (
-          <li className="BillsOne" key={dummyBill.id}>
-            <div className="BillsBack">
-              <div className="BillsXBtn" onClick={xbtnHandler}>
-                X
-              </div>
-              <img className="BillsImg" src={danggeun} alt="영수증"></img>
-              {dummyBill.text}
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <div className="BillsMainBtn" hidden={!show}>
-        <div className="modal-background" onClick={handleModalClose}>
-          <div className="modal-card">
-            <AddBills handleModalClose={handleModalClose} />
-          </div>
-        </div>
-      </div>
-      {show ? (
-        <></>
-      ) : (
-        <div className="BillsLogAddBtn" onClick={handleModalOpen}>
-          +
-        </div>
-      )} */}
       </BillsOut>
       {show ? (
         <BillsUpload>
