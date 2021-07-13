@@ -165,10 +165,10 @@ function LikePlace({myinfo}: any) {
   useEffect(() => {
     axios
       .get(
-        `https://www.api.liteseoul.com/shop/manyVisits/${id}`
+        `https://www.api.liteseoul.com/shop/manyVisits/${Number(id)}`
       )
       .then((res) => {
-        // console.log(res)
+        console.log(res)
         setLikePlaces(res.data);
       });
   }, []);

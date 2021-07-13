@@ -15,7 +15,7 @@ const MyPageOut = styled.div`
   width: 100%;
   height: 100vh;
   min-height: 900px;
-  overflow: hidden;
+  overflow: auto;
   padding-top: 68px;
   display: flex;
   position: relative;
