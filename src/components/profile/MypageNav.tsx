@@ -1,9 +1,5 @@
-import React from "react";
-import { useRef } from "react";
-import { NavLink, Link } from "react-router-dom";
-import dummyMyInfo from "../documents/dummyMyInfo";
-import styled from "styled-components";
-import Mypage from "../../pages/Mypage";
+import React from 'react';
+import styled from 'styled-components';
 
 const MyPageNavOut = styled.div`
   width: 20%;
@@ -110,7 +106,6 @@ const MyPageNavUl = styled.ul`
     justify-content: center;
     border-radius: 25px;
     position: relative;
-
     &.active {
       border: none;
       background: #ff735d;
@@ -150,8 +145,8 @@ const NavHidden = styled.div`
 function MypageNav({ myinfo, handleMypageNow }: any) {
   const { nick } = myinfo;
   const handleNav = () => {
-    document.getElementById("nav1")?.classList.toggle("nav1");
-    document.getElementById("hidden1")?.classList.toggle("hidden1");
+    document.getElementById('nav1')?.classList.toggle('nav1');
+    document.getElementById('hidden1')?.classList.toggle('hidden1');
   };
 
   return (
@@ -168,16 +163,16 @@ function MypageNav({ myinfo, handleMypageNow }: any) {
         </MyPageNavTop>
         <MyPageNavMain>
           <MyPageNavUl>
-            <li onClick={() => handleMypageNow("justinfo")}>
+            <li onClick={() => handleMypageNow('justinfo')}>
               <div>Mypage</div>
             </li>
-            <li onClick={() => handleMypageNow("billslog")}>
+            <li onClick={() => handleMypageNow('billslog')}>
               <div>인증하기</div>
             </li>
-            <li onClick={() => handleMypageNow("likeplace")}>
+            <li onClick={() => handleMypageNow('likeplace')}>
               <div>즐겨찾기</div>
             </li>
-            <li onClick={() => handleMypageNow("memberout")}>
+            <li onClick={() => handleMypageNow('memberout')}>
               <div>회원탈퇴</div>
             </li>
           </MyPageNavUl>

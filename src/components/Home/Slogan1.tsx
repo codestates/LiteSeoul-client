@@ -39,7 +39,6 @@ const SloganImg = styled.div`
     transform: translateX(0%);
     opacity: 1;
   }
-
   @media screen and (max-width: 800px) {
     width: 70%;
     height: 50%;
@@ -166,7 +165,6 @@ const SloganTextContent = styled.div`
   color: #6e6e73;
   z-index: 20;
   line-height: 30px;
-
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
   }
@@ -187,14 +185,12 @@ function Slogan1() {
           <SloganSubTitle>Zero Waste Life</SloganSubTitle>
         </SloganImg>
         <SloganText id="slogan1Text">
-          {/* <img src="img/blueback-01.png" alt="bg"></img> */}
           <SloganTextTitle>'제로 웨이스트 샵'을 찾아드릴게요</SloganTextTitle>
           <SloganTextContent>
             탄소중립시대인 '넷제로(Net-Zero)'를 위해 함께 동참해주세요.
             <br />
-            당신 근처에서 환경을 위해 재생용기를 사용하고 <br />
-            1회용품과 화학용품을 없앤 '제로 웨이스트 샵(Zero Waste Shop)'을
-            만나보세요.
+            당신 근처에서 환경을 위해 재생용기를 사용하고 1회용품과 화학용품을
+            없앤 '제로 웨이스트 샵'을 만나보세요.
           </SloganTextContent>
         </SloganText>
       </SloganMain>
