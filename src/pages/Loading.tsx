@@ -35,6 +35,7 @@ const LoadingText = styled.div`
   width: 150px;
   height: 40px;
   color: #189cc4;
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
