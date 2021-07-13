@@ -1,5 +1,6 @@
-import styled from 'styled-components';
-import axios from 'axios';
+import React, { useState } from "react";
+import styled from "styled-components";
+import axios from "axios";
 
 const MemberDelOut = styled.div`
   width: 80%;
@@ -59,21 +60,25 @@ const MemberCloseBtn = styled.div`
 function MemberOut() {
   const outHandler = () => {
     const returnvalue = window.confirm(
-      '😣 정말 제로 웨이스트를 그만두시겠어요?',
+      "😣 정말 제로 웨이스트를 그만두시겠어요?"
     );
     if (returnvalue === true) {
-      alert('회원탈퇴를 최종적으로 완료하셨습니다🥲');
+      alert("회원탈퇴를 최종적으로 완료하셨습니다🥲");
       axios
-        .post('https://www.api.liteseoul.com/user/delete', {
-          access_token: sessionStorage.getItem('access_token'),
-        })
+        .post(
+          "https://www.api.liteseoul.com/user/delete",
+          {
+            access_token: sessionStorage.getItem("access_token"),
+          }
+        )
         .then((res) => {
           console.log(res);
-          sessionStorage.removeItem('access_token');
-          window.location.replace('http://localhost:3000/');
+          sessionStorage.removeItem("access_token");
+          window.location.replace("http://localhost:3000/");
         });
     } else {
-      alert('탈퇴과정을 취소하였습니다😆');
+      alert("탈퇴과정을 취소하였습니다😆");
+      // window.location.href = "http://localhost:3000/mypage/";
     }
   };
 

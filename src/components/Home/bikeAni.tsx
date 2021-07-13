@@ -3,19 +3,22 @@ import styled, { keyframes } from 'styled-components';
 
 const BikeOut = styled.div`
   width: 100%;
-  height: 800px;
+  height: 900px;
+  min-height: 900px;
+  /* border: 1px solid red; */
+  /* background-color: #eee; */
   display: flex;
   z-index: 910;
-  min-height: 800px;
+  min-height: 900px;
   min-width: 500px;
   background-image: url('img/bgbike.png');
   background-repeat: no-repeat;
   background-size: cover;
+  /* background-position-y: -54px; */
   &::before {
     content: '';
     width: 100%;
     height: 100vh;
-    min-height: 900px;
     position: absolute;
     background-color: #fff;
     opacity: 0.6;
@@ -34,10 +37,10 @@ const Move = keyframes`
 `;
 
 const AniOut = styled.div`
-  padding-top: 150px;
+  padding-top: 18%;
   width: max-content;
-  min-height: 800px;
   height: 100vh;
+  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   animation: ${Move} 12s infinite linear;
@@ -46,6 +49,7 @@ const AniOut = styled.div`
 const Ani = styled.div`
   width: 600px;
   height: 600px;
+  /* border: 1px solid red; */
   position: relative;
 `;
 
