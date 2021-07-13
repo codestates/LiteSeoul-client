@@ -1,68 +1,164 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const DonationOut = styled.div`
   width: 100%;
-  padding-top: 200px;
-  text-align: center;
+  height: 100vh;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  padding-top: 70px;
 `;
 
-const DonationTitle = styled.div`
-  font-size: 100px;
+const DonationMain = styled.div`
+  margin: 0 auto;
+  display: flex;
+  border-radius: 20px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  width: 70%;
+  height: 80%;
+`;
+
+const Img = styled.div`
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & img {
+    width: 80%;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 1600px) {
+    display: none;
+  }
+`;
+const Text = styled.div`
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5%;
+  @media screen and (max-width: 1601px) {
+    width: 100%;
+  }
+`;
+
+const Title = styled.div`
+  width: 100%;
+  height: 15%;
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
   font-weight: 700;
+  align-items: center;
   color: #189cc4;
+  @media screen and (max-width: 1101px) {
+    font-size: 4rem;
+  }
+  @media screen and (max-width: 670px) {
+    font-size: 3rem;
+  }
 `;
 
-const DonationBody = styled.div`
-  /* text-align: ; */
-  font-size: 25px;
-  margin: 50px;
-`;
-
-const BodyBig = styled.div`
-  margin-bottom: 100px;
-  font-weight: 700;
+const SubTitle = styled.div`
+  width: 100%;
+  height: 10%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #ff735d;
+  font-weight: 500;
+  @media screen and (max-width: 850px) {
+    font-size: 1.6rem;
+  }
+  @media screen and (max-width: 670px) {
+    font-size: 1.3rem;
+  }
 `;
 
-const BodySmall = styled.div`
-padding: 0 20%;
-  margin: 20px;
-  /* width: 40%; */
+const List1 = styled.div`
+  width: 100%;
+  height: 10%;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  align-items: center;
+  @media screen and (max-width: 1800px) {
+    font-size: 1.3rem;
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 1.2rem;
+  }
+  @media screen and (max-width: 807px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 670px) {
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: 550px) {
+    display: none;
+  }
 `;
 
-const BodyEnd = styled.div`
-font-size: 20px;
-margin-top: 100px;
-`
+const Account = styled.div`
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & div {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500px;
+    @media screen and (max-width: 807px) {
+      font-size: 0.8rem;
+    }
+  }
+`;
 
 const DonationEnd = styled.div`
+  width: 150px;
+  text-align: center;
   font-size: 10px;
   margin-top: 150px;
+  color: #86868b;
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  margin-left: -75px;
 `;
 
 function Donation() {
   return (
     <DonationOut>
-      <DonationTitle>Donation</DonationTitle>
-      <DonationBody>
-        <BodyBig>LiteSeoul 운영진을 위해 기부해주세요!</BodyBig>
-        <BodySmall>
-          우리는 세상을 바꾸기 위해 공부하고, 기획하며, 만들고, 운영합니다.
-        </BodySmall>
-        <BodySmall>
-          LiteSeoul은 탄소중립시대, 넷제로를 달성하기 위해 노력하겠습니다.
-        </BodySmall>
-        <BodyEnd>
-          <div>후원문의: 010-0000-0000(담당자: 000)</div>
-          <div>계좌번호: 0000-00-000000(팀헬코더스, 카카오뱅크)</div>
-        </BodyEnd>
-
-        
-
-      </DonationBody>
-      <DonationEnd>© 2021 LiteSeoul, HellCoders</DonationEnd>
+      <DonationMain>
+        <Img>
+          <img src="/img/notfound.svg" alt="img"></img>
+        </Img>
+        <Text>
+          <Title>Donation</Title>
+          <SubTitle>Zero Waste을 위해 기부해주세요!</SubTitle>
+          <List1>
+            우리는 세상을 바꾸기 위해 공부하고, 기획하며, 만들고, 운영합니다.
+          </List1>
+          <List1>LiteSeoul은 Net-zero를 달성하기 위해 노력하겠습니다.</List1>
+          <Account>
+            <div>후원문의: 010-1234-5697 (담당자: 000)</div>
+            <div>계좌번호: 1234-56-7590 (HellCoders, KakaoBank)</div>
+          </Account>
+        </Text>
+        <DonationEnd>© 2021 LiteSeoul, HellCoders</DonationEnd>
+      </DonationMain>
     </DonationOut>
   );
 }

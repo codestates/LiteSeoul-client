@@ -10,8 +10,6 @@ import styled from 'styled-components';
 import Bike from '../components/Home/bikeAni';
 
 const HomeOut = styled.div`
-  /* padding-top: 90px; */
-  /* border: 1px solid red; */
   width: 100%;
   min-width: 500px;
   height: 100vh;
@@ -62,9 +60,8 @@ function Home(props: any) {
         longitude: nav.lon || 127.006161,
       })
       .then((res: any) => {
-        console.log(res.data);
         localStorage.setItem('recommend', JSON.stringify(res.data));
-        console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
+        // console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
       });
   }, []);
 
@@ -104,10 +101,6 @@ function Home(props: any) {
     } else {
       document.getElementById('recommend1')?.classList.remove('recommend1');
     }
-
-    // console.log(
-    //   document.getElementById('slogan1')?.getBoundingClientRect().top,
-    // );
 
     if (
       document.getElementById('rending') &&

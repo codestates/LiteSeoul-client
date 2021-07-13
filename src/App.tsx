@@ -1,20 +1,20 @@
-import axios from "axios";
-import { useState } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import Marker from "./components/Modal/Marker";
-import Nav from "./components/Nav";
-import SignIn from "./components/Modal/SignIn";
-import Mypage from "./pages/Mypage";
-import NotFound from "./pages/NotFound";
-import Map from "./pages/Map";
-import SignUp from "./components/Modal/SignUp";
-import { useEffect } from "react";
-import queryStringify from "qs-stringify";
-import Loading from "./pages/Loading";
-import Participation from "./pages/Participation";
-import Donation from "./pages/Donation";
+import axios from 'axios';
+import { useState } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import './App.css';
+import Home from './pages/Home';
+import Marker from './components/Modal/Marker';
+import Nav from './components/Nav';
+import SignIn from './components/Modal/SignIn';
+import Mypage from './pages/Mypage';
+import NotFound from './pages/NotFound';
+import Map from './pages/Map';
+import SignUp from './components/Modal/SignUp';
+import { useEffect } from 'react';
+import queryStringify from 'qs-stringify';
+import Loading from './pages/Loading';
+import Participation from './pages/Participation';
+import Donation from './pages/Donation';
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -33,7 +33,7 @@ interface userInfoForm {
 function App(): any {
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
-  console.log("============= 로그인 여부", isLogin);
+  // console.log('============= 로그인 여부', isLogin);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState([]);
   const [isSignUp, setSignUp] = useState<boolean>(false);
@@ -41,77 +41,77 @@ function App(): any {
   const [loading, setLoading] = useState(false);
   const [myinfo, setMyinfo] = useState<userInfoForm>({
     id: 0,
-    name: "",
-    email: "",
-    nick: "",
-    phone: "",
+    name: '',
+    email: '',
+    nick: '',
+    phone: '',
     level: 0,
     currentExp: 0,
     maxExp: 0,
-    profileImgPath: "",
-    profileText: "",
+    profileImgPath: '',
+    profileText: '',
   });
-  console.log(myinfo);
+  // console.log(myinfo);
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
     axios
       .get(
-        "http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll"
+        'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/getAll',
       )
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("total", JSON.stringify(res.data));
+        // console.log(res.data);
+        localStorage.setItem('total', JSON.stringify(res.data));
       });
 
     localStorage.setItem(
-      "recommend",
+      'recommend',
       JSON.stringify({
         nearest: {
-          address: "성동구 왕십리로 115 헤이그라운드 9층",
-          category: "life",
+          address: '성동구 왕십리로 115 헤이그라운드 9층',
+          category: 'life',
           distance: 3.608268553240311,
           id: 6,
-          latitude: "37.54804049927143",
-          longitude: "127.04413748468407",
-          name: "더피커",
-          phone: "070-4118-0710",
-          recommend: "antiPlastic",
+          latitude: '37.54804049927143',
+          longitude: '127.04413748468407',
+          name: '더피커',
+          phone: '070-4118-0710',
+          recommend: 'antiPlastic',
         },
         resultAntiChemical: {
-          address: "서대문구 홍제천로2길 100, 1층",
-          category: "cafe",
+          address: '서대문구 홍제천로2길 100, 1층',
+          category: 'cafe',
           id: 17,
-          latitude: "37.57177467293018",
-          longitude: "126.92323569632859",
-          name: "카페 샘",
-          phone: "010-3646-4135",
-          recommend: "antiChemical",
+          latitude: '37.57177467293018',
+          longitude: '126.92323569632859',
+          name: '카페 샘',
+          phone: '010-3646-4135',
+          recommend: 'antiChemical',
         },
         resultAntiPlastic: {
-          address: "금천구 독산로 312 1층",
-          category: "cafe",
+          address: '금천구 독산로 312 1층',
+          category: 'cafe',
           id: 3,
-          latitude: "37.47491311875498",
-          longitude: "126.90365938283361",
-          name: "데일리로스팅",
-          phone: "070-4205-1212",
-          recommend: "antiPlastic",
+          latitude: '37.47491311875498',
+          longitude: '126.90365938283361',
+          name: '데일리로스팅',
+          phone: '070-4205-1212',
+          recommend: 'antiPlastic',
         },
         resultRecycle: {
-          address: "서대문구 연희동 708번지 1층",
-          category: "cafe",
+          address: '서대문구 연희동 708번지 1층',
+          category: 'cafe',
           id: 12,
-          latitude: "37.575344352775566",
-          longitude: "126.92843671167105",
-          name: "보틀팩토리",
-          phone: "02-3144-0703",
-          recommend: "recycle",
+          latitude: '37.575344352775566',
+          longitude: '126.92843671167105',
+          name: '보틀팩토리',
+          phone: '02-3144-0703',
+          recommend: 'recycle',
         },
-      })
+      }),
     );
 
-    console.log(localStorage.getItem("recommend"));
+    // console.log(localStorage.getItem('recommend'));
   }, []);
 
   //내위치 위도경도
@@ -124,7 +124,7 @@ function App(): any {
         lat: lat,
         lon: lon,
       };
-      localStorage.setItem("nav", JSON.stringify(latlon));
+      localStorage.setItem('nav', JSON.stringify(latlon));
     });
   }, []);
 
@@ -151,14 +151,14 @@ function App(): any {
   // 토큰을 받아와서 세션 스토리지에 저장 & myinfo 저장하는 이펙트 훅
   useEffect(() => {
     const url = new URL(window.location.href);
-    if (sessionStorage.getItem("access_token")) {
+    if (sessionStorage.getItem('access_token')) {
       setLogin(true);
       axios
         .post(
-          "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get",
+          'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/get',
           {
-            access_token: sessionStorage.getItem("access_token"),
-          }
+            access_token: sessionStorage.getItem('access_token'),
+          },
         )
         .then((res) => {
           // console.log(res)
@@ -166,22 +166,22 @@ function App(): any {
         });
     }
 
-    if (url.searchParams.get("kakao")) {
-      const kakao = url.searchParams.get("kakao");
-      console.log("kakao");
+    if (url.searchParams.get('kakao')) {
+      const kakao = url.searchParams.get('kakao');
+      console.log('kakao');
 
       const data = queryStringify({
-        grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000",
+        grant_type: 'authorization_code',
+        client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+        redirect_uri: 'http://localhost:3000',
         code: kakao,
       });
 
       axios({
-        method: "post",
-        url: "https://kauth.kakao.com/oauth/token",
+        method: 'post',
+        url: 'https://kauth.kakao.com/oauth/token',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data,
       }).then((res) => {
@@ -191,34 +191,34 @@ function App(): any {
         setLoading(true);
         axios
           .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
+            'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login',
             {
               kakaoToken: res.data.access_token,
-            }
+            },
           )
           .then((result) => {
             // console.log("============== 토큰까지 넣는 것 완료")
-            sessionStorage.setItem("access_token", result.data);
+            sessionStorage.setItem('access_token', result.data);
             window.location.reload();
             // console.log("============== setLoading을 false로 변경")
             setLoading(false);
           });
       });
-    } else if (url.searchParams.get("google")) {
-      const google = url.searchParams.get("google");
+    } else if (url.searchParams.get('google')) {
+      const google = url.searchParams.get('google');
 
       const data = queryStringify({
-        grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000",
+        grant_type: 'authorization_code',
+        client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+        redirect_uri: 'http://localhost:3000',
         code: google,
       });
 
       axios({
-        method: "post",
-        url: "https://kauth.kakao.com/oauth/token",
+        method: 'post',
+        url: 'https://kauth.kakao.com/oauth/token',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data,
       }).then((res) => {
@@ -228,14 +228,14 @@ function App(): any {
         setLoading(true);
         axios
           .post(
-            "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login",
+            'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/kakao/login',
             {
               kakaoToken: res.data.access_token,
-            }
+            },
           )
           .then((result) => {
             // console.log("============== 토큰까지 넣는 것 완료")
-            sessionStorage.setItem("access_token", result.data);
+            sessionStorage.setItem('access_token', result.data);
             window.location.reload();
             // console.log("============== setLoading을 false로 변경")
             setLoading(false);
@@ -247,10 +247,10 @@ function App(): any {
   // 토큰을 갖고 로그인 유지해주는 이펙트 훅
   useEffect(() => {
     if (
-      sessionStorage.getItem("access_token") !== null ||
-      localStorage.getItem("id") !== null
+      sessionStorage.getItem('access_token') !== null ||
+      localStorage.getItem('id') !== null
     ) {
-      console.log("======== 로그인 유지! true!");
+      console.log('======== 로그인 유지! true!');
       setLogin(true);
     } else {
       setLogin(false);
@@ -271,7 +271,7 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            if (!sessionStorage.getItem("access_token")) {
+            if (!sessionStorage.getItem('access_token')) {
               return <Redirect to="/" />;
             } else {
               return <Mypage myinfo={myinfo} />;

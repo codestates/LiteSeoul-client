@@ -108,7 +108,6 @@ const Text = styled.p`
 const Logo = styled.div`
   width: 150px;
   height: 40px;
-  /* border: 1px solid #fff; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,7 +123,6 @@ const SignInInput = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background: red; */
   flex-direction: column;
   & li {
     width: 300px;
@@ -166,11 +164,20 @@ const SignInInput = styled.ul`
     }
   }
   & li:nth-child(5) {
-    color: #000000;
-    border: 1px solid #86868b;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     cursor: pointer;
+    position: relative;
+    color: #374957;
+    box-shadow: inset 0 0 0 2px #cfd9e0;
+    & img {
+      width: 38px;
+      height: 38px;
+      position: absolute;
+      left: 5px;
+    }
     &:hover {
-      letter-spacing: 0.2rem;
+      box-shadow: inset 0 0 0 2px #999;
     }
   }
   & li:nth-child(6) {
@@ -253,17 +260,18 @@ function SignIn(props: any) {
   };
 
   const googleLogin = () => {
-    const host_name = "https://accounts.google.com/o/oauth2/v2/auth"
+    const host_name = 'https://accounts.google.com/o/oauth2/v2/auth';
     // const redirect_uri = "https://liteseoul.com"
     const redirect_uri = new URL(window.location.href);
-    const client_id = '609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com';
-    
+    const client_id =
+      '609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com';
+
     // axios.get(`${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`)
     // .then(res =>console.log(res))
 
     window.location.assign(
       `${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}google%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`,
-    )
+    );
 
     // sessionStorage.setItem('access_token', res.data.access_token);
     // // 반석&영근 요청으로 id값 로컬 스토리지에 저장
@@ -300,7 +308,7 @@ function SignIn(props: any) {
       axios
         .post(
           // 'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin',
-          
+
           // 정태쿤 주소
           'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/user/signin',
 
@@ -369,7 +377,13 @@ function SignIn(props: any) {
                 <InputPassword value={password} onChange={handlePassword} />
               </li>
               <li onClick={kakaoLogin}></li>
-              <li onClick={googleLogin}>Google Login</li>
+              <li onClick={googleLogin}>
+                <img
+                  src="/img/btn_google_light_normal_ios.svg"
+                  alt="google"
+                ></img>
+                Sign in with Google
+              </li>
               <li onClick={LoginBtn}>로그인</li>
               <li>
                 <div onClick={handleAccount}>
