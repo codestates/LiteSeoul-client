@@ -15,7 +15,7 @@ import queryStringify from "qs-stringify";
 import Loading from "./pages/Loading";
 import Participation from "./pages/Participation";
 import Donation from "./pages/Donation";
-import qs from 'querystringify';
+import qs from "querystringify";
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -154,38 +154,22 @@ function App(): any {
     const url = new URL(window.location.href);
 
     // ================ 구글
-    if (url.searchParams.get('query')) {
-      const token: any = url.searchParams.get('query');
+    if (url.searchParams.get("query")) {
+      const token: any = url.searchParams.get("query");
       console.log(token);
 
-      console.log("============ setLogin을 true로 변경")
+      console.log("============ setLogin을 true로 변경");
       setLogin(true);
-      console.log("============ setLoading을 true로 변경")
+      console.log("============ setLoading을 true로 변경");
       setLoading(true);
 
       sessionStorage.setItem("access_token", token);
       // window.location.reload();
-      console.log("============== setLoading을 false로 변경")
+      console.log("============== setLoading을 false로 변경");
       setLoading(false);
     }
-    // ================ 구글
-
     // ================ 카카오
-    if (sessionStorage.getItem("access_token")) {
-      setLogin(true);
-      axios
-        .post(
-          "https://www.api.liteseoul.com/user/get",
-          {
-            access_token: sessionStorage.getItem('access_token'),
-          },
-        )
-        .then((res) => {
-          // console.log(res)
-          setMyinfo(res.data);
-        });
-    }
-
+    else if (url.searchParams.get("code")) {
       const code = url.searchParams.get("code");
       console.log("kakao");
       console.log(code);
@@ -206,9 +190,9 @@ function App(): any {
         },
         data: data,
       }).then((res) => {
-        console.log("============ setLogin을 true로 변경")
+        console.log("============ setLogin을 true로 변경");
         setLogin(true);
-        console.log("============ setLoading을 true로 변경")
+        console.log("============ setLoading을 true로 변경");
         setLoading(true);
         axios
           .post(
@@ -225,7 +209,20 @@ function App(): any {
             setLoading(false);
           });
       });
-  
+    }
+
+    // 토큰이 있으면 myInfo에 사용자 정보를 내려보내줌
+    if (sessionStorage.getItem("access_token")) {
+      setLogin(true);
+      axios
+        .post("https://www.api.liteseoul.com/user/get", {
+          access_token: sessionStorage.getItem("access_token"),
+        })
+        .then((res) => {
+          // console.log(res)
+          setMyinfo(res.data);
+        });
+    }
   }, []);
 
   // 토큰을 갖고 로그인 유지해주는 이펙트 훅
