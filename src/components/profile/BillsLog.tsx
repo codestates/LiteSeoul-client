@@ -136,9 +136,10 @@ const BillsUpload = styled.div`
   justify-content: center;
 `;
 
-function BillsLog({ handleMypageNow }: any) {
+function BillsLog({ handleMypageNow, setLoading }: any) {
   const [show, setShow] = useState(false);
   const [logs, setLogs] = useState([]);
+  console.log(logs)
 
   // 영수증 인증기록 제거버튼
   const xbtnHandler = (e: any) => {
@@ -154,7 +155,7 @@ function BillsLog({ handleMypageNow }: any) {
         .then((res) => {
           alert('인증기록을 삭제하였습니다.');
           window.location.reload();
-          window.location.replace('http://localhost:3000/mypage');
+          // window.location.replace('http://localhost:3000/mypage');
         });
     } else {
       alert('삭제과정을 취소하였습니다.');
@@ -196,11 +197,14 @@ function BillsLog({ handleMypageNow }: any) {
                     src={log.imgPath}
                     alt="영수증"
                   ></img>
-                  <span>{log.created_at}</span>
+                  <span>{log.created_at.substring(0, 10)}</span>
                 </li>
               ))
             ) : (
+              <div>
               <div>제로 웨이스트 숍 이용 인증을 해주세요!</div>
+              <div>* 참고: 영수증 인증은 상단부의 사업자번호와 매장(업체)명만 보여주시면 돼요:)</div>
+              </div>
             )}
           </BillsUl>
           <BillsAdd onClick={handleModalOpen}></BillsAdd>
@@ -211,6 +215,7 @@ function BillsLog({ handleMypageNow }: any) {
           <AddBills
             handleMypageNow={handleMypageNow}
             handleModalClose={handleModalClose}
+            setLoading={setLoading}
           />
         </BillsUpload>
       ) : (

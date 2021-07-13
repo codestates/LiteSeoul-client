@@ -70,7 +70,7 @@ const AllRankers = styled.div`
 const ShopImg = styled.div`
   width: 80%;
   height: 45%;
-  border: 1px solid green;
+  /* border: 1px solid green; */
   margin-bottom: 5px;
   & img {
     width: 100%;

@@ -418,7 +418,7 @@ function Participation() {
         .then((res) => {
           console.log(res);
           alert(
-            "LiteSeoul에 업체 참여신청이 완료되었습니다! 운영진이 해당 신청서를 확인하고 등록을 시켜드릴게요. 신청서에 대한 확인용 메일을 전송하였으니 메일에서 '확인' 버튼을 눌러주세요! 홈 페이지로 이동합니다 :)",
+            "LiteSeoul에 업체 참여신청이 완료되었습니다! 운영진이 해당 신청서를 확인하고 등록을 시켜드릴게요. 작성하신 메일주소로 감사의 메일을 전송해 드렸어요! 이제 홈 페이지로 이동합니다 :)",
           );
           window.location.replace('http://localhost:3000/');
         })

@@ -156,8 +156,8 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
 
   useEffect(() => {
     // if (password.length >= 1 && !isPassword(password)) {
-      if (password.length >= 1) {
-      setErrMessage('비밀번호를 다시 확인해주세요');
+      if (password.length < 4) {
+      setErrMessage('비밀번호를 다시 확인해주세요! 소셜로그인 하신 분은 0000 입니다 :)');
     } else {
       setErrMessage('개인정보 수정 페이지입니다 :)');
     }
@@ -215,7 +215,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
 
   const handleSubmit = async () => {
     if (password === "") {
-      setErrMessage('비밀번호를 다시 확인해주세요');
+      setErrMessage('비밀번호를 다시 확인해주세요! 소셜로그인 하신 분은 0000 입니다 :)');
     } else {
       if (userImg === '') {
         console.log('이미지없이 변화 요청');
