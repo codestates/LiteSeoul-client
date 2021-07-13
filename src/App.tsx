@@ -56,10 +56,14 @@ function App(): any {
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
-    axios.get("https://www.api.liteseoul.com/shop/getAll").then((res) => {
-      console.log(res.data);
-      localStorage.setItem("total", JSON.stringify(res.data));
-    });
+    axios
+      .get(
+        "https://www.api.liteseoul.com/shop/getAll"
+      )
+      .then((res) => {
+        // console.log(res.data);
+        localStorage.setItem('total', JSON.stringify(res.data));
+      });
 
     localStorage.setItem(
       "recommend",
@@ -191,9 +195,12 @@ function App(): any {
         console.log("============ setLoading을 true로 변경");
         setLoading(true);
         axios
-          .post("https://www.api.liteseoul.com/kakao/login", {
-            kakaoToken: res.data.access_token,
-          })
+          .post(
+            "https://www.api.liteseoul.com/kakao/login",
+            {
+              kakaoToken: res.data.access_token,
+            },
+          )
           .then((result) => {
             // console.log("============== 토큰까지 넣는 것 완료")
             sessionStorage.setItem("access_token", result.data);
