@@ -1,20 +1,20 @@
-import axios from "axios";
-import { useState } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import "./App.css";
-import Home from "./pages/Home";
-import Marker from "./components/Modal/Marker";
-import Nav from "./components/Nav";
-import SignIn from "./components/Modal/SignIn";
-import Mypage from "./pages/Mypage";
-import NotFound from "./pages/NotFound";
-import Map from "./pages/Map";
-import SignUp from "./components/Modal/SignUp";
-import { useEffect } from "react";
-import queryStringify from "qs-stringify";
-import Loading from "./pages/Loading";
-import Participation from "./pages/Participation";
-import Donation from "./pages/Donation";
+import axios from 'axios';
+import { useState } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import './App.css';
+import Home from './pages/Home';
+import Marker from './components/Modal/Marker';
+import Nav from './components/Nav';
+import SignIn from './components/Modal/SignIn';
+import Mypage from './pages/Mypage';
+import NotFound from './pages/NotFound';
+import Map from './pages/Map';
+import SignUp from './components/Modal/SignUp';
+import { useEffect } from 'react';
+import queryStringify from 'qs-stringify';
+import Loading from './pages/Loading';
+import Participation from './pages/Participation';
+import Donation from './pages/Donation';
 import qs from 'querystringify';
 
 //유저정보 데이터 타입 관리
@@ -56,14 +56,10 @@ function App(): any {
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
-    axios
-      .get(
-        "https://www.api.liteseoul.com/shop/getAll"
-      )
-      .then((res) => {
-        // console.log(res.data);
-        localStorage.setItem('total', JSON.stringify(res.data));
-      });
+    axios.get('https://www.api.liteseoul.com/shop/getAll').then((res) => {
+      // console.log(res.data);
+      localStorage.setItem('total', JSON.stringify(res.data));
+    });
 
     localStorage.setItem(
       'recommend',
@@ -158,74 +154,67 @@ function App(): any {
       const token: any = url.searchParams.get('query');
       console.log(token);
 
-      console.log("============ setLogin을 true로 변경")
+      console.log('============ setLogin을 true로 변경');
       setLogin(true);
-      console.log("============ setLoading을 true로 변경")
+      console.log('============ setLoading을 true로 변경');
       setLoading(true);
 
-      sessionStorage.setItem("access_token", token);
+      sessionStorage.setItem('access_token', token);
       // window.location.reload();
-      console.log("============== setLoading을 false로 변경")
+      console.log('============== setLoading을 false로 변경');
       setLoading(false);
     }
     // ================ 구글
 
     // ================ 카카오
-    if (sessionStorage.getItem("access_token")) {
+    if (sessionStorage.getItem('access_token')) {
       setLogin(true);
       axios
-        .post(
-          "https://www.api.liteseoul.com/user/get",
-          {
-            access_token: sessionStorage.getItem('access_token'),
-          },
-        )
+        .post('https://www.api.liteseoul.com/user/get', {
+          access_token: sessionStorage.getItem('access_token'),
+        })
         .then((res) => {
           // console.log(res)
           setMyinfo(res.data);
         });
     }
 
-      const code = url.searchParams.get("code");
-      console.log("kakao");
-      console.log(code);
+    const code = url.searchParams.get('code');
+    console.log('kakao');
+    console.log(code);
 
-      const data = queryStringify({
-        grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000/",
-        // redirect_uri: "https://liteseoul.com/",
-        code: code,
-      });
+    const data = queryStringify({
+      grant_type: 'authorization_code',
+      client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+      redirect_uri: 'http://localhost:3000/',
+      // redirect_uri: "https://liteseoul.com/",
+      code: code,
+    });
 
-      axios({
-        method: 'post',
-        url: 'https://kauth.kakao.com/oauth/token',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        data: data,
-      }).then((res) => {
-        console.log("============ setLogin을 true로 변경")
-        setLogin(true);
-        console.log("============ setLoading을 true로 변경")
-        setLoading(true);
-        axios
-          .post(
-            "https://www.api.liteseoul.com/kakao/login",
-            {
-              kakaoToken: res.data.access_token,
-            },
-          )
-          .then((result) => {
-            // console.log("============== 토큰까지 넣는 것 완료")
-            sessionStorage.setItem('access_token', result.data);
-            window.location.reload();
-            // console.log("============== setLoading을 false로 변경")
-            setLoading(false);
-          });
-      });
-  
+    axios({
+      method: 'post',
+      url: 'https://kauth.kakao.com/oauth/token',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: data,
+    }).then((res) => {
+      console.log('============ setLogin을 true로 변경');
+      setLogin(true);
+      console.log('============ setLoading을 true로 변경');
+      setLoading(true);
+      axios
+        .post('https://www.api.liteseoul.com/kakao/login', {
+          kakaoToken: res.data.access_token,
+        })
+        .then((result) => {
+          // console.log("============== 토큰까지 넣는 것 완료")
+          sessionStorage.setItem('access_token', result.data);
+          window.location.reload();
+          // console.log("============== setLoading을 false로 변경")
+          setLoading(false);
+        });
+    });
   }, []);
 
   // 토큰을 갖고 로그인 유지해주는 이펙트 훅
@@ -255,11 +244,11 @@ function App(): any {
           exact
           path="/mypage"
           render={() => {
-            if (!sessionStorage.getItem('access_token')) {
-              return <Redirect to="/" />;
-            } else {
-              return <Mypage myinfo={myinfo} />;
-            }
+            // if (!sessionStorage.getItem('access_token')) {
+            // return <Redirect to="/" />;
+            // } else {
+            return <Mypage myinfo={myinfo} />;
+            // }
           }}
         />
         <Route
@@ -312,9 +301,7 @@ function App(): any {
       ) : (
         <></>
       )}
-
       {isSignUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
-
       {loading ? <Loading></Loading> : <></>}
     </BrowserRouter>
   );

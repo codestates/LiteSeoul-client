@@ -221,6 +221,9 @@ const MarkerCommemntUl = styled.ul`
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     & div:nth-child(2) {
       width: 70%;
@@ -363,13 +366,10 @@ function Marker({
     } else {
       // console.log(e.target.checked);
       axios
-        .post(
-          "https://www.api.liteseoul.com/shop/likeToggle",
-          {
-            userId: userId,
-            shopId: modalData.id,
-          },
-        )
+        .post('https://www.api.liteseoul.com/shop/likeToggle', {
+          userId: userId,
+          shopId: modalData.id,
+        })
         .then((res: any) => {
           // console.log(res);
           setCheck(!isCheck);
@@ -387,9 +387,7 @@ function Marker({
   //댓글 가져오기
   useEffect((): any => {
     axios
-      .get(
-        `https://www.api.liteseoul.com/shop/${Number(modalData.id)}`
-      )
+      .get(`https://www.api.liteseoul.com/shop/${Number(modalData.id)}`)
       .then((res) => {
         setComments(res.data.commentInfo);
         // console.log(res.data.commentInfo);
@@ -399,9 +397,7 @@ function Marker({
   //좋아요 가져오기
   useEffect((): any => {
     axios
-      .get(
-        `https://www.api.liteseoul.com/shop/${Number(modalData.id)}`
-      )
+      .get(`https://www.api.liteseoul.com/shop/${Number(modalData.id)}`)
       .then((res) => {
         for (let i = 0; i < res.data.likeInfo.length; i++) {
           //유저 아이디 가져와야함.!! 임의로 4
@@ -430,14 +426,11 @@ function Marker({
       alert('댓글을 입력하세요');
     } else {
       axios
-        .post(
-          `https://www.api.liteseoul.com/shop/comment`,
-          {
-            userId: userId,
-            shopId: modalData.id,
-            comment: isComment,
-          },
-        )
+        .post(`https://www.api.liteseoul.com/shop/comment`, {
+          userId: userId,
+          shopId: modalData.id,
+          comment: isComment,
+        })
         .then((res: any) => {
           console.log(res);
           setComment('');
@@ -489,7 +482,7 @@ function Marker({
             <MarkerCommemntUl>
               {comments.map((comment: any) => (
                 <li key={comment.id}>
-                  <div>{comment.name}</div>
+                  <div title={comment.name}>{comment.name}</div>
                   <div>{comment.comment}</div>
                   <div>{comment.created_at.substring(0, 10)}</div>
                 </li>

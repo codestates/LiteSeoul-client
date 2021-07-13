@@ -1,8 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import choonShick from "../image/choonShick.png";
-import dummyShops from "../documents/dummyShops";
-import styled from "styled-components";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const ShopRankOut = styled.div`
   width: 22%;
@@ -161,7 +159,7 @@ const InputCk = styled.input`
   &:checked + label {
     width: 20px;
     height: 20px;
-    background-image: url("icon/like_fill.svg");
+    background-image: url('icon/like_fill.svg');
     background-size: cover;
     margin-right: 5px;
   }
@@ -169,7 +167,7 @@ const InputCk = styled.input`
 const Label = styled.label`
   width: 20px;
   height: 20px;
-  background-image: url("icon/like_stroke.svg");
+  background-image: url('icon/like_stroke.svg');
   background-size: cover;
   margin-right: 5px;
 `;
@@ -201,14 +199,10 @@ function ShopRank() {
   const [shopRankdata, setShopRankdata] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://www.api.liteseoul.com/shop/rank"
-      )
-      .then((res) => {
-       console.log(res.data)
-        return setShopRankdata(res.data);
-      });
+    axios.get('https://www.api.liteseoul.com/shop/rank').then((res) => {
+      console.log(res.data);
+      return setShopRankdata(res.data);
+    });
   }, []);
 
   return (

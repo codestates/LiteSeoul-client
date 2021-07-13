@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import choonShick from '../image/choonShick.png';
-import dummyShops from '../documents/dummyShops';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -211,21 +209,16 @@ const Hr = styled.hr`
 // }
 
 function UserRank() {
-
   const [userRankData, setUserRankData] = useState([]);
   console.log(userRankData);
 
   // const{profileImgPath, profileText, nick, email} = userRankData;
 
   useEffect(() => {
-    axios
-      .get(
-        "https://www.api.liteseoul.com/user/rank"
-      )
-      .then((res) => {
-        // console.log(res)
-        return setUserRankData(res.data);
-      });
+    axios.get('https://www.api.liteseoul.com/user/rank').then((res) => {
+      // console.log(res)
+      return setUserRankData(res.data);
+    });
   }, []);
 
   return (
@@ -233,7 +226,7 @@ function UserRank() {
       {userRankData.map((data: any, idx: number) => {
         return (
           <ShopRankOut key={data.id}>
-            <RankNumber>{idx+1}</RankNumber>
+            <RankNumber>{idx + 1}</RankNumber>
             <AllRankers>
               <ShopImg>
                 <img src={data.profileImgPath} alt="user"></img>
@@ -248,7 +241,9 @@ function UserRank() {
                 <Hr></Hr>
                 <Add>
                   <img src="icon/location_main.svg" alt="location"></img>
-                  <span>Exp. {Math.floor((data.currentExp / data.maxExp)*100)}%</span>
+                  <span>
+                    Exp. {Math.floor((data.currentExp / data.maxExp) * 100)}%
+                  </span>
                 </Add>
               </ShopContent2>
             </AllRankers>
