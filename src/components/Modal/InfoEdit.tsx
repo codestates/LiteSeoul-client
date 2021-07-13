@@ -1,7 +1,10 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import styled from "styled-components";
+import dummyMyInfo from "../documents/dummyMyInfo";
+import mememe from "../image/mememe.png";
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -31,12 +34,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -131,34 +134,35 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     position: relative;
     /* border: 1px solid red; */
     overflow: hidden;
-    background-image: url('icon/profile-01.svg');
+    background-image: url("icon/profile-01.svg");
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
 
-    & input[type='file'] {
+    & input[type="file"] {
       display: none;
     }
   `;
 
-  const PreviewImg = styled.img`
-    object-fit: cover;
-    height: 100%;
-  `;
+const PreviewImg = styled.img`
+object-fit: cover;
+height: 100%;
+`;
 
-  const [userImg, setUserImg] = useState('');
+
+  const [userImg, setUserImg] = useState("");
   // console.log(userImg);
   const [userNick, setUserNick] = useState(nick);
   const [userPhone, setUserPhone] = useState(phone);
   const [myText, setMytext] = useState(profileText);
-  const [password, setPassword] = useState('');
-  const [errMessage, setErrMessage] = useState('개인정보 수정 페이지입니다 :)');
+  const [password, setPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("개인정보 수정 페이지입니다 :)");
 
   useEffect(() => {
     if (password.length >= 1 && !isPassword(password)) {
-      setErrMessage('비밀번호를 다시 확인해주세요');
+      setErrMessage("비밀번호를 다시 확인해주세요");
     } else {
-      setErrMessage('개인정보 수정 페이지입니다 :)');
+      setErrMessage("개인정보 수정 페이지입니다 :)");
     }
   }, [password]);
 
@@ -210,56 +214,62 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
 
   // 서버단에 데이터 전송
   const formData = new FormData();
-  const token = sessionStorage.getItem('access_token');
+  const token = sessionStorage.getItem("access_token");
 
   const handleSubmit = async () => {
     if (!isPassword) {
-      setErrMessage('비밀번호를 다시 확인해주세요');
+      setErrMessage("비밀번호를 다시 확인해주세요");
     } else {
-      if (userImg === '') {
-        console.log('이미지없이 변화 요청');
+      if(userImg === "") {
+        console.log("이미지없이 변화 요청")
         await axios
-          .post('https://www.api.liteseoul.com/user/changeinfo', {
-            access_token: token,
-            nick: userNick,
-            phone: userPhone,
-            profileText: myText,
-            password: password,
-          })
+          .post(
+            "https://www.api.liteseoul.com/user/changeinfo",
+            {
+              access_token: token,
+              nick: userNick,
+              phone: userPhone,
+              profileText: myText,
+              password: password,
+            }
+          )
           .then((res) => {
             console.log(res);
-            alert('정보수정이 되었습니다! 홈 페이지로 이동합니다 :)');
-            window.location.replace('http://localhost:3000/mypage/');
+            alert("정보수정이 되었습니다! 홈 페이지로 이동합니다 :)")
+            window.location.replace("http://localhost:3000/mypage/");
           })
           .catch((err) => {
-            alert('비밀번호가 맞지않아요!');
+            alert("비밀번호가 맞지않아요!");
           });
       }
-      if (userImg !== '' || userImg !== undefined) {
-        console.log(userImg);
-        formData.append('UserImg', userImg);
+      if (userImg !== "" || userImg !== undefined) {
+        console.log(userImg)
+        formData.append("UserImg", userImg);
         if (token !== null) {
-          formData.append('access_token', token);
+          formData.append("access_token", token);
         }
-        formData.append('nick', userNick);
-        formData.append('phone', userPhone);
-        formData.append('profileText', myText);
-        formData.append('password', password);
+        formData.append("nick", userNick);
+        formData.append("phone", userPhone);
+        formData.append("profileText", myText);
+        formData.append("password", password);
 
-        console.log('이미지포함 변화 요청');
+        console.log("이미지포함 변화 요청")
         // 이미지 변화가 있다면~
         await axios
-          .post('https://www.api.liteseoul.com/user/update', formData)
+          .post(
+            "https://www.api.liteseoul.com/user/update",
+            formData
+          )
           .then((res) => {
             console.log(res);
-            alert('정보수정이 되었습니다! 홈 페이지로 이동합니다 :)');
-            window.location.replace('http://localhost:3000/mypage/');
+            alert("정보수정이 되었습니다! 홈 페이지로 이동합니다 :)")
+            window.location.replace("http://localhost:3000/mypage/");
           })
           .catch((err) => {
-            alert('비밀번호가 맞지않아요!');
+            alert("비밀번호가 맞지않아요!");
           });
         // 이미지 변화가 없다면~
-      }
+      } 
     }
   };
 
@@ -296,7 +306,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
             <input
               className="EditNickName"
               type="text"
-              placeholder={nick || '* NickName'}
+              placeholder={nick || "* NickName"}
               onChange={handleUserNick}
             ></input>
 
@@ -304,7 +314,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
             <input
               className="EditPhone"
               type="tel"
-              placeholder={phone || '* Mobile Phone'}
+              placeholder={phone || "* Mobile Phone"}
               onChange={handleUserPhone}
             ></input>
 
@@ -312,7 +322,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
             <input
               className="EditText"
               type="text"
-              placeholder={profileText || '* 상태메시지를 입력해주세요'}
+              placeholder={profileText || "* 상태메시지를 입력해주세요"}
               onChange={handleMyText}
             ></input>
 

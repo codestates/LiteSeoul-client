@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink, Link } from 'react-router-dom';
 
 const FooterOut = styled.div`
   width: 100%;
@@ -139,7 +139,7 @@ const FooterBusiness = styled.ul`
     color: white;
   }
   & a:hover {
-    color: #ff735d;
+    color: #189cc4;
   }
   & li {
     opacity: 0.7;
