@@ -180,6 +180,7 @@ function App(): any {
       setLoading(true);
 
       sessionStorage.setItem("access_token", token);
+      sessionStorage.setItem("id", id)
       localStorage.setItem("id", id)
       // window.location.reload();
       console.log("============== setLoading을 false로 변경");
@@ -221,6 +222,7 @@ function App(): any {
             // console.log("============== 토큰까지 넣는 것 완료")
             console.log(result)
             sessionStorage.setItem("access_token", result.data.access_token);
+            sessionStorage.setItem("id", result.data.payload.id)
             localStorage.setItem("id", result.data.payload.id)
             window.location.reload();
             // console.log("============== setLoading을 false로 변경")
