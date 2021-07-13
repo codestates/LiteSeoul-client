@@ -319,6 +319,7 @@ function SignIn(props: any) {
           sessionStorage.setItem("access_token", res.data.access_token);
           // 반석&영근 요청으로 id값 로컬 스토리지에 저장
           localStorage.setItem("id", res.data.payload.id);
+          sessionStorage.setItem("id", res.data.payload.id)
           window.location.replace("http://localhost:3000/");
         })
         .catch(() => {

@@ -157,7 +157,7 @@ function LikePlace({myinfo}: any) {
     console.log(e.target.innerText);
   };
 
-  // 유저의 id를 로컬 스토리지에 저장해야함.
+  // 유저의 id를 세션 스토리지에 저장해야함.
   const id = sessionStorage.getItem("id");
   // const id = myinfo.id;
   
@@ -175,7 +175,7 @@ function LikePlace({myinfo}: any) {
 
   return (
     <LikePlaceOut>
-      <LikePlaceTitle>자주 방문한 곳</LikePlaceTitle>
+      <LikePlaceTitle>좋아하는 장소</LikePlaceTitle>
       <LikePlaceMain>
         {likePlaces.length !== 0 ? likePlaces.map((likePlace: any) => (
           <LikePlaceList key={likePlace.id} onClick={consoleHandler}>
@@ -186,7 +186,7 @@ function LikePlace({myinfo}: any) {
               {likePlace.shop.address}
             </LikePlaceAddr>
           </LikePlaceList>
-        )) : <div>인증을 하시면서 방문기록을 등록해보세요!</div>}
+        )) : <div>자주이용하시는 샵에 상세정보 창에서 좋아요를 눌러서 모아보세요!</div>}
       </LikePlaceMain>
     </LikePlaceOut>
   );

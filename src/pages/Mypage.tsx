@@ -70,7 +70,7 @@ const MyPageOut4 = styled.div`
   }
 `;
 
-function Mypage({ myinfo }: any) {
+function Mypage({ myinfo, setLoading }: any) {
   const [mypageNow, setMypageNow] = useState("justinfo");
   console.log(mypageNow);
 
@@ -94,7 +94,7 @@ function Mypage({ myinfo }: any) {
       ) : mypageNow === "billslog" ? (
         <MyPageOut2>
           <MypageNav myinfo={myinfo} handleMypageNow={handleMypageNow} />
-          <BillsLog handleMypageNow={handleMypageNow}/>
+          <BillsLog handleMypageNow={handleMypageNow} setLoading={setLoading}/>
         </MyPageOut2>
       ) : mypageNow === "likeplace" ? (
         <MyPageOut3>

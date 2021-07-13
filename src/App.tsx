@@ -181,10 +181,11 @@ function App(): any {
 
       sessionStorage.setItem("access_token", token);
       sessionStorage.setItem("id", id)
-      localStorage.setItem("id", id)
-      // window.location.reload();
+      
       console.log("============== setLoading을 false로 변경");
       setLoading(false);
+      // window.location.reload();
+      window.location.replace("http://localhost:3000/");
     }
     // ================ 구글
 
@@ -223,7 +224,6 @@ function App(): any {
             console.log(result)
             sessionStorage.setItem("access_token", result.data.access_token);
             sessionStorage.setItem("id", result.data.payload.id)
-            localStorage.setItem("id", result.data.payload.id)
             window.location.reload();
             // console.log("============== setLoading을 false로 변경")
             setLoading(false);
@@ -264,7 +264,7 @@ function App(): any {
             if (!sessionStorage.getItem("access_token")) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage myinfo={myinfo} />;
+              return <Mypage myinfo={myinfo} setLoading={setLoading}/>;
             }
           }}
         />
@@ -318,7 +318,7 @@ function App(): any {
       ) : (
         <></>
       )}
-      {isSignUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
+      {isSignUp ? <SignUp handleSignUp={handleSignUp} setLoading={setLoading}></SignUp> : <></>}
       {loading ? <Loading></Loading> : <></>}
     </BrowserRouter>
   );
