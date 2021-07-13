@@ -204,7 +204,7 @@ const Img = styled.div`
 
 function ReRecycle() {
   const data = JSON.parse(localStorage.getItem('recommend') || '{}');
-
+  console.log(data);
   return (
     <Out>
       <ListTitle>Recycle</ListTitle>

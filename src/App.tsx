@@ -54,61 +54,68 @@ function App(): any {
   });
   console.log(myinfo);
 
+  localStorage.setItem(
+    'recommend',
+    JSON.stringify({
+      nearest: {
+        address: '성동구 왕십리로 115 헤이그라운드 9층',
+        category: 'life',
+        distance: 3.608268553240311,
+        id: 6,
+        latitude: '37.54804049927143',
+        longitude: '127.04413748468407',
+        name: '더피커',
+        phone: '070-4118-0710',
+        recommend: 'antiPlastic',
+        imgPath:
+          'http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/06_thepicker.jpg',
+      },
+      resultAntiChemical: {
+        address: '서대문구 홍제천로2길 100, 1층',
+        category: 'cafe',
+        id: 17,
+        latitude: '37.57177467293018',
+        longitude: '126.92323569632859',
+        name: '카페 샘',
+        phone: '010-3646-4135',
+        recommend: 'antiChemical',
+        imgPath:
+          'http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/17_cafesam.jpeg',
+      },
+      resultAntiPlastic: {
+        address: '금천구 독산로 312 1층',
+        category: 'cafe',
+        id: 3,
+        latitude: '37.47491311875498',
+        longitude: '126.90365938283361',
+        name: '데일리로스팅',
+        phone: '070-4205-1212',
+        recommend: 'antiPlastic',
+        imgPath:
+          'http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/03_dailyroasting.png',
+      },
+      resultRecycle: {
+        address: '서대문구 연희동 708번지 1층',
+        category: 'cafe',
+        id: 12,
+        latitude: '37.575344352775566',
+        longitude: '126.92843671167105',
+        name: '보틀팩토리',
+        phone: '02-3144-0703',
+        recommend: 'recycle',
+        imgPath:
+          'http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/12_bottlefactory.jpeg',
+      },
+    }),
+  );
+  console.log(localStorage.getItem('recommend'));
+
   //전체 지도 데이터 받아오기
   useEffect(() => {
     axios.get('https://www.api.liteseoul.com/shop/getAll').then((res) => {
       // console.log(res.data);
       localStorage.setItem('total', JSON.stringify(res.data));
     });
-
-    localStorage.setItem(
-      'recommend',
-      JSON.stringify({
-        nearest: {
-          address: '성동구 왕십리로 115 헤이그라운드 9층',
-          category: 'life',
-          distance: 3.608268553240311,
-          id: 6,
-          latitude: '37.54804049927143',
-          longitude: '127.04413748468407',
-          name: '더피커',
-          phone: '070-4118-0710',
-          recommend: 'antiPlastic',
-        },
-        resultAntiChemical: {
-          address: '서대문구 홍제천로2길 100, 1층',
-          category: 'cafe',
-          id: 17,
-          latitude: '37.57177467293018',
-          longitude: '126.92323569632859',
-          name: '카페 샘',
-          phone: '010-3646-4135',
-          recommend: 'antiChemical',
-        },
-        resultAntiPlastic: {
-          address: '금천구 독산로 312 1층',
-          category: 'cafe',
-          id: 3,
-          latitude: '37.47491311875498',
-          longitude: '126.90365938283361',
-          name: '데일리로스팅',
-          phone: '070-4205-1212',
-          recommend: 'antiPlastic',
-        },
-        resultRecycle: {
-          address: '서대문구 연희동 708번지 1층',
-          category: 'cafe',
-          id: 12,
-          latitude: '37.575344352775566',
-          longitude: '126.92843671167105',
-          name: '보틀팩토리',
-          phone: '02-3144-0703',
-          recommend: 'recycle',
-        },
-      }),
-    );
-
-    console.log(localStorage.getItem('recommend'));
   }, []);
 
   //내위치 위도경도
