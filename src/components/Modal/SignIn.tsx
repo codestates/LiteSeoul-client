@@ -1,7 +1,9 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import dotenv from 'dotenv';
+import axios from "axios";
+import React, { useState } from "react";
+import styled from "styled-components";
+import dotenv from "dotenv";
+import qs from "querystringify";
+
 dotenv.config();
 
 const SingInOut = styled.div`
@@ -38,12 +40,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -84,7 +86,7 @@ const Img = styled.div`
   background-color: #fff;
   border-radius: 50%;
   margin-bottom: 20px;
-  background-image: url('/img/login_imge.svg');
+  background-image: url("/img/login_imge.svg");
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -153,7 +155,7 @@ const SignInInput = styled.ul`
     }
   }
   & li:nth-child(4) {
-    background-image: url('img/kakao_login.png');
+    background-image: url("img/kakao_login.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -207,8 +209,8 @@ const SignInInput = styled.ul`
 `;
 
 const InputId = styled.input.attrs({
-  type: 'text',
-  placeholder: 'Email',
+  type: "text",
+  placeholder: "Email",
 })`
   width: 100%;
   height: 100%;
@@ -224,8 +226,8 @@ const InputId = styled.input.attrs({
 `;
 
 const InputPassword = styled.input.attrs({
-  type: 'password',
-  placeholder: 'Password',
+  type: "password",
+  placeholder: "Password",
 })`
   width: 100%;
   height: 100%;
@@ -243,44 +245,42 @@ const InputPassword = styled.input.attrs({
 function SignIn(props: any) {
   // console.log(props);
 
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [errMessage, setErrMessage] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
 
   const kakaoLogin = () => {
     // console.log('hello');
     const url = new URL(window.location.href);
 
-    const _hostName = 'https://kauth.kakao.com';
-    const _restApiKey = 'd33a84f54f22e12cd75db7c1981bd095';
+    const _hostName = "https://kauth.kakao.com";
+    const _restApiKey = "d33a84f54f22e12cd75db7c1981bd095";
     const _redirectUrl = url;
+
+    console.log("=== redirectUrl ===", _redirectUrl);
+
     window.location.assign(
-      `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`,
+      `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`
     );
   };
 
   const googleLogin = () => {
-    const host_name = 'https://accounts.google.com/o/oauth2/v2/auth';
-    // const redirect_uri = "https://liteseoul.com"
-    const redirect_uri = new URL(window.location.href);
+    // console.log(props)
+    // const url = new URL(window.location.href);
+    const host_name = "https://accounts.google.com";
+    // const redirect_uri = 'http://localhost:80';
+    const redirect_uri = "https://api.liteseoul.com";
+    console.log("=== redirect uri === ", redirect_uri);
     const client_id =
-      '609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com';
-
-    // axios.get(`${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`)
-    // .then(res =>console.log(res))
+      "609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com";
 
     window.location.assign(
-      `${host_name}/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}google%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`,
+      `${host_name}/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`
     );
-
-    // sessionStorage.setItem('access_token', res.data.access_token);
-    // // 반석&영근 요청으로 id값 로컬 스토리지에 저장
-    // localStorage.setItem('id', res.data.payload.id);
-    // window.location.replace('http://localhost:3000/');
   };
 
   const handleAccount = () => {
-    console.log('회원가입버튼');
+    console.log("회원가입버튼");
     props.handleSignUp();
     props.handleLoginModal();
   };
@@ -294,10 +294,10 @@ function SignIn(props: any) {
   };
 
   const LoginBtn = () => {
-    if (id === '') {
-      setErrMessage('아이디를 입력해주세요');
-    } else if (password === '') {
-      setErrMessage('비밀번호를 입력해주세요');
+    if (id === "") {
+      setErrMessage("아이디를 입력해주세요");
+    } else if (password === "") {
+      setErrMessage("비밀번호를 입력해주세요");
     } else {
       // console.log('로그인완료')
       // setErrMessage('');
@@ -307,41 +307,28 @@ function SignIn(props: any) {
       // 서버 연결 관련
       axios
         .post(
-          // 'http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signin',
-
-          // 정태쿤 주소
-          'http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/user/signin',
-
+           "https://www.api.liteseoul.com/user/signin",
           {
             email: id,
             password: password,
-          },
+          }
         )
         .then((res) => {
           console.log(res);
           console.log(res.data.access_token);
-          sessionStorage.setItem('access_token', res.data.access_token);
+          sessionStorage.setItem("access_token", res.data.access_token);
           // 반석&영근 요청으로 id값 로컬 스토리지에 저장
-          localStorage.setItem('id', res.data.payload.id);
-          window.location.replace('http://localhost:3000/');
+          localStorage.setItem("id", res.data.payload.id);
+          window.location.replace("http://localhost:3000/");
         })
         .catch(() => {
-          setErrMessage('아이디와 패스워드를 확인해주세요');
+          setErrMessage("아이디와 패스워드를 확인해주세요");
         });
     }
-
-    // if (id !== '' && password !== '') {
-    //   console.log(id, password);
-    //   console.log('로그인완료');
-    //   setErrMessage('');
-    // } else {
-    //   setErrMessage('아이디와 패스워드를 확인하세요옹');
-    // }
-  };
+  }
 
   return (
     <SingInOut>
-      {/* {errMessage === '' ? <></> : <ErrorMessage>{errMessage}</ErrorMessage>} */}
       <form onSubmit={(e) => e.preventDefault()}>
         <SignMain>
           <CloseBtn onClick={props.handleLoginModal}></CloseBtn>
@@ -355,13 +342,13 @@ function SignIn(props: any) {
             </SignInImg>
             <SignInInput>
               <li>
-                {errMessage === '' ? (
+                {errMessage === "" ? (
                   <p>LiteSeoul</p>
                 ) : (
                   <p
                     style={{
-                      color: 'red',
-                      fontSize: '1.2rem',
+                      color: "red",
+                      fontSize: "1.2rem",
                     }}
                   >
                     {errMessage}

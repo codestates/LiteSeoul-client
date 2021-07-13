@@ -210,7 +210,7 @@ function ReNoChem() {
     <Out>
       <ListTitle>No Chemical</ListTitle>
       <Img>
-        <img src="/img/zero.jpeg" alt="store"></img>
+        <img src={data.resultAntiChemical.imgPath} alt="store"></img>
       </Img>
       <Store>
         <StoreName>

@@ -364,7 +364,7 @@ function Marker({
       // console.log(e.target.checked);
       axios
         .post(
-          `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/likeToggle`,
+          "https://www.api.liteseoul.com/shop/likeToggle",
           {
             userId: userId,
             shopId: modalData.id,
@@ -388,9 +388,7 @@ function Marker({
   useEffect((): any => {
     axios
       .get(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/${Number(
-          modalData.id,
-        )}`,
+        `https://www.api.liteseoul.com/shop/${Number(modalData.id)}`
       )
       .then((res) => {
         setComments(res.data.commentInfo);
@@ -402,9 +400,7 @@ function Marker({
   useEffect((): any => {
     axios
       .get(
-        `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/${Number(
-          modalData.id,
-        )}`,
+        `https://www.api.liteseoul.com/shop/${Number(modalData.id)}`
       )
       .then((res) => {
         for (let i = 0; i < res.data.likeInfo.length; i++) {
@@ -435,7 +431,7 @@ function Marker({
     } else {
       axios
         .post(
-          `http://ec2-52-79-247-245.ap-northeast-2.compute.amazonaws.com/shop/comment`,
+          `https://www.api.liteseoul.com/shop/comment`,
           {
             userId: userId,
             shopId: modalData.id,

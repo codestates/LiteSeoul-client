@@ -250,7 +250,7 @@ const SignUp = (props: any) => {
 
     axios
       .post(
-        "http://ec2-3-142-145-100.us-east-2.compute.amazonaws.com/user/signup",
+        "https://www.api.liteseoul.com/user/signup",
         formData,
         {
           headers: {
@@ -263,9 +263,6 @@ const SignUp = (props: any) => {
       });
   };
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);
-
-  // 회원가입버튼 작동여부 확인 함수
-  const createHandle = (e: any) => console.log("hello");
 
   const handleCLose = () => {
     props.handleSignUp();

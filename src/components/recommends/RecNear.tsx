@@ -199,7 +199,7 @@ function RecNear() {
     <Out>
       <ListTitle>Near</ListTitle>
       <Img>
-        <img src="/img/zero.jpeg" alt="store"></img>
+        <img src={data.nearest.imgPath} alt="store"></img>
       </Img>
       <Store>
         <StoreName>

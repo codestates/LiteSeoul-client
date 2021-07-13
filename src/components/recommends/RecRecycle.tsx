@@ -209,7 +209,7 @@ function ReRecycle() {
     <Out>
       <ListTitle>Recycle</ListTitle>
       <Img>
-        <img src="/img/zero.jpeg" alt="store"></img>
+        <img src={data.resultRecycle.imgPath} alt="store"></img>
       </Img>
       <Store>
         <StoreName>

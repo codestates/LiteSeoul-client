@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "qs-stringify": "^1.2.1",
+    "querystringify": "^2.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.9.0",
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/querystringify": "^2.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.10"
   }
