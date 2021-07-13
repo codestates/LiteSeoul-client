@@ -214,26 +214,24 @@ const MarkerCommemntUl = styled.ul`
       white-space: nowrap;
     }
     & div:nth-child(1) {
-      /* border: 1px solid red; */
       width: 15%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
     & div:nth-child(2) {
-      width: 70%;
+      width: 60%;
       height: 100%;
       display: flex;
       align-items: center;
       font-size: 0.8rem;
     }
     & div:nth-child(3) {
-      /* border: 1px solid red; */
       width: 15%;
       height: 100%;
       font-size: 0.6rem;
