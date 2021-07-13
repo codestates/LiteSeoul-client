@@ -56,14 +56,10 @@ function App(): any {
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
-    axios
-      .get(
-        "https://www.api.liteseoul.com/shop/getAll"
-      )
-      .then((res) => {
-        // console.log(res.data);
-        localStorage.setItem('total', JSON.stringify(res.data));
-      });
+    axios.get('https://www.api.liteseoul.com/shop/getAll').then((res) => {
+      // console.log(res.data);
+      localStorage.setItem('total', JSON.stringify(res.data));
+    });
 
     localStorage.setItem(
       "recommend",
@@ -163,7 +159,7 @@ function App(): any {
       console.log("============ setLoading을 true로 변경");
       setLoading(true);
 
-      sessionStorage.setItem("access_token", token);
+      sessionStorage.setItem('access_token', token);
       // window.location.reload();
       console.log("============== setLoading을 false로 변경");
       setLoading(false);
@@ -174,13 +170,13 @@ function App(): any {
       console.log("kakao");
       console.log(code);
 
-      const data = queryStringify({
-        grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000/",
-        // redirect_uri: "https://liteseoul.com/",
-        code: code,
-      });
+    const data = queryStringify({
+      grant_type: 'authorization_code',
+      client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+      redirect_uri: 'http://localhost:3000/',
+      // redirect_uri: "https://liteseoul.com/",
+      code: code,
+    });
 
       axios({
         method: "post",
@@ -309,9 +305,7 @@ function App(): any {
       ) : (
         <></>
       )}
-
       {isSignUp ? <SignUp handleSignUp={handleSignUp}></SignUp> : <></>}
-
       {loading ? <Loading></Loading> : <></>}
     </BrowserRouter>
   );

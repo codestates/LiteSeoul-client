@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import dummyMyInfo from "../documents/dummyMyInfo";
-import mememe from "../image/mememe.png";
-import styled from "styled-components";
-import InfoEdit from "../Modal/InfoEdit";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import InfoEdit from '../Modal/InfoEdit';
 
 const JustInfoOut = styled.div`
   width: 80%;
   height: 100%;
-  /* background: yellow; */
   position: absolute;
   right: 0;
   display: flex;
@@ -25,7 +22,6 @@ const JustInfoOut = styled.div`
 const MyInfoTitle = styled.div`
   width: 100%;
   height: 15%;
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   padding-left: 5%;
@@ -47,7 +43,6 @@ const MyInfoMain = styled.ul`
     width: 40%;
     height: 100%;
     padding: 2%;
-    /* border: 1px solid pink; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -122,13 +117,11 @@ const ProfileEdit = styled.div`
 const ProfileLevelImg = styled.div`
   width: 500px;
   height: 320px;
-  /* border-radius: 50%; */
-  /* overflow: hidden; */
   margin-bottom: 20px;
   & img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 `;
 
@@ -147,7 +140,6 @@ const MyLevelText1 = styled.div`
   width: 100%;
   height: auto;
   font-size: 1rem;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,10 +204,10 @@ function JustInfo({ myinfo }: any) {
     currentExp,
     maxExp,
     profileImgPath,
-    profileText
+    profileText,
   } = myinfo;
 
-  console.log(profileImgPath)
+  console.log(profileImgPath);
 
   const percentage = Math.floor((currentExp / maxExp) * 100);
 
@@ -226,16 +218,6 @@ function JustInfo({ myinfo }: any) {
     width: ${percentage}%;
     background-color: #189cc4;
     border-radius: 50px;
-  `;
-
-  const MypageADMents = styled.div`
-    border: 3px solid #188cc4;
-    /* margin: 20px; */
-    background-color: #188cc4;
-    color: white;
-    padding: 50px;
-    text-align: center;
-    align-items: center;
   `;
 
   // 인포에딧 모달창 관리
@@ -255,10 +237,13 @@ function JustInfo({ myinfo }: any) {
           {/* 프로필 */}
           <li>
             <ProfileImg>
-              <img src={profileImgPath} alt="profileImg"></img>
+              <img
+                src={profileImgPath ? profileImgPath : '/icon/profile-01.svg'}
+                alt="profileImg"
+              ></img>
             </ProfileImg>
-            <ProfileName>{nick}</ProfileName>
-            <ProfileEmail>{email}</ProfileEmail>
+            <ProfileName>{nick ? nick : 'nickname'}</ProfileName>
+            <ProfileEmail>{email ? email : 'email'}</ProfileEmail>
             <ProfileEdit onClick={handleModalOpen}>Edit</ProfileEdit>
           </li>
           {/* 레벨 */}
@@ -273,7 +258,9 @@ function JustInfo({ myinfo }: any) {
             <ProfileLevel>Level {level}</ProfileLevel>
             <MyLevelBarOut>
               <MyLevelBarIn>
-                <MyLevelExpControll>{percentage}%</MyLevelExpControll>
+                <MyLevelExpControll>
+                  {percentage ? percentage : 0}%
+                </MyLevelExpControll>
               </MyLevelBarIn>
             </MyLevelBarOut>
             <MyLevelText1>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Out = styled.div`

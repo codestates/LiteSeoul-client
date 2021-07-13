@@ -119,8 +119,6 @@ function Slogan2() {
     <Slogan2Out id="slogan2">
       <SloganMain>
         <SloganText id="slogan2Text">
-          {/* <img src="img/blueback-03.png" alt="bg"></img> */}
-
           <SloganTextTitle>당신의 제로 웨이스트(Zero Waste)</SloganTextTitle>
           <SloganTextContent>
             제로 웨이스트 샵에서 구매한 영수증 혹은 인증샷을 올려주세요! <br />
