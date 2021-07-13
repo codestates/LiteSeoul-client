@@ -123,6 +123,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     profileText,
   } = myinfo;
 
+
   const FileUpload = styled.label`
     display: block;
     height: 150px;
@@ -154,7 +155,8 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
   const [errMessage, setErrMessage] = useState('개인정보 수정 페이지입니다 :)');
 
   useEffect(() => {
-    if (password.length >= 1 && !isPassword(password)) {
+    // if (password.length >= 1 && !isPassword(password)) {
+      if (password.length >= 1) {
       setErrMessage('비밀번호를 다시 확인해주세요');
     } else {
       setErrMessage('개인정보 수정 페이지입니다 :)');
@@ -162,8 +164,8 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
   }, [password]);
 
   const isPassword = (password: any) => {
-    const PasswordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,15}$/;
-    return PasswordRegex.test(password);
+    // const PasswordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,15}$/;
+    // return PasswordRegex.test(password);
   };
 
   // 프리뷰 상태
@@ -212,7 +214,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
   const token = sessionStorage.getItem('access_token');
 
   const handleSubmit = async () => {
-    if (!isPassword) {
+    if (password === "") {
       setErrMessage('비밀번호를 다시 확인해주세요');
     } else {
       if (userImg === '') {
@@ -227,7 +229,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
           })
           .then((res) => {
             console.log(res);
-            alert('정보수정이 되었습니다! 홈 페이지로 이동합니다 :)');
+            alert('정보수정이 되었습니다! 마이페이지로 이동합니다 :)');
             window.location.replace('http://localhost:3000/mypage/');
           })
           .catch((err) => {
@@ -251,7 +253,12 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
           .post('https://www.api.liteseoul.com/user/update', formData)
           .then((res) => {
             console.log(res);
-            alert('정보수정이 되었습니다! 홈 페이지로 이동합니다 :)');
+            alert('정보수정이 되었습니다! 마이페이지로 이동합니다 :)');
+            setUploadImg({
+              file: "",
+              previewURL: ""
+            })
+            setUserImg("")
             window.location.replace('http://localhost:3000/mypage/');
           })
           .catch((err) => {
