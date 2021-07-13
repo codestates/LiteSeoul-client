@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 /* font-family: 'Noto Sans KR', sans-serif; */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap');
-/* font-family: 'Roboto', sans-serif; */
+
 html,
 body,
 div,
@@ -1101,9 +1100,9 @@ a {
   justify-content: center;
 }
 @media screen and (max-width: 600px) {
-  .EditForm {
+  .EditForm{
     width: 80%;
-  }
+  } 
 }
 
 .EditNickName {
@@ -1118,7 +1117,7 @@ a {
   border-bottom: 2px solid #ff735d;
 }
 
-.EditPhone {
+.EditPhone{
   width: 100%;
   border: none;
   height: 50px;
@@ -1130,7 +1129,7 @@ a {
   border-bottom: 2px solid #ff735d;
 }
 
-.EditText {
+.EditText{
   width: 100%;
   border: none;
   height: 50px;

@@ -110,6 +110,7 @@ const Text = styled.p`
 const Logo = styled.div`
   width: 150px;
   height: 40px;
+  /* border: 1px solid #fff; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,6 +126,7 @@ const SignInInput = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
+  /* background: red; */
   flex-direction: column;
   & li {
     width: 300px;
@@ -166,20 +168,11 @@ const SignInInput = styled.ul`
     }
   }
   & li:nth-child(5) {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    color: #000000;
+    border: 1px solid #86868b;
     cursor: pointer;
-    position: relative;
-    color: #374957;
-    box-shadow: inset 0 0 0 2px #cfd9e0;
-    & img {
-      width: 38px;
-      height: 38px;
-      position: absolute;
-      left: 5px;
-    }
     &:hover {
-      box-shadow: inset 0 0 0 2px #999;
+      letter-spacing: 0.2rem;
     }
   }
   & li:nth-child(6) {
@@ -364,13 +357,7 @@ function SignIn(props: any) {
                 <InputPassword value={password} onChange={handlePassword} />
               </li>
               <li onClick={kakaoLogin}></li>
-              <li onClick={googleLogin}>
-                <img
-                  src="/img/btn_google_light_normal_ios.svg"
-                  alt="google"
-                ></img>
-                Sign in with Google
-              </li>
+              <li onClick={googleLogin}>Google Login</li>
               <li onClick={LoginBtn}>로그인</li>
               <li>
                 <div onClick={handleAccount}>
