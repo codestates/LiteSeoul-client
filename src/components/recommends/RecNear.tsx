@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Out = styled.div`
@@ -11,7 +10,6 @@ const Out = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   @media screen and (max-width: 1401px) {
     height: 65%;
   }
@@ -53,12 +51,10 @@ const ListTitle = styled.div`
     width: 200px;
     font-size: 1.2rem;
   }
-
   @media screen and (max-width: 1401px) {
     width: 160px;
     font-size: 1.2rem;
   }
-
   @media screen and (max-width: 1101px) {
     width: 140px;
     font-size: 1.2rem;
