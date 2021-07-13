@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 const BikeOut = styled.div`
   width: 100%;
   height: 900px;
+  min-height: 900px;
   /* border: 1px solid red; */
   /* background-color: #eee; */
   display: flex;
