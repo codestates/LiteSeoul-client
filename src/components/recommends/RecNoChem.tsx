@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Out = styled.div`
   width: 18%;
@@ -40,10 +40,10 @@ const ListTitle = styled.div`
   align-items: center;
   justify-content: center;
   &::before {
-    content: '';
+    content: "";
     width: 25px;
     height: 25px;
-    background-image: url('/icon/location_white.svg');
+    background-image: url("/icon/location_white.svg");
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 5px;
@@ -52,10 +52,10 @@ const ListTitle = styled.div`
     width: 200px;
     font-size: 1.2rem;
     &::before {
-      content: '';
+      content: "";
       width: 20px;
       height: 20px;
-      background-image: url('/icon/leaf2.svg');
+      background-image: url("/icon/leaf2.svg");
       background-repeat: no-repeat;
       background-position: center;
       margin-right: 5px;
@@ -204,7 +204,7 @@ const Img = styled.div`
 `;
 
 function ReNoChem() {
-  const data = JSON.parse(localStorage.getItem('recommend') || '{}');
+  const data = JSON.parse(localStorage.getItem("recommend") || "{}");
 
   return (
     <Out>
@@ -214,21 +214,21 @@ function ReNoChem() {
       </Img>
       <Store>
         <StoreName>
-          {localStorage.getItem('recommend')
+          {localStorage.getItem("recommend")
             ? data.resultAntiChemical.name
-            : '가게이름'}
+            : "가게이름"}
         </StoreName>
         <StoreText>
-          {localStorage.getItem('recommend')
+          {localStorage.getItem("recommend")
             ? data.resultAntiChemical.phone
-            : '전화번호'}
+            : "전화번호"}
         </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
           <span>
-            {localStorage.getItem('recommend')
+            {localStorage.getItem("recommend")
               ? data.resultAntiChemical.address
-              : '가게주소'}
+              : "가게주소"}
           </span>
         </StoreAdd>
       </Store>

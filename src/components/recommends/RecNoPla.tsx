@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Out = styled.div`
   width: 18%;
@@ -44,10 +44,10 @@ const ListTitle = styled.div`
   align-items: center;
   justify-content: center;
   &::before {
-    content: '';
+    content: "";
     width: 25px;
     height: 25px;
-    background-image: url('/icon/leaf1.svg');
+    background-image: url("/icon/leaf1.svg");
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 5px;
@@ -197,7 +197,7 @@ const Img = styled.div`
 `;
 
 function ReNoPla() {
-  const data = JSON.parse(localStorage.getItem('recommend') || '{}');
+  const data = JSON.parse(localStorage.getItem("recommend") || "{}");
   return (
     <Out>
       <ListTitle>No Plastic</ListTitle>
@@ -206,21 +206,21 @@ function ReNoPla() {
       </Img>
       <Store>
         <StoreName>
-          {localStorage.getItem('recommend')
+          {localStorage.getItem("recommend")
             ? data.resultAntiPlastic.name
-            : '가게이름'}
+            : "가게이름"}
         </StoreName>
         <StoreText>
-          {localStorage.getItem('recommend')
+          {localStorage.getItem("recommend")
             ? data.resultAntiPlastic.phone
-            : '전화번호'}
+            : "전화번호"}
         </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
           <span>
-            {localStorage.getItem('recommend')
+            {localStorage.getItem("recommend")
               ? data.resultAntiPlastic.address
-              : '가게주소'}
+              : "가게주소"}
           </span>
         </StoreAdd>
       </Store>
