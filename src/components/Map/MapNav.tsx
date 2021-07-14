@@ -12,7 +12,6 @@ const MapNav1 = styled.div`
   height: 100%;
   min-height: 800px;
   background-color: #ccc;
-  /* border: 1px solid blue; */
   position: fixed;
   box-shadow: rgba(17, 17, 26, 0.4) 0px 0px 16px;
   overflow: auto;
@@ -66,7 +65,6 @@ const NavMain2 = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: space-evenly;
-  /* border: 1px solid red; */
 `;
 
 const NavAdd = styled.div`
@@ -93,7 +91,6 @@ const Category = styled.div`
 const CategoryOut = styled.div`
   width: 100%;
   height: 40px;
-  /* background-color: red; */
   display: flex;
   align-items: center;
   & img {
@@ -136,7 +133,6 @@ const List2 = styled.div`
   width: 100%;
   height: 80%;
   overflow: auto;
-  /* border: 1px solid blue; */
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -157,15 +153,12 @@ const CategoryList2 = styled.div`
   border-radius: 20px;
   background-color: #eee;
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
   position: relative;
   margin-bottom: 20px;
   &:hover {
-    /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px; */
     background-color: #ffd700;
   }
   &:last-child {
@@ -176,14 +169,11 @@ const CategoryList2 = styled.div`
     height: 30px;
     font-weight: 700;
     font-size: 1.2rem;
-    /* margin-bottom: 5px; */
-    /* background-color: yellow; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
   & div:nth-child(2) {
-    /* background-color: red; */
     width: 80%;
     height: 30px;
     display: flex;
@@ -211,7 +201,6 @@ const CategoryList2 = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid blue; */
   }
 `;
 
@@ -278,7 +267,6 @@ function MapNav(props: any) {
   };
 
   const handleHome = () => {
-    // console.log(props.history);
     props.history.goBack();
   };
 

@@ -24,7 +24,6 @@ const CategoryList = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    /* border: 1px solid red; */
     width: 150px;
     height: 60px;
     & span:nth-child(1) {
@@ -48,7 +47,7 @@ const CategoryList = styled.div`
 function CategoryTotal(props: any) {
   const data = JSON.parse(localStorage.getItem('total') || '{}');
 
-  const [isMap, setMap] = useState(data);
+  const [isMap, setMap] = useState<any>(data);
 
   // 카페 카테고리를 눌럿을떄
   const handelTotal = () => {
@@ -104,34 +103,7 @@ function CategoryTotal(props: any) {
       });
 
       infowindow.open(map, marker);
-
-      // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-      // 이벤트 리스너로는 클로저를 만들어 등록합니다
-      // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-      // window.kakao.maps.event.addListener(
-      //   marker,
-      //   'mouseover',
-      //   makeOverListener(map, marker, infowindow),
-      // );
-      // window.kakao.maps.event.addListener(
-      //   marker,
-      //   'click',
-      //   makeOutListener(infowindow),
-      // );
     }
-
-    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-    // function makeOverListener(map: any, marker: any, infowindow: any) {
-    //   return function () {
-    //     infowindow.open(map, marker);
-    //   };
-    // }
-
-    // function makeOutListener(infowindow: any) {
-    //   return function () {
-    //     infowindow.close();
-    //   };
-    // }
   };
 
   return (

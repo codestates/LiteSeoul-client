@@ -12,7 +12,6 @@ const AddBillsOut = styled.div`
   justify-content: center;
   overflow: hidden;
   position: relative;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
 `;
@@ -34,6 +33,7 @@ const CloseBtn = styled.div`
     background-image: url("/icon/close2.svg");
   }
 `;
+
 const PlayModalInside = styled.div`
   width: 100%;
   height: 750px;
@@ -44,7 +44,6 @@ const PlayModalInside = styled.div`
   flex-direction: column;
   text-align: center;
   align-items: center;
-  /* cursor: pointer; */
   position: absolute;
   bottom: 0;
   padding: 5%;
@@ -63,7 +62,6 @@ const BillsAddLine = styled.div`
 const SubmitBtn = styled.div`
   z-index: 9999;
   cursor: pointer;
-  /* border: 2px solid tomato; */
   border-radius: 20px;
   margin-bottom: 10px;
   padding: 10px 40px;
@@ -81,27 +79,22 @@ const BillsImgOut = styled.div`
 `;
 
 const BillsImg = styled.img`
-  /* margin-top: 0%; */
   padding: 50px;
 `;
 
 const BillMentsRef = styled.div`
-color: #ff735d;
-font-size: 10px;
-`
+  color: #ff735d;
+  font-size: 10px;
+`;
 
 function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
-  // console.log(handleModalClose)/
-
   type Bills = {
     file: string;
     previewURL: any | string;
   };
 
   const [billsImg, setBillsImg] = useState<Bills>();
-  const [uploadImg, setUploadImg] = useState("");
-  console.log(billsImg);
-  console.log(uploadImg);
+  const [uploadImg, setUploadImg] = useState<string>("");
 
   // 영수증 업로드 시 이미지 프리뷰 함수
   const handleFileOnChange = (event: any) => {
@@ -131,13 +124,9 @@ function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
       formData.append("receipt", uploadImg);
       setLoading(true);
       axios
-        .post(
-          "https://www.api.liteseoul.com/receipt/add",
-          formData
-        )
+        .post("https://www.api.liteseoul.com/receipt/add", formData)
         .then((res) => {
-          console.log(res)
-          handleMypageNow("billslog")
+          handleMypageNow("billslog");
           setLoading(false);
           window.location.reload();
         });
@@ -148,7 +137,7 @@ function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
     <AddBillsOut>
       <CloseBtn onClick={handleModalClose}></CloseBtn>
       <PlayModalInside>
-      <SubmitBtn onClick={handleImgSubmit}>제출하기</SubmitBtn>
+        <SubmitBtn onClick={handleImgSubmit}>제출하기</SubmitBtn>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             className="UploadBillsImg"
@@ -161,16 +150,15 @@ function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
           {billsImg ? (
             <BillsImgOut>
               <BillsImg src={billsImg.previewURL} alt="업로드"></BillsImg>
-              {/* <div className="UploadBillBackMents">
-                <div>인증을 바꾸시려면</div>
-                <div>업로드 된 인증을 클릭하세요!</div>
-              </div> */}
             </BillsImgOut>
           ) : (
             <div className="UploadBillBackMents">
               <div>인증을 업로드 하시려면</div>
               <div>여기를 클릭하세요!</div>
-              <BillMentsRef>참고: 영수증 상단부의 사업자번호와 업체(매장)명만 찍어주시면 돼요!</BillMentsRef>
+              <BillMentsRef>
+                참고: 영수증 상단부의 사업자번호와 업체(매장)명만 찍어주시면
+                돼요!
+              </BillMentsRef>
             </div>
           )}
         </BillsAddLine>

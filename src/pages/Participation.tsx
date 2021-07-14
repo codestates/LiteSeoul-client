@@ -264,18 +264,20 @@ const SubmitBtn = styled.button`
 `;
 
 function Participation() {
-  const [storeImg, setStoreImg] = useState('');
-  const [storeName, setStoreName] = useState('');
-  const [marketNum, setMarketNum] = useState('');
-  const [address, setAddress] = useState('');
-  const [storeEmail, setStoreEmail] = useState('');
-  const [recommend, setRecommend] = useState('');
-  const [category, setCategory] = useState('');
-  const [text, setText] = useState('');
-  const [infoOk, setInfoOk] = useState(false);
-  const [errMessage, setErrorMessage] = useState('# 내용을 채워주세요!');
-  const [isCheck, setCheck] = useState(false);
+  // Participation(기업참여) 상태관리 파트
+  const [storeImg, setStoreImg] = useState<string>('');
+  const [storeName, setStoreName] = useState<string>('');
+  const [marketNum, setMarketNum] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [storeEmail, setStoreEmail] = useState<string>('');
+  const [recommend, setRecommend] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [text, setText] = useState<string>('');
+  const [infoOk, setInfoOk] = useState<boolean>(false);
+  const [errMessage, setErrorMessage] = useState<string>('# 내용을 채워주세요!');
+  const [isCheck, setCheck] = useState<boolean>(false);
 
+  // 상태변환 함수관리 파트
   const handleName = (e: any) => {
     setStoreName(e.target.value);
   };
@@ -318,19 +320,21 @@ function Participation() {
     }
   };
 
+  // 프리뷰 관리 파트
   type ProfilePics = {
     file: string;
     previewURL: any | string;
   };
+
   const [uploadImg, setUploadImg] = useState<ProfilePics>();
 
-  const handleFileOnChange = (event: any) => {
-    event.preventDefault();
+  const handleFileOnChange = (e: any) => {
+    e.preventDefault();
     let reader = new FileReader();
 
-    if (event.target.files[0] !== undefined) {
-      setStoreImg(event.target.files[0]);
-      const file = event.target.files[0];
+    if (e.target.files[0] !== undefined) {
+      setStoreImg(e.target.files[0]);
+      const file = e.target.files[0];
       reader.onloadend = () => {
         setUploadImg({
           file,
@@ -340,10 +344,12 @@ function Participation() {
       reader.readAsDataURL(file);
     }
   };
+
   const deleteUploadImg = () => {
     setUploadImg(undefined);
   };
 
+  // 이메일, 사업자번호 유효성검사 파트
   const isEmail = (storeEmail: string) => {
     const emailRegex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -358,6 +364,7 @@ function Participation() {
     }
   };
 
+  // 전체 작성 여부에 대한 에러메시지 이펙트 훅
   useEffect(() => {
     if (infoOk === false) {
       setErrorMessage(
@@ -368,6 +375,7 @@ function Participation() {
     }
   }, [infoOk]);
 
+  // 제출에 대한 에러메시지 렌더링 & 최종 제출 관리 함수
   const handleSubmit = () => {
     // 에러메시지 핸들링
     if (storeImg === '') {
@@ -376,7 +384,7 @@ function Participation() {
       setErrorMessage('# 😵상호명을 입력(확인)해주세요!');
     } else if (marketNum === '' || !isMarketNum(marketNum)) {
       setErrorMessage(
-        '# 😵서버와의 연결을 위해 사업자 번호를 입력(확인)해주세요!',
+        '# 😵서버와의 연결을 위해 사업자 번호 숫자 10자리(대시포함 12자리)를 입력(확인)해주세요!',
       );
     } else if (address === '') {
       setErrorMessage(
@@ -401,8 +409,8 @@ function Participation() {
     } else {
       // 최종 확인 메시지
       setErrorMessage('# 😎모두 작성하셨다면 제출하기 버튼을 눌러주세요!');
-      // 엑시오스 전송 구역
-
+      
+      // 이미지  때문에 폼데이터로 변환
       const formData = new FormData();
       formData.append('storeImg', storeImg);
       formData.append('storeName', storeName);
@@ -413,6 +421,7 @@ function Participation() {
       formData.append('recommend', recommend);
       formData.append('text', text);
 
+      // 엑시오스 전송 구역
       axios
         .post('https://www.api.liteseoul.com/shop/register', formData)
         .then((res) => {

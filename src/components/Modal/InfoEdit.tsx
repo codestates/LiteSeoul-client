@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import styled from "styled-components";
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -17,12 +17,13 @@ const SinUpOut = styled.div`
 const SignUpMain = styled.div`
   width: 500px;
   height: 700px;
-  /* background-color: yellow; */
   position: relative;
+
   @media screen and (max-width: 600px) {
     width: 400px;
   }
 `;
+
 const CloseBtn = styled.div`
   width: 40px;
   height: 40px;
@@ -31,12 +32,12 @@ const CloseBtn = styled.div`
   right: 0;
   cursor: pointer;
   transition: 0.2s all;
-  background-image: url('/icon/close.svg');
+  background-image: url("/icon/close.svg");
   background-size: cover;
   background-repeat: no-repeat;
   &:hover {
     transform: scale(1.1);
-    background-image: url('/icon/close2.svg');
+    background-image: url("/icon/close2.svg");
   }
 `;
 
@@ -56,7 +57,6 @@ const SignUpCenter = styled.div`
 const SingUpTitle = styled.div`
   width: 100%;
   height: 60px;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,6 +64,7 @@ const SingUpTitle = styled.div`
   color: #189cc4;
   font-weight: 700;
 `;
+
 const SingUpError = styled.div`
   width: 100%;
   height: 40px;
@@ -73,7 +74,6 @@ const SingUpError = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  /* border: 1px solid red; */
 `;
 
 const SignUpButton = styled.button`
@@ -93,23 +93,13 @@ const SignUpButton = styled.button`
   }
 `;
 
-// 타입스크립트 관련 타입지정
-type EditFormInput = {
-  UserImg: any;
-  UserName: string;
-  UserNickname: string;
-  UserMobile: string;
-  profileText: string;
-  Password: string;
-};
-
+// 사진 프리뷰 타입지정
 type ProfilePics = {
   file: string;
   previewURL: any | string;
 };
 
 const InfoEdit = ({ myinfo, handleModalClose }: any) => {
-  // console.log(myinfo);
   const {
     id,
     name,
@@ -123,7 +113,6 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     profileText,
   } = myinfo;
 
-
   const FileUpload = styled.label`
     display: block;
     height: 150px;
@@ -132,11 +121,11 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     position: relative;
     /* border: 1px solid red; */
     overflow: hidden;
-    background-image: url('icon/profile-01.svg');
+    background-image: url("icon/profile-01.svg");
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
-    & input[type='file'] {
+    & input[type="file"] {
       display: none;
     }
   `;
@@ -146,27 +135,23 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
     height: 100%;
   `;
 
-  const [userImg, setUserImg] = useState('');
-  // console.log(userImg);
-  const [userNick, setUserNick] = useState(nick);
-  const [userPhone, setUserPhone] = useState(phone);
-  const [myText, setMytext] = useState(profileText);
-  const [password, setPassword] = useState('');
-  const [errMessage, setErrMessage] = useState('개인정보 수정 페이지입니다 :)');
+  const [userImg, setUserImg] = useState<string>("");
+  const [userNick, setUserNick] = useState<string>(nick);
+  const [userPhone, setUserPhone] = useState<string>(phone);
+  const [myText, setMytext] = useState<string>(profileText);
+  const [password, setPassword] = useState<string>("");
+  const [errMessage, setErrMessage] =
+    useState<string>("개인정보 수정 페이지입니다 :)");
 
   useEffect(() => {
-    // if (password.length >= 1 && !isPassword(password)) {
-      if (password.length < 4) {
-      setErrMessage('비밀번호를 다시 확인해주세요! 소셜로그인 하신 분은 0000 입니다 :)');
+    if (password.length < 4) {
+      setErrMessage(
+        "비밀번호를 다시 확인해주세요! 소셜로그인 하신 분은 0000 입니다 :)"
+      );
     } else {
-      setErrMessage('개인정보 수정 페이지입니다 :)');
+      setErrMessage("개인정보 수정 페이지입니다 :)");
     }
   }, [password]);
-
-  const isPassword = (password: any) => {
-    // const PasswordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,15}$/;
-    // return PasswordRegex.test(password);
-  };
 
   // 프리뷰 상태
   const [uploadImg, setUploadImg] = useState<ProfilePics>();
@@ -211,16 +196,18 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
 
   // 서버단에 데이터 전송
   const formData = new FormData();
-  const token = sessionStorage.getItem('access_token');
+  const token = sessionStorage.getItem("access_token");
 
   const handleSubmit = async () => {
     if (password === "") {
-      setErrMessage('비밀번호를 다시 확인해주세요! 소셜로그인 하신 분은 0000 입니다 :)');
+      setErrMessage(
+        "비밀번호를 다시 확인해주세요! 소셜로그인 하신 분은 0000 입니다 :)"
+      );
     } else {
-      if (userImg === '') {
-        console.log('이미지없이 변화 요청');
+      if (userImg === "") {
+        console.log("이미지없이 변화 요청");
         await axios
-          .post('https://www.api.liteseoul.com/user/changeinfo', {
+          .post("https://www.api.liteseoul.com/user/changeinfo", {
             access_token: token,
             nick: userNick,
             phone: userPhone,
@@ -229,40 +216,40 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
           })
           .then((res) => {
             console.log(res);
-            alert('정보수정이 되었습니다! 마이페이지로 이동합니다 :)');
-            window.location.replace('http://localhost:3000/mypage/');
+            alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");
+            window.location.replace("http://localhost:3000/mypage/");
           })
           .catch((err) => {
-            alert('비밀번호가 맞지않아요!');
+            alert("비밀번호가 맞지않아요!");
           });
       }
-      if (userImg !== '' || userImg !== undefined) {
+      if (userImg !== "" || userImg !== undefined) {
         console.log(userImg);
-        formData.append('UserImg', userImg);
+        formData.append("UserImg", userImg);
         if (token !== null) {
-          formData.append('access_token', token);
+          formData.append("access_token", token);
         }
-        formData.append('nick', userNick);
-        formData.append('phone', userPhone);
-        formData.append('profileText', myText);
-        formData.append('password', password);
+        formData.append("nick", userNick);
+        formData.append("phone", userPhone);
+        formData.append("profileText", myText);
+        formData.append("password", password);
 
-        console.log('이미지포함 변화 요청');
+        console.log("이미지포함 변화 요청");
         // 이미지 변화가 있다면~
         await axios
-          .post('https://www.api.liteseoul.com/user/update', formData)
+          .post("https://www.api.liteseoul.com/user/update", formData)
           .then((res) => {
             console.log(res);
-            alert('정보수정이 되었습니다! 마이페이지로 이동합니다 :)');
+            alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");
             setUploadImg({
               file: "",
-              previewURL: ""
-            })
-            setUserImg("")
-            window.location.replace('http://localhost:3000/mypage/');
+              previewURL: "",
+            });
+            setUserImg("");
+            window.location.replace("http://localhost:3000/mypage/");
           })
           .catch((err) => {
-            alert('비밀번호가 맞지않아요!');
+            alert("비밀번호가 맞지않아요!");
           });
         // 이미지 변화가 없다면~
       }
@@ -276,7 +263,6 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
         <SignUpCenter>
           <SingUpTitle>LiteSeoul</SingUpTitle>
           <SingUpError>{errMessage}</SingUpError>
-          {/* <SignUpForm> */}
           <form className="EditForm" onSubmit={(e) => e.preventDefault()}>
             <FileUpload htmlFor="file" onChange={handlePreviewChange}>
               {uploadImg !== undefined ? (
@@ -295,41 +281,31 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
                 />
               )}
             </FileUpload>
-
             <div>{email}</div>
-
-            {/* 닉네임 */}
             <input
               className="EditNickName"
               type="text"
-              placeholder={nick || '* NickName'}
+              placeholder={nick || "* NickName"}
               onChange={handleUserNick}
             ></input>
-
-            {/* 핸드폰 */}
             <input
               className="EditPhone"
               type="tel"
-              placeholder={phone || '* Mobile Phone'}
+              placeholder={phone || "* Mobile Phone"}
               onChange={handleUserPhone}
             ></input>
-
-            {/* 상태메시지 */}
             <input
               className="EditText"
               type="text"
-              placeholder={profileText || '* 상태메시지를 입력해주세요'}
+              placeholder={profileText || "* 상태메시지를 입력해주세요"}
               onChange={handleMyText}
             ></input>
-
-            {/* 비밀번호확인 */}
             <input
               className="EditPassword"
               type="password"
               placeholder="기존 비밀번호로 확인해주세요"
               onChange={handlePassword}
             ></input>
-
             <SignUpButton type="submit" onClick={handleSubmit}>
               Edit
             </SignUpButton>

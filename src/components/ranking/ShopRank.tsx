@@ -11,6 +11,7 @@ const ShopRankOut = styled.div`
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
     rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
     rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
   @media screen and (max-width: 1501px) {
     width: 350px;
   }
@@ -41,6 +42,7 @@ const RankNumber = styled.div`
   font-weight: 700;
   font-size: 2.5rem;
   color: #fff;
+
   @media screen and (max-width: 1501px) {
     width: 60px;
     height: 60px;
@@ -55,7 +57,7 @@ const AllRankers = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  /* background-color: pink; */
+
   @media screen and (max-width: 901px) {
     height: 380px;
   }
@@ -70,13 +72,13 @@ const AllRankers = styled.div`
 const ShopImg = styled.div`
   width: 80%;
   height: 45%;
-  /* border: 1px solid green; */
   margin-bottom: 5px;
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   @media screen and (max-width: 761px) {
     display: none;
   }
@@ -87,9 +89,9 @@ const ShopTitle = styled.div`
   height: 10%;
   font-size: 2rem;
   font-weight: 700;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
+
   @media screen and (max-width: 901px) {
     font-size: 1.5rem;
   }
@@ -98,9 +100,9 @@ const ShopTitle = styled.div`
 const ShopContent = styled.div`
   width: 80%;
   height: 16%;
-  /* border: 1px solid green; */
   font-size: 0.8rem;
   text-align: justify;
+
   @media screen and (max-width: 901px) {
     display: none;
   }
@@ -109,12 +111,12 @@ const ShopContent = styled.div`
 const ShopContent2 = styled.div`
   width: 80%;
   height: 10%;
-  /* border: 1px solid green; */
   font-size: 0.8rem;
   text-align: justify;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
   @media screen and (max-width: 901px) {
     height: 15%;
   }
@@ -126,7 +128,6 @@ const ShopContent2 = styled.div`
 const Like = styled.div`
   width: 100%;
   height: 20px;
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   font-size: 0.8rem;
@@ -137,8 +138,8 @@ const Like = styled.div`
     height: 20px;
     object-fit: cover;
     margin-right: 5px;
-    /* border: 1px solid red; */
   }
+
   @media screen and (max-width: 761px) {
     font-size: 1.2rem;
     height: 30px;
@@ -148,31 +149,13 @@ const Like = styled.div`
       height: 25px;
       object-fit: cover;
       margin-right: 5px;
-      /* border: 1px solid red; */
     }
   }
 `;
-const InputCk = styled.input`
-  display: none;
-  &:checked + label {
-    width: 20px;
-    height: 20px;
-    background-image: url('icon/like_fill.svg');
-    background-size: cover;
-    margin-right: 5px;
-  }
-`;
-const Label = styled.label`
-  width: 20px;
-  height: 20px;
-  background-image: url('icon/like_stroke.svg');
-  background-size: cover;
-  margin-right: 5px;
-`;
+
 const Add = styled.div`
   width: 100%;
   height: 20px;
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   font-size: 0.8rem;
@@ -182,6 +165,7 @@ const Add = styled.div`
     object-fit: cover;
     margin-right: 5px;
   }
+
   @media screen and (max-width: 831px) {
     font-size: 0.6rem;
   }
@@ -189,12 +173,24 @@ const Add = styled.div`
     font-size: 0.5rem;
   }
 `;
+
 const Hr = styled.hr`
   width: 100%;
 `;
 
+// 샵정보 타입설정
+type shopInfoForm = {
+  id: number;
+  name: string;
+  address: string;
+  phone: string;
+  likeLength: number;
+  imgPath: string;
+  text: string;
+}
+
 function ShopRank() {
-  const [shopRankdata, setShopRankdata] = useState([]);
+  const [shopRankdata, setShopRankdata] = useState<shopInfoForm[]>([]);
 
   useEffect(() => {
     axios.get('https://www.api.liteseoul.com/shop/rank').then((res) => {
@@ -211,7 +207,6 @@ function ShopRank() {
             <RankNumber>{idx + 1}</RankNumber>
             <AllRankers>
               <ShopImg>
-                {/* <img src="img/main_recycle.svg" alt="user"></img> */}
                 <img src={data.imgPath} alt="user"></img>
               </ShopImg>
               <ShopTitle>{data.name}</ShopTitle>

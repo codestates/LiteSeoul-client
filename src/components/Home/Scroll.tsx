@@ -9,7 +9,6 @@ const ScrollAni = keyframes`
     opacity: 0;
     transform: translateY(70px);
   }
-
 `;
 
 const ScrollOp = keyframes`
@@ -19,8 +18,8 @@ const ScrollOp = keyframes`
   100%{
     opacity: 1;
   }
-
 `;
+
 const ScrollOut = styled.div`
   width: 30px;
   height: 90px;
@@ -60,6 +59,7 @@ const ScrollOut = styled.div`
     left: -50%;
     font-weight: 700;
   }
+  
   @media screen and (max-width: 800px) {
     top: 70%;
     right: 50%;

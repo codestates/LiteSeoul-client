@@ -7,13 +7,13 @@ import axios from 'axios';
 const BillsOut = styled.div`
   width: 80%;
   height: 100%;
-  /* background: yellow; */
   position: absolute;
   right: 0;
   display: flex;
   flex-direction: column;
   overflow: auto;
   z-index: 800;
+
   @media screen and (max-width: 1101px) {
     height: auto;
   }
@@ -25,12 +25,12 @@ const BillsOut = styled.div`
 const BillsTitle = styled.div`
   width: 100%;
   height: 15%;
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   padding-left: 5%;
   font-size: 3rem;
   font-weight: 700;
+
   @media screen and (max-width: 1101px) {
     display: none;
   }
@@ -45,7 +45,6 @@ const BillsMain = styled.div`
 const BillsUl = styled.ul`
   width: 90%;
   height: auto;
-  /* border: 1px solid green; */
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
@@ -56,7 +55,6 @@ const BillsUl = styled.ul`
   & li {
     width: 200px;
     height: 300px;
-    /* border: 1px solid red; */
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -81,6 +79,7 @@ const BillsUl = styled.ul`
       font-weight: 700;
     }
   }
+
   @media screen and (max-width: 1101px) {
     justify-content: space-evenly;
   }
@@ -137,8 +136,8 @@ const BillsUpload = styled.div`
 `;
 
 function BillsLog({ handleMypageNow, setLoading }: any) {
-  const [show, setShow] = useState(false);
-  const [logs, setLogs] = useState([]);
+  const [show, setShow] = useState<boolean>(false);
+  const [logs, setLogs] = useState<never[]>([]);
   console.log(logs)
 
   // 영수증 인증기록 제거버튼

@@ -5,7 +5,6 @@ import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import styled from "styled-components";
 import "../../App.css";
 
-// styled-components로 모달창 css 관리
 const SinUpOut = styled.div`
   width: 100%;
   height: 100%;
@@ -21,7 +20,6 @@ const SinUpOut = styled.div`
 const SignUpMain = styled.div`
   width: 500px;
   height: 700px;
-  /* background-color: yellow; */
   position: relative;
   @media screen and (max-width: 600px) {
     width: 400px;
@@ -60,7 +58,6 @@ const SignUpCenter = styled.div`
 const SingUpTitle = styled.div`
   width: 100%;
   height: 60px;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +65,7 @@ const SingUpTitle = styled.div`
   color: #189cc4;
   font-weight: 700;
 `;
+
 const SingUpError = styled.div`
   width: 100%;
   height: 40px;
@@ -77,8 +75,8 @@ const SingUpError = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  /* border: 1px solid red; */
 `;
+
 const SignUpForm = styled.form`
   display: flex;
   width: 70%;
@@ -90,14 +88,12 @@ const SignUpForm = styled.form`
   }
 `;
 
-// 이 스타일드 컴포넌트 엘리먼트를 함수 안으로 끌고와서, 백그라운드 이미지 쪽을 if문으로 분기 나눈 다음 업로드 된 이미지를 렌더링 하면 될거 같음.
 const FileUpload = styled.label`
   display: block;
   height: 150px;
   width: 150px;
   border-radius: 50%;
   position: relative;
-  /* border: 1px solid red; */
   overflow: hidden;
   background-image: url("icon/profile-01.svg");
   background-repeat: no-repeat;
@@ -191,7 +187,6 @@ const SignUpPassword = styled.input.attrs({
 const SignUpCheckBox = styled.div`
   width: 100%;
   height: 40px;
-  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   font-size: 0.8rem;
@@ -225,10 +220,8 @@ type IFormInput = {
   Checkbox: boolean;
 };
 
-// 사인업 함수 본문
+
 const SignUp = (props: any) => {
-  // react-hook-from 메소드 useForm
-  console.log(props);
 
   const {
     register,
@@ -238,8 +231,9 @@ const SignUp = (props: any) => {
 
   // 제출과 에러 핸들링
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+
+    // 이미지 때문에 폼 데이터 사용
     const formData = new FormData();
-    // formData.append("charset", "UTF-8")
     formData.append("UserImg", data.UserImg[0]);
     formData.append("name", data.UserName);
     formData.append("phone", data.UserMobile);
@@ -247,6 +241,8 @@ const SignUp = (props: any) => {
     formData.append("nick", data.UserNickname);
     formData.append("password", data.Password);
     props.setLoading(true);
+
+    // 엑시오스 전송부분
     axios
       .post("https://www.api.liteseoul.com/user/signup", formData, {
         headers: {
@@ -265,7 +261,7 @@ const SignUp = (props: any) => {
     props.handleSignUp();
   };
 
-  // 회원가입시 프로필사진 프리뷰
+  // 프로필사진 프리뷰 부분
   type ProfilePics = {
     file: string;
     previewURL: any | string;
@@ -304,11 +300,11 @@ const SignUp = (props: any) => {
             {errors.UserImg
               ? "프로필 사진을 지정해주세요 :)"
               : errors.UserName
-              ? "이름은 4글자 이상 8글자 이하 영문이나 숫자로 입력해주세요 :)"
+              ? "이름은 4글자 이상 12글자 이하 영문이나 숫자로 입력해주세요 :)"
               : errors.UserEmail
               ? "이메일을 입력해주세요 :)"
               : errors.UserNickname
-              ? "닉네임은 4글자 이상 8글자 이하 영문이나 숫자로 입력해주세요 :)"
+              ? "닉네임은 4글자 이상 12글자 이하 영문이나 숫자로 입력해주세요 :)"
               : errors.UserMobile
               ? "휴대폰 번호를 입력해주세요 :) 대쉬('-')는 안쓰셔도 돼요!"
               : errors.Password
@@ -344,7 +340,7 @@ const SignUp = (props: any) => {
               {...register("UserName", {
                 required: true,
                 maxLength: 20,
-                pattern: /^[a-zA-Z0-9]{4,8}$/,
+                pattern: /^[a-zA-Z0-9]{4,12}$/,
               
               })}
             ></SignUpName>
@@ -358,7 +354,7 @@ const SignUp = (props: any) => {
             <SignUpNickName
               {...register("UserNickname", {
                 required: true,
-                pattern: /^[a-zA-Z0-9]{4,8}$/,
+                pattern: /^[a-zA-Z0-9]{4,12}$/,
               })}
             ></SignUpNickName>
             <SignUpPhone
@@ -385,9 +381,6 @@ const SignUp = (props: any) => {
               <input
                 type="Checkbox"
                 id="signupCk"
-                // onChange={(e) => {
-                //   console.log(e.target.checked);
-                // }}
                 {...register("Checkbox", {
                   required: true,
                 })}

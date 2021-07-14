@@ -49,6 +49,7 @@ const MyInfoMain = styled.ul`
     justify-content: center;
     min-width: 400px;
   }
+
   @media screen and (max-width: 1101px) {
     flex-direction: column;
     height: auto;
@@ -207,7 +208,25 @@ function JustInfo({ myinfo }: any) {
     profileText,
   } = myinfo;
 
-  console.log(profileImgPath);
+  console.log(`                               _
+                              | |                              
+              __      __  ___ | |  ___   ___   _ __ ___    ___ 
+              \\ \\ /\\ / / / _ \\| | / __| / _ \\ | \'_ \` _ \\  / _ \\ 
+               \\ V  V / |  __/| || (__ | (_) || | | | | ||  __
+                \\_/\\_/   \\___||_| \\___| \\___/ |_| |_| |_| \\___| 
+                 _          
+                | |         
+                | |_   ___  
+                | __| / _ \\ 
+                | |_ | (_) |
+                 \\__| \\___/ 
+                 _            _  _                   _             
+                | |          | || |                 | |            
+                | |__    ___ | || |  ___   ___    __| |  ___  _ __ 
+                | \'_ \\  / _ \\| || | / __| / _ \\  / _\` | / _ \\| \'__|
+                | | | ||  __/| || || (__ | (_) || (_| ||  __/| |   
+                |_| |_| \\___||_||_| \\___| \\___/  \\__,_| \\___||_|   
+                `)
 
   const percentage = Math.floor((currentExp / maxExp) * 100);
 

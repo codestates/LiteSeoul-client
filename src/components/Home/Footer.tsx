@@ -15,10 +15,10 @@ const FooterOut = styled.div`
 const FooterMain = styled.div`
   width: 90%;
   height: 100%;
-  /* border: 1px solid red; */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+
   @media screen and (max-width: 901px) {
     width: 100%;
     display: flex;
@@ -32,11 +32,10 @@ const FooterSocial = styled.ul`
   width: 30%;
   height: 100%;
   padding: 3%;
+
   @media screen and (max-width: 901px) {
     width: 60%;
   }
-
-  /* border: 1px solid green; */
   & li {
     width: 100%;
     height: 40px;
@@ -46,7 +45,6 @@ const FooterSocial = styled.ul`
     & div {
       width: 25%;
       height: 40px;
-      /* border: 1px solid blue; */
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -103,7 +101,6 @@ const FooterSocial = styled.ul`
 const FooterCategory = styled.ul`
   width: 15%;
   height: 100%;
-  /* border: 1px solid green; */
   padding: 3%;
   & a {
     color: white;
@@ -111,6 +108,7 @@ const FooterCategory = styled.ul`
   & a:hover {
     color: #189cc4;
   }
+
   @media screen and (max-width: 901px) {
     width: 60%;
   }
@@ -130,8 +128,8 @@ const FooterCategory = styled.ul`
 const FooterBusiness = styled.ul`
   width: 20%;
   height: 100%;
-  /* border: 1px solid green; */
   padding: 3%;
+
   @media screen and (max-width: 901px) {
     width: 60%;
   }
@@ -159,8 +157,8 @@ const FooterBusiness = styled.ul`
 const FooterContact = styled.ul`
   width: 25%;
   height: 100%;
-  /* border: 1px solid green; */
   padding: 3%;
+
   @media screen and (max-width: 901px) {
     width: 60%;
   }
@@ -191,6 +189,7 @@ const FooterCopyWrite = styled.span`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 0.6rem;
+  
   @media screen and (max-width: 501px) {
     display: none;
   }

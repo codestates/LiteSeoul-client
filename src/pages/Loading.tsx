@@ -27,7 +27,6 @@ const textAni = keyframes`
 }
 100%{
   opacity:0;
-  
 }
 `;
 

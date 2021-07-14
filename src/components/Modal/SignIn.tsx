@@ -12,7 +12,6 @@ const SingInOut = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000000b3;
-  /* opacity: 0.6; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,13 +21,12 @@ const SingInOut = styled.div`
 const SignMain = styled.div`
   width: 900px;
   height: 600px;
-  /* border: 1px solid #fff; */
   position: relative;
+
   @media screen and (max-width: 960px) {
     width: 400px;
     height: 600px;
     position: relative;
-    /* border: 1px solid red; */
   }
 `;
 
@@ -57,6 +55,7 @@ const SignCenter = styled.div`
   bottom: 0;
   border-radius: 20px;
   display: flex;
+
   @media screen and (max-width: 960px) {
     width: 400px;
     height: 550px;
@@ -64,7 +63,6 @@ const SignCenter = styled.div`
     bottom: 0;
     border-radius: 20px;
     display: flex;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   }
 `;
 const SignInImg = styled.div`
@@ -76,6 +74,7 @@ const SignInImg = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   @media screen and (max-width: 960px) {
     display: none;
   }
@@ -91,6 +90,7 @@ const Img = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+
   @media screen and (max-width: 960px) {
     display: none;
   }
@@ -103,10 +103,12 @@ const Text = styled.p`
   color: #fff;
   margin-top: 20px;
   margin-bottom: 20px;
+
   @media screen and (max-width: 960px) {
     display: none;
   }
 `;
+
 const Logo = styled.div`
   width: 150px;
   height: 40px;
@@ -129,7 +131,6 @@ const SignInInput = styled.ul`
   & li {
     width: 300px;
     height: 40px;
-    /* border: 1px solid #fff; */
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -139,7 +140,6 @@ const SignInInput = styled.ul`
   & li:nth-child(1) {
     width: 300px;
     height: 150px;
-    /* border: 1px solid #fff; */
     flex-direction: column;
     color: #fff;
     & p:nth-child(1) {
@@ -149,7 +149,6 @@ const SignInInput = styled.ul`
     }
     & p:nth-child(2) {
       color: #86868b;
-      /* color: #1d1d1f; */
       font-size: 1.2rem;
       font-weight: 700;
     }
@@ -202,6 +201,7 @@ const SignInInput = styled.ul`
       text-decoration: underline 2px solid #189cc4;
     }
   }
+
   @media screen and (max-width: 960px) {
     width: 400px;
     height: 550px;
@@ -243,34 +243,26 @@ const InputPassword = styled.input.attrs({
 `;
 
 function SignIn(props: any) {
-  // console.log(props);
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errMessage, setErrMessage] = useState<string>("");
 
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [errMessage, setErrMessage] = useState("");
-
+  // 카카오로그인 버튼 클릭시
   const kakaoLogin = () => {
-    // console.log('hello');
     const url = new URL(window.location.href);
-
     const _hostName = "https://kauth.kakao.com";
     const _restApiKey = "d33a84f54f22e12cd75db7c1981bd095";
     const _redirectUrl = url;
-
-    console.log("=== redirectUrl ===", _redirectUrl);
 
     window.location.assign(
       `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`
     );
   };
 
+  // 구글로그인 버튼 클릭시
   const googleLogin = () => {
-    // console.log(props)
-    // const url = new URL(window.location.href);
     const host_name = "https://accounts.google.com";
-    // const redirect_uri = 'http://localhost:80';
     const redirect_uri = "https://api.liteseoul.com";
-    console.log("=== redirect uri === ", redirect_uri);
     const client_id =
       "609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com";
 
@@ -280,7 +272,6 @@ function SignIn(props: any) {
   };
 
   const handleAccount = () => {
-    console.log("회원가입버튼");
     props.handleSignUp();
     props.handleLoginModal();
   };
@@ -293,18 +284,15 @@ function SignIn(props: any) {
     setPassword(e.target.value);
   };
 
+  // 로그인버튼 클릭시 에러메시지 및 데이터 전송 서버연결부분
   const LoginBtn = () => {
     if (id === "") {
       setErrMessage("아이디를 입력해주세요");
     } else if (password === "") {
       setErrMessage("비밀번호를 입력해주세요");
     } else {
-      // console.log('로그인완료')
-      // setErrMessage('');
 
-      console.log(id, password);
-
-      // 서버 연결 관련
+      // 엑시오스로 데이터 서버 전송
       axios
         .post(
            "https://www.api.liteseoul.com/user/signin",
@@ -314,10 +302,7 @@ function SignIn(props: any) {
           }
         )
         .then((res) => {
-          console.log(res);
-          console.log(res.data.access_token);
           sessionStorage.setItem("access_token", res.data.access_token);
-          // 반석&영근 요청으로 id값 로컬 스토리지에 저장
           localStorage.setItem("id", res.data.payload.id);
           sessionStorage.setItem("id", res.data.payload.id)
           window.location.replace("http://localhost:3000/");

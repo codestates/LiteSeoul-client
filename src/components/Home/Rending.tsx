@@ -33,7 +33,6 @@ const SubTitleAni = keyframes`
 
 const RendingSubTitle = styled.div`
   width: 40%;
-  /* border: 1px solid red; */
   text-align: right;
   font-size: 3rem;
   font-weight: 700;
@@ -41,6 +40,7 @@ const RendingSubTitle = styled.div`
   margin-top: 20px;
   z-index: 900;
   animation: ${SubTitleAni} 2s ease forwards;
+
   @media screen and (max-width: 1471px) {
     font-size: 1.9rem;
     text-align: center;
@@ -90,6 +90,7 @@ const RendingContent = styled.div`
     line-height: 25px;
     text-align: justify;
   }
+
   @media screen and (max-width: 1600px) {
     width: 40%;
     height: auto;
@@ -107,7 +108,6 @@ const RendingContent = styled.div`
       text-align: center;
     }
   }
-
   @media screen and (max-width: 900px) {
     width: 40%;
     height: auto;
@@ -142,6 +142,7 @@ const RendingBtn = styled.button`
     letter-spacing: 0.2rem;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
   }
+
   @media screen and (max-width: 1100px) {
     height: 30px;
     font-size: 0.9rem;
@@ -151,6 +152,7 @@ const RendingBtn = styled.button`
     /* display: none; */
   }
 `;
+
 function Rending() {
   return (
     <RendingOut id="rending">
