@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 
 const NavAni = keyframes`
   0% {
@@ -43,7 +43,7 @@ const NavBtn = styled.div`
   display: none;
   cursor: pointer;
   z-index: 998;
-  background-image: url("/icon/menu_white.svg");
+  background-image: url('/icon/menu_white.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -54,7 +54,7 @@ const NavBtn = styled.div`
     right: 5%;
     top: 5%;
     &.NavBtn {
-      background-image: url("/icon/close_white.svg");
+      background-image: url('/icon/close_white.svg');
     }
   }
 `;
@@ -132,6 +132,8 @@ const NavUl = styled.ul`
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: 0.4s all;
+
       &:hover {
         background: #189cc4;
         color: #fff;
@@ -229,12 +231,12 @@ const NavUl2 = styled.ul`
 
 function Nav(props: any) {
   const handleNav = () => {
-    document.getElementById("MainNavHidden")?.classList.toggle("MainNavHidden");
-    document.getElementById("NavId")?.classList.toggle("NavBtn");
+    document.getElementById('MainNavHidden')?.classList.toggle('MainNavHidden');
+    document.getElementById('NavId')?.classList.toggle('NavBtn');
   };
 
   const handelNav2 = () => {
-    document.getElementById("MainNavHidden")?.classList.remove("MainNavHidden");
+    document.getElementById('MainNavHidden')?.classList.remove('MainNavHidden');
   };
 
   const deleteSession = () => {
@@ -242,9 +244,9 @@ function Nav(props: any) {
     // 로그아웃 시 세션스토리지 초기화(토큰, id 날림)
     sessionStorage.clear()
     // 로그아웃 시 로컬스토리지 데이터 삭제
-    localStorage.removeItem("id");
+    localStorage.removeItem('id');
     // localStorage.removeItem('total');
-    window.location.replace("http://localhost:3000/");
+    window.location.replace('http://localhost:3000/');
   };
 
   return (
@@ -283,7 +285,7 @@ function Nav(props: any) {
             {props.isLogin ? (
               <li
                 style={{
-                  color: "#ff735D",
+                  color: '#ff735D',
                 }}
               >
                 Logout
@@ -330,7 +332,7 @@ function Nav(props: any) {
                   <li
                     onClick={deleteSession}
                     style={{
-                      color: "#ff735D",
+                      color: '#ff735D',
                     }}
                   >
                     Logout

@@ -1153,3 +1153,19 @@ a {
 .EditPassword:focus {
   border-bottom: 2px solid #ff735d;
 }
+
+@keyframes LogoSvg {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#LogoSvg {
+  opacity: 0;
+  animation: LogoSvg 2s ease forwards;
+}
