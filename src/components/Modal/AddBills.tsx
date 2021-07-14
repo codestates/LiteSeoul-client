@@ -85,7 +85,12 @@ const BillsImg = styled.img`
   padding: 50px;
 `;
 
-function AddBills({ handleModalClose, handleMypageNow }: any) {
+const BillMentsRef = styled.div`
+color: #ff735d;
+font-size: 10px;
+`
+
+function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
   // console.log(handleModalClose)/
 
   type Bills = {
@@ -124,7 +129,7 @@ function AddBills({ handleModalClose, handleMypageNow }: any) {
         formData.append("access_token", token);
       }
       formData.append("receipt", uploadImg);
-
+      setLoading(true);
       axios
         .post(
           "https://www.api.liteseoul.com/receipt/add",
@@ -133,6 +138,7 @@ function AddBills({ handleModalClose, handleMypageNow }: any) {
         .then((res) => {
           console.log(res)
           handleMypageNow("billslog")
+          setLoading(false);
           window.location.reload();
         });
     }
@@ -142,6 +148,7 @@ function AddBills({ handleModalClose, handleMypageNow }: any) {
     <AddBillsOut>
       <CloseBtn onClick={handleModalClose}></CloseBtn>
       <PlayModalInside>
+      <SubmitBtn onClick={handleImgSubmit}>제출하기</SubmitBtn>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             className="UploadBillsImg"
@@ -154,16 +161,16 @@ function AddBills({ handleModalClose, handleMypageNow }: any) {
           {billsImg ? (
             <BillsImgOut>
               <BillsImg src={billsImg.previewURL} alt="업로드"></BillsImg>
-              <div className="UploadBillBackMents">
+              {/* <div className="UploadBillBackMents">
                 <div>인증을 바꾸시려면</div>
                 <div>업로드 된 인증을 클릭하세요!</div>
-                <SubmitBtn onClick={handleImgSubmit}>제출하기</SubmitBtn>
-              </div>
+              </div> */}
             </BillsImgOut>
           ) : (
             <div className="UploadBillBackMents">
               <div>인증을 업로드 하시려면</div>
               <div>여기를 클릭하세요!</div>
+              <BillMentsRef>참고: 영수증 상단부의 사업자번호와 업체(매장)명만 찍어주시면 돼요!</BillMentsRef>
             </div>
           )}
         </BillsAddLine>
