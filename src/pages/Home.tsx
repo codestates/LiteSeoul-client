@@ -9,6 +9,8 @@ import Recommends from "../components/Home/Recommends";
 import styled from "styled-components";
 import Bike from "../components/Home/bikeAni";
 import Bike2 from "../components/Home/bikeAni2";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const HomeOut = styled.div`
   width: 100%;
@@ -56,7 +58,7 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
   // 현재위치불러오기 추천시스템용으로다가 불러옴
   useEffect(() => {
     axios
-      .post("https://www.api.liteseoul.com/shop/recommend", {
+      .post(process.env.REACT_APP_DOAMIN_URL + "shop/recommend", {
         latitude: nav.lat || 37.535946,
         longitude: nav.lon || 127.006161,
       })

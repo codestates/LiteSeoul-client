@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -207,7 +208,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
       if (userImg === "") {
         console.log("이미지없이 변화 요청");
         await axios
-          .post("https://www.api.liteseoul.com/user/changeinfo", {
+          .post(process.env.REACT_APP_DOAMIN_URL + "user/changeinfo", {
             access_token: token,
             nick: userNick,
             phone: userPhone,
@@ -237,7 +238,7 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
         console.log("이미지포함 변화 요청");
         // 이미지 변화가 있다면~
         await axios
-          .post("https://www.api.liteseoul.com/user/update", formData)
+          .post(process.env.REACT_APP_DOAMIN_URL + "user/update", formData)
           .then((res) => {
             console.log(res);
             alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");

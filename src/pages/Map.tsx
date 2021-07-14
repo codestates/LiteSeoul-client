@@ -4,6 +4,9 @@ import MapNav from '../components/Map/MapNav';
 import KakaoMap from '../components/Map/KakaoMap';
 import axios from 'axios';
 import queryStringify from 'qs-stringify';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const MapOut = styled.div`
   width: 100%;
@@ -82,7 +85,7 @@ function Map({
 
       const data2: any = {
         grant_type: 'authorization_code',
-        client_id: 'd33a84f54f22e12cd75db7c1981bd095',
+        client_id: process.env.REACT_APP_KAKAO_CLIETN_ID,
         redirect_uri: url,
         code: code,
       };
@@ -101,7 +104,7 @@ function Map({
         setLoading(true);
         axios
           .post(
-            "https://www.api.liteseoul.com/kakao/login",
+            process.env.REACT_APP_DOAMIN_URL + "kakao/login",
             {
               kakaoToken: res.data.access_token,
             },

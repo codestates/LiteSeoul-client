@@ -1,9 +1,10 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import styled from "styled-components";
 import "../../App.css";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -244,7 +245,7 @@ const SignUp = (props: any) => {
 
     // 엑시오스 전송부분
     axios
-      .post("https://www.api.liteseoul.com/user/signup", formData, {
+      .post(process.env.REACT_APP_DOAMIN_URL + "user/signup", formData, {
         headers: {
           "Content-type": "charset=UTF-8",
         },

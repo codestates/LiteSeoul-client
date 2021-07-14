@@ -1,7 +1,8 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const AddBillsOut = styled.div`
   width: 500px;
@@ -124,7 +125,7 @@ function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
       formData.append("receipt", uploadImg);
       setLoading(true);
       axios
-        .post("https://www.api.liteseoul.com/receipt/add", formData)
+        .post(process.env.REACT_APP_DOAMIN_URL + "receipt/add", formData)
         .then((res) => {
           handleMypageNow("billslog");
           setLoading(false);
