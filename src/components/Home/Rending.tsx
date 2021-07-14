@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Background from '../SVG/BackGround';
 import LogoSvg from '../SVG/LogoSvg';
 import Scroll from './Scroll';
@@ -19,6 +19,18 @@ const RendingOut = styled.div`
   overflow: hidden;
 `;
 
+const SubTitleAni = keyframes`
+0%{
+  opacity:0;
+  transform:translateX(-400px);
+}
+100%{
+  opacity:1;
+  transform:translateX(0px);
+
+}
+`;
+
 const RendingSubTitle = styled.div`
   width: 40%;
   /* border: 1px solid red; */
@@ -28,6 +40,7 @@ const RendingSubTitle = styled.div`
   color: #000;
   margin-top: 20px;
   z-index: 900;
+  animation: ${SubTitleAni} 2s ease forwards;
   @media screen and (max-width: 1471px) {
     font-size: 1.9rem;
     text-align: center;
@@ -50,6 +63,17 @@ const RendingSubTitle = styled.div`
   }
 `;
 
+const RendingContentAni = keyframes`
+0%{
+  opacity:0;
+  transform:translateY(90px) scale(0.7);
+}
+100%{
+  opacity:1;
+  transform:translateY(0px) scale(1);
+}
+`;
+
 const RendingContent = styled.div`
   width: 40%;
   height: auto;
@@ -58,6 +82,7 @@ const RendingContent = styled.div`
   align-items: center;
   margin-top: 20px;
   z-index: 990;
+  animation: ${RendingContentAni} 2s ease forwards;
   & div {
     width: 65%;
     color: #6e6e73;

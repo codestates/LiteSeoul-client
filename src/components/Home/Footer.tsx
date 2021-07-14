@@ -177,6 +177,11 @@ const FooterContact = styled.ul`
     margin-bottom: 20px;
     opacity: 1;
   }
+  & li:nth-child(2) {
+    &:hover {
+      color: #189cc4;
+    }
+  }
 `;
 
 const FooterCopyWrite = styled.span`
