@@ -8,7 +8,6 @@ const RankingOut = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,13 +18,11 @@ const RankingOut = styled.div`
 const RangkingMain = styled.div`
   width: 90%;
   height: auto;
-  /* border: 1px solid green; */
 `;
 
 const RankingTitle = styled.div`
   width: 100%;
   height: 10%;
-  /* border: 1px solid blue; */
   margin-bottom: 50px;
   font-size: 4rem;
   font-weight: 700;
@@ -34,6 +31,7 @@ const RankingTitle = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
   @media screen and (max-width: 1501px) {
     font-size: 3rem;
   }

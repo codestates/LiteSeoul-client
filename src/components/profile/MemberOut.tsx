@@ -4,7 +4,6 @@ import axios from 'axios';
 const MemberDelOut = styled.div`
   width: 80%;
   height: 100%;
-  /* background: yellow; */
   position: absolute;
   right: 0;
   display: flex;
@@ -12,6 +11,7 @@ const MemberDelOut = styled.div`
   justify-content: center;
   overflow: auto;
   z-index: 800;
+
   @media screen and (max-width: 1101px) {
     width: 100%;
   }
@@ -20,12 +20,12 @@ const MemberDelOut = styled.div`
 const MemberDelMain = styled.div`
   width: 100%;
   height: 30%;
-  /* background: blue; */
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   @media screen and (max-width: 1101px) {
     width: 100%;
   }
@@ -57,6 +57,8 @@ const MemberCloseBtn = styled.div`
 `;
 
 function MemberOut() {
+
+  // 회원탈퇴시 얼럿창 분기나누는 함수
   const outHandler = () => {
     const returnvalue = window.confirm(
       '😣 정말 제로 웨이스트를 그만두시겠어요?',
@@ -69,7 +71,7 @@ function MemberOut() {
         })
         .then((res) => {
           console.log(res);
-          sessionStorage.removeItem('access_token');
+          sessionStorage.clear();
           window.location.replace('http://localhost:3000/');
         });
     } else {

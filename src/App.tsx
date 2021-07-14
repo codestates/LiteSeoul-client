@@ -15,7 +15,6 @@ import queryStringify from "qs-stringify";
 import Loading from "./pages/Loading";
 import Participation from "./pages/Participation";
 import Donation from "./pages/Donation";
-import qs from "querystringify";
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -32,13 +31,12 @@ interface userInfoForm {
 }
 
 function App(): any {
+  // 상태관리 파트
   const [isModal, setModal] = useState<boolean>(false);
   const [isLogin, setLogin] = useState<boolean>(false);
-  console.log("============= 로그인 여부", isLogin);
   const [isLoginModal, setLoginModal] = useState<boolean>(false);
-  const [modalData, setModalData] = useState([]);
+  const [modalData, setModalData] = useState<never[]>([]);
   const [isSignUp, setSignUp] = useState<boolean>(false);
-  // console.log("회원가입 모달창", isSignUp);
   const [loading, setLoading] = useState(false);
   const [myinfo, setMyinfo] = useState<userInfoForm>({
     id: 0,
@@ -52,8 +50,8 @@ function App(): any {
     profileImgPath: "",
     profileText: "",
   });
-  console.log(myinfo);
 
+  // 기본 샵 더미데이터 로컬스토리지 삽입
   localStorage.setItem(
     "recommend",
     JSON.stringify({
@@ -67,6 +65,7 @@ function App(): any {
         name: "더피커",
         phone: "070-4118-0710",
         recommend: "antiPlastic",
+        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/06_thepicker.jpg"
       },
       resultAntiChemical: {
         address: "서대문구 홍제천로2길 100, 1층",
@@ -77,6 +76,7 @@ function App(): any {
         name: "카페 샘",
         phone: "010-3646-4135",
         recommend: "antiChemical",
+        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/17_cafesam.jpeg"
       },
       resultAntiPlastic: {
         address: "금천구 독산로 312 1층",
@@ -87,6 +87,7 @@ function App(): any {
         name: "데일리로스팅",
         phone: "070-4205-1212",
         recommend: "antiPlastic",
+        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/03_dailyroasting.png"
       },
       resultRecycle: {
         address: "서대문구 연희동 708번지 1층",
@@ -97,17 +98,14 @@ function App(): any {
         name: "보틀팩토리",
         phone: "02-3144-0703",
         recommend: "recycle",
+        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/12_bottlefactory.jpeg"
       },
     })
   );
 
-  console.log(localStorage.getItem("recommend"));
-
-
   //전체 지도 데이터 받아오기
   useEffect(() => {
-    axios.get("https://www.api.liteseoul.com/shop/getAll")
-    .then(res => {
+    axios.get("https://www.api.liteseoul.com/shop/getAll").then((res) => {
       console.log(res);
       localStorage.setItem("total", JSON.stringify(res.data));
     });
@@ -118,7 +116,6 @@ function App(): any {
     navigator.geolocation.getCurrentPosition(function (position) {
       var lat = position.coords.latitude, // 위도
         lon = position.coords.longitude; // 경도
-      // console.log(lat, lon);
       let latlon: any = {
         lat: lat,
         lon: lon,
@@ -128,6 +125,7 @@ function App(): any {
   }, []);
 
   const handleModalData = (data: any) => {
+    console.log(data);
     setModalData(data);
   };
 
@@ -147,6 +145,7 @@ function App(): any {
     setSignUp(!isSignUp);
   };
 
+  // 액세스 토큰으로 내 정보 가져오기
   useEffect(() => {
     if (sessionStorage.getItem("access_token")) {
       setLogin(true);
@@ -154,42 +153,31 @@ function App(): any {
         .post("https://www.api.liteseoul.com/user/get", {
           access_token: sessionStorage.getItem("access_token"),
         })
-        .then(res => {
-          console.log(res)
+        .then((res) => {
           setMyinfo(res.data);
         });
     }
-    // console.log(myinfo)
-    
-  }, [])
+  }, []);
 
   // 토큰을 받아와서 세션 스토리지에 저장 & myinfo 저장하는 이펙트 훅
   useEffect(() => {
     const url = new URL(window.location.href);
-    // 로그인 후 토큰으로 myInfo 가져오는 부분
 
-    // ================ 구글
+    // 구글 소셜로그인
     if (url.searchParams.get("query")) {
       const token: any = url.searchParams.get("query");
-      const id: any = url.searchParams.get("id")
-      console.log(token);
+      const id: any = url.searchParams.get("id");
 
-      console.log("============ setLogin을 true로 변경");
       setLogin(true);
-      console.log("============ setLoading을 true로 변경");
       setLoading(true);
 
       sessionStorage.setItem("access_token", token);
-      sessionStorage.setItem("id", id)
-      
-      console.log("============== setLoading을 false로 변경");
+      sessionStorage.setItem("id", id);
+
       setLoading(false);
-      // window.location.reload();
       window.location.replace("http://localhost:3000/");
     }
-    // ================ 구글
-
-    // ================ 카카오
+    // 카카오 소셜로그인
     else if (url.searchParams.get("code")) {
       const code = url.searchParams.get("code");
       console.log("kakao");
@@ -211,27 +199,20 @@ function App(): any {
         },
         data: data,
       }).then((res) => {
-        console.log("============ setLogin을 true로 변경");
         setLogin(true);
-        console.log("============ setLoading을 true로 변경");
         setLoading(true);
         axios
           .post("https://www.api.liteseoul.com/kakao/login", {
             kakaoToken: res.data.access_token,
           })
           .then((result) => {
-            // console.log("============== 토큰까지 넣는 것 완료")
-            console.log(result)
             sessionStorage.setItem("access_token", result.data.access_token);
-            sessionStorage.setItem("id", result.data.payload.id)
+            sessionStorage.setItem("id", result.data.payload.id);
             window.location.reload();
-            // console.log("============== setLoading을 false로 변경")
             setLoading(false);
           });
       });
     }
-
-
   }, []);
 
   // 토큰을 갖고 로그인 유지해주는 이펙트 훅
@@ -240,7 +221,6 @@ function App(): any {
       sessionStorage.getItem("access_token") !== null ||
       localStorage.getItem("id") !== null
     ) {
-      console.log("======== 로그인 유지! true!");
       setLogin(true);
     } else {
       setLogin(false);
@@ -264,7 +244,14 @@ function App(): any {
             if (!sessionStorage.getItem("access_token")) {
               return <Redirect to="/" />;
             } else {
-              return <Mypage myinfo={myinfo} setLoading={setLoading}/>;
+              return (
+                <Mypage
+                  myinfo={myinfo}
+                  setLoading={setLoading}
+                  handleModal={handleModal}
+                  handleModalData={handleModalData}
+                />
+              );
             }
           }}
         />
@@ -292,12 +279,21 @@ function App(): any {
             />
           )}
         />
-        <Route exact path="/" render={() => <Home isLogin={isLogin} />} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Home
+              isLogin={isLogin}
+              handleModal={handleModal}
+              handleModalData={handleModalData}
+            />
+          )}
+        />
         <Route component={NotFound} />
       </Switch>
       {isLoginModal ? (
         <SignIn
-          // isLogin={isLogin}
           handleLogin={handleLogin}
           handleLoginModal={handleLoginModal}
           handleSignUp={handleSignUp}
@@ -318,7 +314,11 @@ function App(): any {
       ) : (
         <></>
       )}
-      {isSignUp ? <SignUp handleSignUp={handleSignUp} setLoading={setLoading}></SignUp> : <></>}
+      {isSignUp ? (
+        <SignUp handleSignUp={handleSignUp} setLoading={setLoading}></SignUp>
+      ) : (
+        <></>
+      )}
       {loading ? <Loading></Loading> : <></>}
     </BrowserRouter>
   );

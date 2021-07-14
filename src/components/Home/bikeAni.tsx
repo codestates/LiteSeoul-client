@@ -20,10 +20,12 @@ const BikeOut = styled.div`
     background-color: #fff;
     opacity: 0.6;
   }
+
   @media screen and (max-width: 750px) {
     display: none;
   }
 `;
+
 const Move = keyframes`
 0%{
  transform:translateX(-120%);
@@ -88,7 +90,6 @@ const Img3 = styled.img`
 const Text = styled.div`
   width: max-content;
   height: 350px;
-  /* border: 1px solid blue; */
   color: black;
   font-size: 2rem;
   display: flex;
@@ -101,6 +102,7 @@ const Text = styled.div`
     margin-right: 30px;
   }
 `;
+
 function Bike() {
   return (
     <BikeOut>

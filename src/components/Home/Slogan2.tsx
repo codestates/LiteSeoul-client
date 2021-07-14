@@ -13,7 +13,6 @@ const Slogan2Out = styled.div`
 const SloganMain = styled.div`
   width: 90%;
   height: 100%;
-  /* border: 1px solid red; */
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -29,7 +28,6 @@ const SloganImg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid red; */
   transition: 2s all;
   transform: translateX(100%);
   opacity: 0;
@@ -37,6 +35,7 @@ const SloganImg = styled.div`
     transform: translateX(0%);
     opacity: 1;
   }
+
   @media screen and (max-width: 801px) {
     width: 60%;
     height: 50%;
@@ -46,7 +45,6 @@ const SloganImg = styled.div`
 const SloganText = styled.div`
   width: 60%;
   height: 70%;
-  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -65,6 +63,7 @@ const SloganText = styled.div`
     position: absolute;
     z-index: 10;
   }
+
   @media screen and (max-width: 800px) {
     width: 100%;
     height: auto;
@@ -74,12 +73,12 @@ const SloganText = styled.div`
 const SloganTextTitle = styled.div`
   width: 100%;
   height: 10%;
-  /* background-color: red; */
   margin-bottom: 15px;
   text-align: left;
   font-size: 3.5rem;
   font-weight: 700;
   z-index: 20;
+
   @media screen and (max-width: 1550px) {
     height: auto;
     font-size: 3rem;
@@ -97,12 +96,12 @@ const SloganTextTitle = styled.div`
 const SloganTextContent = styled.div`
   width: 90%;
   height: 20%;
-  /* background-color: red; */
   font-size: 1.2rem;
   text-align: left;
   color: #6e6e73;
   z-index: 20;
   line-height: 30px;
+
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
   }
@@ -113,6 +112,7 @@ const SloganTextContent = styled.div`
     font-size: 0.9rem;
   }
 `;
+
 function Slogan2() {
   return (
     <Slogan2Out id="slogan2">

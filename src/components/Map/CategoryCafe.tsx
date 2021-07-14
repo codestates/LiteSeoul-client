@@ -24,7 +24,6 @@ const CategoryList = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    /* border: 1px solid red; */
     width: 150px;
     height: 60px;
     & span:nth-child(1) {
@@ -46,20 +45,17 @@ const CategoryList = styled.div`
 `;
 
 function CategoryCafe(props: any) {
-  // console.log(props);
   const data = JSON.parse(localStorage.getItem('total') || '{}');
 
   useEffect(() => {
     const axioscafe = data.filter((el: any) => {
       return el['category'] === 'cafe';
     });
-    // console.log(axioscafe);
     setMap(axioscafe);
   }, []);
 
-  const [isMap, setMap] = useState(data);
+  const [isMap, setMap] = useState<any>(data);
 
-  // console.log(isMap);
   // 카페 카테고리를 눌럿을떄
   const handelCafe = () => {
     props.handelList();

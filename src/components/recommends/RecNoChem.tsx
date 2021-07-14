@@ -14,9 +14,6 @@ const Out = styled.div`
   @media screen and (max-width: 1401px) {
     height: 65%;
   }
-  /* @media screen and (max-width: 1101px) {
-    height: 55%;
-  } */
   @media screen and (max-width: 1201px) {
     width: 40%;
     height: 15%;
@@ -48,6 +45,7 @@ const ListTitle = styled.div`
     background-position: center;
     margin-right: 5px;
   }
+
   @media screen and (max-width: 1701px) {
     width: 200px;
     font-size: 1.2rem;
@@ -61,12 +59,10 @@ const ListTitle = styled.div`
       margin-right: 5px;
     }
   }
-
   @media screen and (max-width: 1401px) {
     width: 160px;
     font-size: 1.2rem;
   }
-
   @media screen and (max-width: 1101px) {
     width: 140px;
     font-size: 1.2rem;
@@ -79,8 +75,6 @@ const ListTitle = styled.div`
 const Store = styled.div`
   width: 200px;
   height: 220px;
-
-  /* border: 1px solid red; */
   position: absolute;
   bottom: 8%;
   display: flex;
@@ -88,6 +82,7 @@ const Store = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
   @media screen and (max-width: 1401px) {
     width: 160px;
     height: 180px;
@@ -112,7 +107,7 @@ const StoreName = styled.div`
   justify-content: flex-start;
   font-size: 1.4rem;
   font-weight: 700;
-  /* background-color: green; */
+
   @media screen and (max-width: 1501px) {
     font-size: 1.4rem;
   }
@@ -131,11 +126,11 @@ const StoreName = styled.div`
 const StoreText = styled.div`
   width: 200px;
   height: 60px;
-  /* background-color: blue; */
   text-align: left;
   font-size: 0.8rem;
   color: #6e6e73;
   line-height: 1.2rem;
+
   @media screen and (max-width: 1501px) {
     font-size: 0.8rem;
   }
@@ -176,7 +171,6 @@ const StoreAdd = styled.div`
   }
   @media screen and (max-width: 901px) {
     width: 250px;
-    /* border: 1px solid red; */
   }
 `;
 
@@ -194,6 +188,7 @@ const Img = styled.div`
     height: 100%;
     object-fit: cover;
   }
+  
   @media screen and (max-width: 1401px) {
     width: 160px;
     height: 160px;

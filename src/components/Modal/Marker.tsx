@@ -9,23 +9,21 @@ const MarkerOut = styled.div`
   height: 100%;
   min-height: 900px;
   background-color: #000000b3;
-  /* opacity: 0.6; */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
 `;
+
 const MarkerInMain = styled.div`
   width: 800px;
   height: 900px;
-  /* border: 1px solid #fff; */
-  /* border: 1px solid red; */
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
   @media screen and (max-width: 850px) {
     width: 400px;
     position: relative;
-    /* border: 1px solid red; */
   }
 `;
 
@@ -57,6 +55,7 @@ const MarkerCenter = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
+
   @media screen and (max-width: 850px) {
     width: 400px;
   }
@@ -79,7 +78,6 @@ const MarkerInfo = styled.div`
 const MakerStoreInfo = styled.div`
   width: 90%;
   height: 30%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -112,8 +110,8 @@ const MakerStoreInfo = styled.div`
     }
   }
 `;
+
 const MakerStoreText = styled.div`
-  /* border: 1px solid blue; */
   width: 90%;
   height: 40%;
   display: flex;
@@ -125,7 +123,6 @@ const MakerStoreText = styled.div`
     height: 70px;
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
     margin-bottom: 20px;
   }
   & div:nth-child(2) {
@@ -134,7 +131,6 @@ const MakerStoreText = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
-    /* background: yellow; */
     & span {
       font-size: 1rem;
     }
@@ -165,6 +161,7 @@ const MarkerComment = styled.div`
   text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
+
   @media screen and (max-width: 850px) {
     font-size: 1.2rem;
     width: 90%;
@@ -178,7 +175,6 @@ const MarkerCommemntUl = styled.ul`
   height: 45%;
   margin: 0 auto;
   padding-right: 1%;
-  /* border: 1px solid red; */
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 6px;
@@ -245,6 +241,7 @@ const MarkerCommemntUl = styled.ul`
   & li:nth-last-child() {
     margin-bottom: 0;
   }
+
   @media screen and (max-width: 961px) {
     & li {
       display: flex;
@@ -284,6 +281,7 @@ const MarkerCommnetInput = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const CommentInput = styled.input.attrs({
   type: 'text',
 })`
@@ -335,8 +333,6 @@ function Marker({
   isLogin,
   handleLoginModal,
 }: MarkerProps) {
-  // console.log(modalData);
-  // console.log(isLogin, '마커 로그인 확인용');
 
   //댓글,좋아요, 유즈이펙트 관리용 돈터치
   const [commentModi, setcommentModi] = useState('');
@@ -345,19 +341,16 @@ function Marker({
   //댓글 상태
   const [isComment, setComment] = useState('');
 
-  const userId = Number(localStorage.getItem('id'));
-  // console.log(typeof userId);
+  const userId = Number(sessionStorage.getItem('id'));
 
   //댓글 체인지
   const handleComment = (e: any) => {
     setComment(e.target.value);
   };
 
-  // 좋아요 버튼 false , true (체크박스유무)
-  //엑시오스로 상태받아서 하면될듯
+  // 좋아요 기능 파트
   const [isCheck, setCheck] = useState(false);
 
-  //좋아요 클릭시
   const handleCheck = (e: any) => {
     if (isLogin === false) {
       handleLoginModal();
@@ -369,18 +362,14 @@ function Marker({
           shopId: modalData.id,
         })
         .then((res: any) => {
-          // console.log(res);
           setCheck(!isCheck);
-          console.log(isCheck);
           setlikeModi('a');
           setlikeModi('');
         });
     }
-    // 좋아요 클릭했을떄
   };
 
   const [comments, setComments] = useState([]);
-  // console.log(comments);
 
   //댓글 가져오기
   useEffect((): any => {
@@ -388,7 +377,6 @@ function Marker({
       .get(`https://www.api.liteseoul.com/shop/${Number(modalData.id)}`)
       .then((res) => {
         setComments(res.data.commentInfo);
-        // console.log(res.data.commentInfo);
       });
   }, [commentModi]);
 
@@ -406,9 +394,9 @@ function Marker({
             setCheck(false);
           }
         }
-        // console.log(res.data.likeInfo);
         setLike(res.data.likeInfo.length);
       });
+
   }, [likeModi]);
 
   //좋아요 갯수 상태
@@ -416,8 +404,6 @@ function Marker({
 
   // 댓글제출시
   const CommnetSubmit = () => {
-    // console.log('submit');
-    // console.log(modalData.id);
     if (isLogin === false) {
       handleLoginModal();
     } else if (isComment === '') {

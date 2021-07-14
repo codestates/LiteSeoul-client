@@ -42,6 +42,7 @@ const CurrentLocation = styled.div`
   }
 `;
 
+// 프롭스 타입지정
 type MapProps = {
   handleModal: () => void;
   isModal: boolean;
@@ -61,7 +62,7 @@ function Map({
 }: MapProps) {
   useEffect(() => {
     var url = new URL(window.location.href);
-    console.log(url);
+
     if (sessionStorage.getItem('access_token')) {
       setLogin(true);
       axios
@@ -79,7 +80,6 @@ function Map({
     if (url.searchParams.get('code')) {
       const code = url.searchParams.get('code');
 
-      console.log('kakao');
       const data2: any = {
         grant_type: 'authorization_code',
         client_id: 'd33a84f54f22e12cd75db7c1981bd095',
@@ -241,7 +241,6 @@ function Map({
       <KakaoMap
         handleModal={handleModal}
         isModal={isModal}
-        // handleModalData={handleModalData}
       ></KakaoMap>
       <CurrentLocation onClick={handleCurrentLocation}></CurrentLocation>
     </MapOut>

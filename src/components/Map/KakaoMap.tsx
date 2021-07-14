@@ -10,7 +10,6 @@ declare global {
 const MapContents = styled.div`
   width: 80%;
   height: 100vh;
-  /* border: 1px solid red; */
   position: absolute;
   right: 0;
   @media screen and (max-width: 960px) {
@@ -21,13 +20,12 @@ const MapContents = styled.div`
 type KakaomapProps = {
   handleModal: () => void;
   isModal: boolean;
-  // groundDatas: Array<groundData>;
 };
 
 const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal }) => {
   const data = JSON.parse(localStorage.getItem('total') || '{}');
 
-  const [isMap, setMap] = useState(data);
+  const [isMap, setMap] = useState<any>(data);
 
   useEffect(() => {
     mapscript();

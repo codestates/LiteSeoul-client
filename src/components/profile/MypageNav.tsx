@@ -8,6 +8,7 @@ const MyPageNavOut = styled.div`
   position: fixed;
   background-color: #fff;
   z-index: 900;
+
   @media screen and (max-width: 1101px) {
     width: 300px;
   }
@@ -28,19 +29,19 @@ const MyPageNavOut = styled.div`
     top: 0;
   }
 `;
+
 const MyPageNavTop = styled.div`
   width: 100%;
   height: 15%;
-  /* background-color: green; */
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #189cc4;
 `;
+
 const MyPageNavTopInfo = styled.div`
   width: 70%;
   height: 50%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -52,7 +53,6 @@ const MyPageNavTopInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background: yellow; */
   }
   & div:nth-child(2) {
     width: 100%;
@@ -62,22 +62,12 @@ const MyPageNavTopInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background: yellow; */
   }
-  /* & div:nth-child(2) {
-    height: 30%;
-    font-size: 1.2rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    background: blue;
-  } */
 `;
 
 const MyPageNavMain = styled.div`
   width: 100%;
   height: 85%;
-  /* background: #ccc; */
 `;
 
 const MyPageNavUl = styled.ul`
@@ -87,14 +77,12 @@ const MyPageNavUl = styled.ul`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  /* background: pink; */
   & li {
     width: 100%;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: yellow; */
     cursor: pointer;
     width: 70%;
     height: 50px;
@@ -137,13 +125,18 @@ const NavHidden = styled.div`
     width: 15px;
     height: 15px;
   }
+
   @media screen and (max-width: 1001px) {
     display: flex;
   }
 `;
 
 function MypageNav({ myinfo, handleMypageNow }: any) {
+  
+  // 개인정보 닉네임 네비창 렌더링용
   const { nick } = myinfo;
+
+  // 네비창 반응형 함수
   const handleNav = () => {
     document.getElementById('nav1')?.classList.toggle('nav1');
     document.getElementById('hidden1')?.classList.toggle('hidden1');

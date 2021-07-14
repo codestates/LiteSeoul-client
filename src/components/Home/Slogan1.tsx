@@ -13,11 +13,11 @@ const Slogan1Out = styled.div`
 const SloganMain = styled.div`
   width: 90%;
   height: 100%;
-  /* border: 1px solid red; */
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+
   @media screen and (max-width: 800px) {
     flex-direction: column;
   }
@@ -26,7 +26,6 @@ const SloganMain = styled.div`
 const SloganImg = styled.div`
   width: 40%;
   height: 70%;
-  /* border: 1px solid blue; */
   position: relative;
   display: flex;
   align-items: center;
@@ -39,6 +38,7 @@ const SloganImg = styled.div`
     transform: translateX(0%);
     opacity: 1;
   }
+
   @media screen and (max-width: 800px) {
     width: 70%;
     height: 50%;
@@ -53,6 +53,7 @@ const SloganTitle = styled.div`
   font-size: 7rem;
   font-weight: 700;
   color: #1894cc;
+
   @media screen and (max-width: 1900px) {
     font-size: 5rem;
   }
@@ -68,7 +69,6 @@ const SloganTitle = styled.div`
 `;
 
 const SloganSubTitle = styled.div`
-  /* border: 1px solid red; */
   position: absolute;
   top: 63%;
   left: 50%;
@@ -76,6 +76,7 @@ const SloganSubTitle = styled.div`
   font-size: 3rem;
   font-weight: 700;
   color: #000;
+
   @media screen and (max-width: 1900px) {
     font-size: 2rem;
     top: 58%;
@@ -107,7 +108,6 @@ const SloganSubTitle = styled.div`
 const SloganText = styled.div`
   width: 60%;
   height: 70%;
-  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -127,6 +127,7 @@ const SloganText = styled.div`
   &.slogan1Text {
     opacity: 1;
   }
+
   @media screen and (max-width: 800px) {
     width: 100%;
     height: auto;
@@ -136,12 +137,12 @@ const SloganText = styled.div`
 const SloganTextTitle = styled.div`
   width: 100%;
   height: 10%;
-  /* background-color: red; */
   margin-bottom: 15px;
   text-align: right;
   font-size: 3.5rem;
   font-weight: 700;
   z-index: 20;
+
   @media screen and (max-width: 1550px) {
     height: auto;
     font-size: 3rem;
@@ -159,12 +160,12 @@ const SloganTextTitle = styled.div`
 const SloganTextContent = styled.div`
   width: 100%;
   height: auto;
-  /* background-color: red; */
   font-size: 1.2rem;
   text-align: right;
   color: #6e6e73;
   z-index: 20;
   line-height: 30px;
+
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
   }
@@ -175,6 +176,7 @@ const SloganTextContent = styled.div`
     font-size: 0.9rem;
   }
 `;
+
 function Slogan1() {
   return (
     <Slogan1Out id="slogan1">

@@ -30,10 +30,12 @@ const Img = styled.div`
     width: 80%;
     object-fit: cover;
   }
+
   @media screen and (max-width: 1600px) {
     display: none;
   }
 `;
+
 const Text = styled.div`
   width: 60%;
   height: 100%;
@@ -41,6 +43,7 @@ const Text = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 5%;
+
   @media screen and (max-width: 1601px) {
     width: 100%;
   }
@@ -55,6 +58,7 @@ const Title = styled.div`
   font-weight: 700;
   align-items: center;
   color: #189cc4;
+
   @media screen and (max-width: 1101px) {
     font-size: 4rem;
   }
@@ -72,6 +76,7 @@ const SubTitle = styled.div`
   align-items: center;
   color: #ff735d;
   font-weight: 500;
+
   @media screen and (max-width: 850px) {
     font-size: 1.6rem;
   }
@@ -88,6 +93,7 @@ const List1 = styled.div`
   justify-content: center;
   font-weight: 700;
   align-items: center;
+
   @media screen and (max-width: 1800px) {
     font-size: 1.3rem;
   }
@@ -120,6 +126,7 @@ const Account = styled.div`
     align-items: center;
     justify-content: center;
     font-weight: 500px;
+    
     @media screen and (max-width: 807px) {
       font-size: 0.8rem;
     }

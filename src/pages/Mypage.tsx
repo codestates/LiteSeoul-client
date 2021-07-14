@@ -3,12 +3,10 @@ import MypageNav from "../components/profile/MypageNav";
 import JustInfo from "../components/profile/JustInfo";
 import styled from "styled-components";
 import { useEffect } from "react";
-import axios from "axios";
 import BillsLog from "../components/profile/BillsLog";
 import LikePlace from "../components/profile/LikePlace";
 import MemberOut from "../components/profile/MemberOut";
 import NotFound from "./NotFound";
-import { NavLink } from "react-router-dom";
 
 // JustInfo
 const MyPageOut = styled.div`
@@ -70,19 +68,20 @@ const MyPageOut4 = styled.div`
   }
 `;
 
-function Mypage({ myinfo, setLoading }: any) {
-  const [mypageNow, setMypageNow] = useState("justinfo");
-  console.log(mypageNow);
+function Mypage({
+  myinfo,
+  setLoading,
+  handleModal,
+  isModal,
+  handleModalData,
+}: any) {
+  // 마이페이지 네비의 사이즈를 각 컴포넌트와 연결시 잘 맞지 않기 때문에 개별실행으로 상태 분리
+  const [mypageNow, setMypageNow] = useState<string>("justinfo");
 
-  // 마이페이지 컴포넌트 분리 실행 관련 상태
-
-  const handleMypageNow = (page: any) => {
+  // 각 컴포넌트 렌더링 관리 함수
+  const handleMypageNow = (page: string) => {
     setMypageNow(page);
   };
-
-  useEffect(() => {
-    console.log(mypageNow);
-  }, [mypageNow]);
 
   return (
     <>
@@ -94,12 +93,15 @@ function Mypage({ myinfo, setLoading }: any) {
       ) : mypageNow === "billslog" ? (
         <MyPageOut2>
           <MypageNav myinfo={myinfo} handleMypageNow={handleMypageNow} />
-          <BillsLog handleMypageNow={handleMypageNow} setLoading={setLoading}/>
+          <BillsLog handleMypageNow={handleMypageNow} setLoading={setLoading} />
         </MyPageOut2>
       ) : mypageNow === "likeplace" ? (
         <MyPageOut3>
           <MypageNav myinfo={myinfo} handleMypageNow={handleMypageNow} />
-          <LikePlace myinfo={myinfo} />
+          <LikePlace
+            handleModal={handleModal}
+            handleModalData={handleModalData}
+          />
         </MyPageOut3>
       ) : mypageNow === "memberout" ? (
         <MyPageOut4>

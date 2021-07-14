@@ -55,7 +55,7 @@ function CategoryLife(props: any) {
     setMap(axiosLife);
   }, []);
 
-  const [isMap, setMap] = useState(data);
+  const [isMap, setMap] = useState<any>(data);
 
   // 카페 카테고리를 눌럿을떄
   const handelCafe = () => {

@@ -9,13 +9,13 @@ import { useState } from "react";
 const LikePlaceOut = styled.div`
   width: 80%;
   height: 100%;
-  /* background: yellow; */
   position: absolute;
   right: 0;
   display: flex;
   flex-direction: column;
   overflow: auto;
   z-index: 800;
+
   @media screen and (max-width: 1101px) {
     height: auto;
   }
@@ -27,12 +27,12 @@ const LikePlaceOut = styled.div`
 const LikePlaceTitle = styled.div`
   width: 100%;
   height: 15%;
-  /* border: 1px solid green; */
   display: flex;
   align-items: center;
   padding-left: 5%;
   font-size: 3rem;
   font-weight: 700;
+
   @media screen and (max-width: 1101px) {
     display: none;
   }
@@ -42,7 +42,6 @@ const LikePlaceMain = styled.div`
   width: 80%;
   height: 85%;
   padding: 1%;
-  /* background-color: #ccc; */
   margin-left: 5%;
   overflow: auto;
   display: flex;
@@ -60,6 +59,7 @@ const LikePlaceMain = styled.div`
   &::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
   }
+
   @media screen and (max-width: 1101px) {
     width: 100%;
     align-items: center;
@@ -101,15 +101,16 @@ const LikePlaceListNum = styled.div`
   top: -2px;
   transition: 0.4s all;
 `;
+
 const LikePlaceStore = styled.div`
   width: 50%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  /* border: 1px solid red; */
   font-size: 1.2rem;
   color: #000;
+
   @media screen and (max-width: 901px) {
     width: 40%;
     align-items: center;
@@ -128,7 +129,6 @@ const LikePlaceAddr = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid red; */
   font-size: 0.8rem;
   font-weight: 700;
   color: #6e6e73;
@@ -137,6 +137,7 @@ const LikePlaceAddr = styled.div`
     height: 20px;
     object-fit: cover;
   }
+
   @media screen and (max-width: 901px) {
     width: 20%;
     align-items: center;
@@ -149,26 +150,61 @@ const LikePlaceAddr = styled.div`
   }
 `;
 
-function LikePlace({myinfo}: any) {
-  const [likePlaces, setLikePlaces] = useState([]);
+// 유저가 좋아요 누른 샵 목록 타입지정
+type likePlaceForm = {
+  id: number;
+  rank: number;
+  shop: {
+    name: string;
+    address: string;
+  };
+};
+
+type likeShopInfoForm = {
+  id: number;
+  name: string;
+  address: string;
+  phone: string;
+  likeLength: number;
+  imgPath: string;
+  text: string;
+  category: string;
+  email: string;
+  isAdmitted: string;
+  recommend: string;
+};
+
+//마커에서 필요한 모달데이터
+// address: "영등포구 당산로16길 16 1층"
+// category: "life"
+// email: ""
+// id: 2
+// imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/02_space1616.jpeg"
+// isAdmitted: 1
+// latitude: "37.52262452797101"
+// longitude: "126.89781222701237"
+// name: "공간1616"
+// phone: "02-6952-6050"
+// recommend: "recycle"
+// regisNumber: ""
+// text: ""
+
+function LikePlace({ handleModal, handleModalData }: any) {
+  const [likePlaces, setLikePlaces] = useState<likePlaceForm[]>([]);
   console.log(likePlaces);
 
-  const consoleHandler = (e: any) => {
-    console.log(e.target.innerText);
+  const markerHandler = (likePlace: any) => {
+    handleModalData(likePlace.shop)
+    handleModal()
   };
 
-  // 유저의 id를 세션 스토리지에 저장해야함.
   const id = sessionStorage.getItem("id");
-  // const id = myinfo.id;
-  
 
   useEffect(() => {
     axios
-      .get(
-        `https://www.api.liteseoul.com/shop/manyVisits/${Number(id)}`
-      )
+      .get(`https://www.api.liteseoul.com/shop/manyVisits/${Number(id)}`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setLikePlaces(res.data);
       });
   }, []);
@@ -177,16 +213,25 @@ function LikePlace({myinfo}: any) {
     <LikePlaceOut>
       <LikePlaceTitle>좋아하는 장소</LikePlaceTitle>
       <LikePlaceMain>
-        {likePlaces.length !== 0 ? likePlaces.map((likePlace: any) => (
-          <LikePlaceList key={likePlace.id} onClick={consoleHandler}>
-            <LikePlaceListNum>{likePlace.rank}</LikePlaceListNum>
-            <LikePlaceStore>{likePlace.shop.name}</LikePlaceStore>
-            <LikePlaceAddr>
-              <img src="icon/location_main.svg" alt="d"></img>
-              {likePlace.shop.address}
-            </LikePlaceAddr>
-          </LikePlaceList>
-        )) : <div>자주이용하시는 샵에 상세정보 창에서 좋아요를 눌러서 모아보세요!</div>}
+        {likePlaces.length !== 0 ? (
+          likePlaces.map((likePlace: any) => (
+            <LikePlaceList
+              key={likePlace.id}
+              onClick={() => markerHandler(likePlace)}
+            >
+              <LikePlaceListNum>{likePlace.rank}</LikePlaceListNum>
+              <LikePlaceStore>{likePlace.shop.name}</LikePlaceStore>
+              <LikePlaceAddr>
+                <img src="icon/location_main.svg" alt="d"></img>
+                {likePlace.shop.address}
+              </LikePlaceAddr>
+            </LikePlaceList>
+          ))
+        ) : (
+          <div>
+            자주이용하시는 샵에 상세정보 창에서 좋아요를 눌러서 모아보세요!
+          </div>
+        )}
       </LikePlaceMain>
     </LikePlaceOut>
   );
