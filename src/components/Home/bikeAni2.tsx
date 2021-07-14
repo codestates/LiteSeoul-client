@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 const BikeOut = styled.div`
   width: 100%;
-  height: 800px;
+  height: 100vh;
   display: flex;
   z-index: 910;
   min-height: 800px;
@@ -11,21 +11,21 @@ const BikeOut = styled.div`
   background-image: url('img/bgbike.png');
   background-repeat: no-repeat;
   background-size: cover;
+  /* border: 1px solid red; */
   &::before {
     content: '';
     width: 100%;
-    height: 800px;
+    height: 100vh;
     min-height: 900px;
     position: absolute;
+    inset: 0;
     background-color: #fff;
     opacity: 0.6;
   }
-
   @media screen and (max-width: 750px) {
     display: none;
   }
 `;
-
 const Move = keyframes`
 0%{
  transform:translateX(-120%);
@@ -35,8 +35,17 @@ const Move = keyframes`
 }
 `;
 
+const Uptext = styled.div`
+  margin-top: 140px;
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  inset: 0;
+  border: 1px solid red;
+`;
+
 const AniOut = styled.div`
-  padding-top: 150px;
+  padding-top: 440px;
   width: max-content;
   min-height: 800px;
   height: 100vh;
@@ -46,6 +55,7 @@ const AniOut = styled.div`
 `;
 
 const Ani = styled.div`
+  /* border: 1px solid red; */
   width: 600px;
   height: 600px;
   position: relative;
@@ -90,6 +100,7 @@ const Img3 = styled.img`
 const Text = styled.div`
   width: max-content;
   height: 350px;
+  /* border: 1px solid blue; */
   color: black;
   font-size: 2rem;
   display: flex;
@@ -102,10 +113,10 @@ const Text = styled.div`
     margin-right: 30px;
   }
 `;
-
-function Bike() {
+function Bike2() {
   return (
     <BikeOut>
+      <Uptext></Uptext>
       <AniOut>
         <Text>
           <span>LiteSeoul</span>
@@ -122,4 +133,4 @@ function Bike() {
   );
 }
 
-export default Bike;
+export default Bike2;

@@ -8,6 +8,7 @@ import Ranking from "../components/Home/Ranking";
 import Recommends from "../components/Home/Recommends";
 import styled from "styled-components";
 import Bike from "../components/Home/bikeAni";
+import Bike2 from "../components/Home/bikeAni2";
 
 const HomeOut = styled.div`
   width: 100%;
@@ -159,6 +160,7 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
       )}
 
       {/* 애니메이션 추가 */}
+      {isLogin ? <Bike2></Bike2> : <></>}
       {isLogin ? <Ranking></Ranking> : <></>}
       {isLogin ? <Recommends></Recommends> : <></>}
       <Footer></Footer>
@@ -166,3 +168,4 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
   );
 }
 export default Home;
+
