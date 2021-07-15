@@ -64,7 +64,7 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
       })
       .then((res: any) => {
         localStorage.setItem('recommend', JSON.stringify(res.data));
-        console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
+        // console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
       });
   }, [isLogin]);
 
