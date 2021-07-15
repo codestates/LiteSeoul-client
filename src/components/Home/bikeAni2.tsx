@@ -11,6 +11,9 @@ const BikeOut = styled.div`
   min-width: 500px;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 801px) {
+    display: none;
+  }
 `;
 
 const EarthAni = keyframes`
@@ -41,15 +44,12 @@ const Earth = styled.div`
 const SunAni = keyframes`
 0%{
   transform: translate(-18px, 20px);
-
 }
 50%{
   transform: translate(18px, 0px);
-
 }
 100%{
   transform: translate(-18px, 20px);
-
 }
 `;
 
@@ -177,6 +177,7 @@ const Text = styled.div`
   z-index: 900;
   opacity: 0;
   animation: ${TextAni} 3s linear forwards;
+
   & span:nth-of-type(1) {
     font-size: 8rem;
     color: #189cc4;
@@ -188,6 +189,20 @@ const Text = styled.div`
     color: #000;
     font-weight: 700;
     margin-right: 30px;
+  }
+  @media screen and (max-width: 1101px) {
+    width: 800px;
+    margin-left: -400px;
+
+    & span:nth-of-type(1) {
+      font-size: 6rem;
+    }
+    & span:nth-of-type(2) {
+      font-size: 1.2rem;
+      color: #000;
+      font-weight: 700;
+      margin-right: 30px;
+    }
   }
 `;
 function Bike2() {

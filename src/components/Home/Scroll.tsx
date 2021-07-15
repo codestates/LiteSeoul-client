@@ -33,6 +33,7 @@ const ScrollOut = styled.div`
   animation: ${ScrollOp} 2s forwards;
   opacity: 0;
   animation-delay: 1s;
+  z-index: 910;
   &::before {
     content: '';
     width: 8px;
@@ -59,7 +60,7 @@ const ScrollOut = styled.div`
     left: -50%;
     font-weight: 700;
   }
-  
+
   @media screen and (max-width: 800px) {
     top: 70%;
     right: 50%;
