@@ -58,7 +58,7 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
   // 현재위치불러오기 추천시스템용으로다가 불러옴
   useEffect(() => {
     axios
-      .post(process.env.REACT_APP_DOAMIN_URL + "shop/recommend", {
+      .post(process.env.REACT_APP_DOAMIN_URL + "/shop/recommend", {
         latitude: nav.lat || 37.535946,
         longitude: nav.lon || 127.006161,
       })

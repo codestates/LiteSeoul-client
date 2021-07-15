@@ -185,7 +185,7 @@ function LikePlace({ handleModal, handleModalData }: any) {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_DOAMIN_URL + `shop/manyVisits/${Number(id)}`)
+      .get(process.env.REACT_APP_DOAMIN_URL + `/shop/manyVisits/${Number(id)}`)
       .then((res) => {
         console.log(res);
         setLikePlaces(res.data);

@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const ParticipationOut = styled.div`
   width: 100%;
@@ -263,7 +265,28 @@ const SubmitBtn = styled.button`
   }
 `;
 
-function Participation() {
+function Participation() {  
+  // 마이페이지 이스터에그
+  console.log(`                               _
+                              | |                              
+              __      __  ___ | |  ___   ___   _ __ ___    ___ 
+              \\ \\ /\\ / / / _ \\| | / __| / _ \\ | \'_ \` _ \\  / _ \\ 
+               \\ V  V / |  __/| || (__ | (_) || | | | | ||  __
+                \\_/\\_/   \\___||_| \\___| \\___/ |_| |_| |_| \\___| 
+                 _          
+                | |         
+                | |_   ___  
+                | __| / _ \\ 
+                | |_ | (_) |
+                 \\__| \\___/ 
+                 _            _  _                   _             
+                | |          | || |                 | |            
+                | |__    ___ | || |  ___   ___    __| |  ___  _ __ 
+                | \'_ \\  / _ \\| || | / __| / _ \\  / _\` | / _ \\| \'__|
+                | | | ||  __/| || || (__ | (_) || (_| ||  __/| |   
+                |_| |_| \\___||_||_| \\___| \\___/  \\__,_| \\___||_|   
+                `)
+
   // Participation(기업참여) 상태관리 파트
   const [storeImg, setStoreImg] = useState<string>('');
   const [storeName, setStoreName] = useState<string>('');
@@ -423,13 +446,13 @@ function Participation() {
 
       // 엑시오스 전송 구역
       axios
-        .post('https://www.api.liteseoul.com/shop/register', formData)
+        .post(process.env.REACT_APP_DOAMIN_URL + '/shop/register', formData)
         .then((res) => {
           console.log(res);
           alert(
             "LiteSeoul에 업체 참여신청이 완료되었습니다! 운영진이 해당 신청서를 확인하고 등록을 시켜드릴게요. 작성하신 메일주소로 감사의 메일을 전송해 드렸어요! 이제 홈 페이지로 이동합니다 :)",
           );
-          window.location.replace('http://localhost:3000/');
+          window.location.replace("https://liteseoul.com");
         })
         .catch((err) => {
           alert('서버쪽 에러~');

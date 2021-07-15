@@ -250,7 +250,8 @@ function SignIn(props: any) {
     const url = new URL(window.location.href);
     const _hostName = "https://kauth.kakao.com";
     const _restApiKey = process.env.REACT_APP_KAKAO_CLIETN_ID;
-    const _redirectUrl = url;
+    const _redirectUrl = "https://liteseoul.com/"
+
 
     window.location.assign(
       `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`
@@ -292,7 +293,7 @@ function SignIn(props: any) {
       // 엑시오스로 데이터 서버 전송
       axios
         .post(
-          process.env.REACT_APP_DOAMIN_URL + "user/signin",
+          process.env.REACT_APP_DOAMIN_URL + "/user/signin",
           {
             email: id,
             password: password,
@@ -302,7 +303,7 @@ function SignIn(props: any) {
           sessionStorage.setItem("access_token", res.data.access_token);
           localStorage.setItem("id", res.data.payload.id);
           sessionStorage.setItem("id", res.data.payload.id)
-          window.location.replace("http://localhost:3000/");
+          window.location.replace("https://liteseoul.com/");
         })
         .catch(() => {
           setErrMessage("아이디와 패스워드를 확인해주세요");

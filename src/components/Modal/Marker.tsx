@@ -358,7 +358,7 @@ function Marker({
       handleLoginModal();
     } else {
       axios
-        .post(process.env.REACT_APP_DOAMIN_URL + 'shop/likeToggle', {
+        .post(process.env.REACT_APP_DOAMIN_URL + '/shop/likeToggle', {
           userId: userId,
           shopId: modalData.id,
         })
@@ -375,7 +375,7 @@ function Marker({
   //댓글 가져오기
   useEffect((): any => {
     axios
-      .get(process.env.REACT_APP_DOAMIN_URL + `shop/${Number(modalData.id)}`)
+      .get(process.env.REACT_APP_DOAMIN_URL + `/shop/${Number(modalData.id)}`)
       .then((res) => {
         setComments(res.data.commentInfo);
       });
@@ -384,7 +384,7 @@ function Marker({
   //좋아요 가져오기
   useEffect((): any => {
     axios
-      .get(process.env.REACT_APP_DOAMIN_URL + `shop/${Number(modalData.id)}`)
+      .get(process.env.REACT_APP_DOAMIN_URL + `/shop/${Number(modalData.id)}`)
       .then((res) => {
         for (let i = 0; i < res.data.likeInfo.length; i++) {
           //유저 아이디 가져와야함.!! 임의로 4
@@ -411,7 +411,7 @@ function Marker({
       alert('댓글을 입력하세요');
     } else {
       axios
-        .post(process.env.REACT_APP_DOAMIN_URL + `shop/comment`, {
+        .post(process.env.REACT_APP_DOAMIN_URL + `/shop/comment`, {
           userId: userId,
           shopId: modalData.id,
           comment: isComment,

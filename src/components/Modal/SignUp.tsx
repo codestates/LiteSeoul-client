@@ -242,10 +242,11 @@ const SignUp = (props: any) => {
     formData.append("nick", data.UserNickname);
     formData.append("password", data.Password);
     props.setLoading(true);
+    console.log(formData)
 
     // 엑시오스 전송부분
     axios
-      .post(process.env.REACT_APP_DOAMIN_URL + "user/signup", formData, {
+      .post(process.env.REACT_APP_DOAMIN_URL + "/user/signup", formData, {
         headers: {
           "Content-type": "charset=UTF-8",
         },
@@ -253,7 +254,7 @@ const SignUp = (props: any) => {
       .then((res) => {
         props.setLoading(false);
         alert("회원가입이 완료되셨습니다🥳");
-        window.location.replace("http://localhost:3000/");
+        window.location.replace("https://liteseoul.com/");
       });
   };
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);

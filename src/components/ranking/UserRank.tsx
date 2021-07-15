@@ -200,7 +200,7 @@ function UserRank() {
 
   // 유저랭크 서버에서 받아오는 이펙트 훅
   useEffect(() => {
-    axios.get(process.env.REACT_APP_DOAMIN_URL + 'user/rank').then((res) => {
+    axios.get(process.env.REACT_APP_DOAMIN_URL + '/user/rank').then((res) => {
       return setUserRankData(res.data);
     });
   }, []);
