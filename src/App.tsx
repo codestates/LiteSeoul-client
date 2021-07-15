@@ -198,8 +198,8 @@ function App(): any {
         data: data,
       }).then((res) => {
         console.log(res)
-        // setLogin(true);
-        // setLoading(true);
+        setLogin(true);
+        setLoading(true);
         axios
           .post(process.env.REACT_APP_DOAMIN_URL + "/kakao/login", {
             kakaoToken: res.data.access_token,
@@ -208,8 +208,8 @@ function App(): any {
             console.log(result)
             sessionStorage.setItem("access_token", result.data.access_token);
             sessionStorage.setItem("id", result.data.payload.id);
-            // window.location.reload();
-            // setLoading(false);
+            window.location.reload();
+            setLoading(false);
           });
       });
     }
