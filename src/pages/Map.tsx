@@ -70,7 +70,7 @@ function Map({
       setLogin(true);
       axios
         .post(
-          "https://www.api.liteseoul.com/user/get",
+          process.env.REACT_APP_DOAMIN_URL + "/user/get",
           {
             access_token: sessionStorage.getItem('access_token'),
           },

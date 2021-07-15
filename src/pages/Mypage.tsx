@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import MypageNav from "../components/profile/MypageNav";
 import JustInfo from "../components/profile/JustInfo";
 import styled from "styled-components";
-import { useEffect } from "react";
 import BillsLog from "../components/profile/BillsLog";
 import LikePlace from "../components/profile/LikePlace";
 import MemberOut from "../components/profile/MemberOut";

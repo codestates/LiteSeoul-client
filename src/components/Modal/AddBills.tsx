@@ -125,7 +125,7 @@ function AddBills({ handleModalClose, handleMypageNow, setLoading }: any) {
       formData.append("receipt", uploadImg);
       setLoading(true);
       axios
-        .post(process.env.REACT_APP_DOAMIN_URL + "receipt/add", formData)
+        .post(process.env.REACT_APP_DOAMIN_URL + "/receipt/add", formData)
         .then((res) => {
           handleMypageNow("billslog");
           setLoading(false);
