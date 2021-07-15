@@ -192,7 +192,6 @@ const Img = styled.div`
 
 function RecNear() {
   const data = JSON.parse(localStorage.getItem("recommend") || "{}");
-  console.log(data)
 
   return (
     <Out>

@@ -196,7 +196,6 @@ function ShopRank() {
 
   useEffect(() => {
     axios.get(process.env.REACT_APP_DOAMIN_URL + '/shop/rank').then((res) => {
-      console.log(res.data);
       return setShopRankdata(res.data);
     });
   }, []);

@@ -107,7 +107,6 @@ function App(): any {
   //전체 지도 데이터 받아오기
   useEffect(() => {
     axios.get(process.env.REACT_APP_DOAMIN_URL + "/shop/getAll").then((res) => {
-      console.log(res);
       localStorage.setItem("total", JSON.stringify(res.data));
     });
   }, []);
@@ -198,8 +197,9 @@ function App(): any {
         },
         data: data,
       }).then((res) => {
-        setLogin(true);
-        setLoading(true);
+        console.log(res)
+        // setLogin(true);
+        // setLoading(true);
         axios
           .post(process.env.REACT_APP_DOAMIN_URL + "/kakao/login", {
             kakaoToken: res.data.access_token,
@@ -208,8 +208,8 @@ function App(): any {
             console.log(result)
             sessionStorage.setItem("access_token", result.data.access_token);
             sessionStorage.setItem("id", result.data.payload.id);
-            window.location.reload();
-            setLoading(false);
+            // window.location.reload();
+            // setLoading(false);
           });
       });
     }
