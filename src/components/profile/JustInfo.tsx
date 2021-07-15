@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import InfoEdit from '../Modal/InfoEdit';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const JustInfoOut = styled.div`
   width: 80%;
@@ -208,6 +210,7 @@ function JustInfo({ myinfo }: any) {
     profileText,
   } = myinfo;
 
+  // 마이페이지 이스터에그
   console.log(`                               _
                               | |                              
               __      __  ___ | |  ___   ___   _ __ ___    ___ 
