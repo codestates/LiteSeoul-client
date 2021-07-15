@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Footer from "../components/Home/Footer";
-import Rending from "../components/Home/Rending";
-import Slogan1 from "../components/Home/Slogan1";
-import Slogan2 from "../components/Home/Slogan2";
-import Ranking from "../components/Home/Ranking";
-import Recommends from "../components/Home/Recommends";
-import styled from "styled-components";
-import Bike from "../components/Home/bikeAni";
-import Bike2 from "../components/Home/bikeAni2";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Footer from '../components/Home/Footer';
+import Rending from '../components/Home/Rending';
+import Slogan1 from '../components/Home/Slogan1';
+import Slogan2 from '../components/Home/Slogan2';
+import Ranking from '../components/Home/Ranking';
+import Recommends from '../components/Home/Recommends';
+import styled from 'styled-components';
+import Bike from '../components/Home/bikeAni';
+import Bike2 from '../components/Home/bikeAni2';
 
 const HomeOut = styled.div`
   width: 100%;
@@ -51,18 +51,18 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
   const [isBlock, setBlock] = useState<boolean>(false);
   // 스크롤 위치 추적용 (랜딩페이지로 추적함)
   const [topbtn, setTopbtn] = useState<number>(0);
-  let nav = JSON.parse(localStorage.getItem("nav") || "{}");
+  let nav = JSON.parse(localStorage.getItem('nav') || '{}');
 
   // 현재위치불러오기 추천시스템용으로다가 불러옴
   useEffect(() => {
     axios
-      .post("https://www.api.liteseoul.com/shop/recommend", {
+      .post('https://www.api.liteseoul.com/shop/recommend', {
         latitude: nav.lat || 37.535946,
         longitude: nav.lon || 127.006161,
       })
       .then((res: any) => {
-        localStorage.setItem("recommend", JSON.stringify(res.data));
-        console.log(JSON.parse(localStorage.getItem("recommend") || "{}"));
+        localStorage.setItem('recommend', JSON.stringify(res.data));
+        console.log(JSON.parse(localStorage.getItem('recommend') || '{}'));
       });
   }, [isLogin]);
 
@@ -75,65 +75,65 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
   }, [topbtn]);
 
   useEffect(() => {
-    document.getElementById("home")?.addEventListener("scroll", test);
+    document.getElementById('home')?.addEventListener('scroll', test);
     return () =>
-      document.getElementById("home")?.removeEventListener("scroll", test);
+      document.getElementById('home')?.removeEventListener('scroll', test);
   }, []);
 
   const test = () => {
-    if (document.getElementById("home")) {
+    if (document.getElementById('home')) {
       setTopbtn(
         Math.abs(
           Number(
-            document.getElementById("rending")?.getBoundingClientRect().top
-          )
-        )
+            document.getElementById('rending')?.getBoundingClientRect().top,
+          ),
+        ),
       );
     }
 
     if (
       Math.abs(
         Number(
-          document.getElementById("recommend")?.getBoundingClientRect().top
-        )
+          document.getElementById('recommend')?.getBoundingClientRect().top,
+        ),
       ) < 500
     ) {
-      document.getElementById("recommend1")?.classList.add("recommend1");
+      document.getElementById('recommend1')?.classList.add('recommend1');
     } else {
-      document.getElementById("recommend1")?.classList.remove("recommend1");
+      document.getElementById('recommend1')?.classList.remove('recommend1');
     }
 
     if (
-      document.getElementById("rending") &&
+      document.getElementById('rending') &&
       Math.abs(
-        Number(document.getElementById("slogan1")?.getBoundingClientRect().top)
+        Number(document.getElementById('slogan1')?.getBoundingClientRect().top),
       ) < 500
     ) {
-      document.getElementById("slogan1Img")?.classList.add("slogan1Img");
-      document.getElementById("slogan1Text")?.classList.add("slogan1Text");
+      document.getElementById('slogan1Img')?.classList.add('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.add('slogan1Text');
     } else {
-      document.getElementById("slogan1Img")?.classList.remove("slogan1Img");
-      document.getElementById("slogan1Text")?.classList.remove("slogan1Text");
+      document.getElementById('slogan1Img')?.classList.remove('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.remove('slogan1Text');
     }
 
     if (
-      document.getElementById("rending") &&
+      document.getElementById('rending') &&
       Math.abs(
-        Number(document.getElementById("slogan2")?.getBoundingClientRect().top)
+        Number(document.getElementById('slogan2')?.getBoundingClientRect().top),
       ) < 500
     ) {
-      document.getElementById("slogan2Img")?.classList.add("slogan2Img");
-      document.getElementById("slogan2Text")?.classList.add("slogan2Text");
+      document.getElementById('slogan2Img')?.classList.add('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.add('slogan2Text');
     } else {
-      document.getElementById("slogan2Img")?.classList.remove("slogan2Img");
-      document.getElementById("slogan2Text")?.classList.remove("slogan2Text");
+      document.getElementById('slogan2Img')?.classList.remove('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.remove('slogan2Text');
     }
   };
 
   const handleScroll = () => {
-    document.getElementById("home")?.scrollTo({
+    document.getElementById('home')?.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
@@ -146,7 +146,6 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
       ) : (
         <></>
       )}
-
       {isLogin ? <></> : <Rending></Rending>}
       {isLogin ? <></> : <Recommends></Recommends>}
       {isLogin ? (
@@ -168,4 +167,3 @@ function Home({ handleModal, handleModalData, isLogin }: any) {
   );
 }
 export default Home;
-
