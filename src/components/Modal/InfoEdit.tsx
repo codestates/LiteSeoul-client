@@ -216,9 +216,8 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
             password: password,
           })
           .then((res) => {
-            console.log(res);
             alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");
-            window.location.replace("https://liteseoul.com/mypage/");
+            window.location.replace("https://liteseoul.com/mypage");
           })
           .catch((err) => {
             alert("비밀번호가 맞지않아요!");
@@ -226,7 +225,6 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
       }
       // 이미지포함 변화 요청
       if (userImg !== "" || userImg !== undefined) {
-        console.log(userImg);
         formData.append("UserImg", userImg);
         if (token !== null) {
           formData.append("access_token", token);
@@ -239,14 +237,13 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
         await axios
           .post(process.env.REACT_APP_DOAMIN_URL + "/user/update", formData)
           .then((res) => {
-            console.log(res);
             alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");
             setUploadImg({
               file: "",
               previewURL: "",
             });
             setUserImg("");
-            window.location.replace("https://liteseoul.com/mypage/");
+            window.location.replace("https://liteseoul.com/mypage");
           })
           .catch((err) => {
             alert("비밀번호가 맞지않아요!");

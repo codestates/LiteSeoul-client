@@ -139,7 +139,6 @@ const BillsUpload = styled.div`
 function BillsLog({ handleMypageNow, setLoading }: any) {
   const [show, setShow] = useState<boolean>(false);
   const [logs, setLogs] = useState<never[]>([]);
-  console.log(logs)
 
   // 영수증 인증기록 제거버튼
   const xbtnHandler = (e: any) => {
@@ -167,7 +166,6 @@ function BillsLog({ handleMypageNow, setLoading }: any) {
         access_token: sessionStorage.getItem('access_token'),
       })
       .then((res) => {
-        console.log(res);
         setLogs(res.data);
       });
   }, []);

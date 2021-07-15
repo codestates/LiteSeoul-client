@@ -102,7 +102,6 @@ function Ranking() {
   const [option, setOption] = useState<string>('ShopRank');
 
   const rankingCategory = (value: string) => {
-    console.log(value);
     setOption(value);
   };
 

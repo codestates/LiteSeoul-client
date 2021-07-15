@@ -417,7 +417,6 @@ function Marker({
           comment: isComment,
         })
         .then((res: any) => {
-          console.log(res);
           setComment('');
           setcommentModi('a');
           setcommentModi('');
@@ -443,7 +442,7 @@ function Marker({
                 </div>
               </MakerStoreInfo>
               <MakerStoreText>
-                <div>가게 소개문구 자리. 서버에 요청하여 받을 예정임.</div>
+                <div>{modalData.text}</div>
                 <div>
                   <input
                     type="checkbox"

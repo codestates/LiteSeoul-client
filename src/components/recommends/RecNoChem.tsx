@@ -215,7 +215,7 @@ function ReNoChem() {
         </StoreName>
         <StoreText>
           {localStorage.getItem("recommend")
-            ? data.resultAntiChemical.phone
+            ? data.resultAntiChemical.text
             : "전화번호"}
         </StoreText>
         <StoreAdd>

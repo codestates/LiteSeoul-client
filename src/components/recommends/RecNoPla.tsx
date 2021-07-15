@@ -205,7 +205,7 @@ function ReNoPla() {
         </StoreName>
         <StoreText>
           {localStorage.getItem("recommend")
-            ? data.resultAntiPlastic.phone
+            ? data.resultAntiPlastic.text
             : "전화번호"}
         </StoreText>
         <StoreAdd>

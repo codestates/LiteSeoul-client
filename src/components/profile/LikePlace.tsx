@@ -174,7 +174,6 @@ type likeShopInfoForm = {
 
 function LikePlace({ handleModal, handleModalData }: any) {
   const [likePlaces, setLikePlaces] = useState<likePlaceForm[]>([]);
-  console.log(likePlaces);
 
   const markerHandler = (likePlace: any) => {
     handleModalData(likePlace.shop)
@@ -187,7 +186,6 @@ function LikePlace({ handleModal, handleModalData }: any) {
     axios
       .get(process.env.REACT_APP_DOAMIN_URL + `/shop/manyVisits/${Number(id)}`)
       .then((res) => {
-        console.log(res);
         setLikePlaces(res.data);
       });
   }, []);

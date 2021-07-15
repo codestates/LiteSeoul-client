@@ -51,7 +51,6 @@ function CategoryLife(props: any) {
     const axiosLife = data.filter((el: any) => {
       return el['category'] === 'life';
     });
-    // console.log(axiosLife);
     setMap(axiosLife);
   }, []);
 

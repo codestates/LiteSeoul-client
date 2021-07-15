@@ -301,7 +301,6 @@ function SignIn(props: any) {
         )
         .then((res) => {
           sessionStorage.setItem("access_token", res.data.access_token);
-          localStorage.setItem("id", res.data.payload.id);
           sessionStorage.setItem("id", res.data.payload.id)
           window.location.replace("https://liteseoul.com/");
         })

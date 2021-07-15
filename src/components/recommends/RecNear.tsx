@@ -204,7 +204,7 @@ function RecNear() {
           {localStorage.getItem("recommend") ? data.nearest.name : "가게이름"}
         </StoreName>
         <StoreText>
-          {localStorage.getItem("recommend") ? data.nearest.phone : "전화번호"}
+          {localStorage.getItem("recommend") ? data.nearest.text : "전화번호"}
         </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
