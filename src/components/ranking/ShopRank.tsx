@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const ShopRankOut = styled.div`
   width: 22%;
@@ -193,7 +195,7 @@ function ShopRank() {
   const [shopRankdata, setShopRankdata] = useState<shopInfoForm[]>([]);
 
   useEffect(() => {
-    axios.get('https://www.api.liteseoul.com/shop/rank').then((res) => {
+    axios.get(process.env.REACT_APP_DOAMIN_URL + '/shop/rank').then((res) => {
       console.log(res.data);
       return setShopRankdata(res.data);
     });

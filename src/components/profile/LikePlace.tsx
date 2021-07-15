@@ -1,10 +1,8 @@
-import React from "react";
-import MypageNav from "./MypageNav";
-import dummyLikePlaces from "../documents/dummyLikePlaces";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const LikePlaceOut = styled.div`
   width: 80%;
@@ -174,21 +172,6 @@ type likeShopInfoForm = {
   recommend: string;
 };
 
-//마커에서 필요한 모달데이터
-// address: "영등포구 당산로16길 16 1층"
-// category: "life"
-// email: ""
-// id: 2
-// imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/02_space1616.jpeg"
-// isAdmitted: 1
-// latitude: "37.52262452797101"
-// longitude: "126.89781222701237"
-// name: "공간1616"
-// phone: "02-6952-6050"
-// recommend: "recycle"
-// regisNumber: ""
-// text: ""
-
 function LikePlace({ handleModal, handleModalData }: any) {
   const [likePlaces, setLikePlaces] = useState<likePlaceForm[]>([]);
   console.log(likePlaces);
@@ -202,7 +185,7 @@ function LikePlace({ handleModal, handleModalData }: any) {
 
   useEffect(() => {
     axios
-      .get(`https://www.api.liteseoul.com/shop/manyVisits/${Number(id)}`)
+      .get(process.env.REACT_APP_DOAMIN_URL + `/shop/manyVisits/${Number(id)}`)
       .then((res) => {
         console.log(res);
         setLikePlaces(res.data);

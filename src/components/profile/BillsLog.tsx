@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddBills from '../Modal/AddBills';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const BillsOut = styled.div`
   width: 80%;
@@ -146,15 +147,13 @@ function BillsLog({ handleMypageNow, setLoading }: any) {
 
     if (returnvalue === true) {
       axios
-        .post('https://www.api.liteseoul.com/receipt/delete', {
+        .post(process.env.REACT_APP_DOAMIN_URL + '/receipt/delete', {
           access_token: sessionStorage.getItem('access_token'),
           name: `${e.target.id}`,
         })
-        // .then(res => )
         .then((res) => {
           alert('인증기록을 삭제하였습니다.');
           window.location.reload();
-          // window.location.replace('http://localhost:3000/mypage');
         });
     } else {
       alert('삭제과정을 취소하였습니다.');
@@ -164,7 +163,7 @@ function BillsLog({ handleMypageNow, setLoading }: any) {
   // 실시간 유저의 영수증 인증정보 렌더링
   useEffect(() => {
     axios
-      .post('https://www.api.liteseoul.com/receipt/list', {
+      .post(process.env.REACT_APP_DOAMIN_URL + '/receipt/list', {
         access_token: sessionStorage.getItem('access_token'),
       })
       .then((res) => {

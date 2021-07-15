@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const MemberDelOut = styled.div`
   width: 80%;
@@ -66,13 +68,13 @@ function MemberOut() {
     if (returnvalue === true) {
       alert('회원탈퇴를 최종적으로 완료하셨습니다🥲');
       axios
-        .post('https://www.api.liteseoul.com/user/delete', {
+        .post(process.env.REACT_APP_DOAMIN_URL + '/user/delete', {
           access_token: sessionStorage.getItem('access_token'),
         })
         .then((res) => {
           console.log(res);
           sessionStorage.clear();
-          window.location.replace('http://localhost:3000/');
+          window.location.replace('https://liteseoul.com/');
         });
     } else {
       alert('탈퇴과정을 취소하였습니다😆');

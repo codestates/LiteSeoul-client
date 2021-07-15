@@ -1,9 +1,10 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
 import styled from "styled-components";
 import "../../App.css";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -241,10 +242,11 @@ const SignUp = (props: any) => {
     formData.append("nick", data.UserNickname);
     formData.append("password", data.Password);
     props.setLoading(true);
+    console.log(formData)
 
     // 엑시오스 전송부분
     axios
-      .post("https://www.api.liteseoul.com/user/signup", formData, {
+      .post(process.env.REACT_APP_DOAMIN_URL + "/user/signup", formData, {
         headers: {
           "Content-type": "charset=UTF-8",
         },
@@ -252,7 +254,7 @@ const SignUp = (props: any) => {
       .then((res) => {
         props.setLoading(false);
         alert("회원가입이 완료되셨습니다🥳");
-        window.location.replace("http://localhost:3000/");
+        window.location.replace("https://liteseoul.com/");
       });
   };
   const onError: SubmitErrorHandler<IFormInput> = (data) => console.log(data);

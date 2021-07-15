@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
@@ -10,11 +10,12 @@ import Mypage from "./pages/Mypage";
 import NotFound from "./pages/NotFound";
 import Map from "./pages/Map";
 import SignUp from "./components/Modal/SignUp";
-import { useEffect } from "react";
 import queryStringify from "qs-stringify";
 import Loading from "./pages/Loading";
 import Participation from "./pages/Participation";
 import Donation from "./pages/Donation";
+import dotenv from 'dotenv';
+dotenv.config();
 
 //유저정보 데이터 타입 관리
 interface userInfoForm {
@@ -65,7 +66,7 @@ function App(): any {
         name: "더피커",
         phone: "070-4118-0710",
         recommend: "antiPlastic",
-        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/06_thepicker.jpg"
+        imgPath: process.env.REACT_APP_SERVER_URL + "/uploads/shops/06_thepicker.jpg"
       },
       resultAntiChemical: {
         address: "서대문구 홍제천로2길 100, 1층",
@@ -76,7 +77,7 @@ function App(): any {
         name: "카페 샘",
         phone: "010-3646-4135",
         recommend: "antiChemical",
-        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/17_cafesam.jpeg"
+        imgPath: process.env.REACT_APP_SERVER_URL + "/uploads/shops/17_cafesam.jpeg"
       },
       resultAntiPlastic: {
         address: "금천구 독산로 312 1층",
@@ -87,7 +88,7 @@ function App(): any {
         name: "데일리로스팅",
         phone: "070-4205-1212",
         recommend: "antiPlastic",
-        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/03_dailyroasting.png"
+        imgPath: process.env.REACT_APP_SERVER_URL + "/uploads/shops/03_dailyroasting.png"
       },
       resultRecycle: {
         address: "서대문구 연희동 708번지 1층",
@@ -98,14 +99,14 @@ function App(): any {
         name: "보틀팩토리",
         phone: "02-3144-0703",
         recommend: "recycle",
-        imgPath: "http://ec2-3-34-143-57.ap-northeast-2.compute.amazonaws.com/uploads/shops/12_bottlefactory.jpeg"
+        imgPath: process.env.REACT_APP_SERVER_URL + "/uploads/shops/12_bottlefactory.jpeg"
       },
     })
   );
 
   //전체 지도 데이터 받아오기
   useEffect(() => {
-    axios.get("https://www.api.liteseoul.com/shop/getAll").then((res) => {
+    axios.get(process.env.REACT_APP_DOAMIN_URL + "/shop/getAll").then((res) => {
       console.log(res);
       localStorage.setItem("total", JSON.stringify(res.data));
     });
@@ -150,7 +151,7 @@ function App(): any {
     if (sessionStorage.getItem("access_token")) {
       setLogin(true);
       axios
-        .post("https://www.api.liteseoul.com/user/get", {
+        .post(process.env.REACT_APP_DOAMIN_URL + "/user/get", {
           access_token: sessionStorage.getItem("access_token"),
         })
         .then((res) => {
@@ -175,19 +176,17 @@ function App(): any {
       sessionStorage.setItem("id", id);
 
       setLoading(false);
-      window.location.replace("http://localhost:3000/");
+      window.location.replace("https://liteseoul.com/");
     }
     // 카카오 소셜로그인
     else if (url.searchParams.get("code")) {
+      // const url2 = new URL(window.location.href);
       const code = url.searchParams.get("code");
-      console.log("kakao");
-      console.log(code);
 
       const data = queryStringify({
         grant_type: "authorization_code",
-        client_id: "d33a84f54f22e12cd75db7c1981bd095",
-        redirect_uri: "http://localhost:3000/",
-        // redirect_uri: "https://liteseoul.com/",
+        client_id: process.env.REACT_APP_KAKAO_CLIETN_ID,
+        redirect_uri: process.env.REACT_APP_HOME_URL,
         code: code,
       });
 
@@ -202,10 +201,11 @@ function App(): any {
         setLogin(true);
         setLoading(true);
         axios
-          .post("https://www.api.liteseoul.com/kakao/login", {
+          .post(process.env.REACT_APP_DOAMIN_URL + "/kakao/login", {
             kakaoToken: res.data.access_token,
           })
           .then((result) => {
+            console.log(result)
             sessionStorage.setItem("access_token", result.data.access_token);
             sessionStorage.setItem("id", result.data.payload.id);
             window.location.reload();

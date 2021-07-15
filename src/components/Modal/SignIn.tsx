@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import dotenv from "dotenv";
-import qs from "querystringify";
-
 dotenv.config();
 
 const SingInOut = styled.div`
@@ -251,8 +249,9 @@ function SignIn(props: any) {
   const kakaoLogin = () => {
     const url = new URL(window.location.href);
     const _hostName = "https://kauth.kakao.com";
-    const _restApiKey = "d33a84f54f22e12cd75db7c1981bd095";
-    const _redirectUrl = url;
+    const _restApiKey = process.env.REACT_APP_KAKAO_CLIETN_ID;
+    const _redirectUrl = "https://liteseoul.com/"
+
 
     window.location.assign(
       `${_hostName}/oauth/authorize?client_id=${_restApiKey}&redirect_uri=${_redirectUrl}&response_type=code`
@@ -262,9 +261,8 @@ function SignIn(props: any) {
   // 구글로그인 버튼 클릭시
   const googleLogin = () => {
     const host_name = "https://accounts.google.com";
-    const redirect_uri = "https://api.liteseoul.com";
-    const client_id =
-      "609494041649-93jv4gkett8hccvoee0f6utnqfh9mdl5.apps.googleusercontent.com";
+    const redirect_uri = process.env.REACT_APP_DOAMIN_URL;
+    const client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
     window.location.assign(
       `${host_name}/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&redirect_uri=${redirect_uri}%2Fgoogle%2Fauth%2Fgoogle%2Fcallback&scope=email%20profile&client_id=${client_id}&flowName=GeneralOAuthFlow`
@@ -295,7 +293,7 @@ function SignIn(props: any) {
       // 엑시오스로 데이터 서버 전송
       axios
         .post(
-           "https://www.api.liteseoul.com/user/signin",
+          process.env.REACT_APP_DOAMIN_URL + "/user/signin",
           {
             email: id,
             password: password,
@@ -305,7 +303,7 @@ function SignIn(props: any) {
           sessionStorage.setItem("access_token", res.data.access_token);
           localStorage.setItem("id", res.data.payload.id);
           sessionStorage.setItem("id", res.data.payload.id)
-          window.location.replace("http://localhost:3000/");
+          window.location.replace("https://liteseoul.com/");
         })
         .catch(() => {
           setErrMessage("아이디와 패스워드를 확인해주세요");

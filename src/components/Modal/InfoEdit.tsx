@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const SinUpOut = styled.div`
   width: 100%;
@@ -205,9 +206,9 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
       );
     } else {
       if (userImg === "") {
-        console.log("이미지없이 변화 요청");
+        // 이미지없이 변화 요청
         await axios
-          .post("https://www.api.liteseoul.com/user/changeinfo", {
+          .post(process.env.REACT_APP_DOAMIN_URL + "/user/changeinfo", {
             access_token: token,
             nick: userNick,
             phone: userPhone,
@@ -217,12 +218,13 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
           .then((res) => {
             console.log(res);
             alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");
-            window.location.replace("http://localhost:3000/mypage/");
+            window.location.replace("https://liteseoul.com/mypage/");
           })
           .catch((err) => {
             alert("비밀번호가 맞지않아요!");
           });
       }
+      // 이미지포함 변화 요청
       if (userImg !== "" || userImg !== undefined) {
         console.log(userImg);
         formData.append("UserImg", userImg);
@@ -234,10 +236,8 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
         formData.append("profileText", myText);
         formData.append("password", password);
 
-        console.log("이미지포함 변화 요청");
-        // 이미지 변화가 있다면~
         await axios
-          .post("https://www.api.liteseoul.com/user/update", formData)
+          .post(process.env.REACT_APP_DOAMIN_URL + "/user/update", formData)
           .then((res) => {
             console.log(res);
             alert("정보수정이 되었습니다! 마이페이지로 이동합니다 :)");
@@ -246,12 +246,11 @@ const InfoEdit = ({ myinfo, handleModalClose }: any) => {
               previewURL: "",
             });
             setUserImg("");
-            window.location.replace("http://localhost:3000/mypage/");
+            window.location.replace("https://liteseoul.com/mypage/");
           })
           .catch((err) => {
             alert("비밀번호가 맞지않아요!");
           });
-        // 이미지 변화가 없다면~
       }
     }
   };
