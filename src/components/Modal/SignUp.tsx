@@ -242,7 +242,6 @@ const SignUp = (props: any) => {
     formData.append("nick", data.UserNickname);
     formData.append("password", data.Password);
     props.setLoading(true);
-    console.log(formData)
 
     // 엑시오스 전송부분
     axios

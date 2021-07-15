@@ -72,7 +72,6 @@ function MemberOut() {
           access_token: sessionStorage.getItem('access_token'),
         })
         .then((res) => {
-          console.log(res);
           sessionStorage.clear();
           window.location.replace('https://liteseoul.com/');
         });

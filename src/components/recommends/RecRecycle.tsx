@@ -215,7 +215,7 @@ function ReRecycle() {
         </StoreName>
         <StoreText>
           {localStorage.getItem("recommend")
-            ? data.resultRecycle.phone
+            ? data.resultRecycle.text
             : "전화번호"}
         </StoreText>
         <StoreAdd>

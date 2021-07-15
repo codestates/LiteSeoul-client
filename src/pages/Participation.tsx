@@ -318,7 +318,6 @@ function Participation() {
   };
 
   const handleRecommend = (e: any) => {
-    console.log(e.target.value);
     setRecommend(e.target.value);
   };
 
@@ -448,7 +447,6 @@ function Participation() {
       axios
         .post(process.env.REACT_APP_DOAMIN_URL + '/shop/register', formData)
         .then((res) => {
-          console.log(res);
           alert(
             "LiteSeoul에 업체 참여신청이 완료되었습니다! 운영진이 해당 신청서를 확인하고 등록을 시켜드릴게요. 작성하신 메일주소로 감사의 메일을 전송해 드렸어요! 이제 홈 페이지로 이동합니다 :)",
           );

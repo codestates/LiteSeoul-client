@@ -51,7 +51,6 @@ const Kakaomap: React.FC<KakaomapProps> = ({ isModal, handleModal }) => {
     );
 
     for (var i = 0; i < isMap.length; i++) {
-      // console.log(isMap)
       // 마커를 생성합니다
       var marker = new window.kakao.maps.Marker({
         map: map, // 마커를 표시할 지도

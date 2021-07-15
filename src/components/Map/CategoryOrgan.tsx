@@ -51,7 +51,6 @@ function CategoryOrgan(props: any) {
     const axiosOrgan = data.filter((el: any) => {
       return el['category'] === 'organ';
     });
-    // console.log(axiosOrgan);
     setMap(axiosOrgan);
   }, []);
 
