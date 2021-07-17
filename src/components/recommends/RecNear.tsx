@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Out = styled.div`
   width: 18%;
@@ -10,17 +10,10 @@ const Out = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  }
+
   @media screen and (max-width: 1401px) {
     height: 65%;
   }
-  /* @media screen and (max-width: 1101px) {
-    height: 55%;
-  } */
   @media screen and (max-width: 1201px) {
     width: 40%;
     height: 15%;
@@ -44,24 +37,23 @@ const ListTitle = styled.div`
   align-items: center;
   justify-content: center;
   &::before {
-    content: '';
+    content: "";
     width: 25px;
     height: 25px;
-    background-image: url('/icon/location_white.svg');
+    background-image: url("/icon/location_white.svg");
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 5px;
   }
+
   @media screen and (max-width: 1701px) {
     width: 200px;
     font-size: 1.2rem;
   }
-
   @media screen and (max-width: 1401px) {
     width: 160px;
     font-size: 1.2rem;
   }
-
   @media screen and (max-width: 1101px) {
     width: 140px;
     font-size: 1.2rem;
@@ -73,7 +65,7 @@ const ListTitle = styled.div`
 
 const Store = styled.div`
   width: 200px;
-  height: 180px;
+  height: 220px;
   /* border: 1px solid red; */
   position: absolute;
   bottom: 8%;
@@ -82,6 +74,7 @@ const Store = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
   @media screen and (max-width: 1401px) {
     width: 160px;
     height: 180px;
@@ -104,9 +97,9 @@ const StoreName = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  /* background-color: green; */
+
   @media screen and (max-width: 1501px) {
     font-size: 1.4rem;
   }
@@ -115,17 +108,22 @@ const StoreName = styled.div`
   }
   @media screen and (max-width: 1201px) {
     width: 140px;
+    font-size: 1.4rem;
+  }
+  @media screen and (max-width: 901px) {
+    width: 250px;
+    justify-content: center;
   }
 `;
 
 const StoreText = styled.div`
   width: 200px;
   height: 60px;
-  /* background-color: blue; */
   text-align: left;
   font-size: 0.8rem;
   color: #6e6e73;
   line-height: 1.2rem;
+
   @media screen and (max-width: 1501px) {
     font-size: 0.8rem;
   }
@@ -152,7 +150,9 @@ const StoreAdd = styled.div`
     width: 30px;
     height: 30px;
     object-fit: cover;
+    margin-right: 5px;
   }
+
   @media screen and (max-width: 1401px) {
     width: 160px;
     font-size: 0.6rem;
@@ -160,6 +160,9 @@ const StoreAdd = styled.div`
   @media screen and (max-width: 1201px) {
     width: 140px;
     font-size: 0.6rem;
+  }
+  @media screen and (max-width: 901px) {
+    width: 250px;
   }
 `;
 
@@ -177,6 +180,7 @@ const Img = styled.div`
     height: 100%;
     object-fit: cover;
   }
+
   @media screen and (max-width: 1401px) {
     width: 160px;
     height: 160px;
@@ -187,20 +191,28 @@ const Img = styled.div`
 `;
 
 function RecNear() {
+  const data = JSON.parse(localStorage.getItem("recommend") || "{}");
+
   return (
     <Out>
       <ListTitle>Near</ListTitle>
       <Img>
-        <img src="/img/zero.jpeg" alt="store"></img>
+        <img src={data.nearest.imgPath} alt="store"></img>
       </Img>
       <Store>
-        <StoreName>The Peaker</StoreName>
+        <StoreName>
+          {localStorage.getItem("recommend") ? data.nearest.name : "가게이름"}
+        </StoreName>
         <StoreText>
-          지속가능한 소비문화를 정립시키고 회복시키기 위한 온/오프라인공간
+          {localStorage.getItem("recommend") ? data.nearest.text : "전화번호"}
         </StoreText>
         <StoreAdd>
           <img src="icon/location_main.svg" alt="location"></img>
-          <span>성동구 왕십리로 115 헤어그라운드</span>
+          <span>
+            {localStorage.getItem("recommend")
+              ? data.nearest.address
+              : "가게주소"}
+          </span>
         </StoreAdd>
       </Store>
     </Out>

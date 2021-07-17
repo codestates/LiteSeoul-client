@@ -7,16 +7,17 @@ const Slogan1Out = styled.div`
   height: 100vh;
   min-height: 900px;
   background: #fff;
+  min-width: 500px;
 `;
 
 const SloganMain = styled.div`
   width: 90%;
   height: 100%;
-  /* border: 1px solid red; */
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
+
   @media screen and (max-width: 800px) {
     flex-direction: column;
   }
@@ -25,12 +26,18 @@ const SloganMain = styled.div`
 const SloganImg = styled.div`
   width: 40%;
   height: 70%;
-  /* border: 1px solid blue; */
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  transition: 2s all;
+  transform: translateX(-100%);
+  opacity: 0;
+  &.slogan1Img {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 
   @media screen and (max-width: 800px) {
     width: 70%;
@@ -46,6 +53,7 @@ const SloganTitle = styled.div`
   font-size: 7rem;
   font-weight: 700;
   color: #1894cc;
+
   @media screen and (max-width: 1900px) {
     font-size: 5rem;
   }
@@ -61,7 +69,6 @@ const SloganTitle = styled.div`
 `;
 
 const SloganSubTitle = styled.div`
-  /* border: 1px solid red; */
   position: absolute;
   top: 63%;
   left: 50%;
@@ -69,6 +76,7 @@ const SloganSubTitle = styled.div`
   font-size: 3rem;
   font-weight: 700;
   color: #000;
+
   @media screen and (max-width: 1900px) {
     font-size: 2rem;
     top: 58%;
@@ -100,13 +108,14 @@ const SloganSubTitle = styled.div`
 const SloganText = styled.div`
   width: 60%;
   height: 70%;
-  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
   padding: 3%;
   position: relative;
+  opacity: 0;
+  transition: 2s all;
   & img {
     width: 40%;
     object-fit: cover;
@@ -114,6 +123,9 @@ const SloganText = styled.div`
     position: absolute;
     z-index: 10;
     transform: rotate(15deg);
+  }
+  &.slogan1Text {
+    opacity: 1;
   }
 
   @media screen and (max-width: 800px) {
@@ -125,26 +137,34 @@ const SloganText = styled.div`
 const SloganTextTitle = styled.div`
   width: 100%;
   height: 10%;
-  /* background-color: red; */
   margin-bottom: 15px;
   text-align: right;
   font-size: 3.5rem;
   font-weight: 700;
   z-index: 20;
-  @media screen and (max-width: 1200px) {
+
+  @media screen and (max-width: 1550px) {
     height: auto;
     font-size: 3rem;
+  }
+  @media screen and (max-width: 1320px) {
+    height: auto;
+    font-size: 2.4rem;
+  }
+  @media screen and (max-width: 700px) {
+    height: auto;
+    font-size: 1.8rem;
   }
 `;
 
 const SloganTextContent = styled.div`
   width: 100%;
   height: auto;
-  /* background-color: red; */
   font-size: 1.2rem;
   text-align: right;
   color: #6e6e73;
   z-index: 20;
+  line-height: 30px;
 
   @media screen and (max-width: 1200px) {
     font-size: 1rem;
@@ -152,24 +172,27 @@ const SloganTextContent = styled.div`
   @media screen and (max-width: 800px) {
     font-size: 1.2rem;
   }
+  @media screen and (max-width: 761px) {
+    font-size: 0.9rem;
+  }
 `;
+
 function Slogan1() {
   return (
-    <Slogan1Out>
+    <Slogan1Out id="slogan1">
       <SloganMain>
-        <SloganImg>
+        <SloganImg id="slogan1Img">
           <Recycle></Recycle>
           <SloganTitle>LiteSeoul</SloganTitle>
           <SloganSubTitle>Zero Waste Life</SloganSubTitle>
         </SloganImg>
-        <SloganText>
-          <img src="img/blueback-01.png" alt="bg"></img>
-          <SloganTextTitle>Zero Waste Life</SloganTextTitle>
+        <SloganText id="slogan1Text">
+          <SloganTextTitle>'제로 웨이스트 샵'을 찾아드릴게요</SloganTextTitle>
           <SloganTextContent>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled
+            탄소중립시대인 '넷제로(Net-Zero)'를 위해 함께 동참해주세요.
+            <br />
+            당신 근처에서 환경을 위해 재생용기를 사용하고 1회용품과 화학용품을
+            없앤 '제로 웨이스트 샵'을 만나보세요.
           </SloganTextContent>
         </SloganText>
       </SloganMain>

@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const MarkerOut = styled.div`
   position: absolute;
@@ -8,23 +11,21 @@ const MarkerOut = styled.div`
   height: 100%;
   min-height: 900px;
   background-color: #000000b3;
-  /* opacity: 0.6; */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
 `;
+
 const MarkerInMain = styled.div`
   width: 800px;
   height: 900px;
-  /* border: 1px solid #fff; */
-  /* border: 1px solid red; */
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
   @media screen and (max-width: 850px) {
     width: 400px;
     position: relative;
-    border: 1px solid red;
   }
 `;
 
@@ -56,6 +57,7 @@ const MarkerCenter = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   position: relative;
+
   @media screen and (max-width: 850px) {
     width: 400px;
   }
@@ -78,7 +80,6 @@ const MarkerInfo = styled.div`
 const MakerStoreInfo = styled.div`
   width: 90%;
   height: 30%;
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -111,8 +112,8 @@ const MakerStoreInfo = styled.div`
     }
   }
 `;
+
 const MakerStoreText = styled.div`
-  /* border: 1px solid blue; */
   width: 90%;
   height: 40%;
   display: flex;
@@ -124,7 +125,6 @@ const MakerStoreText = styled.div`
     height: 70px;
     display: flex;
     align-items: center;
-    /* border: 1px solid red; */
     margin-bottom: 20px;
   }
   & div:nth-child(2) {
@@ -133,7 +133,6 @@ const MakerStoreText = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
-    /* background: yellow; */
     & span {
       font-size: 1rem;
     }
@@ -164,6 +163,7 @@ const MarkerComment = styled.div`
   text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
+
   @media screen and (max-width: 850px) {
     font-size: 1.2rem;
     width: 90%;
@@ -177,7 +177,6 @@ const MarkerCommemntUl = styled.ul`
   height: 45%;
   margin: 0 auto;
   padding-right: 1%;
-  /* border: 1px solid red; */
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 6px;
@@ -213,23 +212,24 @@ const MarkerCommemntUl = styled.ul`
       white-space: nowrap;
     }
     & div:nth-child(1) {
-      /* border: 1px solid red; */
       width: 15%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
     & div:nth-child(2) {
-      width: 70%;
+      width: 60%;
       height: 100%;
       display: flex;
       align-items: center;
       font-size: 0.8rem;
     }
     & div:nth-child(3) {
-      /* border: 1px solid red; */
       width: 15%;
       height: 100%;
       font-size: 0.6rem;
@@ -243,6 +243,7 @@ const MarkerCommemntUl = styled.ul`
   & li:nth-last-child() {
     margin-bottom: 0;
   }
+
   @media screen and (max-width: 961px) {
     & li {
       display: flex;
@@ -282,6 +283,7 @@ const MarkerCommnetInput = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const CommentInput = styled.input.attrs({
   type: 'text',
 })`
@@ -317,113 +319,169 @@ const CommentBtn = styled.button`
 
 type MarkerProps = {
   handleModal: () => void;
+  handleLoginModal: () => void;
+  handleLogin: () => void;
   isModal: boolean;
+  modalData: any;
+  isLoginModal: boolean;
+  isLogin: boolean;
 };
 
-function Marker({ isModal, handleModal }: MarkerProps) {
+function Marker({
+  isModal,
+  handleModal,
+  modalData,
+  isLoginModal,
+  isLogin,
+  handleLoginModal,
+}: MarkerProps) {
+
+  //댓글,좋아요, 유즈이펙트 관리용 돈터치
+  const [commentModi, setcommentModi] = useState('');
+  const [likeModi, setlikeModi] = useState('');
+
+  //댓글 상태
+  const [isComment, setComment] = useState('');
+
+  const userId = Number(sessionStorage.getItem('id'));
+
+  //댓글 체인지
+  const handleComment = (e: any) => {
+    setComment(e.target.value);
+  };
+
+  // 좋아요 기능 파트
   const [isCheck, setCheck] = useState(false);
 
-  const handleCheck = () => {
-    setCheck(!isCheck);
+  const handleCheck = (e: any) => {
+    if (isLogin === false) {
+      handleLoginModal();
+    } else {
+      axios
+        .post(process.env.REACT_APP_DOAMIN_URL + '/shop/likeToggle', {
+          userId: userId,
+          shopId: modalData.id,
+        })
+        .then((res: any) => {
+          setCheck(!isCheck);
+          setlikeModi('a');
+          setlikeModi('');
+        });
+    }
+  };
+
+  const [comments, setComments] = useState([]);
+
+  //댓글 가져오기
+  useEffect((): any => {
+    axios
+      .get(process.env.REACT_APP_DOAMIN_URL + `/shop/${Number(modalData.id)}`)
+      .then((res) => {
+        setComments(res.data.commentInfo);
+      });
+  }, [commentModi]);
+
+  //좋아요 가져오기
+  useEffect((): any => {
+    axios
+      .get(process.env.REACT_APP_DOAMIN_URL + `/shop/${Number(modalData.id)}`)
+      .then((res) => {
+        for (let i = 0; i < res.data.likeInfo.length; i++) {
+          //유저 아이디 가져와야함.!! 임의로 4
+          if (res.data.likeInfo[i].userId === userId) {
+            setCheck(true);
+            break;
+          } else {
+            setCheck(false);
+          }
+        }
+        setLike(res.data.likeInfo.length);
+      });
+
+  }, [likeModi]);
+
+  //좋아요 갯수 상태
+  const [Like, setLike] = useState(null);
+
+  // 댓글제출시
+  const CommnetSubmit = () => {
+    if (isLogin === false) {
+      handleLoginModal();
+    } else if (isComment === '') {
+      alert('댓글을 입력하세요');
+    } else {
+      axios
+        .post(process.env.REACT_APP_DOAMIN_URL + `/shop/comment`, {
+          userId: userId,
+          shopId: modalData.id,
+          comment: isComment,
+        })
+        .then((res: any) => {
+          setComment('');
+          setcommentModi('a');
+          setcommentModi('');
+        });
+    }
   };
 
   return (
+    // 프롭스로 가져온 모달데이터를 갖고 아래 하단부에 렌더링 하면 된다.
     <MarkerOut>
-      <MarkerInMain>
-        <CloseBtn onClick={handleModal}></CloseBtn>
-        <MarkerCenter>
-          <MarkerInfo>
-            <MakerStoreInfo>
-              <div>
-                <img src="icon/certification_mypage.svg" alt="Category"></img>
-              </div>
-              <div>
-                <span>Cafe</span>
-                <span>zero waste cafe</span>
-              </div>
-            </MakerStoreInfo>
-            <MakerStoreText>
-              <div>
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="like"
-                  style={{ display: 'none' }}
-                  onChange={handleCheck}
-                ></input>
-                <label htmlFor="like">
-                  {isCheck ? (
-                    <img src="icon/like_fill.svg" alt="Likes"></img>
-                  ) : (
-                    <img src="icon/like_stroke.svg" alt="Likes"></img>
-                  )}
-                </label>
-                <span>Likes 120</span>
-              </div>
-            </MakerStoreText>
-          </MarkerInfo>
-          <MarkerComment>COMMENT</MarkerComment>
-          <MarkerCommemntUl>
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-
-            <li>
-              <div>Ez Kim</div>
-              <div>낮부터 저녁까지 해지는거 보면서 앉아있기</div>
-              <div>2021-06-28</div>
-            </li>
-          </MarkerCommemntUl>
-          <MarkerCommnetInput>
-            <CommentInput></CommentInput>
-            <CommentBtn>등록</CommentBtn>
-          </MarkerCommnetInput>
-        </MarkerCenter>
-      </MarkerInMain>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <MarkerInMain>
+          <CloseBtn onClick={handleModal}></CloseBtn>
+          <MarkerCenter>
+            <MarkerInfo>
+              <MakerStoreInfo>
+                <div>
+                  <img src="icon/certification_mypage.svg" alt="Category"></img>
+                </div>
+                <div key={modalData.id}>
+                  <span>{modalData.name}</span>
+                  <span>{modalData.category}</span>
+                </div>
+              </MakerStoreInfo>
+              <MakerStoreText>
+                <div>{modalData.text}</div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="like"
+                    style={{ display: 'none' }}
+                    checked={isCheck}
+                    onChange={(e) => handleCheck(e)}
+                  ></input>
+                  <label htmlFor="like">
+                    {isCheck ? (
+                      <img src="icon/like_fill.svg" alt="Likes"></img>
+                    ) : (
+                      <img src="icon/like_stroke.svg" alt="Likes"></img>
+                    )}
+                  </label>
+                  <span>Likes {Like}</span>
+                </div>
+              </MakerStoreText>
+            </MarkerInfo>
+            <MarkerComment>COMMENT</MarkerComment>
+            <MarkerCommemntUl>
+              {comments.map((comment: any) => (
+                <li key={comment.id}>
+                  <div title={comment.name}>{comment.name}</div>
+                  <div>{comment.comment}</div>
+                  <div>{comment.created_at.substring(0, 10)}</div>
+                </li>
+              ))}
+            </MarkerCommemntUl>
+            <MarkerCommnetInput>
+              <CommentInput
+                value={isComment}
+                onChange={handleComment}
+              ></CommentInput>
+              <CommentBtn onClick={CommnetSubmit}>등록</CommentBtn>
+            </MarkerCommnetInput>
+          </MarkerCenter>
+        </MarkerInMain>
+      </form>
     </MarkerOut>
   );
 }

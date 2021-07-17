@@ -1,20 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Footer from '../components/Home/Footer';
-import Rending from '../components/Home/Rending';
-import Slogan1 from '../components/Home/Slogan1';
-import Slogan2 from '../components/Home/Slogan2';
-import Slogan3 from '../components/Home/Slogan3';
-import Ranking from '../components/Home/Ranking';
-
-import Recommends from '../components/Home/Recommends';
-import styled from 'styled-components';
-import { homedir } from 'os';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Footer from "../components/Home/Footer";
+import Rending from "../components/Home/Rending";
+import Slogan1 from "../components/Home/Slogan1";
+import Slogan2 from "../components/Home/Slogan2";
+import Ranking from "../components/Home/Ranking";
+import Recommends from "../components/Home/Recommends";
+import styled from "styled-components";
+import Bike from "../components/Home/bikeAni";
+import Bike2 from "../components/Home/bikeAni2";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const HomeOut = styled.div`
-  /* padding-top: 90px; */
   width: 100%;
+  min-width: 500px;
   height: 100vh;
-  overflow: auto;
+  overflow: scroll;
   position: relative;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -46,15 +48,105 @@ const TopBtn = styled.div`
   }
 `;
 
-function Home() {
-  const [isLogin, setLogin] = useState(false);
-  const handleTop = () => {
-    console.log('버튼 확인');
+function Home({ handleModal, handleModalData, isLogin }: any) {
+  // 탑으로 올라가는 버튼 나타는 유무
+  const [isBlock, setBlock] = useState<boolean>(false);
+  // 스크롤 위치 추적용 (랜딩페이지로 추적함)
+  const [topbtn, setTopbtn] = useState<number>(0);
+  let nav = JSON.parse(localStorage.getItem('nav') || '{}');
+
+  // 현재위치불러오기 추천시스템용으로다가 불러옴
+  useEffect(() => {
+    axios
+      .post(process.env.REACT_APP_DOAMIN_URL + "/shop/recommend", {
+        latitude: nav.lat || 37.535946,
+        longitude: nav.lon || 127.006161,
+      })
+      .then((res: any) => {
+        localStorage.setItem('recommend', JSON.stringify(res.data));
+      });
+  }, [isLogin]);
+
+  useEffect(() => {
+    if (topbtn > 300) {
+      setBlock(true);
+    } else {
+      setBlock(false);
+    }
+  }, [topbtn]);
+
+  useEffect(() => {
+    document.getElementById('home')?.addEventListener('scroll', test);
+    return () =>
+      document.getElementById('home')?.removeEventListener('scroll', test);
+  }, []);
+
+  const test = () => {
+    if (document.getElementById('home')) {
+      setTopbtn(
+        Math.abs(
+          Number(
+            document.getElementById('rending')?.getBoundingClientRect().top,
+          ),
+        ),
+      );
+    }
+
+    if (
+      Math.abs(
+        Number(
+          document.getElementById('recommend')?.getBoundingClientRect().top,
+        ),
+      ) < 500
+    ) {
+      document.getElementById('recommend1')?.classList.add('recommend1');
+    } else {
+      document.getElementById('recommend1')?.classList.remove('recommend1');
+    }
+
+    if (
+      document.getElementById('rending') &&
+      Math.abs(
+        Number(document.getElementById('slogan1')?.getBoundingClientRect().top),
+      ) < 500
+    ) {
+      document.getElementById('slogan1Img')?.classList.add('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.add('slogan1Text');
+    } else {
+      document.getElementById('slogan1Img')?.classList.remove('slogan1Img');
+      document.getElementById('slogan1Text')?.classList.remove('slogan1Text');
+    }
+
+    if (
+      document.getElementById('rending') &&
+      Math.abs(
+        Number(document.getElementById('slogan2')?.getBoundingClientRect().top),
+      ) < 500
+    ) {
+      document.getElementById('slogan2Img')?.classList.add('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.add('slogan2Text');
+    } else {
+      document.getElementById('slogan2Img')?.classList.remove('slogan2Img');
+      document.getElementById('slogan2Text')?.classList.remove('slogan2Text');
+    }
+  };
+
+  const handleScroll = () => {
+    document.getElementById('home')?.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
     <HomeOut id="home">
-      <TopBtn onClick={handleTop}>TOP</TopBtn>
+      {isBlock ? (
+        <TopBtn onClick={handleScroll} id="topbtn">
+          TOP
+        </TopBtn>
+      ) : (
+        <></>
+      )}
       {isLogin ? <></> : <Rending></Rending>}
       {isLogin ? <></> : <Recommends></Recommends>}
       {isLogin ? (
@@ -63,9 +155,12 @@ function Home() {
         <>
           <Slogan1></Slogan1>
           <Slogan2></Slogan2>
+          <Bike></Bike>
         </>
       )}
 
+      {/* 애니메이션 추가 */}
+      {isLogin ? <Bike2></Bike2> : <></>}
       {isLogin ? <Ranking></Ranking> : <></>}
       {isLogin ? <Recommends></Recommends> : <></>}
       <Footer></Footer>

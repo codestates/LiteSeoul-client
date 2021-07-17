@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 /* font-family: 'Noto Sans KR', sans-serif; */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap');
+/* font-family: 'Roboto', sans-serif; */
 html,
 body,
 div,
@@ -336,6 +337,13 @@ img {
   transform: rotate(180deg);
 }
 
+.hidden1 {
+  left: 300px;
+}
+.hidden1 > img {
+  transform: rotate(180deg);
+}
+
 .active {
   opacity: 1;
 }
@@ -655,7 +663,7 @@ img {
 .MypageFlex {
   /* display: flex; */
   display: grid;
-  grid-template-columns: 230px 2fr;
+  grid-template-columns: 230px 1fr;
   grid-auto-rows: auto;
 }
 
@@ -950,8 +958,8 @@ a {
 } */
 
 .UploadBillsImg {
-  height: 200%;
-  width: 100px;
+  /* height: 200%;
+  width: 100px; */
   /* border-radius: 100px; */
   position: relative;
   border: 4px solid #ffffff;
@@ -961,7 +969,8 @@ a {
   transition: all 1s;
   color: #ffffff;
   font-size: 100px;
-  height: 100%;
+  margin-top: 50px;
+  height: 50%;
   width: 100%;
   position: absolute;
   top: 0;
@@ -983,7 +992,7 @@ a {
   border: 3px dashed #ff735d;
   border-radius: 20px;
   padding: 20px;
-  margin: 60% 50px;
+  margin: 10% 50px;
   color: #188cc4;
   font-weight: bolder;
 }
@@ -1081,4 +1090,82 @@ a {
   .memberOutGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* 개인유저 정보수정 */
+.EditForm {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 600px) {
+  .EditForm {
+    width: 80%;
+  }
+}
+
+.EditNickName {
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditNickName:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+.EditPhone {
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditPhone:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+.EditText {
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditText:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+.EditPassword {
+  width: 100%;
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid #189cc4;
+  outline: none;
+  text-indent: 10px;
+}
+.EditPassword:focus {
+  border-bottom: 2px solid #ff735d;
+}
+
+@keyframes LogoSvg {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#LogoSvg {
+  opacity: 0;
+  animation: LogoSvg 2s ease forwards;
 }
